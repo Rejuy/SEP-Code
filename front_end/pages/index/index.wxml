@@ -1,4 +1,4 @@
-<view>
+<view class="search">
     <search_box></search_box>
 </view>
 
@@ -18,3 +18,10 @@
         <view class="word">出行推荐</view>
     </navigator>
 </scroll-view>
+
+<view class="admin">
+    <navigator class="notice">
+        <image mode="heightFix" src="/images/icons/message.png"></image>
+        <view class="word">平台公告</view>
+    </navigator>
+</view>
