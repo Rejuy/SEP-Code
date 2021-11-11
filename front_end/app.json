@@ -6,7 +6,10 @@
     "pages/help/help",
     "pages/user/user",
     "pages/search/search",
-    "pages/module/module"
+    "pages/module/module",
+    "pages/course/course",
+    "pages/food/food",
+    "pages/place/place"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -18,18 +21,18 @@
     "list": [{
       "pagePath": "pages/index/index",
       "text": "首页",
-      "iconPath": "images/home.png",
-      "selectedIconPath": "images/home.png"
+      "iconPath": "images/icons/home.png",
+      "selectedIconPath": "images/icons/home.png"
     }, {
       "pagePath": "pages/module/module",
       "text": "模块",
-      "iconPath": "images/module.png",
-      "selectedIconPath": "images/module.png"
+      "iconPath": "images/icons/module.png",
+      "selectedIconPath": "images/icons/module.png"
     }, {
       "pagePath": "pages/user/user",
       "text": "我的",
-      "iconPath": "images/user.png",
-      "selectedIconPath": "images/user.png"
+      "iconPath": "images/icons/user.png",
+      "selectedIconPath": "images/icons/user.png"
     }]
   },
   "style": "v2",

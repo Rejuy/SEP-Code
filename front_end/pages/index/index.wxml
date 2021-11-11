@@ -3,20 +3,18 @@
 </view>
 
 <scroll-view class="module" scroll-x>
-    <view class="module_items">
-        <navigator class="item" url="">
-            <image class="picture" src="/images/course_selection.png"></image>
-            <view class="word">选课推荐</view>
-        </navigator>
+    <navigator class="item" url="../course/course">
+        <image class="picture" src="/images/icons/course.png"></image>
+        <view class="word">选课推荐</view>
+    </navigator>
 
-        <navigator class="item" url="">
-            <image class="picture" src="/images/food_and_drink.png"></image>
-            <view class="word">饮食推荐</view>
-        </navigator>
+    <navigator class="item" url="../food/food">
+        <image class="picture" src="/images/icons/food.png"></image>
+        <view class="word">饮食推荐</view>
+    </navigator>
 
-        <navigator class="item" url="">
-            <image class="picture" src="/images/scenic_spots.png"></image>
-            <view class="word">出行推荐</view>
-        </navigator>
-    </view>
+    <navigator class="item" url="../place/place">
+        <image class="picture" src="/images/icons/place.png"></image>
+        <view class="word">出行推荐</view>
+    </navigator>
 </scroll-view>
