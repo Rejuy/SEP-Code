@@ -15,10 +15,14 @@ bp = Blueprint(
 def registerUserInfo():
     try:
         user_info = request.get_json()
+        print("18======")
         if user_info is None:
             return jsonify({'state': BAD_ARGUMENTS}), 400
+        print("21======")
         state = register_user_service.checkUserInfo(user_info)
+        print("23======")
         return jsonify({'state': state}), 200
     except KeyError:
+        print("26======")
         return jsonify({'state': BAD_ARGUMENTS}), 400
 

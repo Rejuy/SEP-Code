@@ -17,8 +17,8 @@ def login():
         user_info = request.get_json()
         if user_info is None:
             return jsonify({'state': BAD_ARGUMENTS}), 400
-        state = login_service.checkLoginInfo(user_info)
-        return jsonify({'state': state}), 200
+        state, user = login_service.checkLoginInfo(user_info)  # user为当前用户的基本信息，格式为字典
+        return jsonify({'state': state, 'user': user}), 200
     except KeyError:
         return jsonify({'state': BAD_ARGUMENTS}), 400
 

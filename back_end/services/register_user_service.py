@@ -1,5 +1,6 @@
 import re
 from headers import *
+from services.mysql_service import db
 
 
 def checkUserInfo(user_info):
@@ -22,12 +23,20 @@ def checkUserInfo(user_info):
     if not re.match(r"^[0-9A-Za-z@#$%^&*]*$", user_info['password']):
         return INVALID_PASSWORD_ILLEGAL_TYPE
 
-    # TODO:
-    #  检查数据库中是否已经存在邮箱和用户名
+    # 检查该邮箱是否被注册过
+    if db.checkUserExistence(user_info['email']):
+        return EMAIL_EXIST
+
+    # 检查用户名是否被他人注册过
+    if db.checkUserNameExistence(user_info['user_name']):
+        return USERNAME_EXIST
 
     # 合法
     # TODO:
-    #  向用户邮箱发送请求，将用户信息写入数据库，并设置其激活状态为否
+    #  向用户邮箱发送请求
+
+    # 将用户信息写入数据库，并设置其激活状态为否
+    db.addUser(user_info)
 
     return VALID_INFO
 

@@ -1,0 +1,6 @@
+# MySQL配置
+MYSQL_HOST = "localhost"
+# MYSQL_PORT = 3306
+MYSQL_USER = "root"
+MYSQL_PASSWORD = "Rjy20008172#"
+MYSQL_DB = "THUREC_db"
