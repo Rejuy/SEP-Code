@@ -2,6 +2,13 @@
 
 后端框架结构：
 
+`config`——装载一些配置
+
+* `settings.py`
+
+  设置文件
+
+
 `controllers`——装载各种视图`url`
 
 * `__init__.py`
@@ -16,6 +23,8 @@
 
   注册视图`url`
 
+`demo`——存放各种临时的`demo`测试文件，和项目无关，最终会统一删除
+
 `services`——装载各种视图对应的功能
 
 * `__init__.py`
@@ -25,6 +34,10 @@
 * `login_service.py`
 
   登录功能实现
+
+* `mysql_service.py`
+
+  封装数据库操作为类
 
 * `register_user_service.py`
 
