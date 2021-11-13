@@ -2,10 +2,12 @@
 
 from controllers import (
     register_user,
-    login
+    login,
+    activate
 )
 
 blueprints = [
     register_user.bp,
-    login.bp
+    login.bp,
+    activate.bp
 ]

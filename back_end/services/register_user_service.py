@@ -1,6 +1,7 @@
 import re
 from headers import *
 from services.mysql_service import db
+from services.mail_service import send_email
 
 
 def checkUserInfo(user_info):
@@ -34,6 +35,7 @@ def checkUserInfo(user_info):
     # 合法
     # TODO:
     #  向用户邮箱发送请求
+    send_register_email(user_info['email'])
 
     # 将用户信息写入数据库，并设置其激活状态为否
     db.addUser(user_info)
