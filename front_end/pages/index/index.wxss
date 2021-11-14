@@ -19,7 +19,7 @@
     margin-top: -20rpx;
 }
 
-.admin {
+/* .admin {
     border: 1px solid red;
 }
 
@@ -33,5 +33,14 @@
 
 .admin .notice image {
     height: 100%;
+} */
+
+.board swiper {
+    width: 750rpx;
+    height: 384rpx;
+}
+
+.board swiper image {
+    width: 100%;
 }
 

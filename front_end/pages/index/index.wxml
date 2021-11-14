@@ -19,9 +19,24 @@
     </navigator>
 </scroll-view>
 
-<view class="admin">
-    <navigator class="notice">
+<!-- <view class="admin">
+    <navigator class="notice" url="../help/help">
         <image mode="heightFix" src="/images/icons/message.png"></image>
-        <view class="word">平台公告</view>
+        <view class="word">联系我们</view>
     </navigator>
+</view> -->
+
+<view class="board">
+    <swiper autoplay indicator-dots circular>
+        <swiper-item
+        wx:for="{{swiper_data}}"
+        wx:key="id"
+        >
+            <navigator url="{{item.url}}">
+                <image mode="widthFix" src="{{item.path}}">
+                    
+                </image>
+            </navigator>
+        </swiper-item>
+    </swiper>
 </view>
