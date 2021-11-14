@@ -16,5 +16,5 @@ WRONG_PASSWORD = 2  # 错误的密码
 LOGIN_SUCCESS = 0  # 登录成功
 
 # user表所有key值
-USER_KEY = ["id", "user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "content_count", "portrait", "activated", "introduction"]
-USER_KEY_AMOUNT = 12
+USER_KEY = ["id", "user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "content_count", "activated", "introduction"]
+USER_KEY_AMOUNT = 11

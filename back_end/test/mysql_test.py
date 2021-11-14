@@ -45,6 +45,14 @@ class MySQLServiceTest(unittest.TestCase):
     def testDelUser3(self):
         self.assertEqual(db.delUser("email", "testEmail19"), True)
 
+    def testUpdateData1(self):
+        table = "user"
+        locate_key = "email"
+        locate_value = "testEmail19"
+        update_key = "activated"
+        update_value = 1
+        self.assertEqual(db.updateData(table, locate_key, locate_value, update_key, update_value), True)
+
 
 if __name__ == '__main__':
     unittest.main()
