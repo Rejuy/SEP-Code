@@ -9,7 +9,7 @@ Component({
   },
   onChange(event) {
     this.setData({ active: event.detail });
-    if (this.data.isLogin){
+    if (this.data.is_login){
       // 跳转 for login 模式
       wx.switchTab({
         url: '/pages/register/register',
