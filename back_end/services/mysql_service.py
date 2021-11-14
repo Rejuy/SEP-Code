@@ -104,6 +104,20 @@ class MySQLDb:
             self.connection.rollback()
             return None
 
+    def updateData(self, table, locate_key, locate_value, update_key, update_value):
+        try:
+            # 更新数据
+            sql = "UPDATE " + table + " SET " + update_key + " = %s WHERE " + locate_key + " = %s"
+            val = (update_value, locate_value)
+            self.cursor.execute(sql, val)
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (updateData)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
     def select_db(self, sql):
         """查询"""
         # 检查连接是否断开，如果断开就进行重连

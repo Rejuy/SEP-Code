@@ -15,6 +15,10 @@
 
   入口文件
 
+* `activate.py`
+
+  激活用户视图`url`
+
 * `login.py`
 
   登录视图`url`
@@ -34,6 +38,10 @@
 * `login_service.py`
 
   登录功能实现
+
+* `mail_service.py`
+
+  邮箱认证功能实现
 
 * `mysql_service.py`
 
