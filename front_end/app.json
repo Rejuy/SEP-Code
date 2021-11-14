@@ -1,8 +1,8 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/register/register",
+  "pages": [
     "pages/login/login",
+    "pages/register/register",
+    "pages/index/index",
     "pages/notice/notice",
     "pages/user/user",
     "pages/search/search",
@@ -11,29 +11,50 @@
     "pages/food/food",
     "pages/place/place"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#82318E",
     "navigationBarTitleText": "清声细语",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "首页",
-      "iconPath": "images/icons/home.png",
-      "selectedIconPath": "images/icons/home.png"
-    }, {
-      "pagePath": "pages/module/module",
-      "text": "模块",
-      "iconPath": "images/icons/module.png",
-      "selectedIconPath": "images/icons/module.png"
-    }, {
-      "pagePath": "pages/user/user",
-      "text": "我的",
-      "iconPath": "images/icons/user.png",
-      "selectedIconPath": "images/icons/user.png"
-    }]
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/login/login"
+      },
+      {
+        "pagePath": "pages/register/register"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home.png"
+      },
+      {
+        "pagePath": "pages/module/module",
+        "text": "模块",
+        "iconPath": "images/icons/module.png",
+        "selectedIconPath": "images/icons/module.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/icons/user.png",
+        "selectedIconPath": "images/icons/user.png"
+      }
+    ]
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-button": "vant-weapp/button/index",
+    "van-field": "vant-weapp/field/index",
+    "van-popup": "vant-weapp/popup/index",
+    "van-notify": "vant-weapp/notify/index",
+    "van-cell": "vant-weapp/cell/index",
+    "van-cell-group": "vant-weapp/cell-group/index",
+    "van-tabbar": "vant-weapp/tabbar/index",
+    "van-tabbar-item": "vant-weapp/tabbar-item/index"
+  }
 }

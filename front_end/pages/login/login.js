@@ -1,66 +1,40 @@
 // pages/login/login.js
+import Notify from "vant-weapp/notify/notify";
+
 Page({
+  /**
+   * Page initial data
+   */
+  data: {
+    username: "",
+    user_password: "",
+  },
 
-    /**
-     * 页面的初始数据
-     */
-    data: {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    }
-})
+  login() {
+    // post request to backend
+    wx.request({
+      url: "http://127.0.0.1:8080/login",
+      data: {
+        username: this.data.username,
+        password: this.data.password,
+      },
+      header: {
+        "content-type": "application/json", // 默认值
+      },
+      method: "POST",
+      success: (res) => {
+        if (res.data === "yes") {
+          Notify({ type: "success", message: "登录成功" });
+          const tabbar = this.getTabBar();
+          tabbar.setData({ is_login: true });
+          wx.switchTab({
+            url: "/pages/index/index",
+          });
+        }
+      },
+      fail: function () {
+        Notify({ type: "danger", message: "请求超时" });
+      },
+    });
+  },
+});
