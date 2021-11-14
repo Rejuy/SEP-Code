@@ -1,6 +1,14 @@
 Page({
   data: {
-    
+    // 后续可以通过 onLoad 函数获取数据
+    swiper_data: [{
+        "id": 1,
+        "path": "../../images/swiper/notice.png"
+      },{
+        "id":2,
+        "path": "../../images/swiper/topic.png"
+      }
+    ]
   },
 
   /*

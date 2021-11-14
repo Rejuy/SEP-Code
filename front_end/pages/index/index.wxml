@@ -19,9 +19,25 @@
     </navigator>
 </scroll-view>
 
-<view class="admin">
-    <navigator class="notice">
+<!-- <view class="admin">
+    <navigator class="notice" url="../help/help">
         <image mode="heightFix" src="/images/icons/message.png"></image>
-        <view class="word">平台公告</view>
+        <view class="word">联系我们</view>
     </navigator>
+</view> -->
+
+<!--考虑利用轮播图来替代此前的图片显示-->
+<view class="board">
+    <swiper autoplay indicator-dots circular>
+        <swiper-item
+        wx:for="{{swiper_data}}"
+        wx:key="id"
+        >
+            <navigator url="../help/help">
+                <image mode="widthFix" src="{{item.path}}">
+                    
+                </image>
+            </navigator>
+        </swiper-item>
+    </swiper>
 </view>
