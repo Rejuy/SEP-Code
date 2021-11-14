@@ -26,7 +26,6 @@
     </navigator>
 </view> -->
 
-<!--考虑利用轮播图来替代此前的图片显示-->
 <view class="board">
     <swiper autoplay indicator-dots circular>
         <swiper-item
