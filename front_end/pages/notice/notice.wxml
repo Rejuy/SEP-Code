@@ -1,2 +1,27 @@
-<!--pages/notice/notice.wxml-->
-<text>pages/notice/notice.wxml</text>
+<veiw class="board">
+    <view class="notice">
+    
+    </view>
+    <view class="feedback">
+        <textarea placeholder="请输入文字">
+            
+        </textarea>
+
+        <view class="add_image">
+            <button bindtap="addImage">+</button>
+            <view class="thumbnails"
+            wx:for="{{image_selected}}"
+            wx:key="*this"
+            bindtap="removeImage"
+            data-index="{{index}}"
+            >
+                <thumbnail source="{{item}}"></thumbnail>
+            </view>
+        </view>    
+
+        <view class="van-buttons">
+            <van-button type="info">清除</van-button>
+            <van-button type="primary">提交</van-button>
+        </view>
+    </view>
+</veiw>

@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/login/login",
-    "pages/register/register",
     "pages/index/index",
     "pages/notice/notice",
+    "pages/login/login",
+    "pages/register/register",
     "pages/user/user",
     "pages/search/search",
     "pages/module/module",
@@ -51,7 +51,6 @@
     "van-button": "vant-weapp/button/index",
     "van-field": "vant-weapp/field/index",
     "van-popup": "vant-weapp/popup/index",
-    "van-notify": "vant-weapp/notify/index",
     "van-cell": "vant-weapp/cell/index",
     "van-cell-group": "vant-weapp/cell-group/index",
     "van-tabbar": "vant-weapp/tabbar/index",

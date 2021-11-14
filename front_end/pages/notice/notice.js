@@ -1,11 +1,34 @@
 // pages/notice/notice.js
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
+        user_text: "",
+        image_selected: []
+    },
 
+    addImage: function() {
+        wx-wx.chooseImage({
+          count: 9,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera'],
+          success: (result) => {
+              this.setData({
+                  image_selected: [...this.data.image_selected, ...result.tempFilePaths]
+              })
+          }, fail: (error) => {
+              console.log(error);
+          },complete: (res) => {
+
+          },
+        })
+    },
+
+    removeImage: function(result) {
+        const {index} = result.currentTarget.dataset;
+        let {image_selected} = this.data;
+        image_selected.splice(index, 1);
+        this.setData({
+            image_selected
+        })
     },
 
     /**

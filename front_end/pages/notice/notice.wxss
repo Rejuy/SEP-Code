@@ -1,1 +1,42 @@
-/* pages/notice/notice.wxss */
+.board .feedback {
+    background-color: #fff;
+    margin-top: 20rpx;    
+}
+
+.board .feedback textarea {
+    width: 100%;
+    padding: 10rpx;
+    border: 2rpx solid #ccc;
+}
+
+.board .feedback .add_image {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 20rpx;
+}
+
+.board .feedback .add_image .thumbnails {
+    display: flex;
+}
+
+.board .feedback .add_image button {
+    margin: 0;
+    width: 90rpx;
+    height: 90rpx;
+    font-size: 60rpx;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10rpx;
+    color: #ccc;
+    border: 2rpx solid #ccc;
+}
+
+.board .feedback .van-buttons {
+    text-align: center;
+}
+
+.board .feedback .van-buttons van-button {
+    display: inline-block;
+}
