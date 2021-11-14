@@ -32,7 +32,7 @@
         wx:for="{{swiper_data}}"
         wx:key="id"
         >
-            <navigator url="../help/help">
+            <navigator url="{{item.url}}">
                 <image mode="widthFix" src="{{item.path}}">
                     
                 </image>

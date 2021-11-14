@@ -3,7 +3,7 @@
     "pages/index/index",
     "pages/register/register",
     "pages/login/login",
-    "pages/help/help",
+    "pages/notice/notice",
     "pages/user/user",
     "pages/search/search",
     "pages/module/module",

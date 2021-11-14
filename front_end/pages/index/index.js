@@ -3,9 +3,11 @@ Page({
     // 后续可以通过 onLoad 函数获取数据
     swiper_data: [{
         "id": 1,
+        "url": "../notice/notice",
         "path": "../../images/swiper/notice.png"
       },{
         "id":2,
+        "url": "../notice/notice",
         "path": "../../images/swiper/topic.png"
       }
     ]
