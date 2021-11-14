@@ -1,7 +1,7 @@
 Component({
   data: {
     active: 0,
-    isLogin: false,
+    is_login: false,
   },
   setIsLogin(loginStatus){
     console.log("changed");

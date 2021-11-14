@@ -2,11 +2,8 @@
 import Notify from "vant-weapp/notify/notify";
 
 Page({
-  /**
-   * Page initial data
-   */
   data: {
-    username: "",
+    user_name: "",
     user_password: "",
   },
 
@@ -15,8 +12,8 @@ Page({
     wx.request({
       url: "http://127.0.0.1:8080/login",
       data: {
-        username: this.data.username,
-        password: this.data.password,
+        username: this.data.user_name,
+        password: this.data.user_password,
       },
       header: {
         "content-type": "application/json", // 默认值

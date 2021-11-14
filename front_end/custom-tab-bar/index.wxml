@@ -4,5 +4,5 @@
   <van-tabbar-item icon="search">标签</van-tabbar-item>
   <van-tabbar-item icon="friends-o">标签</van-tabbar-item>
   
-  <van-tabbar-item wx:if="{{isLogin}}" icon="setting-o">标签</van-tabbar-item>
+  <van-tabbar-item wx:if="{{!is_login}}" icon="setting-o">标签</van-tabbar-item>
 </van-tabbar>

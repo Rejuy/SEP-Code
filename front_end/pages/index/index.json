@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "search_box": "../../components/search_box/search",
-    "van-button": "vant-weapp/button/index"
+    "search_box": "../../components/search_box/search"
   }
 }
