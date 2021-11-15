@@ -1,9 +1,25 @@
 <veiw class="board">
     <view class="notice">
-    
+        <van-tag type="success" size="large">平台公告区</van-tag>
+        <van-collapse accordion value="{{ active_number }}" bind:change="changeCollapse">
+            <van-collapse-item title="平台审核机制" name="1">
+                呵，距离审核机制成熟还差亿点点
+            </van-collapse-item>
+            <van-collapse-item title="平台热榜设置" name="2">
+                呵，距离搞出来热榜还远着呢
+            </van-collapse-item>           
+        </van-collapse>
     </view>
+
     <view class="feedback">
-        <textarea placeholder="请输入文字">
+        <van-tag type="primary" size="large" color="#82318E">用户反馈区</van-tag>
+        <van-notice-bar
+        wrapable
+        scrollable="{{ false }}"
+        text="反馈区主要用于倾听、了解各位同学在使用本平台时的感想与体会。您在该区域提交的内容会直接呈递至项目的管理人员，因此请您确保上传的内容真实有效，多次提交无用或无效的信息可能会导致您账号的权限受到影响，感谢您的支持与理解！"
+        ></van-notice-bar>
+
+        <textarea value="{{user_text}}" bindinput="handleText" placeholder="请输入文字">
             
         </textarea>
 
@@ -20,8 +36,8 @@
         </view>    
 
         <view class="van-buttons">
-            <van-button type="info">清除</van-button>
-            <van-button type="primary">提交</van-button>
+            <van-button type="info" bindtap="clearText">清除</van-button>
+            <van-button type="primary" bindtap="handleSubmit">提交</van-button>
         </view>
     </view>
 </veiw>

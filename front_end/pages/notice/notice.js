@@ -1,8 +1,17 @@
-// pages/notice/notice.js
 Page({
     data: {
+        // 用户选择输入的文本
         user_text: "",
-        image_selected: []
+        // 用户选择上传的图片
+        image_selected: [],
+        // 展开的公告栏标号
+        active_number: '1'
+    },
+
+    changeCollapse: function(event) {
+        this.setData({
+            active_number: event.detail
+        })
     },
 
     addImage: function() {
@@ -16,7 +25,7 @@ Page({
               })
           }, fail: (error) => {
               console.log(error);
-          },complete: (res) => {
+          },complete: (result) => {
 
           },
         })
@@ -28,6 +37,38 @@ Page({
         image_selected.splice(index, 1);
         this.setData({
             image_selected
+        })
+    },
+
+    handleText: function(result) {
+        this.setData({
+            user_text: result.detail.value
+        })
+    },
+
+    clearText: function() {
+        this.setData({
+            user_text: ""
+        })
+    },
+
+    handleSubmit: function() {
+        let text_length = this.data.user_text.length;
+        // 输入框合法性检查
+        if(text_length < 50) {
+            wx.showToast({
+              title: '文本不足50',
+              icon: 'error',
+              mask: true
+            })
+            return;
+        }
+        // 将用户反馈上传至服务器
+        // wx-uploadFile 
+
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success'
         })
     },
 
