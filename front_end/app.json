@@ -48,12 +48,12 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "van-button": "vant-weapp/button/index",
-    "van-field": "vant-weapp/field/index",
-    "van-popup": "vant-weapp/popup/index",
-    "van-cell": "vant-weapp/cell/index",
-    "van-cell-group": "vant-weapp/cell-group/index",
-    "van-tabbar": "vant-weapp/tabbar/index",
-    "van-tabbar-item": "vant-weapp/tabbar-item/index"
+    "van-button": "@vant/weapp/button/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index"
   }
 }

@@ -63,8 +63,28 @@ Page({
             })
             return;
         }
+
         // 将用户反馈上传至服务器
-        // wx-uploadFile 
+        // this.data.image_selected.forEach((temporary_path, index) => {
+        //     wx-wx.uploadFile({
+        //         filePath: temporary_path,
+        //         name: 'user_feedback_image',
+        //         url: 'url',
+        //         formData: {},
+        //         header: header,
+        //         timeout: 0,
+        //         success: (result) => {
+        //             console.log(result);
+        //             if(index === this.data.image_selected.length - 1) {
+        //                 // 全部图片已经上传，配合文本一起传递至后端
+        //             }
+        //         },fail: (error) => {
+        //             console.log(error);
+        //         },complete: (res) => {
+      
+        //         },
+        //       })
+        // });
 
         wx.showToast({
           title: '提交成功',
