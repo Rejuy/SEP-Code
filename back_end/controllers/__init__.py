@@ -3,11 +3,13 @@
 from controllers import (
     register_user,
     login,
-    activate
+    activate,
+    feedback
 )
 
 blueprints = [
     register_user.bp,
     login.bp,
-    activate.bp
+    activate.bp,
+    feedback.bp
 ]
