@@ -8,6 +8,8 @@ Page({
         active_number: '1'
     },
 
+    images_url: [],
+
     changeCollapse: function(event) {
         this.setData({
             active_number: event.detail
@@ -65,26 +67,48 @@ Page({
         }
 
         // 将用户反馈上传至服务器
-        // this.data.image_selected.forEach((temporary_path, index) => {
-        //     wx-wx.uploadFile({
-        //         filePath: temporary_path,
-        //         name: 'user_feedback_image',
-        //         url: 'url',
-        //         formData: {},
-        //         header: header,
-        //         timeout: 0,
-        //         success: (result) => {
-        //             console.log(result);
-        //             if(index === this.data.image_selected.length - 1) {
-        //                 // 全部图片已经上传，配合文本一起传递至后端
-        //             }
-        //         },fail: (error) => {
-        //             console.log(error);
-        //         },complete: (res) => {
-      
-        //         },
-        //       })
-        // });
+        this.data.image_selected.forEach((temporary_path) => {
+            wx-wx.uploadFile({
+              filePath: temporary_path,
+              name: 'image',
+              url: 'http://183.173.121.154:5000/api/v1.0/save_images',
+              formData: {},
+              timeout: 0,
+              success: (result) => {
+                  // console.log(result);
+                  let str = 'http://183.173.121.154:5000/' + result.data;
+                  this.images_url.push(str);
+              },
+              fail: (error) => {
+                  console.log(error);
+              },
+              complete: (res) => {
+                  // console.log(this.images_url);
+              },
+            })
+        });
+
+        let that = this;
+        wx.request({
+          url: 'http://183.173.121.154:5000/api/v1.0/post_user_feedback',
+          method: 'POST',
+          data: {
+              images_url: that.images_url,
+              user_text: that.data.user_text
+          },
+          header: {
+            "content-type": "application/json"
+          },
+          success:function(result) {
+            console.log(that.images_url);
+          },
+          fail:function(error) {
+              console.log(that.images_url);
+          },
+          complete: function(res) {
+
+          }
+        })
 
         wx.showToast({
           title: '提交成功',

@@ -19,7 +19,7 @@
     </navigator>
 </scroll-view>
 
-<van-divider />
+<van-divider dashed="true" />
 
 <view class="board">
     <swiper autoplay indicator-dots circular>
