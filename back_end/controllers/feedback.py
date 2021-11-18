@@ -17,18 +17,7 @@ bp = Blueprint(
 def postUserFeedback():
     try:
         user_info = request.get_json()
-        print('19')
-        print(request.form)
-        print('21')
-        image_stream = request.files['user_feedback_image'].stream
-        image = image_stream.read()
-        plt.imshow(plt.imread(BytesIO(image)))
-        plt.show()
-        if user_info is None:
-            return '反馈失败'
-        print('25')
-        print(user_info)
-        # send_feedback_email('hhhh', user_info['email'])
+        send_feedback_email(user_info['feedback'], user_info['email'])
         
         return '反馈成功'
 
