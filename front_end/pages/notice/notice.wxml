@@ -25,6 +25,8 @@
         text="反馈区主要用于倾听、了解各位同学在使用本平台时的感想与体会。您在该区域提交的内容会直接呈递至项目的管理人员，因此请您确保上传的内容真实有效，多次提交无用或无效的信息可能会导致您的账号权限受到影响，感谢您的支持与理解！"
         ></van-notice-bar>
 
+        <van-divider dashed="true" hairline="true"/>
+
         <textarea value="{{user_text}}" bindinput="handleText" placeholder="请输入文字">
             
         </textarea>
