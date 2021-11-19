@@ -77,3 +77,14 @@
 
 运行`flask`后端入口文件，运行主函数即可
 
+### run with gunicorn
+
+```bash
+gunicorn -w4 -b 0.0.0.0:5000 --log-level=debug manage:app
+```
+
+### start nginx
+
+```bash
+docker run --name nginx_SEP -p 8080:80 -d nginx
+```

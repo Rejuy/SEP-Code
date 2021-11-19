@@ -1,2 +1,5 @@
 pymysql
 flask_mail
+mysql-connector
+matplotlib
+gunicorn
