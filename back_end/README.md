@@ -77,6 +77,16 @@
 
 运行`flask`后端入口文件，运行主函数即可
 
+
+###
+```bash
+sudo apt-get install python3-dev
+```
+###
+```bash
+pip install -r requirements.txt
+```
+
 ### run with gunicorn
 
 ```bash
@@ -86,5 +96,5 @@ gunicorn -w4 -b 0.0.0.0:5000 --log-level=debug manage:app
 ### start nginx
 
 ```bash
-docker run --name nginx_SEP -p 8080:80 -d nginx
+docker run --name nginx_SEP -p 8000:80 -v /home/ubuntu/SEP-Code/back_end/config/nginx:/etc/nginx/conf.d -v /home/ubuntu/SEP-Code/back_end/static:/home/static -d nginx
 ```

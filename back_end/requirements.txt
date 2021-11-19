@@ -3,3 +3,5 @@ flask_mail
 mysql-connector
 matplotlib
 gunicorn
+Crypto
+pycrypto
