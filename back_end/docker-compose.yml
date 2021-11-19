@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    command: bash -c "gunicorn -w4 -b 0.0.0.0:5000 --log-level=debug manage:app"
+    volumes:
+      - .:/code
+    expose:
+      - "5000"
+    networks:
+      - web_network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8000:80"
+    # docker run --name nginx_SEP -p 8000:80 -v  -v  -d nginx
+    depends_on:
+      - app
+
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./static:/home/static
+
+    networks:
+      - web_network
+
+networks:
+  web_network:
+    driver: bridge

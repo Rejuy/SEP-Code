@@ -87,6 +87,14 @@ sudo apt-get install python3-dev
 pip install -r requirements.txt
 ```
 
+
+## 启动方法
+```bash
+docker-compose up
+```
+
+## 暂时不用
+
 ### run with gunicorn
 
 ```bash
