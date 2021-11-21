@@ -23,8 +23,12 @@ Page({
   login() {
     // post request to backend
     // TODO: finish login check
-    Notify({ type: "success", message: "登录成功" });
-    setTimeout(this.loginSuccessful, 500);
+    if (this.checkEmpty()) {
+      Notify({ type: "danger", message: "必填为空" });
+    } else {
+      Notify({ type: "success", message: "登录成功" });
+      setTimeout(this.loginSuccessful, 500);
+    }
     return;
     wx.request({
       url: "http://49.233.1.189:5000/api/v1.0/login",

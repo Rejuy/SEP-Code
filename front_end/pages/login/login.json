@@ -1,5 +1,7 @@
 {
+  "navigationBarTitleText": "登录",
+  "navigationBarTextStyle": "white",
   "usingComponents": {
-    "van-notify": "@vant/weapp/notify/index"
+    "van-divider": "@vant/weapp/divider/index"
   }
 }
