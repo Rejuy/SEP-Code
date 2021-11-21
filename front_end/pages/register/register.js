@@ -1,66 +1,56 @@
 // pages/register/register.js
+import Notify from "vant-weapp/notify/notify";
+
 Page({
-
-    /**
-     * 页面的初始数据
-     */
-    data: {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+  /**
+   * Page initial data
+   */
+  data: {
+    username: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  },
+  checkEmpty() {
+    // returns true if empty
+    const data_obj = this.data;
+    const isEmpty =
+      data_obj.username === "" ||
+      data_obj.email === "" ||
+      data_obj.password === "" ||
+      data_obj.confirm_password === "";
+    return isEmpty;
+  },
+  register() {
+    if (this.checkEmpty()) {
+      Notify({ type: "danger", message: "必填为空" });
+    } else if (this.data.password != this.data.confirm_password) {
+      Notify({ type: "danger", message: "密码不一致" });
+    } else {
+      // attempt register
+      // TODO: finish register check
+      Notify({ type: "success", message: "邮件已发送，请查看邮箱" });
+      return;
+      wx.request({
+        url: "http://127.0.0.1:8080/register",
+        data: {
+          username: this.data.username,
+          email: this.data.email,
+          password: this.data.password,
+        },
+        header: {
+          "content-type": "application/json", // 默认值
+        },
+        method: "POST",
+        success: function (res) {
+          if (res.data === "yes") {
+            Notify({ type: "success", message: "注册成功" });
+          }
+        },
+        fail: function () {
+          Notify({ type: "danger", message: "请求超时" });
+        },
+      });
     }
-})
+  },
+});
