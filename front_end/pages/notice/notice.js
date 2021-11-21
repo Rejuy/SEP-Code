@@ -71,12 +71,12 @@ Page({
             wx-wx.uploadFile({
               filePath: temporary_path,
               name: 'image',
-              url: 'http://183.173.121.154:5000/api/v1.0/save_images',
+              url: 'http://49.233.123.127:8000/api/v1.0/save_images',
               formData: {},
               timeout: 0,
               success: (result) => {
                   // console.log(result);
-                  let str = 'http://183.173.121.154:5000/' + result.data;
+                  let str = 'http://49.233.123.127:8000/' + result.data;
                   this.images_url.push(str);
               },
               fail: (error) => {
@@ -90,7 +90,7 @@ Page({
 
         let that = this;
         wx.request({
-          url: 'http://183.173.121.154:5000/api/v1.0/post_user_feedback',
+          url: 'http://49.233.123.127:8000/api/v1.0/post_user_feedback',
           method: 'POST',
           data: {
               images_url: that.images_url,
