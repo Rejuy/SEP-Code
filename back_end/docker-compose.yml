@@ -13,7 +13,8 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "8000:80"
+      - "80:80"
+      - "443:443"
     # docker run --name nginx_SEP -p 8000:80 -v  -v  -d nginx
     depends_on:
       - app
