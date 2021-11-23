@@ -1,2 +1,33 @@
-<!--pages/course/course.wxml-->
-<text>pages/course/course.wxml</text>
+<view>
+    <van-card
+    tag="热榜"
+    desc="主讲教师：刘强"
+    title="软件工程"
+    thumb="{{ image_url }}"
+    thumb-mode="aspectFill"
+    >  
+        <!-- <view slot="price-top">
+            放置开课院系+课程属性
+        </view> -->
+        <vew slot="price">
+            <van-rate readonly value="{{ 5 }}" />
+        </vew>
+        <view slot="footer">
+            <van-button size="mini">详情</van-button>
+        </view>
+
+    </van-card>
+    <van-card
+    desc="主讲教师：某师"
+    title="大物实验B(1)"
+    thumb="{{ image_url }}"
+    thumb-mode="aspectFill"
+    >
+        <vew slot="price">
+            <van-rate readonly value="{{ 1 }}" />
+        </vew>
+        <view slot="footer">
+            <van-button size="mini">详情</van-button>
+        </view>
+    </van-card>
+</view>

@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        image_url: "https://learn.tsinghua.edu.cn/b/wlxt/kc/v_kcxx_jskcxx/teacher/showImageById?wlkcid=2021-2022-1142764790&_csrf=d39592c7-bbb0-416a-affb-a39b1ab00ba4"
     },
 
     /**
