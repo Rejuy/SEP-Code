@@ -1,1 +1,3 @@
-/* pages/course/course.wxss */
+van-tag {
+    margin-right: 10rpx;
+}
