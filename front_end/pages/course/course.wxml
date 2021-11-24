@@ -44,7 +44,7 @@
     >  
         <view slot="tags">
             <van-tag plain type="primary">语言中心</van-tag>
-            <van-tag plain type="danger">外文课</van-tag>
+            <van-tag plain type="warning">外文课</van-tag>
         </view>
         <vew slot="price">
             <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 4.5 }}" />
