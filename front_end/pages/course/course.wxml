@@ -1,4 +1,9 @@
-<view>
+ <view>
+    <van-dropdown-menu active-color="#1989fa" :color="red">
+        <van-dropdown-item value="{{ course_value }}" options="{{ course_type }}"/>
+        <van-dropdown-item value="{{ department_value }}" options="{{ department_type }}" />
+        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" />
+    </van-dropdown-menu>
     <van-card
     tag="TOP1"
     desc="主讲教师：刘强"
@@ -13,11 +18,14 @@
         <vew slot="price">
             <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 5 }}" />
         </vew>
+        <view slot="num" class="rate">
+            10.0
+        </view>
         <view slot="footer">
             <van-button size="mini">详情</van-button>
         </view>
-
     </van-card>
+
     <van-card
     desc="主讲教师：马勇志"
     title="二年级男生散手"
@@ -31,10 +39,14 @@
         <vew slot="price">
             <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 2.5 }}" />
         </vew>
+        <view slot="num" class="rate">
+            5.0
+        </view>
         <view slot="footer">
             <van-button size="mini">详情</van-button>
         </view>
     </van-card>
+
     <van-card
     tag="TOP15"
     desc="主讲教师：TULP RUSSELL ALAN"
@@ -49,9 +61,54 @@
         <vew slot="price">
             <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 4.5 }}" />
         </vew>
+        <view slot="num" class="rate">
+            9.5
+        </view>
         <view slot="footer">
             <van-button size="mini">详情</van-button>
         </view>
+    </van-card>
 
+    <van-card
+    desc="主讲教师：张涛"
+    title="数字电子技术基础C"
+    thumb="{{ image_url }}"
+    thumb-mode="aspectFill"
+    >
+        <view slot="tags">
+            <van-tag plain type="primary">自动化系</van-tag>
+            <van-tag plain type="danger">必修课</van-tag>
+        </view>
+        <vew slot="price">
+            <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 0.5 }}" />
+        </vew>
+        <view slot="num" class="rate">
+            1.7
+        </view>
+        <view slot="footer">
+            <van-button size="mini">详情</van-button>
+        </view>
+    </van-card>
+
+    <van-card
+    tag="TOP2"
+    desc="主讲教师：林毅"
+    title="形势与政策"
+    thumb="{{ image_url }}"
+    thumb-mode="aspectFill"
+    >
+        <view slot="tags">
+            <van-tag plain type="primary">马克思主义学院</van-tag>
+            <van-tag plain type="danger">必修课</van-tag>
+        </view>
+        <vew slot="price">
+            <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 5 }}" />
+        </vew>
+        <view slot="num" class="rate">
+            9.9
+        </view>
+        <view slot="footer">
+            <van-button size="mini">详情</van-button>
+        </view>
     </van-card>
 </view>
