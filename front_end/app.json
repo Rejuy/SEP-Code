@@ -1,13 +1,13 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/login/login",
-    "pages/course/course",
     "pages/register/register",
+    "pages/login/login",
+    "pages/index/index",
     "pages/notice/notice",
-    "pages/user/user",
-    "pages/search/search",
     "pages/module/module",
+    "pages/user/user",
+    "pages/course/course",
+    "pages/search/search",
     "pages/food/food",
     "pages/place/place"
   ],
