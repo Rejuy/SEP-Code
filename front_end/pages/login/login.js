@@ -1,4 +1,3 @@
-// pages/login/login.js
 import Notify from "vant-weapp/notify/notify";
 
 Page({
@@ -8,14 +7,14 @@ Page({
   },
 
   checkEmpty() {
-    const data_obj = this.data;
-    const isEmpty = data_obj.user_name === "" || data_obj.user_password === "";
-    return isEmpty;
+    const data_object = this.data;
+    const is_empty = data_object.user_name === "" || data_object.user_password === "";
+    return is_empty;
   },
   loginSuccessful() {
     const app = getApp();
-    app.globalData.g_active = "home";
-    app.globalData.g_is_login = true;
+    app.global_data.global_active = "home";
+    app.global_data.global_is_login = true;
     wx.reLaunch({
       url: "/pages/index/index",
     });

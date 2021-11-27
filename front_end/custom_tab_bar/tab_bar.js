@@ -7,7 +7,7 @@ Component({
     onChange(event) {
       const app = getApp();
       this.setData({ active: event.detail });
-      app.globalData.g_active = this.data.active;
+      app.global_data.global_active = this.data.active;
       if (!this.data.is_login) {
         // 跳转 for login 模式
         switch (this.data.active) {
@@ -22,7 +22,7 @@ Component({
             });
             break;
           default:
-            console.error("Unknown active, check custom-tab-bar.js");
+            console.error("Unknown active, check custom_tab_bar.js");
             break;
         }
       } else {
@@ -48,8 +48,8 @@ Component({
   lifetimes: {
     attached() {
       this.setData({
-        is_login: getApp().globalData.g_is_login,
-        active: getApp().globalData.g_active,
+        is_login: getApp().global_data.global_is_login,
+        active: getApp().global_data.global_active,
       });
     },
   },
