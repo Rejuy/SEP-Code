@@ -1,2 +1,29 @@
-<!--pages/place/place.wxml-->
-<text>pages/place/place.wxml</text>
+<view>
+    <van-dropdown-menu active-color="#1989fa" :color="red">
+        <van-dropdown-item value="{{ range_value }}" options="{{ range_type }}"/>
+        <van-dropdown-item value="{{ place_value }}" options="{{ place_type }}" />
+        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" />
+    </van-dropdown-menu>    
+
+    <van-card
+    tag="TOP3"
+    desc="清华大学西南方向"
+    title="第一教室楼"
+    thumb="{{ image_url }}"
+    thumb-mode="aspectFill"
+    >  
+        <view slot="tags">
+            <van-tag plain type="primary">校内地点</van-tag>
+            <van-tag plain type="success">自习场所</van-tag>
+        </view>
+        <vew slot="price">
+            <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 4 }}" />
+        </vew>
+        <view slot="num" class="rate">
+            8.3
+        </view>
+        <view slot="footer">
+            <van-button size="mini">详情</van-button>
+        </view>
+    </van-card>
+</view>
