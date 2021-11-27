@@ -26,10 +26,8 @@ Page({
     if (this.checkEmpty()) {
       Notify({ type: "danger", message: "必填为空" });
     } else {
-      this.loginSuccessful();
-      return;
       wx.request({
-        url: "http://183.173.135.223:5000/api/v1.0/login",
+        url: "https://thurec.xyz/api/v1.0/login",
         data: {
           user_name: this.data.user_name,
           password: this.data.user_password,

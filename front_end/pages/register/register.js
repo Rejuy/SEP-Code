@@ -28,11 +28,11 @@ Page({
       Notify({ type: "danger", message: "密码不一致" });
     } else {
       // attempt register
-      // TODO: finish register check
+      console.log(this.data)
       wx.request({
-        url: "http://49.233.123.127:8000/register",
+        url: "http://thurec.xyz/api/v1.0/register",
         data: {
-          username: this.data.username,
+          user_name: this.data.username,
           email: this.data.email,
           password: this.data.password,
         },
@@ -43,6 +43,8 @@ Page({
         success: function (res) {
           if (res.data === 0) {
             Notify({ type: "success", message: "邮件已发送，请查看邮箱" });
+          }else{
+            Notify({ type: "danger", message: "信息异常"})
           }
         },
         fail: function () {
