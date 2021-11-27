@@ -1,2 +1,4 @@
 <!--pages/course/course.wxml-->
 <text>pages/course/course.wxml</text>
+
+<tabbar current_page="course" is_login="{{true}}" />

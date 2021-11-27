@@ -17,37 +17,9 @@
     "navigationBarTitleText": "清声细语",
     "navigationBarTextStyle": "white"
   },
-  "tabBar": {
-    "custom": true,
-    "list": [
-      {
-        "pagePath": "pages/login/login"
-      },
-      {
-        "pagePath": "pages/register/register"
-      },
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "images/icons/home.png",
-        "selectedIconPath": "images/icons/home.png"
-      },
-      {
-        "pagePath": "pages/module/module",
-        "text": "模块",
-        "iconPath": "images/icons/module.png",
-        "selectedIconPath": "images/icons/module.png"
-      },
-      {
-        "pagePath": "pages/user/user",
-        "text": "我的",
-        "iconPath": "images/icons/user.png",
-        "selectedIconPath": "images/icons/user.png"
-      }
-    ]
-  },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
+    "tabbar": "/components/custom-tab-bar/index",
     "van-button": "@vant/weapp/button/index",
     "van-field": "@vant/weapp/field/index",
     "van-popup": "@vant/weapp/popup/index",

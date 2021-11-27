@@ -1,7 +1,10 @@
 <!-- custom-tab-bar/index.wxml -->
-<van-tabbar active="{{ active }}" bind:change="onChange">
+<van-tabbar active="{{ current_page }}" bind:change="onChange">
   <van-tabbar-item wx:if="{{!is_login}}" name="login" icon="description">登录</van-tabbar-item>
   <van-tabbar-item wx:if="{{!is_login}}" name="register" icon="records">注册</van-tabbar-item>
   <van-tabbar-item wx:if="{{is_login}}" name="home" icon="friends-o">主页</van-tabbar-item>
+  <van-tabbar-item wx:if="{{is_login}}" name="course" icon="orders-o">课程</van-tabbar-item>
+  <van-tabbar-item wx:if="{{is_login}}" name="food" icon="shop-o">饮食</van-tabbar-item>
+  <van-tabbar-item wx:if="{{is_login}}" name="place" icon="location-o">出行</van-tabbar-item>
   <van-tabbar-item wx:if="{{is_login}}" name="user" icon="setting-o">个人中心</van-tabbar-item>
 </van-tabbar>

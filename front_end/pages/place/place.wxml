@@ -1,2 +1,4 @@
 <!--pages/place/place.wxml-->
 <text>pages/place/place.wxml</text>
+
+<tabbar current_page="place" is_login="{{true}}" />

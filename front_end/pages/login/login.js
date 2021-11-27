@@ -26,30 +26,34 @@ Page({
     if (this.checkEmpty()) {
       Notify({ type: "danger", message: "必填为空" });
     } else {
-      Notify({ type: "success", message: "登录成功" });
-      setTimeout(this.loginSuccessful, 500);
+      this.loginSuccessful();
+      return;
+      wx.request({
+        url: "http://183.173.135.223:5000/api/v1.0/login",
+        data: {
+          user_name: this.data.user_name,
+          password: this.data.user_password,
+        },
+        header: {
+          "content-type": "application/json", // 默认值
+        },
+        method: "POST",
+        success: (res) => {
+          console.log(res);
+          if (res.data.state === 0) {
+            Notify({ type: "success", message: "登录成功" });
+            getApp().globalData.g_user_token = res.data.user_mask;
+            setTimeout(this.loginSuccessful, 500);
+          } else {
+            Notify({ type: "danger", message: "登录失败" });
+          }
+        },
+        fail: function (res) {
+          Notify({ type: "danger", message: "请求超时" });
+        },
+      });
     }
+
     return;
-    wx.request({
-      url: "http://49.233.1.189:5000/api/v1.0/login",
-      data: {
-        user_name: this.data.user_name,
-        password: this.data.user_password,
-      },
-      header: {
-        "content-type": "application/json", // 默认值
-      },
-      method: "POST",
-      success: (res) => {
-        if (res.data.state == 0) {
-          Notify({ type: "success", message: "登录成功" });
-          setTimeout(loginSuccessful, 500);
-        }
-      },
-      fail: function (res) {
-        console.log(res);
-        Notify({ type: "danger", message: "请求超时" });
-      },
-    });
   },
 });

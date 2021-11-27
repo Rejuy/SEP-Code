@@ -29,10 +29,8 @@ Page({
     } else {
       // attempt register
       // TODO: finish register check
-      Notify({ type: "success", message: "邮件已发送，请查看邮箱" });
-      return;
       wx.request({
-        url: "http://127.0.0.1:8080/register",
+        url: "http://49.233.123.127:8000/register",
         data: {
           username: this.data.username,
           email: this.data.email,
@@ -43,8 +41,8 @@ Page({
         },
         method: "POST",
         success: function (res) {
-          if (res.data === "yes") {
-            Notify({ type: "success", message: "注册成功" });
+          if (res.data === 0) {
+            Notify({ type: "success", message: "邮件已发送，请查看邮箱" });
           }
         },
         fail: function () {
