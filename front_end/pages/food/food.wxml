@@ -1,7 +1,7 @@
 <view>
     <van-dropdown-menu active-color="#1989fa" :color="red">
-        <van-dropdown-item value="{{ range_value }}" options="{{ range_type }}"/>
-        <van-dropdown-item value="{{ food_value }}" options="{{ food_type }}" />
+        <van-dropdown-item value="{{ range_value }}" options="{{ range_type }}" bind:change="rangeSelected"/>
+        <van-dropdown-item value="{{ food_value }}" options="{{ food_type }}" disabled="{{ uncertain_range }}"/>
         <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" />
     </van-dropdown-menu>    
     <van-card

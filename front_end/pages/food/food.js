@@ -12,10 +12,6 @@ Page({
         ],
         food_type: [
             { text: '任意类型', value: 0 },
-            { text: '汉堡披萨', value: 1 },
-            { text: '龙虾烧烤', value: 2 },
-            { text: '香锅火锅', value: 3 },
-            { text: '米线拉面', value: 4 },
         ],
         rank_type: [
             { text: '评分排序', value: 0 },
@@ -30,6 +26,46 @@ Page({
         image_url: "https://obohe.com/i/2021/11/27/j1j3qo.jpg"
     },
 
+    rangeSelected: function(result) {
+        this.setData({
+            range_value: result.detail
+        });
+        let tmp_value = this.data.range_value;
+        
+        if(tmp_value == 1) {
+            let inside_food_type = [
+                { text: '任意食堂', value: 0 },
+                { text: '桃李园', value: 1 },
+                { text: '紫荆园', value: 2 },
+                { text: '玉树园', value: 3 },
+                { text: '清芬园', value: 4 },
+            ];
+            this.setData({
+                uncertain_range: false,
+                food_type: inside_food_type
+            });            
+        }else if(tmp_value == 2) {
+            let outside_food_type = [
+                { text: '任意类型', value: 0 },
+                { text: '汉堡披萨', value: 1 },
+                { text: '龙虾烧烤', value: 2 },
+                { text: '香锅火锅', value: 3 },
+                { text: '米线拉面', value: 4 },
+            ];
+            this.setData({
+                uncertain_range: false,
+                food_type: outside_food_type
+            });   
+        }else {
+            let default_food_type = [
+                { text: '任意类型', value: 0 },
+            ];
+            this.setData({
+                uncertain_range: true,
+                food_type: default_food_type
+            });   
+        }
+    },
     /**
      * 生命周期函数--监听页面加载
      */
