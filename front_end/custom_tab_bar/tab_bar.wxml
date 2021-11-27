@@ -1,4 +1,3 @@
-<!-- custom-tab-bar/index.wxml -->
 <van-tabbar active="{{ active }}" bind:change="onChange">
   <van-tabbar-item wx:if="{{!is_login}}" name="login" icon="description">登录</van-tabbar-item>
   <van-tabbar-item wx:if="{{!is_login}}" name="register" icon="records">注册</van-tabbar-item>
