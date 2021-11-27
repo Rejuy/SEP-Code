@@ -1,12 +1,15 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/course/course",
+
     "pages/register/register",
     "pages/login/login",
-    "pages/index/index",
+    
     "pages/notice/notice",
     "pages/module/module",
     "pages/user/user",
-    "pages/course/course",
+    
     "pages/search/search",
     "pages/food/food",
     "pages/place/place"
@@ -20,12 +23,6 @@
   "tabBar": {
     "custom": true,
     "list": [
-      {
-        "pagePath": "pages/login/login"
-      },
-      {
-        "pagePath": "pages/register/register"
-      },
       {
         "pagePath": "pages/index/index",
         "text": "首页",

@@ -6,22 +6,22 @@ Page({
      */
     data: {
         department_type: [
-            { text: '开课院系', value: 0 },
+            { text: '任意院系', value: 0 },
             { text: '体育部', value: 1 },
             { text: '语言中心', value: 2 },
             { text: '软件学院', value: 3 },
         ],
         course_type: [
-            { text: '课程类型', value: 0 },
+            { text: '全部课程', value: 0 },
             { text: '体育课', value: 1 },
             { text: '外文课', value: 2 },
             { text: '文化素质课', value: 3 },
             { text: '文化素质核心课', value: 4 },
         ],
         rank_type: [
-            { text: '排序方式', value: 0 },
-            { text: '评分排序', value: 1 },
-            { text: '热度排序', value: 2 },
+            { text: '评分排序', value: 0 },
+            { text: '热度排序', value: 1 },
+            { text: '时间排序', value: 2 },
         ],
         department_value: 0,
         course_value: 0,
