@@ -23,7 +23,7 @@ Page({
         rank_value: 0,
         uncertain_range: true,
 
-        image_url: "https://obohe.com/i/2021/11/27/j1j3qo.jpg"
+        image_url: "https://z3.ax1x.com/2021/11/28/omzV6x.jpg"
     },
 
     rangeSelected: function(result) {
