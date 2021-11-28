@@ -10,6 +10,7 @@
     title="汉堡王"
     thumb="{{ image_url }}"
     thumb-mode="aspectFill"
+    thumb-link="../food_item/food_item"
     >  
         <view slot="tags">
             <van-tag plain type="primary">校外餐饮</van-tag>

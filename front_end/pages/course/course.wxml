@@ -10,13 +10,14 @@
     title="软件工程"
     thumb="{{ image_url }}"
     thumb-mode="aspectFill"
+    thumb-link="../course_item/course_item"
     >  
         <view slot="tags">
             <van-tag plain type="primary">软件学院</van-tag>
             <van-tag plain type="danger">必修课</van-tag>
         </view>
         <vew slot="price">
-            <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 5 }}" />
+            <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 5.0 }}" />
         </vew>
         <view slot="num" class="rate">
             10.0

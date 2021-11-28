@@ -1,18 +1,22 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/course/course",
 
     "pages/register/register",
     "pages/login/login",
-    
+
+    "pages/search/search",
+    "pages/course/course",
+    "pages/food/food",
+    "pages/place/place",
+
     "pages/notice/notice",
     "pages/module/module",
     "pages/user/user",
-    
-    "pages/search/search",
-    "pages/food/food",
-    "pages/place/place"
+
+    "pages/course_item/course_item",
+    "pages/food_item/food_item",
+    "pages/place_item/place_item"
   ],
   "window": {
     "backgroundTextStyle": "light",

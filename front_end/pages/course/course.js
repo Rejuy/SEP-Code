@@ -1,9 +1,5 @@
 // pages/course/course.js
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
         department_type: [
             { text: '任意院系', value: 0 },
@@ -26,13 +22,59 @@ Page({
         department_value: 0,
         course_value: 0,
         rank_value: 0,
+
         image_url: "https://learn.tsinghua.edu.cn/b/wlxt/kc/v_kcxx_jskcxx/teacher/showImageById?wlkcid=2021-2022-1142764790&_csrf=d39592c7-bbb0-416a-affb-a39b1ab00ba4",
 
         current_page: 0,
         total_pages: 0,
-        courses_list: []
+        courses_list: [
+            { name: '软件工程', teacher: '刘强', department: '软件学院', type: '专业课', star: 5.0, score: 10.0, tag: 'TOP1' },
+            { name: '二年级男生散手', teacher: '马勇志', department: '体育部', type: '专业课', star: 3.5, score: 5.0, tag: '' },
+            { name: '美国社会与文化', teacher: 'TULP RUSSELL ALAN', department: '语言中心', type: '外文课', star: 4.5, score: 9.5, tag: 'TOP15' },            
+        ]
     },
 
+    marco: {
+        PAGE_CAPACITY: 8,
+
+        SCORE_DESCENDING_ORDER: 100,
+        POPULARITY_DESCENDING_ORDER: 200,
+        TIME_DESCENDING_ORDER: 300,
+        SCORE_ASCENDING_ORDER: -100,
+        POPULARITY_ASCENDING_ORDER: -200,
+        TIME_ASCENDING_ORDER: -300
+    },
+
+    getCourseList: function() {
+        let begin = this.data.current_page * PAGE_CAPACITY;
+        let end = begin + PAGE_CAPACITY;
+
+        wx.request({
+          url: 'url',
+          method: 'GET',
+          data: {
+              begin: begin,
+              end: end,
+              course_type: this.data.course_value,
+              course_department: this.data.department_value,
+              course_order: this.marco.SCORE_DESCENDING_ORDER
+          },
+          dataType: JSON,
+          enableCache: true,
+          enableHttp2: true,
+          enableQuic: true,
+          header: {
+            "content-type": "application/json"
+          },
+          timeout: 0,
+          success: (result) => {
+              console.log(result);
+
+          }, fail: (error) => {
+              console.log(error);
+          }, complete: (res) => {},
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */

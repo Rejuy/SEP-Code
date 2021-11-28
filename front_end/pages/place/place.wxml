@@ -11,6 +11,7 @@
     title="第一教室楼"
     thumb="{{ image_url }}"
     thumb-mode="aspectFill"
+    thumb-link="../place_item/place_item"
     >  
         <view slot="tags">
             <van-tag plain type="primary">校内地点</van-tag>
