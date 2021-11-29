@@ -17,11 +17,33 @@
   background: linear-gradient(#82318E, #9198e5);
 }
 
-.register_info{
+.input_text{
   position: absolute;
-  top: 30%;
-  left: 5%;
-  width: 90%;
+  left: 10%;
+  width: 70%;
+  height: 10%;
+  padding: 0 5%;
+  background: white;
+  color: black;
+  font-family: "LiGothic", "FangSong", Arial, serif;
+  font-size: 15px;
+  border-radius: 50px;
+}
+
+#username{
+  top: 10%;
+}
+
+#email{
+  top: 25%;
+}
+
+#password{
+  top: 40%;
+}
+
+#confirm_password{
+  top: 55%;
 }
 
 .register_button {
