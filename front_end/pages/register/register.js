@@ -28,13 +28,10 @@ Page({
       Notify({ type: "danger", message: "密码不一致" });
     } else {
       // attempt register
-      // TODO: finish register check
-      Notify({ type: "success", message: "邮件已发送，请查看邮箱" });
-      return;
       wx.request({
-        url: "http://127.0.0.1:8080/register",
+        url: "https://thurec.xyz/api/v1.0/register",
         data: {
-          username: this.data.username,
+          user_name: this.data.username,
           email: this.data.email,
           password: this.data.password,
         },
@@ -43,8 +40,10 @@ Page({
         },
         method: "POST",
         success: function (res) {
-          if (res.data === "yes") {
-            Notify({ type: "success", message: "注册成功" });
+          if (res.data === 0) {
+            Notify({ type: "success", message: "邮件已发送，请查看邮箱" });
+          }else{
+            Notify({ type: "danger", message: "信息异常"})
           }
         },
         fail: function () {

@@ -1,2 +1,4 @@
 <!-- pages/user/user.wxml -->
 <van-button type="danger" size="large" bind:click="logout">退出登录</van-button>
+
+<tabbar current_page="user" is_login="{{true}}" />

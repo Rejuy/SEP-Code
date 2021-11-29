@@ -48,3 +48,4 @@
         </view>
     </van-card>
 </view>
+<tabbar current_page="food" is_login="{{true}}" />
