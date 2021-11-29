@@ -28,9 +28,8 @@ Page({
       Notify({ type: "danger", message: "密码不一致" });
     } else {
       // attempt register
-      console.log(this.data)
       wx.request({
-        url: "http://thurec.xyz/api/v1.0/register",
+        url: "https://thurec.xyz/api/v1.0/register",
         data: {
           user_name: this.data.username,
           email: this.data.email,

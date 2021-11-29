@@ -37,7 +37,6 @@ Page({
         },
         method: "POST",
         success: (res) => {
-          console.log(res);
           if (res.data.state === 0) {
             Notify({ type: "success", message: "登录成功" });
             getApp().globalData.g_user_token = res.data.user_mask;
