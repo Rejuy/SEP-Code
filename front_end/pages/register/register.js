@@ -46,7 +46,7 @@ Page({
             Notify({ type: "danger", message: "信息异常"})
           }
         },
-        fail: function () {
+        fail: function (res) {
           Notify({ type: "danger", message: "请求超时" });
         },
       });

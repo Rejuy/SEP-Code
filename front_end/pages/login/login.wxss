@@ -6,6 +6,27 @@
   height: 100%;
 }
 
+.input_text{
+  position: absolute;
+  left: 10%;
+  width: 70%;
+  height: 10%;
+  padding: 0 5%;
+  background: white;
+  color: black;
+  font-family: "LiGothic", "FangSong", Arial, serif;
+  font-size: 15px;
+  border-radius: 50px;
+}
+
+#username{
+  top: 30%;
+}
+
+#password{
+  top: 45%;
+}
+
 .background{
   position: absolute;
   top: 0;
@@ -26,5 +47,5 @@
   position: absolute;
   width: 80%;
   left: 10%;
-  top: 70%;
+  top: 60%;
 }
