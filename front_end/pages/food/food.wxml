@@ -23,7 +23,7 @@
             8.3
         </view>
         <view slot="footer">
-            <van-button size="mini">详情</van-button>
+            <van-button size="mini" bindtap="viewFoodItem">详情</van-button>
         </view>
     </van-card>
     <van-card
@@ -37,14 +37,14 @@
             <van-tag plain type="primary">校外餐饮</van-tag>
             <van-tag plain type="danger">米线拉面</van-tag>
         </view>
-        <vew slot="price">
+        <star slot="price">
             <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 4 }}" />
-        </vew>
+        </star>
         <view slot="num" class="rate">
             8.0
         </view>
         <view slot="footer">
-            <van-button size="mini">详情</van-button>
+            <van-button size="mini" bindtap="viewFoodItem">详情</van-button>
         </view>
     </van-card>
 </view>

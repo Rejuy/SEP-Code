@@ -17,9 +17,9 @@
             <van-tag plain type="primary">校内地点</van-tag>
             <van-tag plain type="success">自习场所</van-tag>
         </view>
-        <vew slot="price">
+        <star slot="price">
             <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 4 }}" />
-        </vew>
+        </star>
         <view slot="num" class="rate">
             8.3
         </view>

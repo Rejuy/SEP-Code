@@ -121,6 +121,12 @@ Page({
         console.log("rank_value ", this.data.rank_value);  
     },
 
+    viewCourseItem: function() {
+        wx.navigateTo({
+          url: '../course_item/course_item',
+        })
+    },
+
     getCourseList: function() {
         let begin = this.data.current_page * PAGE_CAPACITY;
         let end = begin + PAGE_CAPACITY;

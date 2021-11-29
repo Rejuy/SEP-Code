@@ -83,6 +83,12 @@ Page({
             });   
         }
     },
+
+    viewFoodItem: function() {
+        wx.navigateTo({
+          url: '../food_item/food_item',
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
