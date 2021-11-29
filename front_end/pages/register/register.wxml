@@ -8,5 +8,6 @@
     </van-cell-group>
     <van-button type="primary" size="large" class="register_button" bind:click="register">注册</van-button>
 </view>
+
 <tabbar current_page="register" is_login="{{false}}" />
 <van-notify id="van-notify" />
