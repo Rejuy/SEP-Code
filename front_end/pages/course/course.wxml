@@ -147,3 +147,4 @@
         </view>
     </van-card> -->
 </view>
+<tabbar current_page="course" is_login="{{true}}" />

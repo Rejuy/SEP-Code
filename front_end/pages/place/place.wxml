@@ -28,3 +28,4 @@
         </view>
     </van-card>
 </view>
+<tabbar current_page="place" is_login="{{true}}" />

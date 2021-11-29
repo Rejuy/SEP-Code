@@ -24,6 +24,7 @@
     "navigationBarTitleText": "清声细语",
     "navigationBarTextStyle": "white"
   },
+  /*
   "tabBar": {
     "custom": true,
     "list": [
@@ -47,8 +48,10 @@
       }
     ]
   },
+  */
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
+    "tabbar": "/components/custom-tab-bar/index",
     "van-button": "@vant/weapp/button/index",
     "van-field": "@vant/weapp/field/index",
     "van-popup": "@vant/weapp/popup/index",
