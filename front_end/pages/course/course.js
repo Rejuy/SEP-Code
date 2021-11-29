@@ -28,9 +28,13 @@ Page({
         current_page: 0,
         total_pages: 0,
         courses_list: [
-            { name: '软件工程', teacher: '刘强', department: '软件学院', type: '专业课', star: 5.0, score: 10.0, tag: 'TOP1' },
-            { name: '二年级男生散手', teacher: '马勇志', department: '体育部', type: '专业课', star: 3.5, score: 5.0, tag: '' },
-            { name: '美国社会与文化', teacher: 'TULP RUSSELL ALAN', department: '语言中心', type: '外文课', star: 4.5, score: 9.5, tag: 'TOP15' },            
+            { id: 1, name: '软件工程', teacher: '刘强', department: '软件学院', type: '专业课', star: 5.0, score: 10.0, tag: 'TOP1', color: '#228B22'},
+            { id: 2, name: '概率论与数理统计', teacher: '梁恒', department: '数学系', type: '数理课', star: 4.0, score: 8.1, tag: '', color: '#000000'},
+            { id: 3, name: '美国社会与文化', teacher: 'TULP RUSSELL ALAN', department: '语言中心', type: '外文课', star: 4.5, score: 9.5, tag: 'TOP15', color: '#FFA500' },  
+            { id: 4, name: '物理实验B(2)', teacher: '梁昌林', department: '物理系', type: '实验课', star: 0.0, score: 0.4, tag: '', color: '#8B4513' },  
+            { id: 5, name: '二年级男生散手', teacher: '马勇志', department: '体育部', type: '体育课', star: 3.5, score: 7.3, tag: '', color: '#9400D3' },    
+            { id: 7, name: '不朽的艺术：走进大师与经典', teacher: '孙晶', department: ' 人文学院', type: '文核课', star: 5.0, score: 9.7, tag: 'TOP8', color: '	#0000FF' },   
+            { id: 8, name: '亲密关系：爱情、婚姻与心理学', teacher: '廖江群', department: '社科学院', type: '文素课', star: 4.0, score: 8.2, tag: '', color: '#FF1493' },   
         ]
     },
 
