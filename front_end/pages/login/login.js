@@ -26,7 +26,7 @@ Page({
       Notify({ type: "danger", message: "必填为空" });
     } else {
       wx.request({
-        url: "https://thurec.xyz/api/v1.0/login",
+        url: "http://thurec.xyz/api/v1.0/login",
         data: {
           user_name: this.data.user_name,
           password: this.data.user_password,
@@ -38,7 +38,7 @@ Page({
         success: (res) => {
           if (res.data.state === 0) {
             Notify({ type: "success", message: "登录成功" });
-            getApp().globalData.g_user_token = res.data.user_mask;
+            //getApp().globalData.global_user_token = res.data.user_mask;
             setTimeout(this.loginSuccessful, 500);
           } else {
             Notify({ type: "danger", message: "登录失败" });

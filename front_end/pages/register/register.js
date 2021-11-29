@@ -29,7 +29,7 @@ Page({
     } else {
       // attempt register
       wx.request({
-        url: "https://thurec.xyz/api/v1.0/register",
+        url: "http://thurec.xyz/api/v1.0/register_user_info",
         data: {
           user_name: this.data.username,
           email: this.data.email,
