@@ -1,8 +1,8 @@
  <view>
     <van-dropdown-menu active-color="#1989fa" :color="red">
-        <van-dropdown-item value="{{ course_value }}" options="{{ course_type }}"/>
-        <van-dropdown-item value="{{ department_value }}" options="{{ department_type }}" />
-        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" />
+        <van-dropdown-item value="{{ course_value }}" options="{{ course_type }}" bind:change="courseTypeSelected"/>
+        <van-dropdown-item value="{{ department_value }}" options="{{ department_type }}" bind:change="departmentTypeSelected"/>
+        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" bind:change="rankTypeSelected"/>
     </van-dropdown-menu>
 
     <view wx:for="{{ courses_list }}" wx:key="id">

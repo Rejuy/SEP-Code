@@ -1,9 +1,5 @@
 // pages/food/food.js
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
         range_type: [
             { text: '全部餐饮', value: 0 },
@@ -23,7 +19,11 @@ Page({
         rank_value: 0,
         uncertain_range: true,
 
-        image_url: "https://z3.ax1x.com/2021/11/28/omzV6x.jpg"
+        image_url: "https://z3.ax1x.com/2021/11/28/omzV6x.jpg",
+
+        food_list: [
+
+        ]
     },
 
     rangeSelected: function(result) {
@@ -35,10 +35,24 @@ Page({
         if(tmp_value == 1) {
             let inside_food_type = [
                 { text: '任意食堂', value: 0 },
-                { text: '桃李园', value: 1 },
-                { text: '紫荆园', value: 2 },
-                { text: '玉树园', value: 3 },
-                { text: '清芬园', value: 4 },
+                { text: '家园', value: 1 },
+                { text: '甲所', value: 2 },
+                { text: '寓园', value: 3 },
+                { text: '融园', value: 4 },
+                { text: '澜园', value: 5 },
+                { text: '荷园', value: 6 },
+                { text: '北园', value: 7 },
+                { text: '南园', value: 8 },
+                { text: '桃李园', value: 9 },
+                { text: '紫荆园', value: 10 },
+                { text: '清芬园', value: 11 },
+                { text: '听涛园', value: 12 },
+                { text: '观畴园', value: 13 },
+                { text: '玉树园', value: 14 },
+                { text: '芝兰园', value: 15 },
+                { text: '丁香园', value: 16 },
+                { text: '熙春园', value: 17 },
+                { text: '清真食堂', value: 18 },
             ];
             this.setData({
                 uncertain_range: false,
@@ -51,6 +65,9 @@ Page({
                 { text: '龙虾烧烤', value: 2 },
                 { text: '香锅火锅', value: 3 },
                 { text: '米线拉面', value: 4 },
+                { text: '日韩料理', value: 5 },
+                { text: '简餐便当', value: 6 },
+                { text: '各类饮品', value: 7 },
             ];
             this.setData({
                 uncertain_range: false,
