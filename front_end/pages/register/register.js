@@ -1,12 +1,12 @@
 // pages/register/register.js
-import Notify from "vant-weapp/notify/notify";
+import Notify from "@vant/weapp/notify/notify";
 
 Page({
   /**
    * Page initial data
    */
   data: {
-    username: "",
+    user_name: "",
     email: "",
     password: "",
     confirm_password: "",
@@ -14,12 +14,12 @@ Page({
   checkEmpty() {
     // returns true if empty
     const data_obj = this.data;
-    const isEmpty =
-      data_obj.username === "" ||
+    const is_empty =
+      data_obj.user_name === "" ||
       data_obj.email === "" ||
       data_obj.password === "" ||
       data_obj.confirm_password === "";
-    return isEmpty;
+    return is_empty;
   },
   register() {
     if (this.checkEmpty()) {

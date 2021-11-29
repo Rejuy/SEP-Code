@@ -1,15 +1,22 @@
 {
   "pages": [
-    "pages/login/login",
-    "pages/register/register",
     "pages/index/index",
-    "pages/notice/notice",
-    "pages/user/user",
+
+    "pages/register/register",
+    "pages/login/login",
+
     "pages/search/search",
-    "pages/module/module",
     "pages/course/course",
     "pages/food/food",
-    "pages/place/place"
+    "pages/place/place",
+
+    "pages/notice/notice",
+    "pages/module/module",
+    "pages/user/user",
+
+    "pages/course_item/course_item",
+    "pages/food_item/food_item",
+    "pages/place_item/place_item"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -17,16 +24,38 @@
     "navigationBarTitleText": "清声细语",
     "navigationBarTextStyle": "white"
   },
+  /*
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home.png"
+      },
+      {
+        "pagePath": "pages/module/module",
+        "text": "模块",
+        "iconPath": "images/icons/module.png",
+        "selectedIconPath": "images/icons/module.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/icons/user.png",
+        "selectedIconPath": "images/icons/user.png"
+      }
+    ]
+  },
+  */
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "tabbar": "/components/custom-tab-bar/index",
     "van-button": "@vant/weapp/button/index",
     "van-field": "@vant/weapp/field/index",
     "van-popup": "@vant/weapp/popup/index",
-    "van-cell": "@vant/weapp/cell/index",
-    "van-cell-group": "@vant/weapp/cell-group/index",
     "van-tabbar": "@vant/weapp/tabbar/index",
-    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
-    "van-notify": "@vant/weapp/notify/index"
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index"
   }
 }

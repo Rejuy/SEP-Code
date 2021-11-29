@@ -19,22 +19,6 @@
     margin-top: -20rpx;
 }
 
-/* .admin {
-    border: 1px solid red;
-}
-
-.admin .notice {
-    display: flex;
-    height: 150rpx;
-    padding: 0 26rpx;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.admin .notice image {
-    height: 100%;
-} */
-
 .board swiper {
     width: 750rpx;
     height: 384rpx;
