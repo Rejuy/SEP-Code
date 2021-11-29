@@ -11,6 +11,8 @@
 .register_info{
   position: absolute;
   top: 10%;
+  left: 5%;
+  width: 90%;
 }
 
 .register_button {

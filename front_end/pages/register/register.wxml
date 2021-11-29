@@ -1,6 +1,6 @@
 <!-- pages/register/register.wxml -->
 <view class="container">
-    <van-cell-group class="register_info" inset>
+    <van-cell-group class="register_info">
         <van-field model:value="{{ username }}" label="用户名" placeholder="请输入用户名" border="{{ false }}" required />
         <van-field model:value="{{ email }}" type="email" label="邮箱" placeholder="请输入邮箱" required border="{{ false }}" />
         <van-field model:value="{{ password }}" type="password" label="密码" placeholder="请输入密码" required border="{{ false }}" />
