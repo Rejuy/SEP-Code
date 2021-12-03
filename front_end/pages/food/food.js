@@ -19,10 +19,11 @@ Page({
         rank_value: 0,
         uncertain_range: true,
 
-        image_url: "https://z3.ax1x.com/2021/11/28/omzV6x.jpg",
+        image_url: "https://z3.ax1x.com/2021/12/03/odK6aD.jpg",
 
         food_list: [
-
+            { id: 1, name: '汉堡王', position: '海淀区华清嘉园7号楼', range: '校外餐饮', type: '汉堡披萨', star: 4.0, score: 8.3, tag: 'TOP15', color: '#FF976A'}, 
+            { id: 2, name: '李先生牛肉面大王', position: '海淀区双清苑1号楼', range: '校外餐饮', type: '米线拉面', star: 4.0, score: 8.0, tag: '', color: '#EE0A24'},             
         ]
     },
 

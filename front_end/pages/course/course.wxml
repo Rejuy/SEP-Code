@@ -38,5 +38,5 @@
         </van-card>
     </view>
 </view>
+<!-- <tabbar current_page="course" is_login="{{true}}" /> -->
 
-<tabbar current_page="course" is_login="{{true}}" />
