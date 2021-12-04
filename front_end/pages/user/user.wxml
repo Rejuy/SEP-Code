@@ -33,6 +33,7 @@
   </van-cell-group>
   <view class="box" />
   <van-button round class="logout_button" type="danger" size="large" bind:click="logout">退出登录</van-button>
+  <view class="block" style="height: 100px;"></view>
 </view>
 
 <tabbar current_page="user" is_login="{{true}}" />
