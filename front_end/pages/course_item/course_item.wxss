@@ -1,1 +1,62 @@
-/* pages/course_item/course_item.wxss */
+.images {
+    text-align: center;
+    justify-content: space-between; 
+}
+
+.images image {
+    padding-top: 20rpx;
+    padding-bottom: 10rpx;
+}
+
+.header {
+    width: 100%;
+    display: inline-flex;
+    border: 2rpx solid #EAEAEA;
+}
+
+.header .information {
+    width: 60%;
+    padding: 10rpx 0 10rpx 10rpx;
+}
+
+.header .information .attribute {
+    width: 100%;
+}
+
+.header .information .tags {
+    display: inline;
+}
+
+.header .information .tags van-tag {
+    padding-right: 16rpx;
+}
+
+.header .information .attribute .attribute_name {
+    color: #666666;
+    font-size: 80%;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.header .information .attribute .attribute_value {
+    color: #111111;
+    font-weight: 600;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+}
+
+.header .score {
+    width: 40%;
+    border-left: 2rpx solid #EAEAEA;
+}
+
+.header .score van-rate{
+    float: right;
+}
+
+.header .score text {
+    width: 25%;
+    display: block;
+    border: 2rpx solid blue;
+    font-size: smaller;
+    font-style: italic;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+}
