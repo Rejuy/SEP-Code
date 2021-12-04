@@ -1,4 +1,38 @@
 <!-- pages/user/user.wxml -->
-<van-button type="danger" size="large" bind:click="logout">退出登录</van-button>
+
+<view class="container">
+  <view class="img_container">
+    <van-image
+      round
+      class="img"
+      width="75px"
+      height="75px"
+      src="https://img.yzcdn.cn/vant/cat.jpeg"
+    />
+  </view>
+  <view class="box" />
+  <van-cell-group title="用户信息">
+    <van-cell title="用户名" value="{{username}}" />
+  </van-cell-group>
+  <van-cell-group title="消息">
+    <van-cell icon="chat-o" is-link>
+      <view slot="title">
+        <view class="van-cell-text" style="display:inline-block">用户消息</view>
+        <van-tag type="danger" style="display:inline-block">1 个未读</van-tag>
+      </view>
+    </van-cell>
+    <van-cell icon="chat-o" is-link>
+      <view slot="title">
+        <view class="van-cell-text" style="display:inline-block">系统消息</view>
+        <van-tag type="danger" style="display:inline-block">1 个未读</van-tag>
+      </view>
+    </van-cell>
+  </van-cell-group>
+  <van-cell-group title="收藏">
+    <van-cell title="收藏信息" icon="star-o" value="{{1}}" is-link />
+  </van-cell-group>
+  <view class="box" />
+  <van-button round class="logout_button" type="danger" size="large" bind:click="logout">退出登录</van-button>
+</view>
 
 <tabbar current_page="user" is_login="{{true}}" />
