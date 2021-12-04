@@ -36,6 +36,7 @@
                 }
             </wxs>
         </van-card>
-    </view>    
+    </view>
+    <view class="block" style="height: 50px" />
 </view>
-<!-- <tabbar current_page="place" is_login="{{true}}" /> -->
+<tabbar current_page="place" is_login="{{true}}" />
