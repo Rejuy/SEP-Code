@@ -1,6 +1,6 @@
 /* pages/user/user.wxss */
 
-.container{
+.container {
   position: absolute;
   left: 0;
   top: 0;
@@ -9,17 +9,17 @@
   padding: 10%;
 }
 
-.img_container{
+.img_container {
   width: 100%;
   height: 75px;
 }
 
-.img{
+.img {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.box{
+.box {
   height: 30px;
 }

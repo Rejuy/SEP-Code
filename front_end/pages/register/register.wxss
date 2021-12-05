@@ -8,16 +8,16 @@
   font-size: 20px;
 }
 
-.background{
+.background {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#82318E, #9198e5);
+  background: linear-gradient(#82318e, #9198e5);
 }
 
-.input_text{
+.input_text {
   position: absolute;
   left: 10%;
   width: 70%;
@@ -30,19 +30,19 @@
   border-radius: 50px;
 }
 
-#username{
+#username {
   top: 10%;
 }
 
-#email{
+#email {
   top: 25%;
 }
 
-#password{
+#password {
   top: 40%;
 }
 
-#confirm_password{
+#confirm_password {
   top: 55%;
 }
 

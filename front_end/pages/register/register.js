@@ -29,7 +29,7 @@ Page({
     } else {
       // attempt register
       wx.request({
-        url: "http://thurec.xyz/api/v1.0/register_user_info",
+        url: "https://thurec.whiteffire.cn/api/v1.0/register_user_info",
         data: {
           user_name: this.data.username,
           email: this.data.email,
@@ -42,8 +42,8 @@ Page({
         success: function (res) {
           if (res.data === 0) {
             Notify({ type: "success", message: "邮件已发送，请查看邮箱" });
-          }else{
-            Notify({ type: "danger", message: "信息异常"})
+          } else {
+            Notify({ type: "danger", message: "信息异常，请检查注册信息" });
           }
         },
         fail: function (res) {
