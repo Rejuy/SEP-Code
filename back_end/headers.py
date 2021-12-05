@@ -55,5 +55,5 @@ COURSE_COLOR = ["", "#228B22", "#000000", "#FFA500", "#8B4513", "#9400D3", "#FF0
 ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "rate", "credit"]
 
 # comment
-INSERT_COMMENT_KEY = ["class", "content_id", "from_user_id", "like_count", "upper_comment_id", "lower_comment_count", "time", "star", "text", "deleted"]
-COMMENT_KEY = ["id", "class", "content_id", "from_user_id", "like_count", "upper_comment_id", "lower_comment_count", "time", "star", "text", "deleted"]
+INSERT_COMMENT_KEY = ["user", "star", "time", "likes", "text", "image", "comments"]
+# COMMENT_KEY = ["id", "class", "content_id", "from_user_id", "like_count", "upper_comment_id", "lower_comment_count", "time", "star", "text", "deleted"]
