@@ -138,6 +138,6 @@ COURSES_KEY = ["id", "number", "type", "name", "teacher", "credit", "department"
 # 插入时所需键值
 INSERT_COURSES_KEY = ["number", "type", "name", "teacher", "credit", "department", "schedule", "rate_count", "rate", "comment_count", "heat"]
 # 添加评论
-INSERT_COMMENT_KEY = ["class", "content_id", "from_user_id", "like_count", "upper_comment_id", "lower_comment_id", "time", "star", "text", "deleted", "imageurl"]]
+INSERT_COMMENT_KEY = ["class", "content_id", "from_user_id", "like_count", "upper_comment_id", "lower_comment_id", "time", "star", "text", "deleted", "imageurl"]
 # 返回的key值（基本）
 BASIC_COURSES_KEY = ["id", "name", "teacher", "rate"]
