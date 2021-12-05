@@ -17,7 +17,7 @@ bp = Blueprint(
 def postUserFeedback():
     try:
         user_info = request.get_json()
-        print(user_info)
+        # print(user_info)
         user_text = user_info['user_text']
         images_url = user_info['images_url']
         for image_url in images_url:

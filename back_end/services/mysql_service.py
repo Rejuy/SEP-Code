@@ -51,6 +51,44 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
+    def addComment(self, user_comment): #TODO
+        try:
+            sql = "INSERT INTO comment "
+            sql += self.getKeysStr(INSERT_USER_KEY) + " VALUES " + self.producePlaceHolder(len(INSERT_USER_KEY))
+            time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            comment = (
+                user_comment['user_name'],
+                user_comment['password'],
+                user_comment['email'],
+                time, 0, 0, 0, 0, 0
+            )
+            # 写入新数据
+            self.cursor.execute(sql, comment)
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (addComment)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
+    def delComment(self, key, val):
+        # 不同方式删除用户（指定键值）
+        try:
+            # 删除数据
+            sql = "DELETE FROM comment WHERE " + key + " = %s"
+            del_val = (val,)
+            self.cursor.execute(sql, del_val)
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (delComment)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
     def addUser(self, user_info):
         try:
             sql = "INSERT INTO user "
@@ -124,8 +162,8 @@ class MySQLDb:
         try:
             sql = "INSERT INTO " + table + " ("
             key_list, val = [], ()
-            if table == "course_content":
-                key_list = INSERT_COURSES_KEY
+            if (table == "couse_list"):
+                keylist = INSERT_COURSES_KEY
             sql += self.getKeysStr(key_list) + ") VALUES " + self.producePlaceHolder(len(key_list))
             for key in key_list:
                 try:

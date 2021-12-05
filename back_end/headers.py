@@ -44,6 +44,8 @@ INSERT_USER_KEY = ["user_name", "password", "email", "account_birth", "collectio
 COURSES_KEY = ["id", "number", "type", "name", "teacher", "credit", "department", "schedule", "rate_count", "rate", "comment_count", "heat"]
 # 插入时所需键值
 INSERT_COURSES_KEY = ["number", "type", "name", "teacher", "credit", "department", "schedule", "rate_count", "rate", "comment_count", "heat"]
+# 添加评论
+INSERT_COMMENT_KEY = ["class", "content_id", "from_user_id", "like_count", "upper_comment_id", "lower_comment_id", "time", "star", "text", "deleted", "imageurl"]
 # 返回的key值（基本）
 BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "rate"]
 # 颜色和属性对应
@@ -55,4 +57,3 @@ ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "rate", "credit"]
 # comment
 INSERT_COMMENT_KEY = ["class", "content_id", "from_user_id", "like_count", "upper_comment_id", "lower_comment_count", "time", "star", "text", "deleted"]
 COMMENT_KEY = ["id", "class", "content_id", "from_user_id", "like_count", "upper_comment_id", "lower_comment_count", "time", "star", "text", "deleted"]
-
