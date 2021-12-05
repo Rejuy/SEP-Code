@@ -25,8 +25,15 @@ if __name__ == "__main__":
     mycursor = mydb.cursor()
     print("测试")
     #mycursor.execute("CREATE TABLE comment (id INT AUTO_INCREMENT PRIMARY KEY, class TINYINT, content_id INT, from_user_id INT, like_count INT, upper_comment_id INT, lower_comment_count INT, time DATETIME, star FLOAT, text TEXT, deleted TINYINT)")
-    #sql = "alter table course_content modify column department INT"
+    #sql = "INSERT INTO place_list (name, range) VALUES (%s, %s)"
+    #val = ('第二教室楼', 1)
     # 执行语句
+    #mycursor.execute(sql, val)
+    #mydb.commit()
+    sql = "UPDATE course_list SET comment_count = 1, credit = 2, heat = 0 WHERE id = 1"
+
+    mycursor.execute(sql)
+    mydb.commit()
     """
     mycursor.execute("alter table destination_content default character set utf8")
     mycursor.execute("alter table destination_content change name name varchar(255) character set utf8")
@@ -38,25 +45,25 @@ if __name__ == "__main__":
     #mycursor.execute(sql)
     #mydb.commit()
     #print(mycursor.fetchall()[0][0])
-    #mycursor.execute("alter table course_content add column click_count INT not null")
+    #mycursor.execute("alter table comment add column content_id INT not null")
     #mycursor.execute("alter table comment default character set utf8")
     #mycursor.execute("alter table comment change text text text character set utf8")
-    #mycursor.execute("alter table course_content change teacher teacher varchar(255) character set utf8")
+    #mycursor.execute("alter table comment change id id int character set utf8")
     #mycursor.execute("CREATE TABLE class (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), count INT)")
     #mycursor.execute("CREATE TABLE food_content (id INT AUTO_INCREMENT PRIMARY KEY, type TINYINT, name VARCHAR(255), inside TINYINT, location VARCHAR(255), distance FLOAT, rate_count INT, rate FLOAT, heat FLOAT, comment_count INT, click_count INT)")
     #mycursor.execute("CREATE TABLE destination_content (id INT AUTO_INCREMENT PRIMARY KEY, type TINYINT, name VARCHAR(255), inside TINYINT, location VARCHAR(255), distance FLOAT, rate_count INT, rate FLOAT, heat FLOAT, comment_count INT, click_count INT)")
-    sql = "INSERT INTO destination_content (type, name, inside, location, distance, rate_count, rate, heat, comment_count, click_count) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    val = (1, "水木清华", 1, "熙春路东工字厅北", 0, 0, 0, 0, 0, 0)
+    #sql = "INSERT INTO destination_content (type, name, inside, location, distance, rate_count, rate, heat, comment_count, click_count) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    #val = (1, "水木清华", 1, "熙春路东工字厅北", 0, 0, 0, 0, 0, 0)
     #val = [
     #    ('Course', 0),
     #    ('Food', 0),
     #    ('Destination', 0)
     #]
     # 写入新数据
-    mycursor.execute(sql, val)
+    #mycursor.execute(sql, val)
     # 数据表内容更新
 
-    mydb.commit()
+    #mydb.commit()
     # mycursor.execute("SHOW TABLES")
 
 

@@ -6,13 +6,13 @@ from headers import *
 class RegisterUserInfoTest(unittest.TestCase):
     def test1(self):
         raw_info = {
-            "course_type": 10,  # 课程类型
-            "course_department": 35,  # 开课院系
-            "course_order": 1,  # 排序方式
+            "course_type": 0,  # 课程类型
+            "course_department": 0,  # 开课院系
+            "course_order": 0,  # 排序方式
             "begin": 0,
-            "end": 1
+            "end": 3
         }
-        self.assertEqual(getCoursesList(raw_info)[1], True)
+        self.assertEqual(getCoursesList(raw_info)[2], True)
 
     def test2(self):
         raw_info = {

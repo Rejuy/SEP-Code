@@ -51,6 +51,22 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
+    def delComment(self, key, val):
+        # 不同方式删除用户（指定键值）
+        try:
+            # 删除数据
+            sql = "DELETE FROM comment WHERE " + key + " = %s"
+            del_val = (val,)
+            self.cursor.execute(sql, del_val)
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (delComment)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
     def addUser(self, user_info):
         try:
             sql = "INSERT INTO user "
@@ -120,12 +136,16 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
-    def addContent(self, table, content_info):
+    def addItem(self, table, content_info):
         try:
             sql = "INSERT INTO " + table + " ("
             key_list, val = [], ()
-            if table == "course_content":
+            if table == "course_list":
                 key_list = INSERT_COURSES_KEY
+            elif table == "food_list":
+                key_list = INSERT_FOOD_KEY
+            elif table == "place_list":
+                key_list = INSERT_PLACE_KEY
             sql += self.getKeysStr(key_list) + ") VALUES " + self.producePlaceHolder(len(key_list))
             for key in key_list:
                 try:
@@ -150,7 +170,7 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
-    def getContentList(self, table, info):
+    def getItemList(self, table, info):
         '''
         :param info: {
             key_list: (list)
@@ -230,21 +250,14 @@ class MySQLDb:
             # 转成字典
             item = self.tupleToDict(raw_item, key_list)
             # 获得相应评论
-            sql = "SELECT * FROM comment WHERE class = %s AND content_id = %s"
+            sql = "SELECT * FROM comment WHERE class = %s AND item_id = %s"
             val = (table_id, id)
             self.cursor.execute(sql, val)
             comments_list = self.cursor.fetchall()
             for i in range(len(comments_list)):
-                comments_list[i] = self.tupleToDict(comments_list[i], COMMENT_KEY)
-                del comments_list[i]['class']
-                del comments_list[i]['content_id']
-                sql = "SELECT user_name FROM user WHERE id = %s"
-                val = (comments_list[i]['from_user_id'],)
-                self.cursor.execute(sql, val)
-                comments_list[i]['user'] = self.cursor.fetchone()[0]
+                comments_list[i] = self.tupleToDict(comments_list[i], BASIC_COMMENT_KEY)
+                del comments_list[i]['id']
                 comments_list[i]['time'] = comments_list[i]['time'].strftime("%Y-%m-%d %H:%M:%S")
-                comments_list[i]['likes'] = comments_list[i]['like_count']
-                del comments_list[i]['like_count']
                 comments_list[i]['comment_numbers'] = comments_list[i]['lower_comment_count']
                 del comments_list[i]['lower_comment_count']
             item['recommendations'] = comments_list
@@ -257,12 +270,12 @@ class MySQLDb:
 
     def addComment(self, comment_info):
         """
-        进入之前要判断对应的content_id, from_user_id, upper_comment_id是否合理
+        进入之前要判断对应的item_id, user, upper_comment_id是否合理
         :param comment_info:{
             "class":,
             "table":,(class对应的表名)
-            "content_id":,
-            "from_user_id":,
+            "item_id":,
+            "user":,
             "upper_comment_id":,
             "star":,
             "text":
@@ -287,12 +300,26 @@ class MySQLDb:
             # 数据表内容更新
             self.connection.commit()
             # 更新其他表相应的值
-            sql = "UPDATE " + comment_info['table'] + " SET rate = (rate * comment_count + %s) / (comment_count + 1), comment_count = comment_count + 1 WHERE id = %s"
-            val = (comment_info['star'], comment_info['content_id'])
+            sql = "UPDATE " + comment_info['table'] + " SET score = (score * comment_count + 2 * %s) / (comment_count + 1), comment_count = comment_count + 1 WHERE id = %s"
+            val = (comment_info['star'], comment_info['item_id'])
             self.cursor.execute(sql, val)  # 补上heat的更新
+            self.connection.commit()
 
-            sql = "UPDATE user SET comment_count = comment_count + 1 WHERE id = %s"
-            val = (comment_info['from_user_id'],)
+            sql = "SELECT score FROM " + comment_info['table'] + " WHERE id = %s"
+            val = (comment_info['item_id'], )
+            self.cursor.execute(sql, val)
+            score = self.cursor.fetchone()[0]
+            if score - int(score) >= 0.5:
+                score = int(score) + 1
+            else:
+                score = int(score)
+            star = score / 2
+            sql = "UPDATE " + comment_info['table'] + " SET star = %s WHERE id = %s"
+            val = (star, comment_info['item_id'])
+            self.cursor.execute(sql, val)
+
+            sql = "UPDATE user SET comment_count = comment_count + 1 WHERE user_name = %s"
+            val = (comment_info['user'],)
             self.cursor.execute(sql, val)
 
             if comment_info['upper_comment_id'] != 0:
