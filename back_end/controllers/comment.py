@@ -19,13 +19,13 @@ def addComment():
         """
         comment = {
             'text': str,
-            'star': int,
+            'user': str,
             'imageurls': list of str,
             'time': date_time
         }
         """
         print('gg')
-        db.addContent('comment ', comment)
+        db.addComment(comment)
         return '评论成功'       
 
     except KeyError:
