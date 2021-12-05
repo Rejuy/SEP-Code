@@ -17,11 +17,11 @@ bp = Blueprint(
 def postUserFeedback():
     try:
         user_info = request.get_json()
-        print(user_info)
+        # print(user_info)
         user_text = user_info['user_text']
         images_url = user_info['images_url']
         for image_url in images_url:
-            user_text += "<p>" + image_url + "</p>"
+            user_text += "<p> <img src=\"https://" + image_url + "\"</p>"
         send_feedback_email(user_text, '1241992824@qq.com')
         # send_feedback_email(user_info['user_text'], user_info['email'])
         

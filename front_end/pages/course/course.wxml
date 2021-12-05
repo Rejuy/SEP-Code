@@ -1,8 +1,8 @@
  <view>
     <van-dropdown-menu active-color="#1989fa" :color="red">
-        <van-dropdown-item value="{{ course_value }}" options="{{ course_type }}"/>
-        <van-dropdown-item value="{{ department_value }}" options="{{ department_type }}" />
-        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" />
+        <van-dropdown-item value="{{ course_value }}" options="{{ course_type }}" bind:change="courseTypeSelected"/>
+        <van-dropdown-item value="{{ department_value }}" options="{{ department_type }}" bind:change="departmentTypeSelected"/>
+        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" bind:change="rankTypeSelected"/>
     </van-dropdown-menu>
 
     <view wx:for="{{ courses_list }}" wx:key="id">
@@ -25,7 +25,7 @@
                 {{ func.toFixed(item.score) }}
             </view>
             <view slot="footer">
-                <van-button size="mini">详情</van-button>
+                <van-button size="mini" bindtap="viewCourseItem">详情</van-button>
             </view>
             <wxs module="func">
                 var toFixed = function(value) {
@@ -37,114 +37,7 @@
             </wxs>
         </van-card>
     </view>
-
-    <!-- <van-card
-    tag="TOP1"
-    desc="主讲教师：刘强"
-    title="软件工程"
-    thumb="{{ image_url }}"
-    thumb-mode="aspectFill"
-    thumb-link="../course_item/course_item"
-    >  
-        <view slot="tags">
-            <van-tag plain type="primary">软件学院</van-tag>
-            <van-tag plain type="danger">必修课</van-tag>
-        </view>
-        <vew slot="price">
-            <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 5.0 }}" />
-        </vew>
-        <view slot="num" class="rate">
-            10.0
-        </view>
-        <view slot="footer">
-            <van-button size="mini">详情</van-button>
-        </view>
-    </van-card>
-
-    <van-card
-    desc="主讲教师：马勇志"
-    title="二年级男生散手"
-    thumb="{{ image_url }}"
-    thumb-mode="aspectFill"
-    >
-        <view slot="tags">
-            <van-tag plain type="primary">体育部</van-tag>
-            <van-tag plain color="#82318E">体育课</van-tag>
-        </view>
-        <vew slot="price">
-            <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 2.5 }}" />
-        </vew>
-        <view slot="num" class="rate">
-            5.0
-        </view>
-        <view slot="footer">
-            <van-button size="mini">详情</van-button>
-        </view>
-    </van-card>
-
-    <van-card
-    tag="TOP15"
-    desc="主讲教师：TULP RUSSELL ALAN"
-    title="美国社会与文化"
-    thumb="{{ image_url }}"
-    thumb-mode="aspectFill"
-    >  
-        <view slot="tags">
-            <van-tag plain type="primary">语言中心</van-tag>
-            <van-tag plain type="warning">外文课</van-tag>
-        </view>
-        <vew slot="price">
-            <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 4.5 }}" />
-        </vew>
-        <view slot="num" class="rate">
-            9.5
-        </view>
-        <view slot="footer">
-            <van-button size="mini">详情</van-button>
-        </view>
-    </van-card>
-
-    <van-card
-    desc="主讲教师：张涛"
-    title="数字电子技术基础C"
-    thumb="{{ image_url }}"
-    thumb-mode="aspectFill"
-    >
-        <view slot="tags">
-            <van-tag plain type="primary">自动化系</van-tag>
-            <van-tag plain type="danger">必修课</van-tag>
-        </view>
-        <vew slot="price">
-            <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 0.5 }}" />
-        </vew>
-        <view slot="num" class="rate">
-            1.7
-        </view>
-        <view slot="footer">
-            <van-button size="mini">详情</van-button>
-        </view>
-    </van-card>
-
-    <van-card
-    tag="TOP2"
-    desc="主讲教师：林毅"
-    title="形势与政策"
-    thumb="{{ image_url }}"
-    thumb-mode="aspectFill"
-    >
-        <view slot="tags">
-            <van-tag plain type="primary">马克思主义学院</van-tag>
-            <van-tag plain type="danger">必修课</van-tag>
-        </view>
-        <vew slot="price">
-            <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ 5 }}" />
-        </vew>
-        <view slot="num" class="rate">
-            9.9
-        </view>
-        <view slot="footer">
-            <van-button size="mini">详情</van-button>
-        </view>
-    </van-card> -->
+    <view class="block" style="height: 100rpx" />
 </view>
 <tabbar current_page="course" is_login="{{true}}" />
+

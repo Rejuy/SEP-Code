@@ -26,8 +26,11 @@ Page({
     if (this.checkEmpty()) {
       Notify({ type: "danger", message: "必填为空" });
     } else {
+      const app = getApp();
+      const domain = app.global_data.global_domain;
+      let login_domain = domain + '/api/v1.0/login';
       wx.request({
-        url: "https://thurec.whiteffire.cn/api/v1.0/login",
+        url: login_domain,
         data: {
           user_name: this.data.user_name,
           password: this.data.user_password,

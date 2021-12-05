@@ -33,6 +33,7 @@ def save_images():
         # print(type(request.files['user_feedback_image']))
         # plt.imshow(plt.imread(BytesIO(image)))
         # plt.show()
+        return filepath
         return 'static/'+imageFileStorage.filename
     except KeyError:
         return '保存失败', 400

@@ -117,6 +117,22 @@ class MySQLServiceTest(unittest.TestCase):
         }
         self.assertEqual(db.addContent("course_content", info), True)
 
+    def testAddContent5(self):
+        info = {
+            "number": 104,
+            "type": TYPE_CULTURE,
+            "name": "清声细语中的哲学思辩",
+            "teacher": "任俊宇",
+            "department": DEPARTMENT_CULTURE,
+            "schedule": "1-5",
+            "credit": 3,
+            "rate_count": 10,
+            "rate": 1,
+            "comment_count": 10,
+            "heat": 4
+        }
+        self.assertEqual(db.addContent("course_content", info), True)
+
     def testGetContentList1(self):
         info = {
             "key_list": BASIC_COURSES_KEY,
@@ -126,10 +142,27 @@ class MySQLServiceTest(unittest.TestCase):
             "index_begin": 0,
             "content_count": 4
         }
+
         result = db.getContentList("course_content", info)
         print(result[0])
         self.assertEqual(result[1], True)
 
+    def testAddComment1(self):
+        comment_info = {
+            "class": 1,
+            "table": "course_content",  # (class对应的表名)
+            "content_id": 1,
+            "from_user_id": 1,
+            "upper_comment_id": 0,
+            "star": 2,
+            "text": "我不怎么喜欢这门课。"
+        }
+        self.assertEqual(db.addComment(comment_info), True)
+
+    def testGetItem(self):
+        result, flag = db.getItem("course_content", 1, 1, ITEM_COURSE_KEY)
+        self.assertEqual(flag, True)
+        print(result)
 
 if __name__ == '__main__':
     unittest.main()

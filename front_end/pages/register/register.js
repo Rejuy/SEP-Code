@@ -28,8 +28,11 @@ Page({
       Notify({ type: "danger", message: "密码不一致" });
     } else {
       // attempt register
+      const app = getApp();
+      const domain = app.global_data.global_domain;
+      let register_domain = domain + '/api/v1.0/register';
       wx.request({
-        url: "https://thurec.whiteffire.cn/api/v1.0/register_user_info",
+        url: register_domain,
         data: {
           user_name: this.data.username,
           email: this.data.email,

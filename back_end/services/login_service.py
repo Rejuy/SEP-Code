@@ -1,6 +1,7 @@
 import re
 from headers import *
 from services.mysql_service import db
+from services.code_service import coder
 
 
 def checkLoginInfo(user_info):
@@ -14,5 +15,12 @@ def checkLoginInfo(user_info):
     if user_info['password'] != user['password']:
         return WRONG_PASSWORD, None
 
-    return LOGIN_SUCCESS, user
+    # 检查用户是否被激活
+    if user['activated'] == 0:
+        return USER_NOT_ACTIVATED, None
+
+    # 返回用户的mask
+    mask = coder.encode(str(user['id']))
+
+    return LOGIN_SUCCESS, mask
 
