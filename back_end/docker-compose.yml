@@ -19,6 +19,9 @@ services:
     depends_on:
       - app
 
+    environment:
+      TZ : 'Asia/Shanghai'
+
     volumes:
       - ./config/nginx:/etc/nginx/conf.d
       - ./static:/home/static
