@@ -6,8 +6,8 @@ from controllers import (
     activate,
     feedback,
     save_images,
-    # viewfile,
-    courses_list
+    courses_list,
+    add_comment,
 )
 
 blueprints = [

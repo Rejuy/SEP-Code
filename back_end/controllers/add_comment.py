@@ -7,13 +7,13 @@ from io import BytesIO
 import matplotlib.pyplot as plt
 
 bp = Blueprint(
-    'feedback',
+    'add_comment',
     __name__,
     # template_folder='../templates'
 )
 
 
-@bp.route('/api/v1.0/post_user_feedback', methods=['POST'])
+@bp.route('/api/v1.0/add_comment', methods=['POST'])
 def postUserFeedback():
     try:
         user_info = request.get_json()
