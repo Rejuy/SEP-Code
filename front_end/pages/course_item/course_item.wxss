@@ -62,7 +62,7 @@
 .header .score text {
     width: 30%;
     display: block;
-    padding: 10rpx 0;
+    padding: 5rpx 0rpx 8rpx 0rpx;
     font-size: smaller;
     font-weight: bold;
     font-family: "Lucida Calligraphy", cursive, serif, sans-serif;    
