@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
 from services.mail_service import send_feedback_email
-from services import register_user_service
+from services.mysql_service import db
 from headers import *
-from io import BytesIO
-import matplotlib.pyplot as plt
 
 bp = Blueprint(
     'comment',
@@ -13,19 +11,22 @@ bp = Blueprint(
 )
 
 
-@bp.route('/api/v1.0/add_comment', methods=['POST', 'GET'])
+@bp.route('/api/v1.0/add_comment', methods=['POST'])
 def addComment():
     try:
 
-        # user_info = request.get_json()
-        # print(user_info)
-        # user_text = user_info['user_text']
-        # images_url = user_info['text']
-        # user_info['star']
+        comment = request.get_json()
+        """
+        comment = {
+            'text': str,
+            'star': int,
+            'imageurls': list of str,
+            'time': date_time
+        }
+        """
         print('gg')
-        # send_feedback_email(user_info['user_text'], user_info['email'])
-        
-        return '评论成功'
+        db.addContent('comment ', comment)
+        return '评论成功'       
 
     except KeyError:
         print("26======")
