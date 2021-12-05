@@ -11,7 +11,7 @@
 .header {
     width: 100%;
     display: inline-flex;
-    border: 2rpx solid #EAEAEA;
+    border: 2rpx solid black;
 }
 
 .header .information {
@@ -59,6 +59,10 @@
     float: right;
 }
 
+.header .score .statistics {
+    display: flex;
+}
+
 .header .score text {
     width: 30%;
     display: block;
@@ -66,4 +70,9 @@
     font-size: smaller;
     font-weight: bold;
     font-family: "Lucida Calligraphy", cursive, serif, sans-serif;    
+}
+
+.header .score .statistics van-progress {
+    width: 70%;
+    padding-top: 16rpx;
 }

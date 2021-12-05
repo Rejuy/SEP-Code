@@ -4,7 +4,6 @@
     </view>
 
     <view class="header">
-    
         <view class="information">
             <view class="attribute">
                 <text class="attribute_name">课程名：</text>
@@ -30,7 +29,7 @@
 
         <view class="score">
             <view class="average_score">
-                10.0
+                7.3
             </view>
 
             <van-rate 
@@ -40,12 +39,30 @@
             color="#ffd21e" 
             void-color="#eee"
             void-icon="star" 
-            readonly value="5.0" />
+            readonly value="3.5" />
            
             <text>评级</text>
-            <text>差评</text>
-            <text>中立</text>
-            <text>好评</text>
+            <view class="statistics">
+                <text>差评</text>
+                <van-progress 
+                pivot-color="#654ea3" 
+                color="linear-gradient(to right, #be99ff, #7232dd)" 
+                percentage="30" />                
+            </view>
+            <view class="statistics">
+                <text>中立</text>
+                <van-progress 
+                pivot-color="#654ea3" 
+                color="linear-gradient(to right, #be99ff, #7232dd)" 
+                percentage="20" />                
+            </view>
+            <view class="statistics">
+                <text>好评</text>
+                <van-progress 
+                pivot-color="#654ea3" 
+                color="linear-gradient(to right, #be99ff, #7232dd)" 
+                percentage="50" />                
+            </view>
         </view>
     </view>
 
