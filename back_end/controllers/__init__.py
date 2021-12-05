@@ -7,7 +7,7 @@ from controllers import (
     feedback,
     save_images,
     courses_list,
-    add_comment,
+    comment,
 )
 
 blueprints = [
@@ -16,6 +16,6 @@ blueprints = [
     activate.bp,
     feedback.bp,
     save_images.bp,
-    # viewfile.bp,
-    courses_list.bp
+    courses_list.bp,
+    comment.bp
 ]
