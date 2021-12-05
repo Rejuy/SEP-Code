@@ -1,7 +1,7 @@
 <!-- pages/user/user.wxml -->
 <view class="container">
   <view class="img_container">
-    <van-image round class="img" width="75px" height="75px" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+    <van-image round class="img" width="75px" height="75px" fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
   </view>
   <view class="box" />
   <van-cell-group title="用户信息">

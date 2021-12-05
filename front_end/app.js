@@ -1,8 +1,8 @@
 // app.js
 App({
   global_data: {
-    global_user_token: "",  // user login token
-    global_user_info:{
+    global_user_token: "", // user login token
+    global_user_info: {
       username: "Andrew",
       email: "adr",
       like_count: 2,
