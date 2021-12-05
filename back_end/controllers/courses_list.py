@@ -17,14 +17,14 @@ def coursesList():
         print("Enter get_courses_list......")
         raw_info = request.get_json()
         if raw_info is None:
-            return jsonify({'state': BAD_ARGUMENTS}), 400
+            return jsonify({'total_courses': -1, 'courses': None}), 400
         print("Request no problem")
-        content_list, flag = getCoursesList(raw_info)  # content_list为查询到的列表，flag为访问是否正确
+        content_list, course_count, flag = getCoursesList(raw_info)  # content_list为查询到的列表，flag为访问是否正确
         print("Get content list")
         if not flag:
-            return jsonify({'state': BAD_ARGUMENTS}), 200
+            return jsonify({'total_courses': -1, 'courses': None}), 200
         print("Content list no problem")
-        return jsonify({'content_list': content_list}), 200
+        return jsonify({'total_courses': course_count, 'courses': content_list}), 200
     except KeyError:
-        return jsonify({'state': BAD_ARGUMENTS}), 400
+        return jsonify({'total_courses': -1, 'courses': None}), 400
 
