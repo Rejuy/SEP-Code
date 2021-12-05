@@ -6,11 +6,11 @@ from headers import *
 class RegisterUserInfoTest(unittest.TestCase):
     def test1(self):
         raw_info = {
-            "filter": COURSE_DEFAULT,
-            "sort_order": DESCENDING,
-            "sort_criteria": RATE_COUNT_ORDER,
-            "index_begin": 0,
-            "content_count": 4
+            "course_type": 10,  # 课程类型
+            "course_department": 35,  # 开课院系
+            "course_order": 1,  # 排序方式
+            "begin": 0,
+            "end": 1
         }
         self.assertEqual(getCoursesList(raw_info)[1], True)
 
