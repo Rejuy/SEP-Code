@@ -51,32 +51,6 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
-    def addComment(self, user_comment): #TODO
-        try:
-            sql = "INSERT INTO comment "
-            sql += self.getKeysStr(INSERT_COMMENT_KEY) + " VALUES " + self.producePlaceHolder(len(INSERT_USER_KEY))
-            time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            comment = (
-                user_comment['user'],
-                0,
-                time,
-                0,
-                user_comment['text'],
-                "[]",
-                0
-            )
-            # 写入新数据
-            self.cursor.execute(sql, comment)
-            # 数据表内容更新
-            self.connection.commit()
-            print('gg')
-            return True
-        except Exception as e:
-            print("[Error] (addCommggent)：{}".format(e))
-            # 回滚所有更改
-            self.connection.rollback()
-            return False
-
     def delComment(self, key, val):
         # 不同方式删除用户（指定键值）
         try:
