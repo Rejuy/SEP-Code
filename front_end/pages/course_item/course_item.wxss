@@ -48,15 +48,22 @@
     border-left: 2rpx solid #EAEAEA;
 }
 
-.header .score van-rate{
+.header .score .average_score {
+    color: #EE0A24;
+    font-weight: bold;
+    text-align: center;
+    justify-content: space-between; 
+}
+
+.header .score van-rate {
     float: right;
 }
 
 .header .score text {
-    width: 25%;
+    width: 30%;
     display: block;
-    border: 2rpx solid blue;
+    padding: 10rpx 0;
     font-size: smaller;
-    font-style: italic;
-    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+    font-weight: bold;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;    
 }
