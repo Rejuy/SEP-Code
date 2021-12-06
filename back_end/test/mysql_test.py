@@ -160,6 +160,9 @@ class MySQLServiceTest(unittest.TestCase):
         self.assertEqual(flag, True)
         print(result)
 
+    def testAddLike(self):
+        self.assertEqual(db.addLike("course", "renjy", 27), True)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -280,7 +280,8 @@ class MySQLDb:
             "user":,
             "upper_comment_id":,
             "star":,
-            "text":
+            "text":,
+            "image":
         }
         :return:
         """
@@ -336,6 +337,41 @@ class MySQLDb:
             # 回滚所有更改
             self.connection.rollback()
             return False
+
+    def addLike(self, comment_class, user, comment_id):
+        """
+        :param comment_class: 评论所属的模块, "course"/"food"/"place"
+        :param user: 用户名
+        :param comment_id: 评论的id
+        :return:
+        """
+        try:
+            sql = "INSERT INTO user_like ("
+            sql += self.getKeysStr(INSERT_LIKE_KEY) + ") VALUES " + self.producePlaceHolder(len(INSERT_LIKE_KEY))
+            time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            val = (CLASS_TO_INT[comment_class], user, comment_id, time)
+            # 写入新数据
+            self.cursor.execute(sql, val)
+            # 数据表内容更新
+            self.connection.commit()
+            # 更新其他表相应的值
+            sql = "UPDATE comment SET likes = likes + 1 WHERE id = %s"
+            val = (comment_id, )
+            self.cursor.execute(sql, val)
+
+            sql = "UPDATE user SET like_count = like_count + 1 WHERE user_name = %s"
+            val = (user, )
+            self.cursor.execute(sql, val)
+
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (addLike)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+    # ==========后为功能性函数
 
     def tupleToDict(self, tuple, key_list):
         # 将元组转化为字典
