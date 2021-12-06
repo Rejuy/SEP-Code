@@ -81,16 +81,21 @@
                 <view class="user_evaluation">
                     <van-rate readonly allow-half size="40rpx" gutter="0rpx" void-color="#eee" void-icon="star" value="3.5"/>
                     <text>2021.12.06</text>
-                    <van-icon name="good-job" />
+                    <van-icon name="good-job" bindtap="giveLikes"/>
                     <text style="color:#000000; padding-left: 10rpx;">998</text>
                 </view>
 
                 <view class="user_text">
+                    <text>
+                        这课给人的感觉就是完全O什么K啊，自动PF，上够8个单元就稳吃1学分文核了。不过找实验室的过程确实痛苦面具啊
+                    </text>
+                    <text class="unfold" style="color: #3377AA; font-weight: bold;" bindtap="viewDetails">[展开]</text>
                 </view>
             </van-skeleton>
             <van-skeleton title avatar row="3">
             </van-skeleton>
         </view>
+        
     </view>
 </view>
 
