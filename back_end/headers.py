@@ -39,6 +39,10 @@ USER_KEY = ["id", "user_name", "password", "email", "account_birth", "collection
 # 插入时所需键值
 INSERT_USER_KEY = ["user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "content_count", "activated"]
 
+# 模块
+CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}
+INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
+
 # courses表
 # 所有key值
 COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat"]
@@ -71,3 +75,8 @@ COMMENT_KEY = ["id", "class", "item_id", "user", "star", "time", "likes", "text"
 # 获取时的key
 BASIC_COMMENT_KEY = ["id", "user", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
 
+# like
+# 插入时所需key值
+INSERT_LIKE_KEY = ["class", "user", "comment_id", "time"]
+# 所有key值
+LIKE_KEY = ["id", "class", "user", "comment_id", "time"]
