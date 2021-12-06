@@ -147,11 +147,11 @@ class MySQLServiceTest(unittest.TestCase):
         comment_info = {
             "class": 1,
             "table": "course_list",  # (class对应的表名)
-            "item_id": 1,
+            "item_id": 3,
             "user": "renjy",
             "upper_comment_id": 0,
-            "star": 2,
-            "text": "我不怎么喜欢这门课。"
+            "star": 3,
+            "text": "我对这门课无可奉告。"
         }
         self.assertEqual(db.addComment(comment_info), True)
 
@@ -161,7 +161,28 @@ class MySQLServiceTest(unittest.TestCase):
         print(result)
 
     def testAddLike(self):
-        self.assertEqual(db.addLike("course", "renjy", 27), True)
+        self.assertEqual(db.addLike("renjy", 29), True)
+
+    def testDelLike(self):
+        self.assertEqual(db.delLike("renjy", 29), True)
+
+    def testCheckCommentLiked(self):
+        self.assertEqual(db.checkCommentLiked("renjy", 28), False)
+
+    def testGetUserCommentList(self):
+        comment_list, flag = db.getUserCommentList("renjy")
+        self.assertEqual(flag, True)
+        print(comment_list)
+
+    def testGetUserLikeCommentList(self):
+        comment_list, flag = db.getUserLikeCommentList("renjy")
+        self.assertEqual(flag, True)
+        print(comment_list)
+
+    def testCheckItemCommented(self):
+        result, flag = db.checkItemCommented("renjy", 1, 1)
+        self.assertEqual(flag, True)
+        print(result)
 
 
 if __name__ == '__main__':
