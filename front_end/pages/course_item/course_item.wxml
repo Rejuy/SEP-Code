@@ -3,6 +3,8 @@
         <image src="{{ image_url }}"></image>
     </view>
 
+    <text class="information_title">课程信息：</text>
+
     <view class="header">
         <view class="information">
             <view class="attribute">
@@ -33,9 +35,9 @@
             </view>
 
             <van-rate 
+            allow-half 
             size="40rpx" 
             gutter="0rpx"
-            allow-half 
             color="#ffd21e" 
             void-color="#eee"
             void-icon="star" 
@@ -65,9 +67,30 @@
             </view>
         </view>
     </view>
-
-    <view class="comments">
     
+    <view class="comments">
+        <text class="comments_title">评论区：</text>
+
+        <view class="content">
+            <van-skeleton title avatar row="3" loading="{{ loading }}">
+                <view class="user_info">
+                    <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="70rpx"/>
+                    <text>平台测试组</text>
+                </view>
+
+                <view class="user_evaluation">
+                    <van-rate readonly allow-half size="40rpx" gutter="0rpx" void-color="#eee" void-icon="star" value="3.5"/>
+                    <text>2021.12.06</text>
+                    <van-icon name="good-job" />
+                    <text style="color:#000000; padding-left: 10rpx;">998</text>
+                </view>
+
+                <view class="user_text">
+                </view>
+            </van-skeleton>
+            <van-skeleton title avatar row="3">
+            </van-skeleton>
+        </view>
     </view>
 </view>
 

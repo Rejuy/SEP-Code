@@ -1,6 +1,7 @@
 // pages/course_item/course_item.js
 Page({
     data: {
+        loading: true,
         course_name: '实验室科研探究',
         course_credit: 1,
         course_teacher: '汤彬',
@@ -14,7 +15,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        console.log('ready');
+        this.setData({
+            loading: false,
+        })
     },
 
     /**
