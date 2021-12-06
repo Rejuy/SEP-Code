@@ -62,28 +62,24 @@ class MySQLServiceTest(unittest.TestCase):
         self.assertEqual(db.updateData("course_content", "number", "101", "comment_count", 1), True)
         self.assertEqual(db.updateData("course_content", "number", "101", "heat", 8), True)
 
-    def testAddContent1(self):
+    def testAddItem1(self):
         info = {
-            "number": 100,
-            "type": TYPE_CULTURE,
-            "name": "轻声细语导论",
-            "teacher": "任俊宇",
-            "department": DEPARTMENT_SOCIETY,
-            "schedule": "5-2"
-        }
-        self.assertEqual(db.addContent("course_content", info), True)
-
-    def testAddContent2(self):
-        info = {
-            "number": 101,
-            "type": TYPE_ROOKIE_DISCUSSION,
-            "name": "清声细语技术研讨",
-            "teacher": "张博闻",
-            "department": DEPARTMENT_CULTURE,
-            "schedule": "3-3",
+            "type": 5,
+            "name": "清声细语4",
+            "teacher": "平台测试组",
+            "department": 1,
             "credit": 2
         }
-        self.assertEqual(db.addContent("course_content", info), True)
+        self.assertEqual(db.addItem("course_list", info), True)
+
+    def testAddItem2(self):
+        info = {
+            "type": 1,
+            "name": "第二教室楼",
+            "position": "清华大学西南方向",
+            "scope": 1
+        }
+        self.assertEqual(db.addItem("place_list", info), True)
 
     def testAddContent3(self):
         info = {
@@ -133,26 +129,26 @@ class MySQLServiceTest(unittest.TestCase):
         }
         self.assertEqual(db.addContent("course_content", info), True)
 
-    def testGetContentList1(self):
+    def testGetItemList1(self):
         info = {
             "key_list": BASIC_COURSES_KEY,
             "filter": "",
             "sort_order": "desc",
-            "sort_criteria": "heat",
+            "sort_criteria": "star",
             "index_begin": 0,
             "content_count": 4
         }
 
-        result = db.getContentList("course_content", info)
+        result = db.getItemList("course_list", info)
         print(result[0])
         self.assertEqual(result[1], True)
 
     def testAddComment1(self):
         comment_info = {
             "class": 1,
-            "table": "course_content",  # (class对应的表名)
-            "content_id": 1,
-            "from_user_id": 1,
+            "table": "course_list",  # (class对应的表名)
+            "item_id": 1,
+            "user": "renjy",
             "upper_comment_id": 0,
             "star": 2,
             "text": "我不怎么喜欢这门课。"
@@ -160,9 +156,13 @@ class MySQLServiceTest(unittest.TestCase):
         self.assertEqual(db.addComment(comment_info), True)
 
     def testGetItem(self):
-        result, flag = db.getItem("course_content", 1, 1, ITEM_COURSE_KEY)
+        result, flag = db.getItem("course_list", 1, 1, ITEM_COURSE_KEY)
         self.assertEqual(flag, True)
         print(result)
+
+    def testAddLike(self):
+        self.assertEqual(db.addLike("course", "renjy", 27), True)
+
 
 if __name__ == '__main__':
     unittest.main()
