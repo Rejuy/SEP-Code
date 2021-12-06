@@ -1,9 +1,12 @@
 <view class="container">
-  <van-cell-group style="width:100%">
-    <van-field model:value="{{ user_name }}" label="用户名" placeholder="请输入用户名" required />
-    <van-field model:value="{{ user_password }}" type="password" label="密码" placeholder="请输入密码" required />
-  </van-cell-group>
-  <view style="height:50px" />
-  <van-button type="primary" size="large" style="width:95%" bind:click="login">登录</van-button>
+  <view class="background"></view>
+  <view id="login">
+    <input id="username" class="input_text" model:value="{{user_name}}" type="text" placeholder="用户名" />
+    <input id="password" class="input_text" model:value="{{user_password}}" type="password" placeholder="密码" />
+    <van-button color="#cc99ff" size="large" class="login_button" bind:click="login" round>登录</van-button>
+  </view>
+
 </view>
+
+<tabbar current_page="login" is_login="{{false}}" />
 <van-notify id="van-notify" />

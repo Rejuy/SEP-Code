@@ -71,6 +71,3 @@ COMMENT_KEY = ["id", "class", "item_id", "user", "star", "time", "likes", "text"
 # 获取时的key
 BASIC_COMMENT_KEY = ["id", "user", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
 
-
-
-

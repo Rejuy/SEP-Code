@@ -140,12 +140,14 @@ class MySQLDb:
         try:
             sql = "INSERT INTO " + table + " ("
             key_list, val = [], ()
+
             if table == "course_list":
                 key_list = INSERT_COURSES_KEY
             elif table == "food_list":
                 key_list = INSERT_FOOD_KEY
             elif table == "place_list":
                 key_list = INSERT_PLACE_KEY
+
             sql += self.getKeysStr(key_list) + ") VALUES " + self.producePlaceHolder(len(key_list))
             for key in key_list:
                 try:

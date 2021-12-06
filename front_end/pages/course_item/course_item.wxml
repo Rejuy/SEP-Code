@@ -1,0 +1,96 @@
+<view>
+    <view class="images">
+        <image src="{{ image_url }}"></image>
+    </view>
+
+    <text class="information_title">课程信息：</text>
+
+    <view class="header">
+        <view class="information">
+            <view class="attribute">
+                <text class="attribute_name">课程名：</text>
+                <text class="attribute_value">{{course_name}}</text>
+            </view>
+            <view class="attribute">
+                <text class="attribute_name">课程学分：</text>
+                <text class="attribute_value">{{course_credit}}</text>
+            </view>
+            <view class="attribute">
+                <text class="attribute_name">主讲教师：</text>
+                <text class="attribute_value">{{course_teacher}}</text>
+            </view>
+            <view class="attribute">
+                <text class="attribute_name">开课时间：</text>
+                <text class="attribute_value">{{course_schedule}}</text>
+            </view>
+            <view class="tags">
+                <van-tag type="primary" size="medium">{{ course_department }}</van-tag>
+                <van-tag color='#228B22' size="medium">{{ course_type }}</van-tag>
+            </view>
+        </view>
+
+        <view class="score">
+            <view class="average_score">
+                7.3
+            </view>
+
+            <van-rate 
+            allow-half 
+            size="40rpx" 
+            gutter="0rpx"
+            color="#ffd21e" 
+            void-color="#eee"
+            void-icon="star" 
+            readonly value="3.5" />
+           
+            <text>评级</text>
+            <view class="statistics">
+                <text>差评</text>
+                <van-progress 
+                pivot-color="#654ea3" 
+                color="linear-gradient(to right, #be99ff, #7232dd)" 
+                percentage="30" />                
+            </view>
+            <view class="statistics">
+                <text>中立</text>
+                <van-progress 
+                pivot-color="#654ea3" 
+                color="linear-gradient(to right, #be99ff, #7232dd)" 
+                percentage="20" />                
+            </view>
+            <view class="statistics">
+                <text>好评</text>
+                <van-progress 
+                pivot-color="#654ea3" 
+                color="linear-gradient(to right, #be99ff, #7232dd)" 
+                percentage="50" />                
+            </view>
+        </view>
+    </view>
+    
+    <view class="comments">
+        <text class="comments_title">评论区：</text>
+
+        <view class="content">
+            <van-skeleton title avatar row="3" loading="{{ loading }}">
+                <view class="user_info">
+                    <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="70rpx"/>
+                    <text>平台测试组</text>
+                </view>
+
+                <view class="user_evaluation">
+                    <van-rate readonly allow-half size="40rpx" gutter="0rpx" void-color="#eee" void-icon="star" value="3.5"/>
+                    <text>2021.12.06</text>
+                    <van-icon name="good-job" />
+                    <text style="color:#000000; padding-left: 10rpx;">998</text>
+                </view>
+
+                <view class="user_text">
+                </view>
+            </van-skeleton>
+            <van-skeleton title avatar row="3">
+            </van-skeleton>
+        </view>
+    </view>
+</view>
+

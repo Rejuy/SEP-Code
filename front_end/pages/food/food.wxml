@@ -1,2 +1,42 @@
-<!--pages/food/food.wxml-->
-<text>pages/food/food.wxml</text>
+<view>
+    <van-dropdown-menu active-color="#1989fa" :color="red">
+        <van-dropdown-item value="{{ range_value }}" options="{{ range_type }}" bind:change="rangeSelected"/>
+        <van-dropdown-item value="{{ food_value }}" options="{{ food_type }}" disabled="{{ uncertain_range }}"/>
+        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" />
+    </van-dropdown-menu>    
+
+    <view wx:for="{{ food_list }}" wx:key="id">
+        <van-card
+        tag="{{ item.tag }}"
+        desc="{{ item.position }}"
+        title="{{ item.name }}"
+        thumb="{{ image_url }}"
+        thumb-mode="aspectFill"
+        thumb-link="../food_item/food_item"
+        >
+            <view slot="tags">
+                <van-tag plain type="primary">{{ item.range }}</van-tag>
+                <van-tag plain color="{{ item.color }}">{{ item.type }}</van-tag>
+            </view>
+            <star slot="price">
+                <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ item.star }}" />
+            </star>
+            <view slot="num" class="rate">
+                {{ func.toFixed(item.score) }}
+            </view>
+            <view slot="footer">
+                <van-button size="mini" bindtap="viewCourseItem">详情</van-button>
+            </view>
+            <wxs module="func">
+                var toFixed = function(value) {
+                    return value.toFixed(1);
+                }
+                module.exports = {
+                    toFixed: toFixed
+                }
+            </wxs>
+        </van-card>
+    </view>
+    <view class="block" style="height: 100rpx" />
+</view>
+<tabbar current_page="food" is_login="{{true}}" />

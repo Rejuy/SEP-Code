@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "注册",
   "navigationBarTextStyle": "white",
-  "usingComponents": {}
+  "usingComponents": {
+    "van-notify": "@vant/weapp/notify/index"
+  }
 }

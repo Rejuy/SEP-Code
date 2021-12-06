@@ -1,12 +1,12 @@
 // pages/register/register.js
-import Notify from "vant-weapp/notify/notify";
+import Notify from "@vant/weapp/notify/notify";
 
 Page({
   /**
    * Page initial data
    */
   data: {
-    username: "",
+    user_name: "",
     email: "",
     password: "",
     confirm_password: "",
@@ -14,12 +14,12 @@ Page({
   checkEmpty() {
     // returns true if empty
     const data_obj = this.data;
-    const isEmpty =
-      data_obj.username === "" ||
+    const is_empty =
+      data_obj.user_name === "" ||
       data_obj.email === "" ||
       data_obj.password === "" ||
       data_obj.confirm_password === "";
-    return isEmpty;
+    return is_empty;
   },
   register() {
     if (this.checkEmpty()) {
@@ -28,13 +28,13 @@ Page({
       Notify({ type: "danger", message: "密码不一致" });
     } else {
       // attempt register
-      // TODO: finish register check
-      Notify({ type: "success", message: "邮件已发送，请查看邮箱" });
-      return;
+      const app = getApp();
+      const domain = app.global_data.global_domain;
+      let register_domain = domain + '/api/v1.0/register';
       wx.request({
-        url: "http://127.0.0.1:8080/register",
+        url: register_domain,
         data: {
-          username: this.data.username,
+          user_name: this.data.username,
           email: this.data.email,
           password: this.data.password,
         },
@@ -43,11 +43,13 @@ Page({
         },
         method: "POST",
         success: function (res) {
-          if (res.data === "yes") {
-            Notify({ type: "success", message: "注册成功" });
+          if (res.data === 0) {
+            Notify({ type: "success", message: "邮件已发送，请查看邮箱" });
+          } else {
+            Notify({ type: "danger", message: "信息异常，请检查注册信息" });
           }
         },
-        fail: function () {
+        fail: function (res) {
           Notify({ type: "danger", message: "请求超时" });
         },
       });

@@ -55,11 +55,14 @@ Page({
     },
 
     handleSubmit: function() {
+        const app = getApp();
+        const domain = app.global_data.global_domain;
+
         let text_length = this.data.user_text.length;
         // 输入框合法性检查
-        if(text_length < 50) {
+        if(text_length < 15) {
             wx.showToast({
-              title: '文本不足50',
+              title: '文本不足15',
               icon: 'error',
               mask: true
             })
@@ -67,16 +70,17 @@ Page({
         }
 
         // 将用户反馈上传至服务器
+        let save_images = domain + '/api/v1.0/save_images';
         this.data.image_selected.forEach((temporary_path) => {
-            wx-wx.uploadFile({
+            wx.uploadFile({
               filePath: temporary_path,
               name: 'image',
-              url: 'http://183.173.121.154:5000/api/v1.0/save_images',
+              url: save_images,
               formData: {},
               timeout: 0,
               success: (result) => {
                   // console.log(result);
-                  let str = 'http://183.173.121.154:5000/' + result.data;
+                  let str = domain + result.data;
                   this.images_url.push(str);
               },
               fail: (error) => {
@@ -89,8 +93,9 @@ Page({
         });
 
         let that = this;
+        let post_user_feedback = domain + '/api/v1.0/post_user_feedback';
         wx.request({
-          url: 'http://183.173.121.154:5000/api/v1.0/post_user_feedback',
+          url: post_user_feedback,
           method: 'POST',
           data: {
               images_url: that.images_url,

@@ -1,5 +1,4 @@
-// pages/login/login.js
-import Notify from "vant-weapp/notify/notify";
+import Notify from "@vant/weapp/notify/notify";
 
 Page({
   data: {
@@ -8,14 +7,15 @@ Page({
   },
 
   checkEmpty() {
-    const data_obj = this.data;
-    const isEmpty = data_obj.user_name === "" || data_obj.user_password === "";
-    return isEmpty;
+    const data_object = this.data;
+    const is_empty =
+      data_object.user_name === "" || data_object.user_password === "";
+    return is_empty;
   },
   loginSuccessful() {
     const app = getApp();
-    app.globalData.g_active = "home";
-    app.globalData.g_is_login = true;
+    app.global_data.global_active = "home";
+    app.global_data.global_is_login = true;
     wx.reLaunch({
       url: "/pages/index/index",
     });
@@ -26,30 +26,39 @@ Page({
     if (this.checkEmpty()) {
       Notify({ type: "danger", message: "必填为空" });
     } else {
-      Notify({ type: "success", message: "登录成功" });
-      setTimeout(this.loginSuccessful, 500);
+      const app = getApp();
+      const domain = app.global_data.global_domain;
+      let login_domain = domain + '/api/v1.0/login';
+      wx.request({
+        url: login_domain,
+        data: {
+          user_name: this.data.user_name,
+          password: this.data.user_password,
+        },
+        header: {
+          "content-type": "application/json", // 默认值
+        },
+        method: "POST",
+        success: (res) => {
+          if (res.data.state === 0) {
+            Notify({ type: "success", message: "登录成功" });
+            setTimeout(this.loginSuccessful, 500);
+            const app = getApp();
+            const user_data = res.data.user;
+            app.global_data.global_user_info.email = user_data.email;
+            app.global_data.global_user_info.like_count = user_data.like_count;
+            app.global_data.global_user_info.account_birth = user_data.account_birth;
+            app.global_data.global_user_info.username = user_data.user_name;
+          } else {
+            Notify({ type: "danger", message: "登录失败" });
+          }
+        },
+        fail: function (res) {
+          Notify({ type: "danger", message: "请求超时" });
+        },
+      });
     }
+
     return;
-    wx.request({
-      url: "http://49.233.1.189:5000/api/v1.0/login",
-      data: {
-        user_name: this.data.user_name,
-        password: this.data.user_password,
-      },
-      header: {
-        "content-type": "application/json", // 默认值
-      },
-      method: "POST",
-      success: (res) => {
-        if (res.data.state == 0) {
-          Notify({ type: "success", message: "登录成功" });
-          setTimeout(loginSuccessful, 500);
-        }
-      },
-      fail: function (res) {
-        console.log(res);
-        Notify({ type: "danger", message: "请求超时" });
-      },
-    });
   },
 });

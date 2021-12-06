@@ -1,0 +1,4 @@
+/* custom-tab-bar/index.wxss */
+.custom-tabbar{
+    --tabbar-background-color: #ffffff
+}
