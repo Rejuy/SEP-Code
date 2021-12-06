@@ -41,19 +41,33 @@ INSERT_USER_KEY = ["user_name", "password", "email", "account_birth", "collectio
 
 # courses表
 # 所有key值
-COURSES_KEY = ["id", "number", "type", "name", "teacher", "credit", "department", "schedule", "rate_count", "rate", "comment_count", "heat"]
+COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat"]
 # 插入时所需键值
-INSERT_COURSES_KEY = ["number", "type", "name", "teacher", "credit", "department", "schedule", "rate_count", "rate", "comment_count", "heat"]
-# 添加评论
-INSERT_COMMENT_KEY = ["class", "content_id", "from_user_id", "like_count", "upper_comment_id", "lower_comment_id", "time", "star", "text", "deleted", "imageurl"]
+INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat"]
 # 返回的key值（基本）
-BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "rate"]
+BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star"]
 # 颜色和属性对应
 COURSE_COLOR = ["", "#228B22", "#000000", "#FFA500", "#8B4513", "#9400D3", "#FF0000", "#0000FF", "#FF1493"]
-
 # item
-ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "rate", "credit"]
+ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "star", "credit"]
+
+# food表
+# 所有key值
+FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
+# 插入时所需键值
+INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
+
+# place表
+# 所有key值
+PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
+# 插入时所需键值
+INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
 
 # comment
-INSERT_COMMENT_KEY = ["user", "star", "time", "likes", "text", "image", "comments"]
-# COMMENT_KEY = ["id", "class", "content_id", "from_user_id", "like_count", "upper_comment_id", "lower_comment_count", "time", "star", "text", "deleted"]
+# 插入时所需key值
+INSERT_COMMENT_KEY = ["class", "item_id", "user", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
+# 所有key值
+COMMENT_KEY = ["id", "class", "item_id", "user", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
+# 获取时的key
+BASIC_COMMENT_KEY = ["id", "user", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
+
