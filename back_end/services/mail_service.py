@@ -71,8 +71,8 @@ def send_register_email(recipient):
 <br> \
 <p>Cheers!</p>'
     # 将要发送的链接嵌进去
-    confirm_url = 'http://49.233.1.189:5000/' + '/api/v1.0/activate?code=' + generate_confirmation_token(recipient)
-    send_email('test subject', app.config['MAIL_USERNAME'], [recipient], 'text body',
+    confirm_url = 'https://thurec.xyz' + '/api/v1.0/activate?code=' + generate_confirmation_token(recipient)
+    send_email('test subject', app.config['MAIL_USERNAME'], [recipient+"@mails.tsinghua.edu.cn"], 'text body',
                html_body=html_body.format(confirm_url=confirm_url))
 
 
