@@ -30,7 +30,7 @@ comment = {
         """ 
         comment['image'] = json.dumps(comment['imageurls']) # 将url列表转换为字符串保存。
         db.addComment(comment) #TODO
-        return '评论成功'
+        return '添加成功'
 
     except KeyError:
         return jsonify({'state': BAD_ARGUMENTS}), 400
