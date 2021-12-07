@@ -99,6 +99,11 @@
 
 .comments .content {
     border: 2rpx solid black;
+    padding-bottom: 2rpx;
+}
+
+.comments .content van-skeleton {
+    height: 100%;
 }
 
 .comments .content .user_info {
