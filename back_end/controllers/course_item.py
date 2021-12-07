@@ -10,6 +10,7 @@ bp = Blueprint(
     # template_folder='../templates'
 )
 
+# 获取单个课程信息
 
 @bp.route('/api/v1.0/get_course_item', methods=['POST'])
 def courseItem():

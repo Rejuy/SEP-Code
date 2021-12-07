@@ -10,7 +10,7 @@ bp = Blueprint(
     # template_folder='../templates'
 )
 
-
+# 激活用户
 @bp.route('/api/v1.0/activate', methods=['GET'])
 def activate_register():
     try:

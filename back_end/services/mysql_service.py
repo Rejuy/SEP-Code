@@ -69,8 +69,8 @@ class MySQLDb:
 
     def addUser(self, user_info):
         try:
-            sql = "INSERT INTO user "
-            sql += self.getKeysStr(INSERT_USER_KEY) + " VALUES " + self.producePlaceHolder(len(INSERT_USER_KEY))
+            sql = "INSERT INTO user ("
+            sql += self.getKeysStr(INSERT_USER_KEY) + ") VALUES " + self.producePlaceHolder(len(INSERT_USER_KEY))
             time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             user = (
                 user_info['user_name'],

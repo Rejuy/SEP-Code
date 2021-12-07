@@ -11,7 +11,7 @@ bp = Blueprint(
     # template_folder='../templates'
 )
 
-
+# 添加评论
 @bp.route('/api/v1.0/add_comment', methods=['POST'])
 def addComment():
     try:
@@ -35,6 +35,7 @@ comment = {
     except KeyError:
         return jsonify({'state': BAD_ARGUMENTS}), 400
 
+# 获取推荐
 @bp.route('/api/v1.0/get_comment', methods=['POST'])
 def getComment():
     try:
