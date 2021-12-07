@@ -257,7 +257,7 @@ class MySQLDb:
             self.cursor.execute(sql, val)
             comments_list = self.cursor.fetchall()
             for i in range(len(comments_list)):
-                comments_list[i] = self.tupleToDict(comments_list[i], BASIC_COMMENT_KEY)
+                comments_list[i] = self.tupleToDict(comments_list[i], BASIC_ITEM_COMMENT_KEY)
                 del comments_list[i]['id']
                 comments_list[i]['time'] = comments_list[i]['time'].strftime("%Y-%m-%d %H:%M:%S")
                 comments_list[i]['comment_numbers'] = comments_list[i]['lower_comment_count']
@@ -338,9 +338,9 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
-    def addLike(self, comment_class, user, comment_id):
+    def addLike(self, user, comment_id):
         """
-        :param comment_class: 评论所属的模块, "course"/"food"/"place"
+        :param comment_class: 评论所属的模块, 1,2,3
         :param user: 用户名
         :param comment_id: 评论的id
         :return:
@@ -349,7 +349,7 @@ class MySQLDb:
             sql = "INSERT INTO user_like ("
             sql += self.getKeysStr(INSERT_LIKE_KEY) + ") VALUES " + self.producePlaceHolder(len(INSERT_LIKE_KEY))
             time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            val = (CLASS_TO_INT[comment_class], user, comment_id, time)
+            val = (user, comment_id, time)
             # 写入新数据
             self.cursor.execute(sql, val)
             # 数据表内容更新
@@ -371,6 +371,148 @@ class MySQLDb:
             # 回滚所有更改
             self.connection.rollback()
             return False
+
+    def delLike(self, user, comment_id):
+        """
+        删除点赞
+        :param user: 用户名
+        :param comment_id: 评论id
+        :return: bool
+        """
+        try:
+            # 删除数据
+            sql = "DELETE FROM user_like WHERE comment_id = %s AND user = %s"
+            val = (comment_id, user)
+            self.cursor.execute(sql, val)
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (delLike)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
+    def checkCommentLiked(self, user, comment_id):
+        """
+        检查用户是否点赞过某个评论
+        :param user: 用户名
+        :return: bool
+        """
+        try:
+            # 获得相应评论
+            sql = "SELECT * FROM user_like WHERE user = %s AND comment_id = %s"
+            val = (user, comment_id)
+            self.cursor.execute(sql, val)
+            result = self.cursor.fetchone()
+            if result != None:
+                return True
+            return False
+        except Exception as e:
+            print("[Error] (checkCommentLiked)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
+    def getUserCommentList(self, user):
+        """
+        获得用户所有的评论
+        :param user: 用户名
+        :return: comment列表[{
+            user:,
+            star:,
+            time:,
+            likes:,
+            text:,
+            image:,
+            class:,
+            item_id:
+        }]
+        """
+        try:
+            # 获得相应评论
+            sql = "SELECT * FROM comment WHERE user = %s"
+            val = (user, )
+            self.cursor.execute(sql, val)
+            comments_list = self.cursor.fetchall()
+            for i in range(len(comments_list)):
+                comments_list[i] = self.tupleToDict(comments_list[i], COMMENT_KEY)
+                del comments_list[i]['id']
+                comments_list[i]['time'] = comments_list[i]['time'].strftime("%Y-%m-%d %H:%M:%S")
+                del comments_list[i]['lower_comment_count']
+                del comments_list[i]['upper_comment_id']
+            return comments_list, True
+        except Exception as e:
+            print("[Error] (getUserCommentList)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return None, False
+
+    def getUserLikeCommentList(self, user):
+        """
+        获得用户所有的评论
+        :param user: 用户名
+        :return: comment列表[{
+            user:,
+            star:,
+            time:,
+            likes:,
+            text:,
+            image:,
+            class:,
+            item_id:
+        }]
+        """
+        try:
+            # 获得相应评论id
+            sql = "SELECT comment_id FROM user_like WHERE user = %s"
+            val = (user,)
+            self.cursor.execute(sql, val)
+            comment_id_list = self.cursor.fetchall()
+            # 获得相应评论
+            sql = "SELECT * FROM comment WHERE id = %s"
+            comments_list = []
+            for id in comment_id_list:
+                self.cursor.execute(sql, id)
+                comments_list.append(self.cursor.fetchone())
+            for i in range(len(comments_list)):
+                comments_list[i] = self.tupleToDict(comments_list[i], COMMENT_KEY)
+                del comments_list[i]['id']
+                comments_list[i]['time'] = comments_list[i]['time'].strftime("%Y-%m-%d %H:%M:%S")
+                del comments_list[i]['lower_comment_count']
+                del comments_list[i]['upper_comment_id']
+            return comments_list, True
+        except Exception as e:
+            print("[Error] (getUserLikeCommentList)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return None, False
+
+    def checkItemCommented(self, user, item_class, item_id):
+        """
+        检查用户是否评论过某个item
+        :param user: 用户名
+        :param item_class: 所属模块
+        :param item_id: id
+        :return: 相应评论
+        """
+        try:
+            # 获得相应评论
+            sql = "SELECT * FROM comment WHERE class = %s AND item_id = %s AND user = %s"
+            val = (item_class, item_id, user)
+            self.cursor.execute(sql, val)
+            raw_comment = self.cursor.fetchone()
+            comment = self.tupleToDict(raw_comment, COMMENT_KEY)
+            if comment != None:
+                comment['time'] = comment['time'].strftime("%Y-%m-%d %H:%M:%S")
+                return comment, True
+            return None, False
+        except Exception as e:
+            print("[Error] (checkItemCommented)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return None, False
+
     # ==========后为功能性函数
 
     def tupleToDict(self, tuple, key_list):

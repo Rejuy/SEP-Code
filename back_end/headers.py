@@ -73,10 +73,12 @@ INSERT_COMMENT_KEY = ["class", "item_id", "user", "star", "time", "likes", "text
 # 所有key值
 COMMENT_KEY = ["id", "class", "item_id", "user", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
 # 获取时的key
-BASIC_COMMENT_KEY = ["id", "user", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
+BASIC_ITEM_COMMENT_KEY = ["id", "user", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
+BASIC_USER_COMMENT_KEY = ["id", "class", "item_id", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
+
 
 # like
 # 插入时所需key值
-INSERT_LIKE_KEY = ["class", "user", "comment_id", "time"]
+INSERT_LIKE_KEY = ["user", "comment_id", "time"]
 # 所有key值
-LIKE_KEY = ["id", "class", "user", "comment_id", "time"]
+LIKE_KEY = ["id", "user", "comment_id", "time"]
