@@ -31,8 +31,8 @@ Page({
         })
     },
 
-    giveLikes: function() {
-        console.log("likes");
+    giveLikes: function (options) {
+        console.log(options);
     },
 
     viewDetails: function (options) {

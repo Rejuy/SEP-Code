@@ -22,6 +22,7 @@ Page({
             { text: '热度排序', value: 1 },
             { text: '时间排序', value: 2 },
         ],
+        search_value: '',
         range_value: 0,
         place_value: 0,
         rank_value: 0,
@@ -32,6 +33,12 @@ Page({
             { id: 1, name: '第一教室楼', position: '清华大学西南方向', range: '校内地点', type: '自习场所', star: 4.0, score: 8.3, tag: 'TOP3', color: '#07C160'},    
             { id: 2, name: '邺架轩', position: '清华大学李文正图书馆下沉广场', range: '校内地点', type: '自习场所', star: 3.5, score: 7.2, tag: '', color: '#07C160'},        
         ]
+    },
+
+    onSearch: function(result) {
+        this.setData({
+            search_value: result.detail
+        });
     },
 
     /**

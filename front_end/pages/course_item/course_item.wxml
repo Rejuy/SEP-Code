@@ -93,7 +93,6 @@
                 </view>
             </van-skeleton>
         </view>
-        
     </view>
 </view>
 
