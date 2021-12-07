@@ -136,6 +136,36 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
+    def getData(self, table, locate_key, locate_value, get_key):
+        """
+        获取某条数据的某一些属性
+        :param table: 表名
+        :param locate_key: 定位的key（列表）
+        :param locate_value: 定位的key对应的值（列表）
+        :param get_key: 想要获取的key（列表）
+        :return: 数据列表
+        """
+        try:
+            # 获取数据
+            sql = "SELECT " + self.getKeysStr(get_key) + " FROM " + table + " WHERE " + locate_key[0] + " = %s "
+            val = (locate_value[0],)
+            for i in range(1, len(locate_key)):
+                sql += " and " + locate_key[i] + " = %s "
+                val += (locate_value[i],)
+            self.cursor.execute(sql, val)
+            data_list = self.cursor.fetchall()
+            for i in range(len(data_list)):
+                data_list[i] = self.tupleToDict(data_list[i], get_key)
+                for key in get_key:
+                    if type(data_list[i][key]) == datetime.datetime:
+                        data_list[i][key] = data_list[i][key].strftime("%Y-%m-%d %H:%M:%S")
+            return data_list, True
+        except Exception as e:
+            print("[Error] (getData)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return [], False
+
     def addItem(self, table, content_info):
         try:
             sql = "INSERT INTO " + table + " ("
