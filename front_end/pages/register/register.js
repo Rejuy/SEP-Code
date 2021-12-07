@@ -30,11 +30,11 @@ Page({
       // attempt register
       const app = getApp();
       const domain = app.global_data.global_domain;
-      let register_domain = domain + '/api/v1.0/register';
+      let register_domain = domain + '/api/v1.0/register_user_info';
       wx.request({
         url: register_domain,
         data: {
-          user_name: this.data.username,
+          user_name: this.data.user_name,
           email: this.data.email,
           password: this.data.password,
         },
