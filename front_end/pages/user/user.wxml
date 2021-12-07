@@ -1,7 +1,7 @@
 <!-- pages/user/user.wxml -->
 <view class="container">
   <view class="img_container">
-    <van-image round class="img" width="75px" height="75px" fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+    <van-image round class="img" width="75px" height="75px" fit="fill" src="{{user_icon_path}}" bindtap="choose_icon" />
   </view>
   <view class="box" />
   <van-cell-group title="用户信息">
@@ -36,3 +36,4 @@
   <view class="block" style="height: 100px;"></view>
 </view>
 <tabbar current_page="user" is_login="{{true}}" />
+<van-notify id="van-notify" />
