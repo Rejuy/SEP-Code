@@ -44,11 +44,13 @@ Page({
             Notify({ type: "success", message: "登录成功" });
             setTimeout(this.loginSuccessful, 500);
             const app = getApp();
-            const user_data = res.data.user;
+            app.global_data.global_user_token = res.data.user_mask;
+            /*
             app.global_data.global_user_info.email = user_data.email;
             app.global_data.global_user_info.like_count = user_data.like_count;
             app.global_data.global_user_info.account_birth = user_data.account_birth;
             app.global_data.global_user_info.username = user_data.user_name;
+            */
           } else {
             Notify({ type: "danger", message: "登录失败" });
           }
