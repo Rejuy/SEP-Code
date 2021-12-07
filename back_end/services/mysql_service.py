@@ -149,11 +149,13 @@ class MySQLDb:
             # 获取数据
             sql = "SELECT " + self.getKeysStr(get_key) + " FROM " + table + " WHERE " + locate_key[0] + " = %s "
             val = (locate_value[0],)
+            # print(len(locate_key))
             for i in range(1, len(locate_key)):
                 sql += " and " + locate_key[i] + " = %s "
                 val += (locate_value[i],)
             self.cursor.execute(sql, val)
             data_list = self.cursor.fetchall()
+            print(data_list)
             for i in range(len(data_list)):
                 data_list[i] = self.tupleToDict(data_list[i], get_key)
                 for key in get_key:

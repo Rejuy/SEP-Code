@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
-from services.user_icon_service import updateProfilePicture
+from services.user_icon_service import updateProfilePicture, getProfilePicture
 from services.save_image_service import saveImage
 from headers import *
 from services.code_service import coder
@@ -26,8 +26,9 @@ def save_user_icon():
 @bp.route('/api/v1.0/get_user_icon', methods=['POST'])
 def get_user_icon():
     try:
-        user_id = coder.decode(request.json()['mask'])
-        GetProfilePicture(user_id, filepath)
+        user_id = coder.decode(request.get_json()['mask'])
+        print(user_id)
+        filepath = getProfilePicture(user_id)
         return jsonify({'state': 0, 'path': filepath}), 200
     except KeyError:
         return jsonify({'state': 1}), 400
