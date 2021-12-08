@@ -155,7 +155,6 @@ class MySQLDb:
                 val += (locate_value[i],)
             self.cursor.execute(sql, val)
             data_list = self.cursor.fetchall()
-            print(data_list)
             for i in range(len(data_list)):
                 data_list[i] = self.tupleToDict(data_list[i], get_key)
                 for key in get_key:
