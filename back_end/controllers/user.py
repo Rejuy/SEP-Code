@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
-from services.user_icon_service import updateProfilePicture, getProfilePicture
+from services.user_service import updateProfilePicture, getProfilePicture, getUserInfo
 from services.save_image_service import saveImage
 from headers import *
 from services.code_service import coder
 
 bp = Blueprint(
-    'user_icon',
+    'user',
     __name__,
     # template_folder='../templates'
 )
@@ -33,3 +33,11 @@ def get_user_icon():
     except KeyError:
         return jsonify({'state': 1}), 400
 
+@bp.route('/api/v1.0/get_user_info', methods=['POST'])
+def get_user_info():
+    try:
+        user_id = coder.decode(request.get_json()['mask'])
+        user_info = getUserInfo(user_id)
+        return jsonify({'state': 0, 'user': user_info}), 200
+    except KeyError:
+        return jsonify({'state': 1}), 400

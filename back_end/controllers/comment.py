@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
-from services.mail_service import send_feedback_email
+from services.comment_service import getCommentsByName
 from services.mysql_service import db
+from services.id_to_name_service import getNameByID
 from headers import *
+from services.code_service import coder
 import json
 
 bp = Blueprint(
@@ -35,16 +37,19 @@ comment = {
     except KeyError:
         return jsonify({'state': BAD_ARGUMENTS}), 400
 
-# 获取推荐
-@bp.route('/api/v1.0/get_comment', methods=['POST'])
-def getComment():
+# 获取用户历史评论
+@bp.route('/api/v1.0/get_comment_by_id', methods=['POST'])
+def get_comment_by_id():
     try:
-        id = request.get_json()["id"]
+        info = request.get_json()
+        id = coder.decode(info['mask'])
         # print(id)
-        commentList = db.getComment(id) #TODO
+        user_name = getNameByID(id)
+        # print(user_name)
+        comments = getCommentsByName(user_name, info['offset'], info['size']) #TODO
         # commentList = [{"id": 5, "user": "zbw"}, {"id": 5, "user": "zxl"}]
-        return jsonify(commentList)
+        return jsonify({'state': int(info['size'] != len(comments)), 'comments': comments})
 
     except KeyError:
-        return jsonify({'state': BAD_ARGUMENTS}), 400
+        return jsonify({'state': 2}), 400
 
