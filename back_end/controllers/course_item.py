@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
-from services.course_item_service import getCourseItem
+from services.course_service import getCourseItem
 from headers import *
 
 

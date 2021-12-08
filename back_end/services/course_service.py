@@ -1,6 +1,5 @@
 from headers import *
 from services.mysql_service import db
-from services.code_service import coder
 
 
 def getCoursesList(raw_info):
@@ -52,3 +51,8 @@ def getCoursesList(raw_info):
         print(new_list)
     course_count = db.getTableCount("course_list")
     return new_list, course_count, result
+
+
+def getCourseItem(id):
+    item, flag = db.getItem("course_list", 1, id, ITEM_COURSE_KEY)
+    return item, flag

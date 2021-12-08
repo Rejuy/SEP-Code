@@ -155,9 +155,14 @@ class MySQLServiceTest(unittest.TestCase):
         }
         self.assertEqual(db.addComment(comment_info), True)
 
-    def testGetItem(self):
-        result, flag = db.getItem("course_list", 1, 1, ITEM_COURSE_KEY)
+    def testGetItem1(self):
+        result, flag = db.getItem("food_list", 2, 1, ITEM_FOOD_KEY)
         self.assertEqual(flag, True)
+        print(result)
+
+    def testGetItem2(self):
+        result, flag = db.getItem("place_list", 3, 5, ITEM_PLACE_KEY)
+        self.assertEqual(flag, True)``
         print(result)
 
     def testAddLike(self):

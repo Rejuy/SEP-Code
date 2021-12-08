@@ -9,7 +9,11 @@ from controllers import (
     comment,
     courses_list,
     course_item,
-    user
+    user,
+    places_list,
+    place_item,
+    foods_list,
+    food_item
 )
 
 blueprints = [
@@ -21,5 +25,9 @@ blueprints = [
     courses_list.bp,
     comment.bp,
     course_item.bp,
-    user.bp
+    user.bp,
+    places_list.bp,
+    place_item.bp,
+    foods_list.bp,
+    food_item.bp
 ]

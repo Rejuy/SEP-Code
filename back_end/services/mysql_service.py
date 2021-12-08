@@ -246,7 +246,7 @@ class MySQLDb:
             print("[Error] (getContentList)：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
-            return None, False
+            return [], False
 
     def getTableCount(self, table):
         try:
