@@ -28,8 +28,7 @@
     </van-cell-group>
     <van-cell-group title="使用信息">
       <van-cell title="点赞信息" icon="good-job-o" value="{{like_count}}" is-link />
-      <van-cell title="评论信息" icon="goods-collect-o" value="{{comment_count}}" is-link />
-      <van-cell title="发帖信息" icon="orders-o" value="{{content_count}}" is-link />
+      <van-cell title="评论信息" icon="orders-o" value="{{comment_count}}" is-link link-type="reLaunch" url="/pages/user_comments/user_comments" />
       <van-cell title="收藏信息" icon="star-o" value="{{collection_count}}" is-link />
     </van-cell-group>
     <view class="box" />
