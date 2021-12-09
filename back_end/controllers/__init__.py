@@ -8,7 +8,12 @@ from controllers import (
     save_images,
     comment,
     courses_list,
-    course_item
+    course_item,
+    user,
+    places_list,
+    place_item,
+    foods_list,
+    food_item
 )
 
 blueprints = [
@@ -19,5 +24,10 @@ blueprints = [
     save_images.bp,
     courses_list.bp,
     comment.bp,
-    course_item.bp
+    course_item.bp,
+    user.bp,
+    places_list.bp,
+    place_item.bp,
+    foods_list.bp,
+    food_item.bp
 ]

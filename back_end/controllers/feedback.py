@@ -12,7 +12,7 @@ bp = Blueprint(
     # template_folder='../templates'
 )
 
-
+# 发送用户反馈
 @bp.route('/api/v1.0/post_user_feedback', methods=['POST'])
 def postUserFeedback():
     try:

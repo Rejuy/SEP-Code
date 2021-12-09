@@ -1,5 +1,5 @@
 import unittest
-from services.courses_list_service import getCoursesList
+from services.course_service import getCoursesList
 from headers import *
 
 

@@ -60,12 +60,20 @@ ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "star", "credit"]
 FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
 # 插入时所需键值
 INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
+# 返回的key值（基本）
+BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star"]
+# item
+ITEM_FOOD_KEY = ["name", "position", "scope", "star"]
 
 # place表
 # 所有key值
 PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
 # 插入时所需键值
 INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
+# 返回的key值（基本）
+BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star"]
+# item
+ITEM_PLACE_KEY = ["name", "position", "scope", "star"]
 
 # comment
 # 插入时所需key值
@@ -82,3 +90,12 @@ BASIC_USER_COMMENT_KEY = ["id", "class", "item_id", "star", "time", "likes", "te
 INSERT_LIKE_KEY = ["user", "comment_id", "time"]
 # 所有key值
 LIKE_KEY = ["id", "user", "comment_id", "time"]
+
+# collection
+# 插入时所需key值
+INSERT_COLLECTION_KEY = ["user_id", "class", "item_id", "time", "item_name"]
+# 所有key值
+COLLECTION_KEY = ["id", "user_id", "class", "item_id", "time", "item_name"]
+
+
+

@@ -62,6 +62,9 @@ class MySQLServiceTest(unittest.TestCase):
         self.assertEqual(db.updateData("course_content", "number", "101", "comment_count", 1), True)
         self.assertEqual(db.updateData("course_content", "number", "101", "heat", 8), True)
 
+    def testUpdateData3(self):
+        self.assertEqual(db.updateData("user_like", "id", 4, "comment_id", 35), True)
+
     def testAddItem1(self):
         info = {
             "type": 5,
@@ -155,8 +158,25 @@ class MySQLServiceTest(unittest.TestCase):
         }
         self.assertEqual(db.addComment(comment_info), True)
 
-    def testGetItem(self):
-        result, flag = db.getItem("course_list", 1, 1, ITEM_COURSE_KEY)
+    def testAddComment2(self):
+        comment_info = {
+            "class": 1,
+            "table": "course_list",  # (class对应的表名)
+            "item_id": 3,
+            "user": "zengxl",
+            "upper_comment_id": 0,
+            "star": 4,
+            "text": "我对这门课无可奉告呀。"
+        }
+        self.assertEqual(db.addComment(comment_info), True)
+
+    def testGetItem1(self):
+        result, flag = db.getItem("food_list", 2, 1, ITEM_FOOD_KEY)
+        self.assertEqual(flag, True)
+        print(result)
+
+    def testGetItem2(self):
+        result, flag = db.getItem("place_list", 3, 5, ITEM_PLACE_KEY)
         self.assertEqual(flag, True)
         print(result)
 
@@ -183,6 +203,34 @@ class MySQLServiceTest(unittest.TestCase):
         result, flag = db.checkItemCommented("renjy", 1, 1)
         self.assertEqual(flag, True)
         print(result)
+
+    def testGetData1(self):
+        result, flag = db.getData("comment", ["star"], [2], ["text"])
+        self.assertEqual(flag, True)
+        print(result)
+
+    def testGetData2(self):
+        result, flag = db.getData("course_list", ["id"], [2], ["name"])
+        self.assertEqual(flag, True)
+        print(result)
+
+    def testAddCollection(self):
+        self.assertEqual(db.addCollection(1,2,4), True)
+
+    def testDelCollection(self):
+        self.assertEqual(db.delCollection(1,2,4), True)
+
+    def testItemCollected1(self):
+        self.assertEqual(db.checkItemCollected(1,1,4), True)
+
+    def testItemCollected2(self):
+        self.assertEqual(db.checkItemCollected(1,2,4), False)
+
+    def testDelComment1(self):
+        self.assertEqual(db.delComment("id", 34), True)
+
+    def testDelComment2(self):
+        self.assertEqual(db.delComment("id", 35), True)
 
 
 if __name__ == '__main__':
