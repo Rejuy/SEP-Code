@@ -99,6 +99,11 @@
 
 .comments .content {
     border: 2rpx solid black;
+    padding-bottom: 2rpx;
+}
+
+.comments .content van-skeleton {
+    height: 100%;
 }
 
 .comments .content .user_info {
@@ -143,4 +148,19 @@
 
 .comments .content van-skeleton .van-skeleton {
     padding: var(--skeleton-padding, 20rpx 20rpx);
+}
+
+.comments .content .user_text {
+    font-size: 35rpx;
+    padding-right: 2rpx;
+    padding-left: 116rpx;
+    padding-bottom: 30rpx;
+    border-bottom: 2rpx solid #EAEAEA;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+}
+
+.comments .content .user_text .unfold {
+    float: right;
+    margin-right: 4rpx;
+    margin-top: -38rpx;
 }

@@ -194,6 +194,7 @@ class MySQLDb:
             data_list = self.cursor.fetchall()
             if len(data_list) == 0:
                 return [], False
+
             for i in range(len(data_list)):
                 data_list[i] = self.tupleToDict(data_list[i], get_key)
                 for key in get_key:

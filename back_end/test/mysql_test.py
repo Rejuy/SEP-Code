@@ -158,6 +158,7 @@ class MySQLServiceTest(unittest.TestCase):
         }
         self.assertEqual(db.addComment(comment_info), True)
 
+
     def testAddComment2(self):
         comment_info = {
             "class": 1,
@@ -231,6 +232,7 @@ class MySQLServiceTest(unittest.TestCase):
 
     def testDelComment2(self):
         self.assertEqual(db.delComment("id", 35), True)
+
 
 
 if __name__ == '__main__':

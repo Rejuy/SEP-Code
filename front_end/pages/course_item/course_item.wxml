@@ -49,21 +49,21 @@
                 <van-progress 
                 pivot-color="#654ea3" 
                 color="linear-gradient(to right, #be99ff, #7232dd)" 
-                percentage="30" />                
+                percentage="{{ negative_radio }}" />                
             </view>
             <view class="statistics">
                 <text>中立</text>
                 <van-progress 
                 pivot-color="#654ea3" 
                 color="linear-gradient(to right, #be99ff, #7232dd)" 
-                percentage="20" />                
+                percentage="{{ neutral_radio }}" />                
             </view>
             <view class="statistics">
                 <text>好评</text>
                 <van-progress 
                 pivot-color="#654ea3" 
                 color="linear-gradient(to right, #be99ff, #7232dd)" 
-                percentage="50" />                
+                percentage="{{ positive_radio }}" />                
             </view>
         </view>
     </view>
@@ -72,23 +72,25 @@
         <text class="comments_title">评论区：</text>
 
         <view class="content">
-            <van-skeleton title avatar row="3" loading="{{ loading }}">
+            <van-skeleton wx:for="{{ comment_list }}" wx:key="id" title avatar row="3" loading="{{ loading }}">
                 <view class="user_info">
                     <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="70rpx"/>
-                    <text>平台测试组</text>
+                    <text>{{ item.user }}</text>
                 </view>
 
                 <view class="user_evaluation">
-                    <van-rate readonly allow-half size="40rpx" gutter="0rpx" void-color="#eee" void-icon="star" value="3.5"/>
-                    <text>2021.12.06</text>
-                    <van-icon name="good-job" />
-                    <text style="color:#000000; padding-left: 10rpx;">998</text>
+                    <van-rate readonly allow-half size="40rpx" gutter="0rpx" void-color="#eee" void-icon="star" value="{{ item.star }}"/>
+                    <text>{{ item.date }}</text>
+                    <van-icon name="good-job" bindtap="giveLikes"/>
+                    <text style="color:#000000; padding-left: 10rpx;">{{ item.likes }}</text>
                 </view>
 
                 <view class="user_text">
+                    <text>
+                        {{ item.brief_text }}
+                    </text>
+                    <text class="unfold" wx:if="{{ ! item.complete }}" style="color: #3377AA; font-weight: bold;" bindtap="viewDetails">[展开]</text>
                 </view>
-            </van-skeleton>
-            <van-skeleton title avatar row="3">
             </van-skeleton>
         </view>
     </view>

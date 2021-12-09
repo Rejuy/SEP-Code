@@ -2,7 +2,7 @@
 <view class="container">
     <view class="background"></view>
     <input id="username" class="input_text" model:value="{{user_name}}" type="text" placeholder="用户名" />
-    <input id="email" class="input_text" model:value="{{email}}" type="text" placeholder="邮箱" />
+    <input id="email" class="input_text" model:value="{{email}}" type="text" placeholder="邮箱前缀@thu" />
     <input id="password" class="input_text" model:value="{{password}}" type="password" placeholder="密码" />
     <input id="confirm_password" class="input_text" model:value="{{confirm_password}}" type="password" placeholder="确认密码" />
     <van-button color="#cc99ff" round size="large" class="register_button" bind:click="register">
