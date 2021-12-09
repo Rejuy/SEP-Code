@@ -1,66 +1,21 @@
-// components/user_comment_comp/user_comment_comp.js
-Page({
-
-  /**
-   * Page initial data
-   */
-  data: {
-
+Component({
+  properties:{
+    user: String, // url link
+    user_icon: String, // url link
+    text: String, // 评论
+    "imageurls": Array, 
+    is_self: Boolean, // 评论是自己的?
   },
-
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
-
+  data:{
+    tag: ""
   },
-
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
+  lifetimes: {
+    ready(){
+      if (this.properties.is_self){
+        this.setData({
+          tag:"自己"
+        })
+      }
+    }
   }
 })

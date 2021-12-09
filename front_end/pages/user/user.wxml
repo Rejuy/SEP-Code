@@ -1,6 +1,4 @@
 <!-- pages/user/user.wxml -->
-
-
 <view class="container">
   <van-skeleton title avatar row="3" loading="{{ loading }}">
     <view class="img_container">
@@ -11,6 +9,11 @@
       <van-cell title="用户名" value="{{username}}" icon="user-o" />
       <van-cell title="邮箱@thu" value="{{email}}" icon="envelop-o" />
       <van-cell title="账号生日" value="{{account_birth}}" icon="birthday-cake-o" />
+    </van-cell-group>
+    <van-cell-group title="使用信息">
+      <van-cell title="点赞信息" icon="good-job-o" value="{{like_count}}" is-link />
+      <van-cell title="评论信息" icon="orders-o" value="{{comment_count}}" is-link link-type="reLaunch" url="/pages/user_comments/user_comments" />
+      <van-cell title="收藏信息" icon="star-o" value="{{collection_count}}" is-link />
     </van-cell-group>
     <van-cell-group title="消息">
       <van-cell icon="chat-o" is-link>
@@ -25,11 +28,6 @@
           <van-tag type="danger" style="display:inline-block">1 条未读</van-tag>
         </view>
       </van-cell>
-    </van-cell-group>
-    <van-cell-group title="使用信息">
-      <van-cell title="点赞信息" icon="good-job-o" value="{{like_count}}" is-link />
-      <van-cell title="评论信息" icon="orders-o" value="{{comment_count}}" is-link link-type="reLaunch" url="/pages/user_comments/user_comments" />
-      <van-cell title="收藏信息" icon="star-o" value="{{collection_count}}" is-link />
     </van-cell-group>
     <view class="box" />
     <van-button round class="logout_button" type="danger" size="large" bind:click="logout">

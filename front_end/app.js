@@ -1,8 +1,8 @@
 // app.js
 App({
   global_data: {
-    global_domain: 'https://thurec.whiteffire.cn',
-    global_user_token: "", // user login token
+    global_domain: 'http://thurec.xyz',
+    global_user_token: "c+O9LCj7q77CfNc7yH3ZEg==", // user login token
     /*
     global_user_info: { // sample user info, dont use
       username: "Andrew",
