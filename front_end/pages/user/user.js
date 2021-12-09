@@ -5,7 +5,7 @@ Page({
   data: {
     user_icon_path: "/images/icons/empty_user.png",
 
-    loaded: true,
+    loading: true,
     username: "",
     email: "",
     account_birth: "",
@@ -73,18 +73,37 @@ Page({
       like_count: app.global_data.global_user_info.like_count,
       comment_count: app.global_data.global_user_info.comment_count,
     })
-    let curr_app = getApp();
     wx.request({
-      url: curr_app.global_data.global_domain + '/api/v1.0/get_user_icon',
+      url: app.global_data.global_domain + '/api/v1.0/get_user_icon',
       data: {
-        mask: curr_app.global_data.global_user_token
+        mask: app.global_data.global_user_token
       },
       method: "POST",
       success: (res) => {
         if (res.data.state === 0) {
           this.setData({
-            user_icon_path: curr_app.global_data.global_domain + "/" + res.data.path,
+            user_icon_path: app.global_data.global_domain + "/" + res.data.path,
           });
+        }
+      }
+    })
+    wx.request({
+      url: app.global_data.global_domain + '/api/v1.0/get_user_info',
+      data: {
+        mask: app.global_data.global_user_token
+      },
+      method: "POST",
+      success: (res) => {
+        if (res.data.state === 0) {
+          const user_data = res.data.user;
+          this.setData({
+            loading: false,
+
+            username: user_data.user_name,
+            email: user_data.email,
+            account_birth: user_data.account_birth.slice(0, -12),
+            like_count: user_data.like_count,
+          })
         }
       }
     })
