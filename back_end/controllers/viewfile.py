@@ -1,3 +1,5 @@
+# TODO
+# 以后可能会用到
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
 from services import mail_service
@@ -5,17 +7,16 @@ from headers import *
 
 
 bp = Blueprint(
-    'activate',
+    'viewfile',
     __name__,
     # template_folder='../templates'
 )
 
-# 激活用户
-@bp.route('/api/v1.0/activate', methods=['GET'])
+
+@bp.route('/api/v1.0/viewfile', methods=['GET'])
 def activate_register():
     try:
-        email = mail_service.confirm_token(request.args.get('code'))
-        mail_service.activate_user(email)
+        target_url = request.args.get('f')
         return '验证成功', 200
     except KeyError:
         return '验证失败', 400

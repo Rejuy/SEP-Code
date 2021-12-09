@@ -5,17 +5,24 @@
 
 .images image {
     padding-top: 20rpx;
-    padding-bottom: 10rpx;
+    padding-bottom: 20rpx;
+}
+
+.information_title {
+    font-weight: bold;
+    padding-left: 10rpx;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;   
 }
 
 .header {
-    width: 100%;
+    width: 99%;
+    margin-left: 4rpx;
     display: inline-flex;
-    border: 2rpx solid #EAEAEA;
+    border: 2rpx solid black;
 }
 
 .header .information {
-    width: 60%;
+    width: 59%;
     padding: 10rpx 0 10rpx 10rpx;
 }
 
@@ -24,7 +31,7 @@
 }
 
 .header .information .tags {
-    display: inline;
+    display: flex;
 }
 
 .header .information .tags van-tag {
@@ -44,7 +51,8 @@
 }
 
 .header .score {
-    width: 40%;
+    width: 41%;
+    padding-top: 10rpx;
     border-left: 2rpx solid #EAEAEA;
 }
 
@@ -59,11 +67,100 @@
     float: right;
 }
 
+.header .score .statistics {
+    display: flex;
+}
+
 .header .score text {
     width: 30%;
     display: block;
-    padding: 10rpx 0;
+    padding: 5rpx 0rpx 8rpx 0rpx;
     font-size: smaller;
     font-weight: bold;
     font-family: "Lucida Calligraphy", cursive, serif, sans-serif;    
+}
+
+.header .score .statistics van-progress {
+    width: 70%;
+    padding-top: 16rpx;
+}
+
+.comments {
+    width: 99%;
+    margin-left: 4rpx;
+    padding-top: 20rpx;
+}
+
+.comments .comments_title {
+    font-weight: bold;
+    padding-left: 10rpx;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+}
+
+.comments .content {
+    border: 2rpx solid black;
+    padding-bottom: 2rpx;
+}
+
+.comments .content van-skeleton {
+    height: 100%;
+}
+
+.comments .content .user_info {
+    display: flex;
+}
+
+.comments .content .user_info text {
+    font-weight: bold;
+    padding-top: 30rpx;
+    padding-left: 0rpx;
+    padding-right: 20rpx;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;       
+}
+
+.comments .content .user_info van-icon {
+    padding: 20rpx 20rpx;
+}
+
+.comments .content .user_evaluation {
+    display: flex;
+    margin-top: -30rpx;
+}
+
+.comments .content .user_evaluation van-rate {
+    padding-left: 110rpx;
+}
+
+.comments .content .user_evaluation text {
+    color:#696969;
+    padding-left: 20rpx;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;    
+}
+
+.comments .content .user_evaluation van-icon {
+    margin-top: -5rpx;
+    padding-left: 30rpx;
+}
+
+.comments .content .user_evaluation van-rate .van-rate__item van-icon{
+    padding: 0rpx 0rpx;
+}
+
+.comments .content van-skeleton .van-skeleton {
+    padding: var(--skeleton-padding, 20rpx 20rpx);
+}
+
+.comments .content .user_text {
+    font-size: 35rpx;
+    padding-right: 2rpx;
+    padding-left: 116rpx;
+    padding-bottom: 30rpx;
+    border-bottom: 2rpx solid #EAEAEA;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+}
+
+.comments .content .user_text .unfold {
+    float: right;
+    margin-right: 4rpx;
+    margin-top: -38rpx;
 }

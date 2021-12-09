@@ -51,28 +51,6 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
-    def addComment(self, user_comment): #TODO
-        try:
-            sql = "INSERT INTO comment "
-            sql += self.getKeysStr(INSERT_USER_KEY) + " VALUES " + self.producePlaceHolder(len(INSERT_USER_KEY))
-            time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            comment = (
-                user_comment['user_name'],
-                user_comment['password'],
-                user_comment['email'],
-                time, 0, 0, 0, 0, 0
-            )
-            # 写入新数据
-            self.cursor.execute(sql, comment)
-            # 数据表内容更新
-            self.connection.commit()
-            return True
-        except Exception as e:
-            print("[Error] (addComment)：{}".format(e))
-            # 回滚所有更改
-            self.connection.rollback()
-            return False
-
     def delComment(self, key, val):
         # 不同方式删除用户（指定键值）
         try:
@@ -91,8 +69,8 @@ class MySQLDb:
 
     def addUser(self, user_info):
         try:
-            sql = "INSERT INTO user "
-            sql += self.getKeysStr(INSERT_USER_KEY) + " VALUES " + self.producePlaceHolder(len(INSERT_USER_KEY))
+            sql = "INSERT INTO user ("
+            sql += self.getKeysStr(INSERT_USER_KEY) + ") VALUES " + self.producePlaceHolder(len(INSERT_USER_KEY))
             time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             user = (
                 user_info['user_name'],
@@ -158,12 +136,49 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
-    def addContent(self, table, content_info):
+    def getData(self, table, locate_key, locate_value, get_key):
+        """
+        获取某条数据的某一些属性
+        :param table: 表名
+        :param locate_key: 定位的key（列表）
+        :param locate_value: 定位的key对应的值（列表）
+        :param get_key: 想要获取的key（列表）
+        :return: 数据列表
+        """
+        try:
+            # 获取数据
+            sql = "SELECT " + self.getKeysStr(get_key) + " FROM " + table + " WHERE " + locate_key[0] + " = %s "
+            val = (locate_value[0],)
+            # print(len(locate_key))
+            for i in range(1, len(locate_key)):
+                sql += " and " + locate_key[i] + " = %s "
+                val += (locate_value[i],)
+            self.cursor.execute(sql, val)
+            data_list = self.cursor.fetchall()
+            for i in range(len(data_list)):
+                data_list[i] = self.tupleToDict(data_list[i], get_key)
+                for key in get_key:
+                    if type(data_list[i][key]) == datetime.datetime:
+                        data_list[i][key] = data_list[i][key].strftime("%Y-%m-%d %H:%M:%S")
+            return data_list, True
+        except Exception as e:
+            print("[Error] (getData)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return [], False
+
+    def addItem(self, table, content_info):
         try:
             sql = "INSERT INTO " + table + " ("
             key_list, val = [], ()
-            if (table == "couse_list"):
-                keylist = INSERT_COURSES_KEY
+
+            if table == "course_list":
+                key_list = INSERT_COURSES_KEY
+            elif table == "food_list":
+                key_list = INSERT_FOOD_KEY
+            elif table == "place_list":
+                key_list = INSERT_PLACE_KEY
+
             sql += self.getKeysStr(key_list) + ") VALUES " + self.producePlaceHolder(len(key_list))
             for key in key_list:
                 try:
@@ -188,7 +203,7 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
-    def getContentList(self, table, info):
+    def getItemList(self, table, info):
         '''
         :param info: {
             key_list: (list)
@@ -231,7 +246,7 @@ class MySQLDb:
             print("[Error] (getContentList)：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
-            return None, False
+            return [], False
 
     def getTableCount(self, table):
         try:
@@ -268,21 +283,14 @@ class MySQLDb:
             # 转成字典
             item = self.tupleToDict(raw_item, key_list)
             # 获得相应评论
-            sql = "SELECT * FROM comment WHERE class = %s AND content_id = %s"
+            sql = "SELECT * FROM comment WHERE class = %s AND item_id = %s"
             val = (table_id, id)
             self.cursor.execute(sql, val)
             comments_list = self.cursor.fetchall()
             for i in range(len(comments_list)):
-                comments_list[i] = self.tupleToDict(comments_list[i], COMMENT_KEY)
-                del comments_list[i]['class']
-                del comments_list[i]['content_id']
-                sql = "SELECT user_name FROM user WHERE id = %s"
-                val = (comments_list[i]['from_user_id'],)
-                self.cursor.execute(sql, val)
-                comments_list[i]['user'] = self.cursor.fetchone()[0]
+                comments_list[i] = self.tupleToDict(comments_list[i], BASIC_ITEM_COMMENT_KEY)
+                del comments_list[i]['id']
                 comments_list[i]['time'] = comments_list[i]['time'].strftime("%Y-%m-%d %H:%M:%S")
-                comments_list[i]['likes'] = comments_list[i]['like_count']
-                del comments_list[i]['like_count']
                 comments_list[i]['comment_numbers'] = comments_list[i]['lower_comment_count']
                 del comments_list[i]['lower_comment_count']
             item['recommendations'] = comments_list
@@ -295,15 +303,16 @@ class MySQLDb:
 
     def addComment(self, comment_info):
         """
-        进入之前要判断对应的content_id, from_user_id, upper_comment_id是否合理
+        进入之前要判断对应的item_id, user, upper_comment_id是否合理
         :param comment_info:{
             "class":,
             "table":,(class对应的表名)
-            "content_id":,
-            "from_user_id":,
+            "item_id":,
+            "user":,
             "upper_comment_id":,
             "star":,
-            "text":
+            "text":,
+            "image":
         }
         :return:
         """
@@ -325,12 +334,26 @@ class MySQLDb:
             # 数据表内容更新
             self.connection.commit()
             # 更新其他表相应的值
-            sql = "UPDATE " + comment_info['table'] + " SET rate = (rate * comment_count + %s) / (comment_count + 1), comment_count = comment_count + 1 WHERE id = %s"
-            val = (comment_info['star'], comment_info['content_id'])
+            sql = "UPDATE " + comment_info['table'] + " SET score = (score * comment_count + 2 * %s) / (comment_count + 1), comment_count = comment_count + 1 WHERE id = %s"
+            val = (comment_info['star'], comment_info['item_id'])
             self.cursor.execute(sql, val)  # 补上heat的更新
+            self.connection.commit()
 
-            sql = "UPDATE user SET comment_count = comment_count + 1 WHERE id = %s"
-            val = (comment_info['from_user_id'],)
+            sql = "SELECT score FROM " + comment_info['table'] + " WHERE id = %s"
+            val = (comment_info['item_id'], )
+            self.cursor.execute(sql, val)
+            score = self.cursor.fetchone()[0]
+            if score - int(score) >= 0.5:
+                score = int(score) + 1
+            else:
+                score = int(score)
+            star = score / 2
+            sql = "UPDATE " + comment_info['table'] + " SET star = %s WHERE id = %s"
+            val = (star, comment_info['item_id'])
+            self.cursor.execute(sql, val)
+
+            sql = "UPDATE user SET comment_count = comment_count + 1 WHERE user_name = %s"
+            val = (comment_info['user'],)
             self.cursor.execute(sql, val)
 
             if comment_info['upper_comment_id'] != 0:
@@ -345,6 +368,183 @@ class MySQLDb:
             # 回滚所有更改
             self.connection.rollback()
             return False
+
+    def addLike(self, user, comment_id):
+        """
+        :param comment_class: 评论所属的模块, 1,2,3
+        :param user: 用户名
+        :param comment_id: 评论的id
+        :return:
+        """
+        try:
+            sql = "INSERT INTO user_like ("
+            sql += self.getKeysStr(INSERT_LIKE_KEY) + ") VALUES " + self.producePlaceHolder(len(INSERT_LIKE_KEY))
+            time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            val = (user, comment_id, time)
+            # 写入新数据
+            self.cursor.execute(sql, val)
+            # 数据表内容更新
+            self.connection.commit()
+            # 更新其他表相应的值
+            sql = "UPDATE comment SET likes = likes + 1 WHERE id = %s"
+            val = (comment_id, )
+            self.cursor.execute(sql, val)
+
+            sql = "UPDATE user SET like_count = like_count + 1 WHERE user_name = %s"
+            val = (user, )
+            self.cursor.execute(sql, val)
+
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (addLike)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
+    def delLike(self, user, comment_id):
+        """
+        删除点赞
+        :param user: 用户名
+        :param comment_id: 评论id
+        :return: bool
+        """
+        try:
+            # 删除数据
+            sql = "DELETE FROM user_like WHERE comment_id = %s AND user = %s"
+            val = (comment_id, user)
+            self.cursor.execute(sql, val)
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (delLike)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
+    def checkCommentLiked(self, user, comment_id):
+        """
+        检查用户是否点赞过某个评论
+        :param user: 用户名
+        :return: bool
+        """
+        try:
+            # 获得相应评论
+            sql = "SELECT * FROM user_like WHERE user = %s AND comment_id = %s"
+            val = (user, comment_id)
+            self.cursor.execute(sql, val)
+            result = self.cursor.fetchone()
+            if result != None:
+                return True
+            return False
+        except Exception as e:
+            print("[Error] (checkCommentLiked)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
+    def getUserCommentList(self, user):
+        """
+        获得用户所有的评论
+        :param user: 用户名
+        :return: comment列表[{
+            user:,
+            star:,
+            time:,
+            likes:,
+            text:,
+            image:,
+            class:,
+            item_id:
+        }]
+        """
+        try:
+            # 获得相应评论
+            sql = "SELECT * FROM comment WHERE user = %s"
+            val = (user, )
+            self.cursor.execute(sql, val)
+            comments_list = self.cursor.fetchall()
+            for i in range(len(comments_list)):
+                comments_list[i] = self.tupleToDict(comments_list[i], COMMENT_KEY)
+                del comments_list[i]['id']
+                comments_list[i]['time'] = comments_list[i]['time'].strftime("%Y-%m-%d %H:%M:%S")
+                del comments_list[i]['lower_comment_count']
+                del comments_list[i]['upper_comment_id']
+            return comments_list, True
+        except Exception as e:
+            print("[Error] (getUserCommentList)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return None, False
+
+    def getUserLikeCommentList(self, user):
+        """
+        获得用户所有的评论
+        :param user: 用户名
+        :return: comment列表[{
+            user:,
+            star:,
+            time:,
+            likes:,
+            text:,
+            image:,
+            class:,
+            item_id:
+        }]
+        """
+        try:
+            # 获得相应评论id
+            sql = "SELECT comment_id FROM user_like WHERE user = %s"
+            val = (user,)
+            self.cursor.execute(sql, val)
+            comment_id_list = self.cursor.fetchall()
+            # 获得相应评论
+            sql = "SELECT * FROM comment WHERE id = %s"
+            comments_list = []
+            for id in comment_id_list:
+                self.cursor.execute(sql, id)
+                comments_list.append(self.cursor.fetchone())
+            for i in range(len(comments_list)):
+                comments_list[i] = self.tupleToDict(comments_list[i], COMMENT_KEY)
+                del comments_list[i]['id']
+                comments_list[i]['time'] = comments_list[i]['time'].strftime("%Y-%m-%d %H:%M:%S")
+                del comments_list[i]['lower_comment_count']
+                del comments_list[i]['upper_comment_id']
+            return comments_list, True
+        except Exception as e:
+            print("[Error] (getUserLikeCommentList)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return None, False
+
+    def checkItemCommented(self, user, item_class, item_id):
+        """
+        检查用户是否评论过某个item
+        :param user: 用户名
+        :param item_class: 所属模块
+        :param item_id: id
+        :return: 相应评论
+        """
+        try:
+            # 获得相应评论
+            sql = "SELECT * FROM comment WHERE class = %s AND item_id = %s AND user = %s"
+            val = (item_class, item_id, user)
+            self.cursor.execute(sql, val)
+            raw_comment = self.cursor.fetchone()
+            comment = self.tupleToDict(raw_comment, COMMENT_KEY)
+            if comment != None:
+                comment['time'] = comment['time'].strftime("%Y-%m-%d %H:%M:%S")
+                return comment, True
+            return None, False
+        except Exception as e:
+            print("[Error] (checkItemCommented)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return None, False
+
+    # ==========后为功能性函数
 
     def tupleToDict(self, tuple, key_list):
         # 将元组转化为字典

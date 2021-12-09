@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
-from services.mail_service import send_feedback_email
+from services.comment_service import getCommentsByName
 from services.mysql_service import db
+from services.id_to_name_service import getNameByID
 from headers import *
+from services.code_service import coder
+import json
 
 bp = Blueprint(
     'comment',
@@ -10,43 +13,43 @@ bp = Blueprint(
     # template_folder='../templates'
 )
 
-
+# 添加评论
 @bp.route('/api/v1.0/add_comment', methods=['POST'])
 def addComment():
     try:
-
         comment = request.get_json()
         """
-        comment = {
-            'text': str,
-            'star': int,
-            'imageurls': list of str,
-            'time': date_time
-        }
-        """
-        print('gg')
-        db.addContent('comment ', comment)
-        return '评论成功'       
+comment = {
+    "user": str,
+    "text": str,
+    "imageurls": list of str,
+}
+{
+    "user": "zbw",
+    "text": "good!",
+    "imageurls": ["thurec.xyz/static/efaIZYWqFoyH3c3ee2488ab73f783cefd929f008c8fc.png"]
+}
+        """ 
+        comment['image'] = json.dumps(comment['imageurls']) # 将url列表转换为字符串保存。
+        db.addComment(comment) #TODO
+        return '添加成功'
 
     except KeyError:
-        print("26======")
         return jsonify({'state': BAD_ARGUMENTS}), 400
 
-@bp.route('/api/v1.0/get_comment', methods=['POST', 'GET'])
-def getComment():
+# 获取用户历史评论
+@bp.route('/api/v1.0/get_comment_by_id', methods=['POST'])
+def get_comment_by_id():
     try:
-
-        # user_info = request.get_json()
-        # print(user_info)
-        # user_text = user_info['user_text']
-        # images_url = user_info['text']
-        # user_info['star']
-        print('gg')
-        # send_feedback_email(user_info['user_text'], user_info['email'])
-        
-        return '获取评论'
+        info = request.get_json()
+        id = coder.decode(info['mask'])
+        # print(id)
+        user_name = getNameByID(id)
+        # print(user_name)
+        comments = getCommentsByName(user_name, info['offset'], info['size']) #TODO
+        # commentList = [{"id": 5, "user": "zbw"}, {"id": 5, "user": "zxl"}]
+        return jsonify({'state': int(info['size'] != len(comments)), 'comments': comments})
 
     except KeyError:
-        print("26======")
-        return jsonify({'state': BAD_ARGUMENTS}), 400
+        return jsonify({'state': 2}), 400
 

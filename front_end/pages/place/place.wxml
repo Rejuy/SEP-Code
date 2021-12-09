@@ -1,4 +1,5 @@
 <view>
+    <van-search value="{{ search_value }}" bind:search="onSearch" background="#82318E" placeholder="请输入搜索关键词"></van-search>
     <van-dropdown-menu active-color="#1989fa" :color="red">
         <van-dropdown-item value="{{ range_value }}" options="{{ range_type }}"/>
         <van-dropdown-item value="{{ place_value }}" options="{{ place_type }}" />

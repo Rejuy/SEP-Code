@@ -14,6 +14,7 @@ Page({
             { text: '热度排序', value: 1 },
             { text: '时间排序', value: 2 },
         ],
+        search_value: '',
         range_value: 0,
         food_value: 0,
         rank_value: 0,
@@ -25,6 +26,12 @@ Page({
             { id: 1, name: '汉堡王', position: '海淀区华清嘉园7号楼', range: '校外餐饮', type: '汉堡披萨', star: 4.0, score: 8.3, tag: 'TOP15', color: '#FF976A'}, 
             { id: 2, name: '李先生牛肉面大王', position: '海淀区双清苑1号楼', range: '校外餐饮', type: '米线拉面', star: 4.0, score: 8.0, tag: '', color: '#EE0A24'},             
         ]
+    },
+
+    onSearch: function(result) {
+        this.setData({
+            search_value: result.detail
+        });
     },
 
     rangeSelected: function(result) {

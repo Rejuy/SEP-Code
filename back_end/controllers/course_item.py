@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
-from services.course_item_service import getCourseItem
+from services.course_service import getCourseItem
 from headers import *
 
 
@@ -10,6 +10,7 @@ bp = Blueprint(
     # template_folder='../templates'
 )
 
+# 获取单个课程信息
 
 @bp.route('/api/v1.0/get_course_item', methods=['POST'])
 def courseItem():
