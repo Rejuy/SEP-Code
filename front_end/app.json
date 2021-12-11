@@ -1,6 +1,6 @@
 {
   "pages": [    
-    "pages/food_item/food_item",
+    "pages/place_item/place_item",
     
     "pages/index/index",
     
@@ -17,7 +17,7 @@
     "pages/user/user",
     
     "pages/course_item/course_item",
-    "pages/place_item/place_item"
+    "pages/food_item/food_item"
   ],
   "window": {
     "backgroundTextStyle": "light",
