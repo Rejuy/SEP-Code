@@ -68,8 +68,8 @@
     
     <view class="comments">
         <view class="comments_title">
-            <text class="comments_title_left">评论区：</text>
-            <van-button class="comments_title_right" size="small" icon="add-o" type="info" block>写点什么</van-button>
+            <text class="left_side">评论区：</text>
+            <van-button class="right_side" size="small" icon="add-o" type="info" block>写点什么</van-button>
         </view>
 
         <view class="content">

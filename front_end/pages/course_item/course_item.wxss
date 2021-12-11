@@ -117,7 +117,7 @@ van-button .van-button--info .van-button__text {
     justify-content: space-between;
 }
 
-.comments .comments_title .comments_title_left{
+.comments .comments_title .left_side {
     font-weight: bold;
     padding-left: 10rpx;
     font-family: 'Courier New', Courier, monospace;
