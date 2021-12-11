@@ -22,19 +22,10 @@ Page({
         ]
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function (options) {
         this.setData({
             loading: false,
         })
-        // wx.loadFontFace({
-        //     family: 'Lucida Calligraphy',
-        //     source: 'url("https://thurec.xyz/static/LucidaUnicodeCalligraphy.ttf")',
-        //     success: console.log('font success'),
-        //     fail: console.log('font fail')
-        //   })
     },
 
     giveLikes: function (options) {

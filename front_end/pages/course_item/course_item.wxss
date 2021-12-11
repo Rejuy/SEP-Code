@@ -25,7 +25,7 @@ van-button .van-button--info .van-button__text {
     padding-bottom: 20rpx;
 }
 
-.information_title {
+.header_title {
     font-weight: bold;
     padding-left: 10rpx;
     font-family: 'Courier New', Courier, monospace; 

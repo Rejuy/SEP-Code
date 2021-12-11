@@ -1,6 +1,7 @@
 {
   "pages": [    
-    "pages/course_item/course_item",
+    "pages/food_item/food_item",
+    
     "pages/index/index",
     
     "pages/login/login",
@@ -15,7 +16,7 @@
     "pages/notice/notice",
     "pages/user/user",
     
-    "pages/food_item/food_item",
+    "pages/course_item/course_item",
     "pages/place_item/place_item"
   ],
   "window": {

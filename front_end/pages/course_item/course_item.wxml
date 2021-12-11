@@ -3,7 +3,7 @@
         <image src="{{ image_url }}"></image>
     </view>
 
-    <text class="information_title">课程信息：</text>
+    <text class="header_title">课程信息：</text>
 
     <view class="header">
         <view class="information">
