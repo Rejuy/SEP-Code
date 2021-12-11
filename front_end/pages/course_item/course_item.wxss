@@ -150,7 +150,8 @@ van-button .van-button--info .van-button__text {
 
 .comments .content .user_evaluation {
     display: flex;
-    margin-top: -20rpx;
+    margin-top: -25rpx;
+    margin-bottom: 10rpx;
 }
 
 .comments .content .user_evaluation van-rate {
@@ -183,7 +184,7 @@ van-button .van-button--info .van-button__text {
     font-size: 35rpx;
     padding-right: 2rpx;
     padding-left: 110rpx;
-    padding-bottom: 30rpx;
+    padding-bottom: 20rpx;
     border-bottom: 2rpx solid #EAEAEA;
     font-family: 'Courier New', Courier, monospace;
 }
