@@ -1,3 +1,20 @@
+van-button {
+    padding-right: 2rpx;
+    padding-bottom: 4rpx;
+}
+
+van-button .van-button--info {
+    display: flex;
+}
+
+van-button .van-button--info .van-button__icon {
+    font-size: 30rpx;
+}
+
+van-button .van-button--info .van-button__text {
+    font-size: 30rpx;
+}
+
 .images {
     text-align: center;
     justify-content: space-between; 
@@ -94,6 +111,13 @@
 }
 
 .comments .comments_title {
+    display: flex;
+    margin-bottom: 4rpx;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.comments .comments_title .comments_title_left{
     font-weight: bold;
     padding-left: 10rpx;
     font-family: 'Courier New', Courier, monospace;
@@ -164,22 +188,6 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
-
 .comments .content .user_text .unfold {
     display: inline;
-}
-
-van-button .van-button--info {
-    width: 99%;
-    margin-left: 4rpx;
-    margin-top: 20rpx;
-    margin-bottom: 20rpx;
-}
-
-van-button .van-button--info .van-button__icon {
-    font-size: 40rpx;
-}
-
-van-button .van-button--info .van-button__text {
-    font-size: 40rpx;
 }

@@ -67,7 +67,10 @@
     </view>
     
     <view class="comments">
-        <text class="comments_title">评论区：</text>
+        <view class="comments_title">
+            <text class="comments_title_left">评论区：</text>
+            <van-button class="comments_title_right" size="small" icon="add-o" type="info" block>写点什么</van-button>
+        </view>
 
         <view class="content">
             <van-skeleton wx:for="{{ comment_list }}" wx:key="id" title avatar row="3" loading="{{ loading }}">
@@ -91,8 +94,8 @@
         </view>
     </view>
 
-    <van-button icon="add-o" type="info" block>
+    <!-- <van-button icon="add-o" type="info" block>
         写点什么
-    </van-button>
+    </van-button> -->
 </view>
 
