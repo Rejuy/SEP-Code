@@ -33,7 +33,6 @@
             <view class="average_score">
                 7.3
             </view>
-
             <van-rate 
             allow-half 
             size="40rpx" 
@@ -42,7 +41,6 @@
             void-color="#eee"
             void-icon="star" 
             readonly value="3.5" />
-           
             <text>评级</text>
             <view class="statistics">
                 <text>差评</text>
@@ -81,19 +79,18 @@
                 <view class="user_evaluation">
                     <van-rate readonly allow-half size="40rpx" gutter="0rpx" void-color="#eee" void-icon="star" value="{{ item.star }}"/>
                     <text>{{ item.date }}</text>
-                    <van-icon name="good-job" bindtap="giveLikes"/>
+                    <van-icon name="good-job" bindtap="giveLikes"style="display: inline;"/>
                     <text style="color:#000000; padding-left: 10rpx;">{{ item.likes }}</text>
                 </view>
 
                 <view class="user_text">
-                    <text>
-                        {{ item.brief_text }}
-                    </text>
+                    <text style="display: inline;">{{ item.brief_text }}</text>
                     <text class="unfold" wx:if="{{ ! item.complete }}" style="color: #3377AA; font-weight: bold;" bindtap="viewDetails">[展开]</text>
                 </view>
             </van-skeleton>
         </view>
     </view>
+
     <van-button icon="add-o" type="info" block>
         写点什么
     </van-button>
