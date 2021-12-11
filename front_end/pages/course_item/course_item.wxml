@@ -94,5 +94,8 @@
             </van-skeleton>
         </view>
     </view>
+    <van-button icon="add-o" type="info" block>
+        写点什么
+    </van-button>
 </view>
 

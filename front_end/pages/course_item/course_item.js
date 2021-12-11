@@ -29,6 +29,12 @@ Page({
         this.setData({
             loading: false,
         })
+        // wx.loadFontFace({
+        //     family: 'Lucida Calligraphy',
+        //     source: 'url("https://thurec.xyz/static/LucidaUnicodeCalligraphy.ttf")',
+        //     success: console.log('font success'),
+        //     fail: console.log('font fail')
+        //   })
     },
 
     giveLikes: function (options) {
