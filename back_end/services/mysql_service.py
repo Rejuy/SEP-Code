@@ -253,6 +253,7 @@ class MySQLDb:
                 value: ...
                 }
             ]
+            like: (str)
             sort_order: (str)
             sort_criteria: (str)
             index_begin:
@@ -272,6 +273,21 @@ class MySQLDb:
                     for i in range(1, len(info['filter'])):
                         sql += " and " + info['filter'][i]['key'] + " = %s "
                         val += (info['filter'][i]['value'], )
+                # 判断是否要模糊匹配
+                if info['like'] != "":
+                    sql += " AND ("
+                    if table == "course_list":
+                        sql += "teacher LIKE '%" + info['like'] + "%') "
+                    else:
+                        sql += "position LIKE '%" + info['like'] + "%') "
+            else:
+                # 判断是否要模糊匹配
+                if info['like'] != "":
+                    sql += " WHERE (name LIKE '%" + info['like'] + "%' OR "
+                    if table == "course_list":
+                        sql += "teacher LIKE '%" + info['like'] + "%') "
+                    else:
+                        sql += "position LIKE '%" + info['like'] + "%') "
             # 判断是否需要排序，若是则加上排序部分sql语句
             if info['sort_order'] != "not_sort":
                 sql += " order by " + info['sort_criteria'] + " "

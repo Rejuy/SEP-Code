@@ -30,10 +30,11 @@ if __name__ == "__main__":
     # 执行语句
     #mycursor.execute(sql, val)
     #mydb.commit()
-    sql = "UPDATE course_list SET comment_count = 1, credit = 2, heat = 0 WHERE id = 1"
-
+    #sql = "UPDATE course_list SET comment_count = 1, credit = 2, heat = 0 WHERE id = 1"
+    sql = "SELECT * FROM place_list WHERE star = 4 AND (name LIKE '%教室%' OR position LIKE '%教室%')"
+    val = ('%清声细语%', )
     mycursor.execute(sql)
-    mydb.commit()
+    print(mycursor.fetchall())
     """
     mycursor.execute("alter table destination_content default character set utf8")
     mycursor.execute("alter table destination_content change name name varchar(255) character set utf8")
