@@ -3,7 +3,7 @@ import json
 
 def getCommentsByName (user_name, offset, size):
     info = {
-        'key_list': ['user', 'text', 'image', 'time', 'likes', 'item_id'],
+        'key_list': ['user', 'text', 'image', 'star', 'time', 'likes', 'item_id'],
         'filter': [{'key': 'user', 'value': user_name}],
         'sort_order': 'not_sort',
         'index_begin': offset,
