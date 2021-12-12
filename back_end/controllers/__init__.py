@@ -13,7 +13,9 @@ from controllers import (
     places_list,
     place_item,
     foods_list,
-    food_item
+    food_item,
+    like,
+    collection
 )
 
 blueprints = [
@@ -29,5 +31,7 @@ blueprints = [
     places_list.bp,
     place_item.bp,
     foods_list.bp,
-    food_item.bp
+    food_item.bp,
+    like.bp,
+    collection.bp
 ]
