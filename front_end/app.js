@@ -16,6 +16,6 @@ App({
     */
   },
   logout: function(){
-    app.global_user_token = ""
+    this.global_user_token = ""
   }
 });
