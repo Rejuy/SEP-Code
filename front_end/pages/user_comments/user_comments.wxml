@@ -1,2 +1,4 @@
 <!--pages/user_comments/user_comments.wxml-->
-<comment is_self="{{true}}" user_icon="{{user_icon_path}}" />
+<view wx:for="{{comment_list}}" wx:key="index">
+  <comment is_self="{{true}}" user_icon="{{user_icon_path}}" title="{{item.item_title}}" text="{{item.text}}" imageurls="{{item.image}}" rate="{{item.star}}" likes="{{item.likes}}" />
+</view>

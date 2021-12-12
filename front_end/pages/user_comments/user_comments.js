@@ -1,8 +1,9 @@
 Page({
-
   data: {
     loading: true,
-    user_icon_path : "",
+    user_icon_path: "",
+    comment_list: [],
+    num_comment: 0,
   },
 
   onReady: function () {
@@ -33,6 +34,23 @@ Page({
           this.setData({
             loading: false,
             username: user_data.user_name,
+            num_comment: user_data.comment_count,
+          })
+          wx.request({
+            url: app.global_data.global_domain + '/api/v1.0/get_comment_by_id',
+            method: "POST",
+            data: {
+              mask: app.global_data.global_user_token,
+              offset: 0,
+              size: this.data.num_comment
+            },
+            success: (res) => {
+              console.log(this.data.comment_list);
+              this.setData({
+                comment_list: res.data.comments
+              })
+              console.log(this.data.comment_list);
+            }
           })
         }
       }

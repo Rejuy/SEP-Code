@@ -86,6 +86,7 @@ Page({
       },
       method: "POST",
       success: (res) => {
+        console.log(res.data);
         if (res.data.state === 0) {
           const user_data = res.data.user;
           this.setData({
@@ -95,6 +96,8 @@ Page({
             email: user_data.email,
             account_birth: user_data.account_birth.slice(0, -12),
             like_count: user_data.like_count,
+            comment_count: user_data.comment_count,
+            collection_count: user_data.collection_count,
           })
         }
       }

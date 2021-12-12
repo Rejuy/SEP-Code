@@ -1,22 +1,60 @@
 Component({
-  properties:{
+  properties: {
     user: String, // url link
     user_icon: String, // url link
+    title: String,
     text: String, // 评论
-    "imageurls": Array, 
+    rate: Number, // rating
+    likes: Number,
+    "imageurls": Array,
     is_self: Boolean, // 评论是自己的?
   },
-  data:{
-    tag: ""
+  data: {
+    tag: "",
+    show_text: "",
+    show_imageurls: [],
+    show_all: false,
+
+    breif_max_text_size: 50,
+    breif_max_img_len: 1,
+
+    text_length: 0,
+    image_num: 0,
+    show_hide_button: false,
   },
-  lifetimes: {
-    ready(){
-      if (this.properties.is_self){
+  methods: {
+    show_hide: function () {
+      if (!this.data.show_all) {
+        // show all now
         this.setData({
-          tag:"自己",
-          text: "Description dksfjlaksdjflk sajdfklsaj dlfasjdflkdsajflkasjflkasjd sakd fa skjf alks jflksaj dflkdsjf lsakd ksdjf salkjdfkls jdlkasjdlkfjsd lkfsjl sjkdflksaj flksajdflksjdflkasjldkfjslkdfdk jsak fksjlaksdjskjdf al lk dfjla jsljlk. ksadjflksadjlfk jaklds jflksaj dflksdajf lksadjfklsajdflksjdflksjdflksjdflksjdflksjdflkj lfksjdlkf jlskdjf lksa jf lkdjf lkj lkj fslkdfsajlkdfsajsdf lkj fsalsf l."
+          show_text: this.properties.text,
+          show_imageurls: this.properties.imageurls,
+        })
+      } else {
+        this.setData({
+          show_text: this.properties.text.substring(0, this.data.breif_max_text_size),
+          show_imageurls: this.properties.imageurls.slice(0, this.data.breif_max_img_len),
         })
       }
+      this.setData({
+        show_all: !this.data.show_all
+      })
+    }
+  },
+  lifetimes: {
+    ready() {
+      if (this.properties.is_self) {
+        this.setData({
+          tag: "自己",
+        })
+      }
+      this.setData({
+        show_text: this.properties.text.substring(0, this.data.breif_max_text_size),
+        show_imageurls: this.properties.imageurls.slice(0, this.data.breif_max_img_len),
+        text_length: this.properties.text.length,
+        image_num: this.properties.imageurls.length,
+        show_hide_button: (this.properties.text.length > this.data.breif_max_text_size) || (this.properties.imageurls.length > this.data.breif_max_img_len)
+      })
     }
   }
 })
