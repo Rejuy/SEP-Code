@@ -2,7 +2,7 @@
 <view class="container">
   <van-skeleton title avatar row="3" loading="{{ loading }}">
     <view class="img_container">
-      <van-image round class="img" width="75px" height="75px" fit="fill" src="{{user_icon_path}}" bindtap="choose_icon" />
+      <van-image radius="10px" class="img" width="100px" height="100px" fit="fill" src="{{user_icon_path}}" bindtap="choose_icon" />
     </view>
     <view class="box" />
     <van-cell-group title="用户信息">

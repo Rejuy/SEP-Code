@@ -1,2 +1,2 @@
 <!--pages/user_comments/user_comments.wxml-->
-<comment is_self="{{true}}" />
+<comment is_self="{{true}}" user_icon="{{user_icon_path}}" />

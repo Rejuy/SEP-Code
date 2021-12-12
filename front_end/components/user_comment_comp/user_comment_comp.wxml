@@ -1,15 +1,14 @@
 <!--components/user_comment_comp/user_comment_comp.wxml-->
-<van-card tag="{{tag}}" thumb="/images/icons/empty_user.png">
+<van-card tag="{{tag}}" thumb="{{user_icon}}" thumb-mode="fill">
   <view slot="title">
     Title
   </view>
   <view slot="desc">
-    Description
+    {{text.substring(0, 100)}}
   </view>
   <view slot="num">
-    <van-button size="mini">展开</van-button>
   </view>
   <view slot="price">
-    price
+    <van-button size="mini">展开</van-button>
   </view>
 </van-card>
