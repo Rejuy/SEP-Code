@@ -43,5 +43,5 @@
     <view class="block" style="height: 100rpx" />
 </view>
 
-<tabbar current_page="course" is_login="{{true}}" />
+<tabbar current_page="course" is_login="{{ true }}" />
 
