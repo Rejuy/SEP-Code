@@ -1,3 +1,20 @@
+van-button {
+    padding-right: 2rpx;
+    padding-bottom: 4rpx;
+}
+
+van-button .van-button--info {
+    display: flex;
+}
+
+van-button .van-button--info .van-button__icon {
+    font-size: 30rpx;
+}
+
+van-button .van-button--info .van-button__text {
+    font-size: 30rpx;
+}
+
 .images {
     text-align: center;
     justify-content: space-between; 
@@ -8,10 +25,10 @@
     padding-bottom: 20rpx;
 }
 
-.information_title {
+.header_title {
     font-weight: bold;
     padding-left: 10rpx;
-    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;   
+    font-family: 'Courier New', Courier, monospace; 
 }
 
 .header {
@@ -41,13 +58,13 @@
 .header .information .attribute .attribute_name {
     color: #666666;
     font-size: 80%;
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .header .information .attribute .attribute_value {
     color: #111111;
     font-weight: 600;
-    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .header .score {
@@ -65,6 +82,7 @@
 
 .header .score van-rate {
     float: right;
+    margin-top: 3rpx;
 }
 
 .header .score .statistics {
@@ -77,24 +95,32 @@
     padding: 5rpx 0rpx 8rpx 0rpx;
     font-size: smaller;
     font-weight: bold;
-    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;    
+    font-family: 'Courier New', Courier, monospace;  
 }
 
 .header .score .statistics van-progress {
     width: 70%;
-    padding-top: 16rpx;
+    padding-top: 22rpx;
 }
 
 .comments {
     width: 99%;
     margin-left: 4rpx;
     padding-top: 20rpx;
+    margin-bottom: 20rpx;
 }
 
 .comments .comments_title {
+    display: flex;
+    margin-bottom: 4rpx;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.comments .comments_title .left_side {
     font-weight: bold;
     padding-left: 10rpx;
-    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .comments .content {
@@ -112,10 +138,10 @@
 
 .comments .content .user_info text {
     font-weight: bold;
-    padding-top: 30rpx;
+    padding-top: 28rpx;
     padding-left: 0rpx;
     padding-right: 20rpx;
-    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;       
+    font-family: 'Courier New', Courier, monospace;      
 }
 
 .comments .content .user_info van-icon {
@@ -124,17 +150,20 @@
 
 .comments .content .user_evaluation {
     display: flex;
-    margin-top: -30rpx;
+    margin-top: -25rpx;
+    margin-bottom: 10rpx;
 }
 
 .comments .content .user_evaluation van-rate {
-    padding-left: 110rpx;
+    display: inline;
+    padding-left: 105rpx;
 }
 
 .comments .content .user_evaluation text {
+    display: inline;
     color:#696969;
     padding-left: 20rpx;
-    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;    
+    font-family: 'Courier New', Courier, monospace;   
 }
 
 .comments .content .user_evaluation van-icon {
@@ -151,16 +180,15 @@
 }
 
 .comments .content .user_text {
+    text-align: justify;
     font-size: 35rpx;
     padding-right: 2rpx;
-    padding-left: 116rpx;
-    padding-bottom: 30rpx;
+    padding-left: 110rpx;
+    padding-bottom: 20rpx;
     border-bottom: 2rpx solid #EAEAEA;
-    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .comments .content .user_text .unfold {
-    float: right;
-    margin-right: 4rpx;
-    margin-top: -38rpx;
+    display: inline;
 }

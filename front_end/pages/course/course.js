@@ -69,6 +69,7 @@ Page({
             { text: '热度排序', value: 1 },
             { text: '时间排序', value: 2 },
         ],
+
         search_value: '',
         department_value: 0,
         course_value: 0,
@@ -78,6 +79,8 @@ Page({
 
         current_page: 0,
         total_pages: 0,
+        show_popup: false,
+
         courses_list: [
             { id: 1, name: '软件工程', teacher: '刘强', department: '软件学院', type: '专业课', star: 5.0, score: 10.0, tag: 'TOP1', color: '#228B22'},
             { id: 2, name: '概率论与数理统计', teacher: '梁恒', department: '数学系', type: '数理课', star: 4.0, score: 8.1, tag: '', color: '#000000'},
@@ -105,6 +108,18 @@ Page({
         this.setData({
             search_value: result.detail
         });
+    },
+
+    closePopup: function() {
+        this.setData({
+            show_popup: false
+        });
+    },
+
+    publishRecommendation: function() {
+        this.setData({
+            show_popup: true
+        })
     },
 
     courseTypeSelected: function(result) {
@@ -164,6 +179,7 @@ Page({
           }, complete: (res) => {},
         })
     },
+
     /**
      * 生命周期函数--监听页面加载
      */

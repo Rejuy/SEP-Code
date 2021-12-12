@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "search_box": "/components/search_box/search",
-    "van-divider": "@vant/weapp/divider/index"
+    "van-divider": "@vant/weapp/divider/index",
+    "van-empty": "@vant/weapp/empty/index"
   }
 }

@@ -4,11 +4,11 @@ Page({
     swiper_data: [{
         id: 1,
         url: "../notice/notice",
-        path: "../../images/swiper/notice.png"
+        path: "https://s3.bmp.ovh/imgs/2021/12/8cc8d6aa502879af.jpg"
       },{
-        id:2,
+        id: 2,
         url: "../notice/notice",
-        path: "../../images/swiper/topic.png"
+        path: "https://s3.bmp.ovh/imgs/2021/12/d4d723c1a40f1385.jpg"
       }
     ]
   },

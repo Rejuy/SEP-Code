@@ -1,1 +1,194 @@
-/* pages/food_item/food_item.wxss */
+van-button {
+    padding-right: 2rpx;
+    padding-bottom: 4rpx;
+}
+
+van-button .van-button--info {
+    display: flex;
+}
+
+van-button .van-button--info .van-button__icon {
+    font-size: 30rpx;
+}
+
+van-button .van-button--info .van-button__text {
+    font-size: 30rpx;
+}
+
+.images {
+    text-align: center;
+    justify-content: space-between; 
+}
+
+.images image {
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+}
+
+.header_title {
+    font-weight: bold;
+    padding-left: 10rpx;
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+.header {
+    width: 99%;
+    margin-left: 4rpx;
+    display: inline-flex;
+    border: 2rpx solid black;
+}
+
+.header .information {
+    width: 59%;
+    padding: 10rpx 0 10rpx 10rpx;
+}
+
+.header .information .attribute {
+    width: 100%;
+}
+
+.header .information .tags {
+    display: flex;
+}
+
+.header .information .tags van-tag {
+    padding-right: 16rpx;
+}
+
+.header .information .attribute .attribute_name {
+    color: #666666;
+    font-size: 80%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.header .information .attribute .attribute_value {
+    color: #111111;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.header .score {
+    width: 41%;
+    padding-top: 10rpx;
+    border-left: 2rpx solid #EAEAEA;
+}
+
+.header .score .average_score {
+    color: #EE0A24;
+    font-weight: bold;
+    text-align: center;
+    justify-content: space-between; 
+}
+
+.header .score van-rate {
+    float: right;
+    margin-top: 3rpx;
+}
+
+.header .score .statistics {
+    display: flex;
+}
+
+.header .score text {
+    width: 30%;
+    display: block;
+    padding: 5rpx 0rpx 8rpx 0rpx;
+    font-size: smaller;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;  
+}
+
+.header .score .statistics van-progress {
+    width: 70%;
+    padding-top: 22rpx;
+}
+
+.comments {
+    width: 99%;
+    margin-left: 4rpx;
+    padding-top: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.comments .comments_title {
+    display: flex;
+    margin-bottom: 4rpx;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.comments .comments_title .left_side {
+    font-weight: bold;
+    padding-left: 10rpx;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.comments .content {
+    border: 2rpx solid black;
+    padding-bottom: 2rpx;
+}
+
+.comments .content van-skeleton {
+    height: 100%;
+}
+
+.comments .content .user_info {
+    display: flex;
+}
+
+.comments .content .user_info text {
+    font-weight: bold;
+    padding-top: 28rpx;
+    padding-left: 0rpx;
+    padding-right: 20rpx;
+    font-family: 'Courier New', Courier, monospace;      
+}
+
+.comments .content .user_info van-icon {
+    padding: 20rpx 20rpx;
+}
+
+.comments .content .user_evaluation {
+    display: flex;
+    margin-top: -25rpx;
+    margin-bottom: 10rpx;
+}
+
+.comments .content .user_evaluation van-rate {
+    display: inline;
+    padding-left: 105rpx;
+}
+
+.comments .content .user_evaluation text {
+    display: inline;
+    color:#696969;
+    padding-left: 20rpx;
+    font-family: 'Courier New', Courier, monospace;   
+}
+
+.comments .content .user_evaluation van-icon {
+    margin-top: -5rpx;
+    padding-left: 30rpx;
+}
+
+.comments .content .user_evaluation van-rate .van-rate__item van-icon{
+    padding: 0rpx 0rpx;
+}
+
+.comments .content van-skeleton .van-skeleton {
+    padding: var(--skeleton-padding, 20rpx 20rpx);
+}
+
+.comments .content .user_text {
+    text-align: justify;
+    font-size: 35rpx;
+    padding-right: 2rpx;
+    padding-left: 110rpx;
+    padding-bottom: 20rpx;
+    border-bottom: 2rpx solid #EAEAEA;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.comments .content .user_text .unfold {
+    display: inline;
+}
