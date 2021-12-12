@@ -350,6 +350,12 @@ class MySQLDb:
                 comments_list[i]['comment_numbers'] = comments_list[i]['lower_comment_count']
                 del comments_list[i]['lower_comment_count']
             item['recommendations'] = comments_list
+            # 更新heat值
+            sql = "UPDATE " + table + " SET heat = heat + 1 WHERE id = %s"
+            val = (id,)
+            self.cursor.execute(sql, val)
+            # 数据表内容更新
+            self.connection.commit()
             return item, True
         except Exception as e:
             print("[Error] (getItem)：{}".format(e))
