@@ -5,7 +5,7 @@
   </view>
   <view slot="desc">
     <view>
-      {{show_text}} {{(!show_all && text_length > breif_max_text_size) ? "..." : ""}}
+      {{show_text}} {{(!show_all && text_length > brief_max_text_size) ? "..." : ""}}
     </view>
     <view>
       <view wx:for="{{show_imageurls}}" wx:key="index">

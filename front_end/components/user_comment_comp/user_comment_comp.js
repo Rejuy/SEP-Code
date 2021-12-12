@@ -15,8 +15,8 @@ Component({
     show_imageurls: [],
     show_all: false,
 
-    breif_max_text_size: 50,
-    breif_max_img_len: 1,
+    brief_max_text_size: 50, //const
+    brief_max_img_len: 1, //const
 
     text_length: 0,
     image_num: 0,
@@ -32,8 +32,8 @@ Component({
         })
       } else {
         this.setData({
-          show_text: this.properties.text.substring(0, this.data.breif_max_text_size),
-          show_imageurls: this.properties.imageurls.slice(0, this.data.breif_max_img_len),
+          show_text: this.properties.text.substring(0, this.data.brief_max_text_size),
+          show_imageurls: this.properties.imageurls.slice(0, this.data.brief_max_img_len),
         })
       }
       this.setData({
@@ -49,11 +49,11 @@ Component({
         })
       }
       this.setData({
-        show_text: this.properties.text.substring(0, this.data.breif_max_text_size),
-        show_imageurls: this.properties.imageurls.slice(0, this.data.breif_max_img_len),
+        show_text: this.properties.text.substring(0, this.data.brief_max_text_size),
+        show_imageurls: this.properties.imageurls.slice(0, this.data.brief_max_img_len),
         text_length: this.properties.text.length,
         image_num: this.properties.imageurls.length,
-        show_hide_button: (this.properties.text.length > this.data.breif_max_text_size) || (this.properties.imageurls.length > this.data.breif_max_img_len)
+        show_hide_button: (this.properties.text.length > this.data.brief_max_text_size) || (this.properties.imageurls.length > this.data.brief_max_img_len)
       })
     }
   }

@@ -4,6 +4,13 @@ Page({
     user_icon_path: "",
     comment_list: [],
     num_comment: 0,
+
+    loading: true,
+  },
+  back: function () {
+    wx.reLaunch({
+      url: '/pages/user/user',
+    })
   },
 
   onReady: function () {
@@ -42,14 +49,13 @@ Page({
             data: {
               mask: app.global_data.global_user_token,
               offset: 0,
-              size: this.data.num_comment
+              size: this.data.num_comment,
             },
             success: (res) => {
-              console.log(this.data.comment_list);
               this.setData({
                 comment_list: res.data.comments
               })
-              console.log(this.data.comment_list);
+              this.data.loading = false;
             }
           })
         }
