@@ -1,0 +1,13 @@
+<!--pages/user_comments/user_comments.wxml-->
+<view class="container">
+  <van-skeleton title avatar row="3" loading="{{ loading }}">
+    <view wx:for="{{comment_list}}" wx:key="index">
+      <comment is_self="{{true}}" user_icon="{{user_icon_path}}" title="{{item.item_title}}" text="{{item.text}}" imageurls="{{item.image}}" rate="{{item.star}}" likes="{{item.likes}}" />
+      <view style="height: 1rem;"></view>
+    </view>
+    <view style="height: 3.5rem;"></view>
+  </van-skeleton>
+</view>
+<van-tabbar>
+  <van-button type="primary" size="large" id="back_button" bindtap="back">返回个人中心</van-button>
+</van-tabbar>

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "comment": "/components/user_comment_comp/user_comment_comp",
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-tabbar": "@vant/weapp/tabbar/index"
+  }
+}

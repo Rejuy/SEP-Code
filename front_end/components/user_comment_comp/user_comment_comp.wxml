@@ -1,0 +1,27 @@
+<!--components/user_comment_comp/user_comment_comp.wxml-->
+<view class="container">
+  <van-card tag="{{tag}}" thumb="{{user_icon}}" thumb-mode="fill">
+    <view slot="title">
+      {{title}}
+    </view>
+    <view slot="desc">
+      <view>
+        {{show_text}} {{(!show_all && text_length > brief_max_text_size) ? "..." : ""}}
+      </view>
+      <view>
+        <view wx:for="{{show_imageurls}}" wx:key="index">
+          <van-image width="10em" height="10em" radius="1" src="{{item}}" use-loading-slot lazy-load>
+            <van-loading slot="loading" type="spinner" size="20" vertical />
+          </van-image>
+        </view>
+      </view>
+      <van-icon name="thumb-circle" color="blue" info="{{likes}}" size="2rem" style="position: absolute; top: 0; right: 0;" slot="price-top" />
+      <van-rate value="{{ rate }}" allow-half slot="num" style="position:absolute; right: 0; bottom: 0;" void-icon="star" void-color="#eee" />
+    </view>
+    <view slot="num">
+    </view>
+    <view slot="price" wx:if="{{show_hide_button}}">
+      <van-button size="mini" bindtap="show_hide">{{!show_all ? "展开" : "收起"}}</van-button>
+    </view>
+  </van-card>
+</view>
