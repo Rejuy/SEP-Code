@@ -54,7 +54,44 @@ class MySQLDb:
     def delComment(self, key, val):
         # 不同方式删除用户（指定键值）
         try:
+            # 首先获取信息
+            info, flag = self.getData("comment", [key], [val], ["id", "class", "item_id", "user", "star"])
+            info = info[0]
+
+            # 更新其他表相应的值
+            sql = "SELECT score, comment_count FROM " + INT_TO_TABLE[info['class']] + " WHERE id = %s"
+            tval = (info['item_id'],)
+            self.cursor.execute(sql, tval)
+            result = self.cursor.fetchone()
+            score = result[0]
+            comment_count = result[1]
+            if comment_count == 1:
+                sql = "UPDATE " + INT_TO_TABLE[info['class']] + " SET score = 0, comment_count = 0, star = 0 WHERE id = %s"
+                tval = (info['item_id'],)
+                self.cursor.execute(sql, tval)  # 补上heat的更新
+            else:
+                score = (score * comment_count - 2 * info['star']) / (comment_count - 1)
+                if score - int(score) >= 0.5:
+                    new_score = int(score) + 1
+                else:
+                    new_score = int(score)
+                star = new_score / 2
+                sql = "UPDATE " + INT_TO_TABLE[info['class']] + " SET star = %s, score = %s, comment_count = comment_count - 1 WHERE id = %s"
+                tval = (star, score, info['item_id'])
+                self.cursor.execute(sql, tval)  # 补上heat的更新
+
+            sql = "UPDATE user SET comment_count = comment_count - 1 WHERE user_name = %s"
+            tval = (info['user'],)
+            self.cursor.execute(sql, tval)
+
+            # 数据表内容更新
+            self.connection.commit()
+
             # 删除数据
+            user_list, flag = self.getData("user_like", ["comment_id"], [info['id']], ["user"])
+            for user in user_list:
+                self.delLike(user['user'], info['id'], comment_deleted=True)
+
             sql = "DELETE FROM comment WHERE " + key + " = %s"
             del_val = (val,)
             self.cursor.execute(sql, del_val)
@@ -155,6 +192,9 @@ class MySQLDb:
                 val += (locate_value[i],)
             self.cursor.execute(sql, val)
             data_list = self.cursor.fetchall()
+            if len(data_list) == 0:
+                return [], False
+
             for i in range(len(data_list)):
                 data_list[i] = self.tupleToDict(data_list[i], get_key)
                 for key in get_key:
@@ -403,7 +443,7 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
-    def delLike(self, user, comment_id):
+    def delLike(self, user, comment_id, comment_deleted=False):
         """
         删除点赞
         :param user: 用户名
@@ -415,6 +455,15 @@ class MySQLDb:
             sql = "DELETE FROM user_like WHERE comment_id = %s AND user = %s"
             val = (comment_id, user)
             self.cursor.execute(sql, val)
+            # 数据表内容更新
+            sql = "UPDATE user SET like_count = like_count - 1 WHERE user_name = %s"
+            val = (user,)
+            self.cursor.execute(sql, val)
+
+            if not comment_deleted:
+                sql = "UPDATE comment SET likes = likes - 1 WHERE id = %s"
+                val = (comment_id,)
+                self.cursor.execute(sql, val)
             # 数据表内容更新
             self.connection.commit()
             return True
@@ -543,6 +592,86 @@ class MySQLDb:
             # 回滚所有更改
             self.connection.rollback()
             return None, False
+
+    def addCollection(self, class_id, item_id, user_id):
+        """
+        :param class_id: 模块的id,1,2,3
+        :param item_id: item的id
+        :param user_id: 用户的id
+        :return:
+        """
+        try:
+            name = self.getData(INT_TO_TABLE[class_id], ["id"], [item_id], ["name"])[0][0]['name']
+            sql = "INSERT INTO user_favorite ("
+            sql += self.getKeysStr(INSERT_COLLECTION_KEY) + ") VALUES " + self.producePlaceHolder(len(INSERT_COLLECTION_KEY))
+            time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            val = (user_id, class_id, item_id, time, name)
+            # 写入新数据
+            self.cursor.execute(sql, val)
+            # 数据表内容更新
+            self.connection.commit()
+            # 更新其他表相应的值
+
+            sql = "UPDATE user SET collection_count = collection_count + 1 WHERE id = %s"
+            val = (user_id,)
+            self.cursor.execute(sql, val)
+
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (addCollection)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
+    def delCollection(self, class_id, item_id, user_id):
+        """
+        删除收藏
+        :param class_id: 模块id
+        :param item_id: item id
+        :param user_id: user id
+        :return: bool
+        """
+        try:
+            # 删除数据
+            sql = "DELETE FROM user_favorite WHERE class = %s AND item_id = %s AND user_id = %s"
+            val = (class_id, item_id, user_id)
+            self.cursor.execute(sql, val)
+            # 数据表内容更新
+            self.connection.commit()
+            # 更新其他表相应的值
+
+            sql = "UPDATE user SET collection_count = collection_count - 1 WHERE id = %s"
+            val = (user_id,)
+            self.cursor.execute(sql, val)
+
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (delCollection)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
+    def checkItemCollected(self, class_id, item_id, user_id):
+        """
+        检查某一个item是否被收藏
+        :param class_id: 模块id
+        :param item_id: item id
+        :param user_id: user id
+        :return: bool
+        """
+        try:
+            # 删除数据
+            result, flag = self.getData("user_favorite", ["class", "item_id", "user_id"], [class_id, item_id, user_id], ["id"])
+            return flag
+        except Exception as e:
+            print("[Error] (checkItemCollected)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
 
     # ==========后为功能性函数
 

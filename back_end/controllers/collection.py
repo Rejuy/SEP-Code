@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
-from services.like_service import modifyUserLike
+from services.collection_service import modifyUserCollection
 from headers import *
 from services.code_service import coder
-from services.id_to_name_service import getNameByID
 
 bp = Blueprint(
-    'like',
+    'collection',
     __name__,
     # template_folder='../templates'
 )
 
 
-@bp.route('/api/v1.0/like', methods=['POST'])
-def modifyLike():
+@bp.route('/api/v1.0/collection', methods=['POST'])
+def modifyCollection():
     """
     :param raw_info:{
         mask:
-        comment_id:
-        operation: 1点赞，0删除点赞
+        class:
+        item_id:
+        operation: 1收藏，0取消收藏
     }
     :return: {
         state: 0成功,1失败
@@ -26,9 +26,8 @@ def modifyLike():
     """
     try:
         raw_info = request.get_json()
-        id = coder.decode(raw_info['mask'])
-        raw_info['user'] = getNameByID(id)
-        modifyUserLike(raw_info)
+        raw_info['user_id'] = coder.decode(raw_info['mask'])
+        modifyUserCollection(raw_info)
         return jsonify({'state': 0})
     except KeyError:
         return jsonify({"state": 1})

@@ -1,6 +1,35 @@
 <view>
     <van-search value="{{ search_value }}" bind:search="onSearch" background="#82318E" placeholder="请输入搜索关键词">
-    </van-search> 
+    </van-search>
+
+    <view class="create">
+        <van-button color="#07C160" icon="add-o" block bindtap="publishRecommendation">写点什么</van-button>
+        <van-popup closeable position="bottom" custom-style="height: 80%" show="{{ show_popup }}" bind:close="closePopup">
+            <van-cell-group>
+                <van-field
+                    value="{{ username }}"
+                    required
+                    clearable
+                    label="课程名"
+                    icon="question-o"
+                    placeholder="请输入课程名"
+                    bind:click-icon="onClickIcon"
+                />
+                <van-field
+                    value="{{ username }}"
+                    required
+                    clearable
+                    label="主讲教师"
+                    icon="question-o"
+                    placeholder="请输入主讲教师"
+                    bind:click-icon="onClickIcon"
+                />
+                <van-stepper value="{{ 1 }}" min="0" max="15" />
+
+                </van-cell-group>
+        </van-popup>
+        <van-button color="#1989FA" icon="star-o" block>我的创作</van-button>
+    </view>
 
     <van-dropdown-menu active-color="#1989fa" :color="red">
         <van-dropdown-item value="{{ course_value }}" options="{{ course_type }}" bind:change="courseTypeSelected"/>
@@ -40,8 +69,9 @@
             </wxs>
         </van-card>
     </view>
+
     <view class="block" style="height: 100rpx" />
 </view>
 
-<tabbar current_page="course" is_login="{{true}}" />
+<tabbar current_page="course" is_login="{{ true }}" />
 

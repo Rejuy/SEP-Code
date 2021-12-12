@@ -90,3 +90,12 @@ BASIC_USER_COMMENT_KEY = ["id", "class", "item_id", "star", "time", "likes", "te
 INSERT_LIKE_KEY = ["user", "comment_id", "time"]
 # 所有key值
 LIKE_KEY = ["id", "user", "comment_id", "time"]
+
+# collection
+# 插入时所需key值
+INSERT_COLLECTION_KEY = ["user_id", "class", "item_id", "time", "item_name"]
+# 所有key值
+COLLECTION_KEY = ["id", "user_id", "class", "item_id", "time", "item_name"]
+
+
+
