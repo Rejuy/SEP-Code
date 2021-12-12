@@ -8,6 +8,8 @@
       <view>
         {{show_text}} {{(!show_all && text_length > brief_max_text_size) ? "..." : ""}}
       </view>
+      <view style="height: 10px;"></view>
+      <van-tag color="{{class_color}}" style="right:0;">{{class_label}}</van-tag>
       <view>
         <view wx:for="{{show_imageurls}}" wx:key="index">
           <van-image width="10em" height="10em" radius="1" src="{{item}}" use-loading-slot lazy-load>

@@ -7,6 +7,7 @@ Component({
     rate: Number, // rating
     likes: Number,
     "imageurls": Array,
+    comment_class: Number,
     is_self: Boolean, // 评论是自己的?
   },
   data: {
@@ -21,6 +22,9 @@ Component({
     text_length: 0,
     image_num: 0,
     show_hide_button: false,
+
+    class_color: "red",
+    class_label: "其他"
   },
   methods: {
     show_hide: function () {
@@ -55,6 +59,28 @@ Component({
         image_num: this.properties.imageurls.length,
         show_hide_button: (this.properties.text.length > this.data.brief_max_text_size) || (this.properties.imageurls.length > this.data.brief_max_img_len)
       })
+      switch (this.properties.comment_class) {
+        case 1:
+          this.setData({
+            class_color: "blue",
+            class_label: "课程"
+          })
+          break;
+        case 2:
+          this.setData({
+            class_color: "yellow",
+            class_label: "饮食"
+          })
+          break;
+        case 3:
+          this.setData({
+            class_color: "green",
+            class_label: "出行"
+          })
+          break;
+        default:
+          break;
+      }
     }
   }
 })
