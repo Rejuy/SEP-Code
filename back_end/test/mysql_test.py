@@ -132,6 +132,51 @@ class MySQLServiceTest(unittest.TestCase):
         }
         self.assertEqual(db.addContent("course_content", info), True)
 
+    def testAddItem6(self):
+        info = {
+            "type": 1,
+            "name": "第三教室楼",
+            "position": "清华大学学堂路东",
+            "scope": 1
+        }
+        self.assertEqual(db.addItem("place_list", info), True)
+
+    def testAddItem7(self):
+        info = {
+            "type": 1,
+            "name": "第四教室楼",
+            "position": "清华大学学堂路西",
+            "scope": 1
+        }
+        self.assertEqual(db.addItem("place_list", info), True)
+
+    def testAddItem8(self):
+        info = {
+            "type": 1,
+            "name": "清华学堂",
+            "position": "清华大学中部大礼堂东南侧",
+            "scope": 1
+        }
+        self.assertEqual(db.addItem("place_list", info), True)
+
+    def testAddItem9(self):
+        info = {
+            "type": 1,
+            "name": "第五教室楼",
+            "position": "清华大学清华学堂东侧",
+            "scope": 1
+        }
+        self.assertEqual(db.addItem("place_list", info), True)
+
+    def testAddItem10(self):
+        info = {
+            "type": 1,
+            "name": "第六教学楼",
+            "position": "清华大学新民路西",
+            "scope": 1
+        }
+        self.assertEqual(db.addItem("place_list", info), True)
+
     def testGetItemList1(self):
         info = {
             "key_list": BASIC_COURSES_KEY,
@@ -143,6 +188,51 @@ class MySQLServiceTest(unittest.TestCase):
         }
 
         result = db.getItemList("course_list", info)
+        print(result[0])
+        self.assertEqual(result[1], True)
+
+    def testGetItemList2(self):
+        info = {
+            "key_list": BASIC_COURSES_KEY,
+            "filter": "",
+            "sort_order": "desc",
+            "sort_criteria": "star",
+            "index_begin": 0,
+            "content_count": 4,
+            "like": "2"
+        }
+
+        result = db.getItemList("course_list", info)
+        print(result[0])
+        self.assertEqual(result[1], True)
+
+    def testGetItemList3(self):
+        info = {
+            "key_list": BASIC_COURSES_KEY,
+            "filter": "",
+            "sort_order": "desc",
+            "sort_criteria": "star",
+            "index_begin": 0,
+            "content_count": 4,
+            "like": "2333"
+        }
+
+        result = db.getItemList("course_list", info)
+        print(result[0])
+        self.assertEqual(result[1], True)
+
+    def testGetItemList4(self):
+        info = {
+            "key_list": BASIC_PLACE_KEY,
+            "filter": "",
+            "sort_order": "desc",
+            "sort_criteria": "star",
+            "index_begin": 0,
+            "content_count": 4,
+            "like": "学堂路"
+        }
+
+        result = db.getItemList("place_list", info)
         print(result[0])
         self.assertEqual(result[1], True)
 
@@ -233,6 +323,17 @@ class MySQLServiceTest(unittest.TestCase):
     def testDelComment2(self):
         self.assertEqual(db.delComment("id", 35), True)
 
+    def testGetGlobalItemList1(self):
+        info = {
+            "like": "清",
+            "sort_order": "desc",
+            "sort_criteria": "heat",
+            "index_begin": 0,
+            "item_count": 5
+        }
+        item_list, flag = db.getGlobalItemList(info)
+        self.assertEqual(flag, True)
+        print(item_list)
 
 
 if __name__ == '__main__':
