@@ -38,4 +38,9 @@
 
 <van-divider dashed="true" />
 
+<view class="random">
+    <text class="random_title">随机漫步：</text>
+    <van-empty description="尽请期待" />
+</view>
+
 <tabbar current_page="home" is_login="{{true}}" />
