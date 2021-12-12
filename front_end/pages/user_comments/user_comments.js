@@ -55,7 +55,9 @@ Page({
               this.setData({
                 comment_list: res.data.comments
               })
-              this.data.loading = false;
+              this.setData({
+                loading: false
+              })
             }
           })
         }

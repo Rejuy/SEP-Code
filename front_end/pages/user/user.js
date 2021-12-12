@@ -86,7 +86,6 @@ Page({
       },
       method: "POST",
       success: (res) => {
-        console.log(res.data);
         if (res.data.state === 0) {
           const user_data = res.data.user;
           this.setData({

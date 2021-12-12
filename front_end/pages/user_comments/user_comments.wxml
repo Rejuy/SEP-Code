@@ -2,7 +2,7 @@
 <view class="container">
   <van-skeleton title avatar row="3" loading="{{ loading }}">
     <view wx:for="{{comment_list}}" wx:key="index">
-      <comment is_self="{{true}}" user_icon="{{user_icon_path}}" title="{{item.item_title}}" text="{{item.text}}" imageurls="{{item.image}}" rate="{{item.star}}" likes="{{item.likes}}" />
+      <comment is_self="{{true}}" user_icon="{{user_icon_path}}" title="{{item.item_title}}" text="{{item.text}}" imageurls="{{item.image}}" rate="{{item.star}}" likes="{{item.likes}}" comment_class="{{item.class}}" />
       <view style="height: 1rem;"></view>
     </view>
     <view style="height: 3.5rem;"></view>
