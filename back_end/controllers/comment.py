@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
-from services.comment_service import getCommentsByName
+from services.comment_service import getCommentsByName, getCommentsByItem
 from services.mysql_service import db
 from services.id_to_name_service import getNameByID
 from headers import *
@@ -78,19 +78,21 @@ def get_comment_by_item():
     return: {
         state: 成功0， 错误1
         comments: [
-           {"user": ... ,"star": ..., "text": ...,"imageurls": ...}, ...
+           {"user": ... ,"star": ..., "text": ...,"image": ...}, ...
         ]
+    }
+    example:
+    post: {
+        "class": 1,
+        "item_id": 1
     }
     '''
     try:
         info = request.get_json()
-        id = coder.decode(info['mask'])
-        # print(id)
-        user_name = getNameByID(id)
         # print(user_name)
-        comments = getCommentsByName(user_name, info['offset'], info['size']) #TODO
+        comments = getCommentsByItem(info['class'], info['item_id']) #TODO
         # commentList = [{"id": 5, "user": "zbw"}, {"id": 5, "user": "zxl"}]
-        return jsonify({'state': int(info['size'] != len(comments)), 'comments': comments})
+        return jsonify({'state': 0, 'comments': comments})
 
     except KeyError:
-        return jsonify({'state': 2}), 400
+        return jsonify({'state': 1})
