@@ -22,7 +22,7 @@ def addComment():
 comment = {
     "class": str, class=1课程,class=2饮食,class=3出行
     "item_id"： 推荐的物品在表中对应的id
-    "user": str,
+    "mask": str,
     "star": str,
     "text": str,
     "imageurls": list of urls(str),
@@ -39,6 +39,9 @@ comment = {
     "upper_comment_id": -1
 }
         """ 
+
+        id = coder.decode(comment['mask'])
+        comment['user'] = getNameByID(id)
         comment['image'] = json.dumps(comment['imageurls']) # 将url列表转换为字符串保存。
 
         table_name = ["hhh", "course_list", "food_list", "place_list"]
