@@ -299,7 +299,7 @@ class MySQLDb:
             content_list = self.cursor.fetchall()
             return content_list, True
         except Exception as e:
-            print("[Error] (getContentList)：{}".format(e))
+            print("[Error] (getItemList)：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
             return [], False
@@ -688,6 +688,43 @@ class MySQLDb:
             # 回滚所有更改
             self.connection.rollback()
             return False
+
+    def getGlobalItemList(self, info):
+        '''
+        :param info: {
+            like: (str)
+            sort_order: (str)
+            sort_criteria: (str)
+            index_begin:
+            item_count:
+        }
+        :return: list
+        '''
+        try:
+            # 获得数据
+            sql = "SELECT * FROM (SELECT id, name, star, heat, 'course_list' FROM course_list WHERE name LIKE '%"\
+                  + info['like']\
+                  + "%' UNION SELECT id, name, star, heat, 'food_list' FROM food_list WHERE name LIKE '%"\
+                  + info['like']\
+                  + "%' UNION SELECT id, name, star, heat, 'place_list' FROM place_list WHERE name LIKE '%"\
+                  + info['like']\
+                  + "%') AS c ORDER BY "
+            sql += info['sort_criteria']
+            if info['sort_order'] == 'desc':
+                sql += ' DESC '
+            # 进行分页操作
+            sql += " LIMIT " + str(info['item_count']) + " OFFSET " + str(info['index_begin'])
+            self.cursor.execute(sql)
+            item_list = self.cursor.fetchall()
+            # 转化为字典
+            for i in range(len(item_list)):
+                item_list[i] = self.tupleToDict(item_list[i], GLOBAL_ITEM_KEY)
+            return item_list, True
+        except Exception as e:
+            print("[Error] (getGlobalItemList)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return [], False
 
     # ==========后为功能性函数
 

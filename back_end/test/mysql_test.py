@@ -323,6 +323,17 @@ class MySQLServiceTest(unittest.TestCase):
     def testDelComment2(self):
         self.assertEqual(db.delComment("id", 35), True)
 
+    def testGetGlobalItemList1(self):
+        info = {
+            "like": "清",
+            "sort_order": "desc",
+            "sort_criteria": "heat",
+            "index_begin": 0,
+            "item_count": 5
+        }
+        item_list, flag = db.getGlobalItemList(info)
+        self.assertEqual(flag, True)
+        print(item_list)
 
 
 if __name__ == '__main__':
