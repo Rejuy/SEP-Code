@@ -36,3 +36,21 @@ def getCommentsByItem (class_id, item_id):
         commentList[i]['image'] = json.loads(commentList[i]['image'])
         # print(commentList[i]['image'], type(commentList[i]['image']))
     return commentList
+
+def getCommentsByComment (comment_id):
+    info = {
+        'key_list': ['user', 'text', 'image', 'time', 'likes'],
+        'filter': [{'key': 'upper_comment_id', 'value': comment_id}],
+        'sort_order': 'not_sort',
+        'index_begin': 0,
+        'content_count': 500
+    }
+    commentState = db.getItemList('comment', info)
+    # print(commentState[1])
+    commentList = commentState[0]
+    for i in range(len(commentList)):
+        commentList[i] = dict(zip(info['key_list'], commentList[i]))
+        # print(commentList[i]['image'], type(commentList[i]['image']))
+        commentList[i]['image'] = json.loads(commentList[i]['image'])
+        # print(commentList[i]['image'], type(commentList[i]['image']))
+    return commentList
