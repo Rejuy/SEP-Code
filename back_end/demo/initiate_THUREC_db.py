@@ -32,7 +32,7 @@ if __name__ == "__main__":
     #mydb.commit()
     #sql = "UPDATE course_list SET comment_count = 1, credit = 2, heat = 0 WHERE id = 1"
     #sql = "SELECT place_list.name, food_list.name, course_list.name FROM place_list, food_list, course_list WHERE place_list.name LIKE '%清%' OR food_list.name LIKE '%清%' OR course_list.name LIKE '%清%'"
-    sql = "select * from (select id, name, star, 'course_list' from course_list where name like '%清%' " \
+    sql = "select * from (select name, star, 'course_list' from course_list where name like '%清%' " \
           "union select id, name, star, 'place_list' from place_list where name like '%清%' " \
           "union select id, name, star, 'food_list' from food_list where name like '%汉堡%') as c order by star desc"
     mycursor.execute(sql)
