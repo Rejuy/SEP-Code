@@ -12,6 +12,7 @@
     "van-cell": "@vant/weapp/cell/index",
     "van-toast": "@vant/weapp/toast/index",
     "van-picker": "@vant/weapp/picker/index",
+    "van-dialog": "@vant/weapp/dialog/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
     "van-dropdown-item": "@vant/weapp/dropdown-item/index"

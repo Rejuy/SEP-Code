@@ -7,23 +7,23 @@
         <van-popup closeable position="bottom" custom-style="height: 85%" show="{{ show_popup }}" bind:close="closePopup">
             <van-cell-group>
                 <van-field
-                    value="{{ username }}"
                     required
                     clearable
                     label="课程名"
                     icon="question-o"
                     placeholder="请输入课程名"
-                    bind:click-icon="onClickIcon"
+                    bind:click-icon="editCourseNameTips"
+                    model:value="{{ edit_course_name }}"
                 />
 
                 <van-field
-                    value="{{ username }}"
                     required
                     clearable
                     label="主讲教师"
                     icon="question-o"
                     placeholder="请输入主讲教师"
-                    bind:click-icon="onClickIcon"
+                    bind:click-icon="editCourseTeacherTips"
+                    model:value="{{ edit_course_teacher }}"
                 />
 
                 <view class="credit">
@@ -34,31 +34,32 @@
                 <van-toast id="van-toast" />
 
                 <van-picker show-toolbar 
-                title="开课时间" 
+                title="{{ course_schedule_title }}" 
                 default-index="{{ 1 }}" 
                 visible-item-count="{{ 4 }}"
                 columns="{{ schedule_for_create }}" 
                 bind:confirm="editCourseSchedule"
-                bind:cancel="cancelPicker">
+                bind:cancel="cancelEditSchedule">
                 </van-picker>
 
                 <van-picker show-toolbar 
-                title="课程类型" 
+                title="{{ course_type_title }}"
                 default-index="{{ 4 }}" 
                 columns="{{ type_for_create }}" 
                 bind:confirm="editCourseType"
-                bind:cancel="cancelPicker">
+                bind:cancel="cancelEditType">
                 </van-picker>
 
                 <van-picker show-toolbar 
-                title="开课院系" 
+                title="{{ course_department_title }}"
                 default-index="{{ 25 }}" 
                 columns="{{ department_for_create }}" 
                 bind:confirm="editCourseDepartment"
-                bind:cancel="cancelPicker">
+                bind:cancel="cancelEditDepartment">
                 </van-picker>
 
-                <van-button class="submit" type="primary" block>提交</van-button>
+                <van-dialog id="van-dialog" />
+                <van-button type="primary" block bind:click="submitNewContent">提交</van-button>
 
                 </van-cell-group>
         </van-popup>

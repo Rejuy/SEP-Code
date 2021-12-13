@@ -1,4 +1,5 @@
 import Toast from '@vant/weapp/toast/toast';
+import Dialog from '@vant/weapp/dialog/dialog';
 
 
 Page({
@@ -81,10 +82,16 @@ Page({
         course_value: 0,
         rank_value: 0,
 
+        edit_course_name: '',
+        edit_course_teacher: '',
         edit_course_credit: 0,
         edit_course_schedule: '',
         edit_course_type: '',
         edit_course_department: '',
+
+        course_schedule_title: '开课时间',
+        course_type_title: '课程类型',
+        course_department_title: '开课院系',
 
         image_url: "https://learn.tsinghua.edu.cn/b/wlxt/kc/v_kcxx_jskcxx/teacher/showImageById?wlkcid=2021-2022-1142764790&_csrf=d39592c7-bbb0-416a-affb-a39b1ab00ba4",
 
@@ -111,6 +118,10 @@ Page({
         SCORE_ASCENDING_ORDER: -100,
         POPULARITY_ASCENDING_ORDER: -200,
         TIME_ASCENDING_ORDER: -300,
+
+        DEFAULT_SCHEDULE_TITLE: '开课时间',
+        DEFAULT_TYPE_TITLE: '课程类型',
+        DEFAULT_DEPARTMENT_TITLE: '开课院系',
     },
 
     onSearch: function(result) {
@@ -134,7 +145,8 @@ Page({
     editCourseSchedule: function(event) {
         const { value } = event.detail;
         this.setData({
-            edit_course_schedule: value
+            edit_course_schedule: value,
+            course_schedule_title: value
         });
         Toast.success('设置成功');
         console.log(this.data.edit_course_schedule);        
@@ -143,7 +155,8 @@ Page({
     editCourseType: function(event) {
         const { value } = event.detail;
         this.setData({
-            edit_course_type: value
+            edit_course_type: value,
+            course_type_title: value
         });
         Toast.success('设置成功');
         console.log(this.data.edit_course_type);
@@ -152,14 +165,59 @@ Page({
     editCourseDepartment: function(event) {
         const { value } = event.detail;
         this.setData({
-            edit_course_department: value
+            edit_course_department: value,
+            course_department_title: value
         });
         Toast.success('设置成功');
         console.log(this.data.edit_course_department);
     },
 
-    cancelPicker: function() {
+    cancelEditSchedule: function() {
+        this.setData({
+            edit_course_schedule: this.marco.DEFAULT_SCHEDULE_TITLE,
+            course_schedule_title: this.marco.DEFAULT_SCHEDULE_TITLE
+        });
         Toast.fail('请重新选择');
+    },
+
+    cancelEditType: function() {
+        this.setData({
+            edit_course_type: this.marco.DEFAULT_TYPE_TITLE,
+            course_type_title: this.marco.DEFAULT_TYPE_TITLE
+        });
+        Toast.fail('请重新选择');
+    },
+
+    cancelEditDepartment: function() {
+        this.setData({
+            edit_course_department: this.marco.DEFAULT_DEPARTMENT_TITLE,
+            course_department_title: this.marco.DEFAULT_DEPARTMENT_TITLE
+        });
+        Toast.fail('请重新选择');        
+    },
+
+    submitNewContent: function() {
+        Dialog.confirm({
+            title: '确认提交？',
+            message: '请仔细检查所填信息是否真实有效，多次提交无用的内容会浪费他人的时间，并可能导致您的账号信用受到影响。',
+          }).then(() => {
+              // on confirm
+              let tmp_course_name = this.data.edit_course_name;
+              let tmp_course_teacher = this.data.edit_course_teacher;
+              if(tmp_course_name == '' || tmp_course_teacher == '') {
+                  Toast.fail('缺少关键内容');
+                  return;
+              }
+              let tmp_course_schedule = this.data.edit_course_schedule;
+              let tmp_course_type = this.data.edit_course_type;
+              let tmp_course_department = this.data.edit_course_department;
+              if(tmp_course_schedule == this.marco.DEFAULT_SCHEDULE_TITLE || tmp_course_type == this.marco.DEFAULT_TYPE_TITLE || tmp_course_department == this.marco.DEFAULT_DEPARTMENT_TITLE) {
+                Toast.fail('缺少关键内容');
+                return;
+            }              
+            }).catch(() => {
+              // on cancel
+            });
     },
 
     courseTypeSelected: function(result) {
