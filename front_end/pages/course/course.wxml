@@ -4,7 +4,7 @@
 
     <view class="create">
         <van-button color="#07C160" icon="add-o" block bindtap="publishRecommendation">写点什么</van-button>
-        <van-popup closeable position="bottom" custom-style="height: 80%" show="{{ show_popup }}" bind:close="closePopup">
+        <van-popup closeable position="bottom" custom-style="height: 85%" show="{{ show_popup }}" bind:close="closePopup">
             <van-cell-group>
                 <van-field
                     value="{{ username }}"
@@ -15,6 +15,7 @@
                     placeholder="请输入课程名"
                     bind:click-icon="onClickIcon"
                 />
+
                 <van-field
                     value="{{ username }}"
                     required
@@ -24,7 +25,40 @@
                     placeholder="请输入主讲教师"
                     bind:click-icon="onClickIcon"
                 />
-                <van-stepper value="{{ 1 }}" min="0" max="15" />
+
+                <view class="credit">
+                    <text>课程学分</text>
+                    <van-stepper value="{{ 1 }}" min="0" max="15" />
+                </view>
+
+                <van-toast id="van-toast" />
+
+                <van-picker show-toolbar 
+                title="开课时间" 
+                default-index="{{ 1 }}" 
+                visible-item-count="{{ 4 }}"
+                columns="{{ schedule_for_create }}" 
+                bind:confirm="editCourseSchedule"
+                bind:cancel="cancelPicker">
+                </van-picker>
+
+                <van-picker show-toolbar 
+                title="课程类型" 
+                default-index="{{ 4 }}" 
+                columns="{{ type_for_create }}" 
+                bind:confirm="editCourseType"
+                bind:cancel="cancelPicker">
+                </van-picker>
+
+                <van-picker show-toolbar 
+                title="开课院系" 
+                default-index="{{ 25 }}" 
+                columns="{{ department_for_create }}" 
+                bind:confirm="editCourseDepartment"
+                bind:cancel="cancelPicker">
+                </van-picker>
+
+                <van-button class="submit" type="primary" block>提交</van-button>
 
                 </van-cell-group>
         </van-popup>

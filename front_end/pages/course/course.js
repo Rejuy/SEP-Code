@@ -1,57 +1,59 @@
-// pages/course/course.js
+import Toast from '@vant/weapp/toast/toast';
+
+
 Page({
     data: {
         department_type: [
             { text: '任意院系', value: 0 },
-            { text: 'C···车辆学院', value: 1 },
-            { text: 'C···材料学院', value: 2 },
-            { text: 'D···电机系', value: 3 },
-            { text: 'D···电子系', value: 4 },
-            { text: 'F···法学院', value: 5 },
-            { text: 'G···工物系', value: 6 },
-            { text: 'G···公管学院', value: 7 },
-            { text: 'G···工业工程系', value: 8 },
-            { text: 'H···航院', value: 9 },
-            { text: 'H···化学系', value: 10 },
-            { text: 'H···化工系', value: 11 },
-            { text: 'H···环境学院', value: 12 },
-            { text: 'J···机械系', value: 13 },
-            { text: 'J···经管学院', value: 14 },
-            { text: 'J···金融学院', value: 15 },
-            { text: 'J···建筑学院', value: 16 },
-            { text: 'J···计算机系', value: 17 },
-            { text: 'J···交叉信息院', value: 18 },
-            { text: 'J···集成电路学院', value: 19 },
-            { text: 'M···美术学院', value: 20 },
-            { text: 'M···马克思主义学院', value: 21 },
-            { text: 'N···能动系', value: 22 },
-            { text: 'Q···求真书院', value: 23 },
-            { text: 'Q···清华-伯克利深圳学院', value: 24 },
-            { text: 'R···日新书院', value: 25 },
-            { text: 'R···软件学院', value: 26 },
-            { text: 'R···人文学院', value: 27 },
-            { text: 'S···数学系', value: 28 },
-            { text: 'S···水利系', value: 29 },
-            { text: 'S···社科学院', value: 30 },
-            { text: 'S···生命学院', value: 31 },
-            { text: 'S···苏世民书院', value: 32 },
-            { text: 'T···土木系', value: 33 },
-            { text: 'T···体育部', value: 34 },
-            { text: 'T···土水学院', value: 35 },
-            { text: 'W···外文系', value: 36 },
-            { text: 'W···物理系', value: 37 },
-            { text: 'W···未央书院', value: 38 },
-            { text: 'X···新雅书院', value: 39 },
-            { text: 'X···行健书院', value: 40 },
-            { text: 'X···新闻学院', value: 41 },
-            { text: 'X···训练中心', value: 42 },
-            { text: 'Y···医学院', value: 43 },
-            { text: 'Y···药学院', value: 44 },
-            { text: 'Y···语言中心', value: 45 },
-            { text: 'Y···艺教中心', value: 46 },
-            { text: 'Z···致理书院', value: 47 },
-            { text: 'Z···自动化系', value: 48 },
-            { text: '···其他开课单位', value: 49 },
+            { text: '车辆学院', value: 1 },
+            { text: '材料学院', value: 2 },
+            { text: '电机系', value: 3 },
+            { text: '电子系', value: 4 },
+            { text: '法学院', value: 5 },
+            { text: '工物系', value: 6 },
+            { text: '公管学院', value: 7 },
+            { text: '工业工程系', value: 8 },
+            { text: '航院', value: 9 },
+            { text: '化学系', value: 10 },
+            { text: '化工系', value: 11 },
+            { text: '环境学院', value: 12 },
+            { text: '机械系', value: 13 },
+            { text: '经管学院', value: 14 },
+            { text: '金融学院', value: 15 },
+            { text: '建筑学院', value: 16 },
+            { text: '计算机系', value: 17 },
+            { text: '交叉信息院', value: 18 },
+            { text: '集成电路学院', value: 19 },
+            { text: '美术学院', value: 20 },
+            { text: '马克思主义学院', value: 21 },
+            { text: '能动系', value: 22 },
+            { text: '求真书院', value: 23 },
+            { text: '清华-伯克利深圳学院', value: 24 },
+            { text: '日新书院', value: 25 },
+            { text: '软件学院', value: 26 },
+            { text: '人文学院', value: 27 },
+            { text: '数学系', value: 28 },
+            { text: '水利系', value: 29 },
+            { text: '社科学院', value: 30 },
+            { text: '生命学院', value: 31 },
+            { text: '苏世民书院', value: 32 },
+            { text: '土木系', value: 33 },
+            { text: '体育部', value: 34 },
+            { text: '土水学院', value: 35 },
+            { text: '外文系', value: 36 },
+            { text: '物理系', value: 37 },
+            { text: '未央书院', value: 38 },
+            { text: '新雅书院', value: 39 },
+            { text: '行健书院', value: 40 },
+            { text: '新闻学院', value: 41 },
+            { text: '训练中心', value: 42 },
+            { text: '医学院', value: 43 },
+            { text: '药学院', value: 44 },
+            { text: '语言中心', value: 45 },
+            { text: '艺教中心', value: 46 },
+            { text: '致理书院', value: 47 },
+            { text: '自动化系', value: 48 },
+            { text: '其他开课单位', value: 49 },
         ],
         course_type: [
             { text: '全部课程', value: 0 },
@@ -69,11 +71,20 @@ Page({
             { text: '热度排序', value: 1 },
             { text: '时间排序', value: 2 },
         ],
+        
+        schedule_for_create: ['春季学期', '夏季学期', '秋季学期', '春、秋季学期'],
+        type_for_create: ['专业课', '数理课', '外文课', '实验课', '体育课', '思政课', '文核课', '文素课'],
+        department_for_create: ['车辆学院','材料学院','电机系','电子系','法学院','工物系','公管学院','工业工程系','航院','化学系','化工系','环境学院','机械系','经管学院','金融学院','建筑学院','计算机系','交叉信息院','集成电路学院','美术学院','马克思主义学院','能动系','求真书院','清华-伯克利深圳学院','日新书院','软件学院','人文学院','数学系','水利系','社科学院','生命学院','苏世民书院','土木系','体育部','土水学院','外文系','物理系','未央书院','新雅书院','行健书院','新闻学院','训练中心','医学院','药学院','语言中心','艺教中心','致理书院','自动化系','其他开课单位'],
 
         search_value: '',
         department_value: 0,
         course_value: 0,
         rank_value: 0,
+
+        edit_course_credit: 0,
+        edit_course_schedule: '',
+        edit_course_type: '',
+        edit_course_department: '',
 
         image_url: "https://learn.tsinghua.edu.cn/b/wlxt/kc/v_kcxx_jskcxx/teacher/showImageById?wlkcid=2021-2022-1142764790&_csrf=d39592c7-bbb0-416a-affb-a39b1ab00ba4",
 
@@ -100,8 +111,6 @@ Page({
         SCORE_ASCENDING_ORDER: -100,
         POPULARITY_ASCENDING_ORDER: -200,
         TIME_ASCENDING_ORDER: -300,
-
-        hast_table: ['任意院系', 'C···车辆学院', 'C···材料学院', 'D···电机系', 'D···电子系', 'F···法学院', 'G···工物系', 'G···公管学院', 'G···工业工程系', 'H···航院', 'H···化学系', 'H···化工系', 'H···环境学院', 'J···机械系', 'J···经管学院', 'J···金融学院', 'J···建筑学院', 'J···计算机系', 'J···交叉信息院', 'J···集成电路学院', 'M···美术学院', 'M···马克思主义学院', 'N···能动系', 'Q···求真书院', 'Q···清华-伯克利深圳学院', 'R···日新书院', 'R···软件学院', 'R···人文学院', 'S···数学系', 'S···水利系', 'S···社科学院', 'S···生命学院', 'S···苏世民书院', 'T···土木系', 'T···体育部', 'T···土水学院', 'W···外文系', 'W···物理系', 'W···未央书院', 'X···新雅书院', 'X···行健书院', 'X···新闻学院', 'X···训练中心', 'Y···医学院', 'Y···药学院', 'Y···语言中心', 'Y···艺教中心', 'Z···致理书院', 'Z···自动化系', '···其他开课单位']
     },
 
     onSearch: function(result) {
@@ -120,6 +129,37 @@ Page({
         this.setData({
             show_popup: true
         })
+    },
+
+    editCourseSchedule: function(event) {
+        const { value } = event.detail;
+        this.setData({
+            edit_course_schedule: value
+        });
+        Toast.success('设置成功');
+        console.log(this.data.edit_course_schedule);        
+    },
+
+    editCourseType: function(event) {
+        const { value } = event.detail;
+        this.setData({
+            edit_course_type: value
+        });
+        Toast.success('设置成功');
+        console.log(this.data.edit_course_type);
+    },
+
+    editCourseDepartment: function(event) {
+        const { value } = event.detail;
+        this.setData({
+            edit_course_department: value
+        });
+        Toast.success('设置成功');
+        console.log(this.data.edit_course_department);
+    },
+
+    cancelPicker: function() {
+        Toast.fail('请重新选择');
     },
 
     courseTypeSelected: function(result) {
