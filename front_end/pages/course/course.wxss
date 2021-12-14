@@ -26,9 +26,9 @@
     color: var(--field-label-color,#646566);
 }
 
-/* .create .van-picker .van-picker__toolbar{
-    padding-top: 80rpx;
-} */
+.create .credit .van-stepper {
+    padding-right: 20rpx;
+}
 
 .create van-button .van-button--primary {
     width: 98%;
@@ -40,10 +40,6 @@
     font-size: 50rpx;
     padding-top: 8rpx;
     font-family: 'Courier New', Courier, monospace; 
-}
-
-.create .credit .van-stepper {
-    padding-right: 20rpx;
 }
 
 .create van-button .van-button--default {

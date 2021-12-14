@@ -4,6 +4,8 @@
 
     <view class="create">
         <van-button color="#07C160" icon="add-o" block bindtap="publishRecommendation">写点什么</van-button>
+        <van-button color="#1989FA" icon="star-o" block>我的创作</van-button>
+
         <van-popup closeable position="bottom" custom-style="height: 85%" show="{{ show_popup }}" bind:close="closePopup">
             <van-cell-group>
                 <van-field
@@ -63,7 +65,6 @@
 
                 </van-cell-group>
         </van-popup>
-        <van-button color="#1989FA" icon="star-o" block>我的创作</van-button>
     </view>
 
     <van-dropdown-menu active-color="#1989fa" :color="red">

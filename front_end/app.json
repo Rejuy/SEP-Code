@@ -1,6 +1,7 @@
 {
   "pages": [ 
-    "pages/course/course",
+    "pages/food/food",
+    
     "pages/index/index",
 
     "pages/login/login",
@@ -8,7 +9,7 @@
 
     "pages/search/search",
     
-    "pages/food/food",
+    "pages/course/course",
     "pages/place/place",
 
     "pages/notice/notice",

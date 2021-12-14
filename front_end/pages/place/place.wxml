@@ -4,6 +4,66 @@
     <view class="create">
         <van-button color="#07C160" icon="add-o" block>写点什么</van-button>
         <van-button color="#1989FA" icon="star-o" block>我的创作</van-button>
+
+        <van-popup closeable position="bottom" custom-style="height: 85%" show="{{ show_popup }}" bind:close="closePopup">
+            <van-cell-group>
+                <van-field
+                    required
+                    clearable
+                    label="课程名"
+                    icon="question-o"
+                    placeholder="请输入课程名"
+                    bind:click-icon="editCourseNameTips"
+                    model:value="{{ edit_course_name }}"
+                />
+
+                <van-field
+                    required
+                    clearable
+                    label="主讲教师"
+                    icon="question-o"
+                    placeholder="请输入主讲教师"
+                    bind:click-icon="editCourseTeacherTips"
+                    model:value="{{ edit_course_teacher }}"
+                />
+
+                <view class="credit">
+                    <text>课程学分</text>
+                    <van-stepper value="{{ 1 }}" min="0" max="15" />
+                </view>
+
+                <van-toast id="van-toast" />
+
+                <van-picker show-toolbar 
+                title="{{ course_schedule_title }}" 
+                default-index="{{ 1 }}" 
+                visible-item-count="{{ 4 }}"
+                columns="{{ schedule_for_create }}" 
+                bind:confirm="editCourseSchedule"
+                bind:cancel="cancelEditSchedule">
+                </van-picker>
+
+                <van-picker show-toolbar 
+                title="{{ course_type_title }}"
+                default-index="{{ 4 }}" 
+                columns="{{ type_for_create }}" 
+                bind:confirm="editCourseType"
+                bind:cancel="cancelEditType">
+                </van-picker>
+
+                <van-picker show-toolbar 
+                title="{{ course_department_title }}"
+                default-index="{{ 25 }}" 
+                columns="{{ department_for_create }}" 
+                bind:confirm="editCourseDepartment"
+                bind:cancel="cancelEditDepartment">
+                </van-picker>
+
+                <van-dialog id="van-dialog" />
+                <van-button type="primary" block bind:click="submitNewContent">提交</van-button>
+
+                </van-cell-group>
+        </van-popup>
     </view>
     
     <van-dropdown-menu active-color="#1989fa" :color="red">

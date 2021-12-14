@@ -1,9 +1,8 @@
-// pages/place/place.js
-Page({
+import Toast from '@vant/weapp/toast/toast';
+import Dialog from '@vant/weapp/dialog/dialog';
 
-    /**
-     * 页面的初始数据
-     */
+
+Page({
     data: {
         range_type: [
             { text: '任意地点', value: 0 },
