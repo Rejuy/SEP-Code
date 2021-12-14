@@ -80,7 +80,6 @@ Page({
     editFoodRange: function(event) {
         const { value } = event.detail;
         this.setData({
-            edit_food_range: value,
             food_range_title: value
         });
         if(value == '校内餐饮') {
@@ -95,7 +94,7 @@ Page({
             })
         }
         Toast.success('设置成功');
-        console.log(this.data.edit_food_type);
+        console.log(this.data.edit_range_value);
     },
 
     editFoodType: function(event) {

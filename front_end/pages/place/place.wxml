@@ -2,7 +2,7 @@
     <van-search value="{{ search_value }}" bind:search="onSearch" background="#82318E" placeholder="请输入搜索关键词"></van-search>
 
     <view class="create">
-        <van-button color="#07C160" icon="add-o" block>写点什么</van-button>
+        <van-button color="#07C160" icon="add-o" block bindtap="publishRecommendation">写点什么</van-button>
         <van-button color="#1989FA" icon="star-o" block>我的创作</van-button>
 
         <van-popup closeable position="bottom" custom-style="height: 85%" show="{{ show_popup }}" bind:close="closePopup">
@@ -10,59 +10,53 @@
                 <van-field
                     required
                     clearable
-                    label="课程名"
+                    label="地点名称"
                     icon="question-o"
-                    placeholder="请输入课程名"
-                    bind:click-icon="editCourseNameTips"
-                    model:value="{{ edit_course_name }}"
+                    placeholder="请输入地点名称"
+                    model:value="{{ edit_place_name }}"
                 />
 
                 <van-field
                     required
                     clearable
-                    label="主讲教师"
+                    label="具体方位"
                     icon="question-o"
-                    placeholder="请输入主讲教师"
-                    bind:click-icon="editCourseTeacherTips"
-                    model:value="{{ edit_course_teacher }}"
+                    placeholder="请输入具体方位"
+                    model:value="{{ edit_place_position }}"
                 />
 
-                <view class="credit">
-                    <text>课程学分</text>
-                    <van-stepper value="{{ 1 }}" min="0" max="15" />
-                </view>
+                <van-field
+                    required
+                    clearable
+                    label="开放时间"
+                    icon="question-o"
+                    placeholder="请输入开放时间"
+                    model:value="{{ edit_opening_hours }}"
+                />
 
                 <van-toast id="van-toast" />
 
                 <van-picker show-toolbar 
-                title="{{ course_schedule_title }}" 
+                default-index="{{ 0 }}" 
+                visible-item-count="{{ 2 }}"
+                title="{{ place_range_title }}"
+                columns="{{ range_for_create }}" 
+                bind:confirm="editPlaceRange"
+                bind:cancel="cancelPlaceRange">
+                </van-picker>
+
+                <van-picker show-toolbar 
                 default-index="{{ 1 }}" 
-                visible-item-count="{{ 4 }}"
-                columns="{{ schedule_for_create }}" 
-                bind:confirm="editCourseSchedule"
-                bind:cancel="cancelEditSchedule">
-                </van-picker>
-
-                <van-picker show-toolbar 
-                title="{{ course_type_title }}"
-                default-index="{{ 4 }}" 
+                visible-item-count="{{ 4 }}"               
+                title="{{ place_type_title }}"
                 columns="{{ type_for_create }}" 
-                bind:confirm="editCourseType"
-                bind:cancel="cancelEditType">
-                </van-picker>
-
-                <van-picker show-toolbar 
-                title="{{ course_department_title }}"
-                default-index="{{ 25 }}" 
-                columns="{{ department_for_create }}" 
-                bind:confirm="editCourseDepartment"
-                bind:cancel="cancelEditDepartment">
+                bind:confirm="editPlaceType"
+                bind:cancel="cancelPlaceType">
                 </van-picker>
 
                 <van-dialog id="van-dialog" />
                 <van-button type="primary" block bind:click="submitNewContent">提交</van-button>
-
-                </van-cell-group>
+            </van-cell-group>
         </van-popup>
     </view>
     

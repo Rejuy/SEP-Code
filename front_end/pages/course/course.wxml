@@ -62,8 +62,7 @@
 
                 <van-dialog id="van-dialog" />
                 <van-button type="primary" block bind:click="submitNewContent">提交</van-button>
-
-                </van-cell-group>
+            </van-cell-group>
         </van-popup>
     </view>
 
