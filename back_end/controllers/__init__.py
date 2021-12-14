@@ -18,7 +18,8 @@ from controllers import (
     like,
     collection,
     search,
-    user_count
+    user_count,
+    user_list
 )
 
 blueprints = [
@@ -39,5 +40,6 @@ blueprints = [
     like.bp,
     collection.bp,
     search.bp,
-    user_count.bp
+    user_count.bp,
+    user_list.bp
 ]
