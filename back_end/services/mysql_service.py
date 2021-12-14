@@ -108,7 +108,7 @@ class MySQLDb:
         try:
             sql = "INSERT INTO user ("
             sql += self.getKeysStr(INSERT_USER_KEY) + ") VALUES " + self.producePlaceHolder(len(INSERT_USER_KEY))
-            time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            time = self.timeToStr(datetime.datetime.now())
             user = (
                 user_info['user_name'],
                 user_info['password'],
@@ -144,8 +144,6 @@ class MySQLDb:
 
     def getUser(self, key, val):
         # 用于用户登录成功后返回给前端用户的基本信息，返回格式为字典
-        # TODO
-        #  考虑图片的前后端传输？
         try:
             # 获得数据
             sql = "SELECT * FROM user WHERE " + key + " = %s"
@@ -158,6 +156,31 @@ class MySQLDb:
             # 回滚所有更改
             self.connection.rollback()
             return None
+
+    def getUserList(self, info):
+        """
+        返回给管理员用户列表
+        :param info: {
+            offset:,
+            size:,
+        }
+        :return:
+        """
+        try:
+            # 获得数据
+            sql = "SELECT " + self.getKeysStr(ADMIN_GET_USER_KEY) + " FROM user"
+            sql += " LIMIT " + str(info['size']) + " OFFSET " + str(info['offset'])
+            self.cursor.execute(sql)
+            user_list = self.cursor.fetchall()
+            for i in range(len(user_list)):
+                user_list[i] = self.tupleToDict(user_list[i], ADMIN_GET_USER_KEY)
+                user_list[i]['account_birth'] = self.timeToStr(user_list[i]['account_birth'])
+            return user_list, True
+        except Exception as e:
+            print("[Error] (getUserList)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return [], False
 
     def updateData(self, table, locate_key, locate_value, update_key, update_value):
         try:
@@ -199,7 +222,7 @@ class MySQLDb:
                 data_list[i] = self.tupleToDict(data_list[i], get_key)
                 for key in get_key:
                     if type(data_list[i][key]) == datetime.datetime:
-                        data_list[i][key] = data_list[i][key].strftime("%Y-%m-%d %H:%M:%S")
+                        data_list[i][key] = self.timeToStr(data_list[i][key])
             return data_list, True
         except Exception as e:
             print("[Error] (getData)：{}".format(e))
@@ -351,7 +374,7 @@ class MySQLDb:
             for i in range(len(comments_list)):
                 comments_list[i] = self.tupleToDict(comments_list[i], BASIC_ITEM_COMMENT_KEY)
                 del comments_list[i]['id']
-                comments_list[i]['time'] = comments_list[i]['time'].strftime("%Y-%m-%d %H:%M:%S")
+                comments_list[i]['time'] = self.timeToStr(comments_list[i]['time'])
                 comments_list[i]['comment_numbers'] = comments_list[i]['lower_comment_count']
                 del comments_list[i]['lower_comment_count']
             item['recommendations'] = comments_list
@@ -392,7 +415,7 @@ class MySQLDb:
                     val += (comment_info[key], )
                 except:
                     if key == "time":
-                        time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        time = self.timeToStr(datetime.datetime.now())
                         val += (time, )
                     else:
                         val += (0, )
@@ -446,7 +469,7 @@ class MySQLDb:
         try:
             sql = "INSERT INTO user_like ("
             sql += self.getKeysStr(INSERT_LIKE_KEY) + ") VALUES " + self.producePlaceHolder(len(INSERT_LIKE_KEY))
-            time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            time = self.timeToStr(datetime.datetime.now())
             val = (user, comment_id, time)
             # 写入新数据
             self.cursor.execute(sql, val)
@@ -545,7 +568,7 @@ class MySQLDb:
             for i in range(len(comments_list)):
                 comments_list[i] = self.tupleToDict(comments_list[i], COMMENT_KEY)
                 del comments_list[i]['id']
-                comments_list[i]['time'] = comments_list[i]['time'].strftime("%Y-%m-%d %H:%M:%S")
+                comments_list[i]['time'] = self.timeToStr(comments_list[i]['time'])
                 del comments_list[i]['lower_comment_count']
                 del comments_list[i]['upper_comment_id']
             return comments_list, True
@@ -585,7 +608,7 @@ class MySQLDb:
             for i in range(len(comments_list)):
                 comments_list[i] = self.tupleToDict(comments_list[i], COMMENT_KEY)
                 del comments_list[i]['id']
-                comments_list[i]['time'] = comments_list[i]['time'].strftime("%Y-%m-%d %H:%M:%S")
+                comments_list[i]['time'] = self.timeToStr(comments_list[i]['time'])
                 del comments_list[i]['lower_comment_count']
                 del comments_list[i]['upper_comment_id']
             return comments_list, True
@@ -631,7 +654,7 @@ class MySQLDb:
             name = self.getData(INT_TO_TABLE[class_id], ["id"], [item_id], ["name"])[0][0]['name']
             sql = "INSERT INTO user_favorite ("
             sql += self.getKeysStr(INSERT_COLLECTION_KEY) + ") VALUES " + self.producePlaceHolder(len(INSERT_COLLECTION_KEY))
-            time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            time = self.timeToStr(datetime.datetime.now())
             val = (user_id, class_id, item_id, time, name)
             # 写入新数据
             self.cursor.execute(sql, val)
@@ -760,6 +783,12 @@ class MySQLDb:
             place_holder += ", %s"
         place_holder += ")"
         return place_holder
+
+    def timeToStr(self, raw_time):
+        try:
+            return raw_time.strftime("%Y-%m-%d %H:%M:%S")
+        except:
+            return ""
 
     def select_db(self, sql):
         """查询"""

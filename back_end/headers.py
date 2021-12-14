@@ -38,6 +38,8 @@ COMMENT_COUNT_ORDER = 4  # 按评论数量排序
 USER_KEY = ["id", "user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "item_count", "activated", "introduction"]
 # 插入时所需键值
 INSERT_USER_KEY = ["user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "item_count", "activated"]
+# 获取user表的时候所需的键值
+ADMIN_GET_USER_KEY = ['id', 'user_name', 'email', 'account_birth', 'collection_count', 'like_count', 'comment_count', 'item_count', 'activated']
 
 # 模块
 CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}

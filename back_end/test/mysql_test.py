@@ -353,6 +353,15 @@ class MySQLServiceTest(unittest.TestCase):
         self.assertEqual(flag, True)
         print(item_list)
 
+    def testGetUserList(self):
+        info = {
+            "offset": 0,
+            "size": 4
+        }
+        user_list, flag = db.getUserList(info)
+        self.assertEqual(flag, True)
+        print(user_list)
+
 
 if __name__ == '__main__':
     unittest.main()

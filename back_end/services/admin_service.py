@@ -10,3 +10,14 @@ def checkSecretCode(secret_code):
 
 def getUserCount():
     return db.getTableCount("user")
+
+
+def getUserList(info):
+    """
+    :param info: {
+        "offset":,
+        "size":
+    }
+    :return: list<user>
+    """
+    return db.getUserList(info)
