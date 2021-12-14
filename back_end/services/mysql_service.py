@@ -207,7 +207,7 @@ class MySQLDb:
             self.connection.rollback()
             return [], False
 
-    def addItem(self, table, content_info):
+    def addItem(self, table, item_info, user_id=-1):
         try:
             sql = "INSERT INTO " + table + " ("
             key_list, val = [], ()
@@ -222,7 +222,7 @@ class MySQLDb:
             sql += self.getKeysStr(key_list) + ") VALUES " + self.producePlaceHolder(len(key_list))
             for key in key_list:
                 try:
-                    val += (content_info[key], )
+                    val += (item_info[key], )
                 except:
                     val += (0, )
             # 写入新数据
@@ -234,11 +234,16 @@ class MySQLDb:
             class_name = table.split("_")[0][0].upper() + table.split("_")[0][1:]
             val = (class_name, )
             self.cursor.execute(sql, val)
+            # 更新用户添加item
+            if user_id != -1:
+                sql = "UPDATE user SET item_count = item_count + 1 WHERE id = %s"
+                val = (user_id, )
+                self.cursor.execute(sql, val)
             # 数据表内容更新
             self.connection.commit()
             return True
         except Exception as e:
-            print("[Error] (addContent)：{}".format(e))
+            print("[Error] (addItem)：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
             return False
