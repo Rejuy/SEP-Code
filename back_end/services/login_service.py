@@ -2,6 +2,10 @@ import re
 from headers import *
 from services.mysql_service import db
 from services.code_service import coder
+from datetime import datetime
+
+
+admin_secret_code = ""
 
 
 def checkLoginInfo(user_info):
@@ -23,4 +27,18 @@ def checkLoginInfo(user_info):
     mask = coder.encode(str(user['id']))
 
     return LOGIN_SUCCESS, mask
+
+
+def checkAdminLoginInfo(user_info):
+    if user_info['user_name'] != "admin":
+        return 1, ""
+
+    if user_info['password'] != "thurec123456":
+        return 1, ""
+
+    cur_text = datetime.now().isoformat()
+    secret_code = coder.encode(cur_text)
+    global admin_secret_code
+    admin_secret_code = secret_code
+    return 0, secret_code
 

@@ -5,7 +5,7 @@ from headers import *
 
 
 bp = Blueprint(
-    'register',
+    'login',
     __name__,
     # template_folder='../templates'
 )
