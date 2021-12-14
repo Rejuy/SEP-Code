@@ -24,16 +24,23 @@
 <view class="board">
     <swiper autoplay indicator-dots circular>
         <swiper-item
-        wx:for="{{swiper_data}}"
+        wx:for="{{ swiper_data }}"
         wx:key="id"
         >
-            <navigator url="{{item.url}}">
-                <image mode="widthFix" src="{{item.path}}">
+            <navigator url="{{ item.url }}">
+                <image mode="widthFix" src="{{ item.path }}">
                     
                 </image>
             </navigator>
         </swiper-item>
     </swiper>
+</view>
+
+<van-divider dashed="true" />
+
+<view class="random">
+    <text class="random_title">随机漫步：</text>
+    <van-empty description="尽请期待" />
 </view>
 
 <tabbar current_page="home" is_login="{{true}}" />

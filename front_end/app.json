@@ -1,7 +1,7 @@
 {
-  "pages": [
+  "pages": [ 
     "pages/index/index",
-    
+
     "pages/login/login",
     "pages/register/register",
 
@@ -12,7 +12,6 @@
     "pages/place/place",
 
     "pages/notice/notice",
-    "pages/module/module",
     "pages/user/user",
     
     "pages/course_item/course_item",

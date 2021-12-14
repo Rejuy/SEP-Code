@@ -28,3 +28,10 @@
     width: 100%;
 }
 
+.random .random_title {
+    font-size: 45rpx;
+    font-weight: bold;
+    padding-left: 10rpx;
+    font-family: 'Courier New', Courier, monospace; 
+}
+

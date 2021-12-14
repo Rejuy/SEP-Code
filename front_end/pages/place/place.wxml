@@ -1,5 +1,65 @@
 <view>
     <van-search value="{{ search_value }}" bind:search="onSearch" background="#82318E" placeholder="请输入搜索关键词"></van-search>
+
+    <view class="create">
+        <van-button color="#07C160" icon="add-o" block bindtap="publishRecommendation">写点什么</van-button>
+        <van-button color="#1989FA" icon="star-o" block>我的创作</van-button>
+
+        <van-popup closeable position="bottom" custom-style="height: 85%" show="{{ show_popup }}" bind:close="closePopup">
+            <van-cell-group>
+                <van-field
+                    required
+                    clearable
+                    label="地点名称"
+                    icon="question-o"
+                    placeholder="请输入地点名称"
+                    model:value="{{ edit_place_name }}"
+                />
+
+                <van-field
+                    required
+                    clearable
+                    label="具体方位"
+                    icon="question-o"
+                    placeholder="请输入具体方位"
+                    model:value="{{ edit_place_position }}"
+                />
+
+                <van-field
+                    required
+                    clearable
+                    label="开放时间"
+                    icon="question-o"
+                    placeholder="请输入开放时间"
+                    model:value="{{ edit_opening_hours }}"
+                />
+
+                <van-toast id="van-toast" />
+
+                <van-picker show-toolbar 
+                default-index="{{ 0 }}" 
+                visible-item-count="{{ 2 }}"
+                title="{{ place_range_title }}"
+                columns="{{ range_for_create }}" 
+                bind:confirm="editPlaceRange"
+                bind:cancel="cancelPlaceRange">
+                </van-picker>
+
+                <van-picker show-toolbar 
+                default-index="{{ 1 }}" 
+                visible-item-count="{{ 4 }}"               
+                title="{{ place_type_title }}"
+                columns="{{ type_for_create }}" 
+                bind:confirm="editPlaceType"
+                bind:cancel="cancelPlaceType">
+                </van-picker>
+
+                <van-dialog id="van-dialog" />
+                <van-button type="primary" block bind:click="submitNewContent">提交</van-button>
+            </van-cell-group>
+        </van-popup>
+    </view>
+    
     <van-dropdown-menu active-color="#1989fa" :color="red">
         <van-dropdown-item value="{{ range_value }}" options="{{ range_type }}"/>
         <van-dropdown-item value="{{ place_value }}" options="{{ place_type }}" />

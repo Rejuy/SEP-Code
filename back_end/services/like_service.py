@@ -7,7 +7,7 @@ def modifyUserLike(raw_info):
     :param raw_info:{
         user:
         comment_id:
-        operation: 1点赞，2删除点赞
+        operation: 1点赞，0删除点赞
     }
     :return: bool
     """

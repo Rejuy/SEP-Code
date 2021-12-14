@@ -16,13 +16,13 @@ Component({
         switch (event.detail) {
           case "login":
             getCurrentPages().pop().onLoad();
-            wx.reLaunch({
+            wx.redirectTo({
               url: "/pages/login/login",
             });
             break;
           case "register":
             getCurrentPages().pop().onLoad();
-            wx.reLaunch({
+            wx.redirectTo({
               url: "/pages/register/register",
             });
             break;
@@ -34,27 +34,27 @@ Component({
         // is_login = true
         switch (event.detail) {
           case "home":
-            wx.reLaunch({
+            wx.redirectTo({
               url: "/pages/index/index",
             });
             break;
           case "user":
-            wx.reLaunch({
+            wx.redirectTo({
               url: "/pages/user/user",
             });
             break;
           case "course":
-            wx.reLaunch({
+            wx.redirectTo({
               url: "/pages/course/course",
             });
             break;
           case "food":
-            wx.reLaunch({
+            wx.redirectTo({
               url: "/pages/food/food",
             });
             break;
           case "place":
-            wx.reLaunch({
+            wx.redirectTo({
               url: "/pages/place/place",
             });
             break;
