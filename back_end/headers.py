@@ -35,9 +35,9 @@ COMMENT_COUNT_ORDER = 4  # 按评论数量排序
 
 # user表
 # 所有key值
-USER_KEY = ["id", "user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "content_count", "activated", "introduction"]
+USER_KEY = ["id", "user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "item_count", "activated", "introduction"]
 # 插入时所需键值
-INSERT_USER_KEY = ["user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "content_count", "activated"]
+INSERT_USER_KEY = ["user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "item_count", "activated"]
 
 # 模块
 CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}

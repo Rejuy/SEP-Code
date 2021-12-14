@@ -84,6 +84,24 @@ class MySQLServiceTest(unittest.TestCase):
         }
         self.assertEqual(db.addItem("place_list", info), True)
 
+    def testAddItem3(self):
+        info = {
+            "type": 1,
+            "name": "图书馆北馆（李文正馆）",
+            "position": "清华大学西北方向",
+            "scope": 1
+        }
+        self.assertEqual(db.addItem("place_list", info, user_id=4), True)
+
+    def testAddItem4(self):
+        info = {
+            "type": 1,
+            "name": "图书馆西馆（逸夫馆）",
+            "position": "清华大学西北方向",
+            "scope": 1
+        }
+        self.assertEqual(db.addItem("place_list", info, user_id=4), True)
+
     def testAddContent3(self):
         info = {
             "number": 102,
