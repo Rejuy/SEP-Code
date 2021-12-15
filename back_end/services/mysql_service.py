@@ -230,7 +230,7 @@ class MySQLDb:
             self.connection.rollback()
             return [], False
 
-    def addItem(self, table, item_info, user_id=-1):
+    def addItem(self, table, item_info):
         try:
             sql = "INSERT INTO " + table + " ("
             key_list, val = [], ()
@@ -258,9 +258,9 @@ class MySQLDb:
             val = (class_name, )
             self.cursor.execute(sql, val)
             # 更新用户添加item
-            if user_id != -1:
+            if item_info['user_id'] != 0:
                 sql = "UPDATE user SET item_count = item_count + 1 WHERE id = %s"
-                val = (user_id, )
+                val = (item_info['user_id'], )
                 self.cursor.execute(sql, val)
             # 数据表内容更新
             self.connection.commit()

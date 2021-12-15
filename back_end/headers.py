@@ -47,9 +47,9 @@ INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
 
 # courses表
 # 所有key值
-COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat"]
+COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated"]
 # 插入时所需键值
-INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat"]
+INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated"]
 # 返回的key值（基本）
 BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star"]
 # 颜色和属性对应
@@ -59,9 +59,9 @@ ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "star", "credit"]
 
 # food表
 # 所有key值
-FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
+FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated"]
 # 插入时所需键值
-INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
+INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated"]
 # 返回的key值（基本）
 BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star"]
 # item
@@ -69,9 +69,9 @@ ITEM_FOOD_KEY = ["name", "position", "scope", "star"]
 
 # place表
 # 所有key值
-PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
+PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated"]
 # 插入时所需键值
-INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat"]
+INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated"]
 # 返回的key值（基本）
 BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star"]
 # item
