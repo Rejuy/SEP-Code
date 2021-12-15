@@ -195,6 +195,16 @@ class MySQLServiceTest(unittest.TestCase):
         }
         self.assertEqual(db.addItem("place_list", info), True)
 
+    def testAddItem10(self):
+        info = {
+            "type": 1,
+            "name": "凯风人文社科图书馆",
+            "position": "清华大学学堂路东",
+            "scope": 1,
+            "user_id": 4
+        }
+        self.assertEqual(db.addItem("place_list", info), True)
+
     def testGetItemList1(self):
         info = {
             "key_list": BASIC_COURSES_KEY,
@@ -361,6 +371,12 @@ class MySQLServiceTest(unittest.TestCase):
         user_list, flag = db.getUserList(info)
         self.assertEqual(flag, True)
         print(user_list)
+
+    def testCheckDataExistence1(self):
+        self.assertEqual(db.checkDataExistence("user", "id", 4), True)
+
+    def testCheckDataExistence2(self):
+        self.assertEqual(db.checkDataExistence("user", "id", 14), False)
 
 
 if __name__ == '__main__':
