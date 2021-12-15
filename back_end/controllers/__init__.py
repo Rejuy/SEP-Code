@@ -19,7 +19,8 @@ from controllers import (
     collection,
     search,
     user_count,
-    user_list
+    user_list,
+    add_item
 )
 
 blueprints = [
@@ -41,5 +42,6 @@ blueprints = [
     collection.bp,
     search.bp,
     user_count.bp,
-    user_list.bp
+    user_list.bp,
+    add_item.bp
 ]

@@ -51,6 +51,29 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
+    def checkDataExistence(self, table, key, val):
+        """
+        检查数据是否存在
+        :param table: 表名
+        :param key: 键
+        :param val: 值
+        :return:
+        """
+        try:
+            sql = "SELECT * FROM " + table + " WHERE " + key + "  = %s"
+            get_val = (val,)
+            # 使用 execute() 查询 email
+            self.cursor.execute(sql, get_val)
+            result = self.cursor.fetchone()
+            if result:
+                return True
+            return False
+        except Exception as e:
+            print("[Error] (checkDataExistence)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
     def delComment(self, key, val):
         # 不同方式删除用户（指定键值）
         try:
@@ -230,7 +253,38 @@ class MySQLDb:
             self.connection.rollback()
             return [], False
 
+<<<<<<< Updated upstream
     def addItem(self, table, item_info, user_id=-1):
+=======
+    def addItem(self, table, item_info):
+        """
+        :param table: 表名
+        :param item_info: item信息
+        course{
+            name: String ,
+            teacher: String ,
+            department: Int ,
+            type: Int ,
+            credit: Int ,
+            user_id: Int
+        }
+        food{
+            name: String ,
+            position: String ,
+            scope: Int ,
+            type: Int ,
+            user_id: Int
+        }
+        place{
+            name: String ,
+            position: String ,
+            scope: Int ,
+            type: Int ,
+            user_id: Int
+        }
+        :return:
+        """
+>>>>>>> Stashed changes
         try:
             sql = "INSERT INTO " + table + " ("
             key_list, val = [], ()
