@@ -14,16 +14,27 @@ bp = Blueprint(
 def addItem():
     try:
         item_info = request.get_json()
+        # 判断info是否合法
         if item_info is None:
             return jsonify({'status': 0}), 400
+        # 判断用户是否存在
         flag, user_id = checkUserExisted(item_info['mask'])
         if not flag:
             return jsonify({'status': 0}), 400
-        if checkItemExisted(item_info):
+        # 判断item是否有同名存在
+        flag = checkItemExisted(item_info)
+        if flag == "error":
+            return jsonify({'status': 0}), 400
+        elif flag:
             return jsonify({'status': 1}), 400
-        if not userAddItem(item_info):
+        # 判断addItem是否成功
+        flag = userAddItem(item_info, int(user_id))
+        if flag == "error":
+            return jsonify({'status': 0}), 400
+        elif not flag:
             return jsonify({'status': 0}), 400
         return jsonify({'status': 2}), 200
     except KeyError:
+        print(33)
         return jsonify({'status': 0}), 400
 

@@ -5,7 +5,7 @@ from services.code_service import coder
 from datetime import datetime
 
 
-admin_secret_code = ""
+admin_secret_code = "X/hRrvQGaJ3HYVebsklp1TxRAjl6qQ2NR99wa/chOqE="
 
 
 def checkLoginInfo(user_info):

@@ -47,35 +47,41 @@ INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
 
 # courses表
 # 所有key值
-COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated"]
+COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 插入时所需键值
-INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated"]
+INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 返回的key值（基本）
 BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star"]
 # 颜色和属性对应
 COURSE_COLOR = ["", "#228B22", "#000000", "#FFA500", "#8B4513", "#9400D3", "#FF0000", "#0000FF", "#FF1493"]
 # item
 ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "star", "credit"]
+# 返回给管理员的key
+ADMIN_COURSE_KEY = ["id", "name", "teacher", "department", "type", "credit", "time"]
 
 # food表
 # 所有key值
-FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated"]
+FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 插入时所需键值
-INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated"]
+INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 返回的key值（基本）
 BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star"]
 # item
 ITEM_FOOD_KEY = ["name", "position", "scope", "star"]
+# 返回给管理员的key
+ADMIN_FOOD_KEY = ["id", "name", "position", "scope", "type", "time"]
 
 # place表
 # 所有key值
-PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated"]
+PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 插入时所需键值
-INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated"]
+INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 返回的key值（基本）
 BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star"]
 # item
 ITEM_PLACE_KEY = ["name", "position", "scope", "star"]
+# 返回给管理员的key
+ADMIN_PLACE_KEY = ["id", "name", "position", "scope", "type", "time"]
 
 # comment
 # 插入时所需key值
