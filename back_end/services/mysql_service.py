@@ -253,9 +253,6 @@ class MySQLDb:
             self.connection.rollback()
             return [], False
 
-<<<<<<< Updated upstream
-    def addItem(self, table, item_info, user_id=-1):
-=======
     def addItem(self, table, item_info):
         """
         :param table: 表名
@@ -284,7 +281,6 @@ class MySQLDb:
         }
         :return:
         """
->>>>>>> Stashed changes
         try:
             sql = "INSERT INTO " + table + " ("
             key_list, val = [], ()
@@ -301,20 +297,23 @@ class MySQLDb:
                 try:
                     val += (item_info[key], )
                 except:
-                    val += (0, )
+                    if key == "time":
+                        val += (self.timeToStr(datetime.datetime.now()), )
+                    else:
+                        val += (0, )
             # 写入新数据
             self.cursor.execute(sql, val)
             # 数据表内容更新
-            self.connection.commit()
+            # self.connection.commit()
             # 更新class表的count值
             sql = "UPDATE class SET count = count + 1 WHERE name = %s"
             class_name = table.split("_")[0][0].upper() + table.split("_")[0][1:]
             val = (class_name, )
             self.cursor.execute(sql, val)
             # 更新用户添加item
-            if user_id != -1:
+            if item_info['user_id'] != 0:
                 sql = "UPDATE user SET item_count = item_count + 1 WHERE id = %s"
-                val = (user_id, )
+                val = (item_info['user_id'], )
                 self.cursor.execute(sql, val)
             # 数据表内容更新
             self.connection.commit()
@@ -339,7 +338,7 @@ class MySQLDb:
             sort_order: (str)
             sort_criteria: (str)
             index_begin:
-            content_count:
+            item_count:
         }
         :return: list
         '''
@@ -376,7 +375,7 @@ class MySQLDb:
                 if info['sort_order'] == 'desc':
                     sql += 'desc '
             # 进行分页操作
-            sql += " LIMIT " + str(info['content_count']) + " OFFSET " + str(info['index_begin'])
+            sql += " LIMIT " + str(info['item_count']) + " OFFSET " + str(info['index_begin'])
             self.cursor.execute(sql, val)
             content_list = self.cursor.fetchall()
             return content_list, True
