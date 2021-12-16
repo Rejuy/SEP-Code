@@ -1,2 +1,1 @@
-# react-admin
-An admin page implemented in react js.
+# 管理员界面
