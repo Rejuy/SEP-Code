@@ -253,6 +253,50 @@ class MySQLDb:
             self.connection.rollback()
             return [], False
 
+    def delItem(self, table, locate_key, locate_value, activated):
+        """
+        删除item
+        :param table:
+        :param locate_key: <list>
+        :param locate_value: <list>
+        :return:
+        """
+        try:
+            # 定位
+            locate = " WHERE " + locate_key[0] + " = %s "
+            locate_val = (locate_value[0],)
+            for i in range(1, len(locate_key)):
+                locate += " AND " + locate_key[i] + " = %s "
+                locate_val += (locate_value[i],)
+            # 获得相应数据
+            if activated:
+                # key_list = ["user_id", "id"]
+                sql = "SELECT user_id, id FROM " + table + locate
+                self.cursor.execute(sql, val)
+                user_id, item_id = self.cursor.fetchone()
+                # 更新其他表格数据
+                # 用户表
+                sql = "UPDATE user SET item_count = item_count - 1 WHERE id = %s"
+                val = (user_id,)
+                self.cursor.execute(sql, val)
+                # 模块表
+                sql = "UPDATE class SET count = count - 1 WHERE name = %s"
+                class_name = table.split("_")[0][0].upper() + table.split("_")[0][1:]
+                val = (class_name,)
+                self.cursor.execute(sql, val)
+                # TODO 评论表
+            # 删除数据
+            sql = "DELETE FROM " + table + locate
+            self.cursor.execute(sql, locate_val)
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (delItem)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
     def addItem(self, table, item_info):
         """
         :param table: 表名
@@ -303,18 +347,6 @@ class MySQLDb:
                         val += (0, )
             # 写入新数据
             self.cursor.execute(sql, val)
-            # 数据表内容更新
-            # self.connection.commit()
-            # 更新class表的count值
-            sql = "UPDATE class SET count = count + 1 WHERE name = %s"
-            class_name = table.split("_")[0][0].upper() + table.split("_")[0][1:]
-            val = (class_name, )
-            self.cursor.execute(sql, val)
-            # 更新用户添加item
-            if item_info['user_id'] != 0:
-                sql = "UPDATE user SET item_count = item_count + 1 WHERE id = %s"
-                val = (item_info['user_id'], )
-                self.cursor.execute(sql, val)
             # 数据表内容更新
             self.connection.commit()
             return True
@@ -812,6 +844,34 @@ class MySQLDb:
             # 回滚所有更改
             self.connection.rollback()
             return [], False
+
+    def selfChangeData(self, table, locate_key, locate_value, update_key, num):
+        """
+        使一个数据自增或自减
+        :param table:
+        :param locate_key: <list>
+        :param locate_value: <list>
+        :param update_key: str
+        :param num: int
+        :return:
+        """
+        try:
+            # 定位
+            locate = " WHERE " + locate_key[0] + " = %s "
+            locate_val = (locate_value[0],)
+            for i in range(1, len(locate_key)):
+                locate += " AND " + locate_key[i] + " = %s "
+                locate_val += (locate_value[i],)
+            # 更新数据
+            sql = "UPDATE " + table + " SET " + update_key + " = " + update_key + " + (" + str(num) + ")" + locate
+            self.cursor.execute(sql, locate_val)
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (selfChangeData)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
 
     # ==========后为功能性函数
 

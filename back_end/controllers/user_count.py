@@ -20,7 +20,7 @@ def adminGetUserCount():
         if not admin_service.checkSecretCode(user_info['secret_code']):
             return jsonify({'status': 1, 'user_count': -1}), 400
         user_count = admin_service.getUserCount()
-        return jsonify({'status': 0, 'secret_code': user_count}), 200
+        return jsonify({'status': 0, 'user_count': user_count}), 200
     except KeyError:
-        return jsonify({'status': 1, 'secret_code': -1}), 400
+        return jsonify({'status': 1, 'user_count': -1}), 400
 
