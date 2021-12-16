@@ -69,8 +69,29 @@
     <view class="comments">
         <view class="comments_title">
             <text class="left_side">评论区：</text>
-            <van-button class="right_side" size="small" icon="add-o" type="info" block>写点什么</van-button>
+            <van-button class="right_side" size="small" icon="add-o" type="info" block bindtap="showPopup">写点什么</van-button>
         </view>
+
+        <van-popup closeable position="bottom" custom-style="height: 60%" show="{{ show_popup }}" bind:close="closePopup">
+            <textarea value="{{ user_text }}" bindinput="InputText" placeholder="请输入文字"></textarea>
+            <view class="add_image">
+                <button bindtap="addImage">+</button>
+
+                <view class="thumbnails"
+                wx:for="{{ image_selected }}"
+                wx:key="*this"
+                bindtap="removeImage"
+                data-index="{{ index }}"
+                >
+                    <thumbnail source="{{ item }}"></thumbnail>
+                </view>
+            </view>    
+
+            <view class="van-buttons">
+                <van-button type="info" bindtap="clearText">清除</van-button>
+                <van-button type="primary" bindtap="handleSubmit">提交</van-button>
+            </view>
+        </van-popup>
 
         <view class="content">
             <van-skeleton wx:for="{{ comment_list }}" wx:key="id" title avatar row="3" loading="{{ loading }}">

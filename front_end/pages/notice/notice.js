@@ -34,8 +34,8 @@ Page({
     },
 
     removeImage: function(result) {
-        const {index} = result.currentTarget.dataset;
-        let {image_selected} = this.data;
+        const { index } = result.currentTarget.dataset;
+        let { image_selected } = this.data;
         image_selected.splice(index, 1);
         this.setData({
             image_selected
