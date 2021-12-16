@@ -17,7 +17,7 @@ Page({
     },
 
     addImage: function() {
-        wx-wx.chooseImage({
+        wx.chooseImage({
           count: 9,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],

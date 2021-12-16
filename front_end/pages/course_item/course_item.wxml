@@ -73,6 +73,10 @@
         </view>
 
         <van-popup closeable position="bottom" custom-style="height: 60%" show="{{ show_popup }}" bind:close="closePopup">
+            <view class="rating">
+                <text>您的评分</text>
+                <van-rate allow-half value="{{ user_rate }}" void-icon="star" void-color="#eee" bind:change="userRate"/>
+            </view>
             <textarea value="{{ user_text }}" bindinput="InputText" placeholder="请输入文字"></textarea>
             <view class="add_image">
                 <button bindtap="addImage">+</button>

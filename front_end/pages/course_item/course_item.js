@@ -16,6 +16,7 @@ Page({
         positive_radio: 50,
 
         user_text: '',
+        user_rate: 3.0,
         image_selected: [],
 
         image_url: "https://learn.tsinghua.edu.cn/b/wlxt/kc/v_kcxx_jskcxx/teacher/showImageById?wlkcid=2021-2022-1142764790&_csrf=d39592c7-bbb0-416a-affb-a39b1ab00ba4",
@@ -41,7 +42,13 @@ Page({
     closePopup: function() {
         this.setData({
             show_popup: false
-        });
+        })
+    },
+
+    userRate: function(event) {
+        this.setData({
+            user_rate: event.detail,
+        });        
     },
 
     InputText: function(result) {
@@ -52,7 +59,7 @@ Page({
 
     clearText: function() {
         this.setData({
-            user_text: ''
+            user_text: ""
         })
     },
 

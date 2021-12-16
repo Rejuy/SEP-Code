@@ -193,10 +193,19 @@ van-button .van-button--info .van-button__text {
     display: inline;
 }
 
+.comments .rating {
+    display: flex;
+    margin: 30rpx 0 10rpx 16rpx;
+}
+
+.comments .rating text {
+    font-family: 'Courier New', Courier, monospace; 
+}
+
 .comments textarea {
     width: 94%;
     padding: 10rpx;
-    margin: 80rpx 0 0 10rpx;
+    margin: 0 0 0 10rpx;
     border: 2rpx solid #ccc;
     font-family: 'Courier New', Courier, monospace; 
 }

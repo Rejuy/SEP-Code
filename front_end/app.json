@@ -1,5 +1,6 @@
 {
   "pages": [ 
+    "pages/course_item/course_item",
     "pages/index/index",
 
     "pages/login/login",
@@ -14,7 +15,6 @@
     "pages/notice/notice",
     "pages/user/user",
     
-    "pages/course_item/course_item",
     "pages/food_item/food_item",
     "pages/place_item/place_item"
   ],
@@ -26,11 +26,11 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "tabbar": "/components/custom-tab-bar/index",
     "van-button": "@vant/weapp/button/index",
     "van-field": "@vant/weapp/field/index",
-    "van-popup": "@vant/weapp/popup/index",
     "van-tabbar": "@vant/weapp/tabbar/index",
-    "van-tabbar-item": "@vant/weapp/tabbar-item/index"
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+
+    "tabbar": "/components/custom-tab-bar/index"
   }
 }
