@@ -22,11 +22,13 @@ def addItem():
         if not flag:
             return jsonify({'status': 0}), 400
         # 判断item是否有同名存在
+        """
         flag = checkItemExisted(item_info)
         if flag == "error":
             return jsonify({'status': 0}), 400
         elif flag:
             return jsonify({'status': 1}), 400
+        """
         # 判断addItem是否成功
         flag = userAddItem(item_info, int(user_id))
         if flag == "error":
