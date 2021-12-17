@@ -27,10 +27,11 @@ def limitedSearch(table, like):
         "sort_order": "desc",
         "sort_criteria": "star",
         "index_begin": 0,
-        "content_count": 500,
+        "item_count": 500,
         "filter": []
     }
     lst = db.getItemList(table, info)[0]
+    print(lst)
     for i in range(len(lst)):
         lst[i] = dict(zip(key_list, lst[i]))
     return lst
