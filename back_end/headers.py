@@ -41,10 +41,6 @@ INSERT_USER_KEY = ["user_name", "password", "email", "account_birth", "collectio
 # 获取user表的时候所需的键值
 ADMIN_GET_USER_KEY = ['id', 'user_name', 'email', 'account_birth', 'collection_count', 'like_count', 'comment_count', 'item_count', 'activated']
 
-# 模块
-CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}
-INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
-
 # courses表
 # 所有key值
 COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
@@ -108,5 +104,7 @@ COLLECTION_KEY = ["id", "user_id", "class", "item_id", "time", "item_name"]
 # 模块global获取的item键
 GLOBAL_ITEM_KEY = ["id", "name", "star", "score", "heat", "table_name"]
 
-
-
+# 模块
+CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}
+INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
+INT_TO_KEY_LIST = ["", BASIC_COURSES_KEY, BASIC_FOOD_KEY, BASIC_PLACE_KEY]
