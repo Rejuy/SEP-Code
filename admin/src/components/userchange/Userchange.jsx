@@ -1,4 +1,4 @@
-import { ArrowUpward } from "@mui/icons-material";
+import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import {
   Button,
   Card,
@@ -6,9 +6,19 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function FeaturedInfo() {
+export default function UserChange() {
+  const [count, setcount] = useState(0);
+  const [percent, setpercent] = useState(0);
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/admin/get_user_change").then((res) => {
+      setcount(res.data.change);
+      setpercent(res.data.percent);
+    });
+  }, []);
   return (
     <Card>
       <CardContent>
@@ -28,18 +38,25 @@ export default function FeaturedInfo() {
           }}
         >
           <Typography sx={{ fontSize: 30 }} color="text.primary" gutterBottom>
-            +{20} Users
+            {count >= 0 ? "+" : null}
+            {count} Users
           </Typography>
           <span style={{ display: "flex", alignItems: "bottom" }}>
-            <ArrowUpward color="success" />
+            {count >= 0 ? (
+              <ArrowUpward color="success" />
+            ) : (
+              <ArrowDownward color="error" />
+            )}
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              +1.0%
+              {percent}%
             </Typography>
           </span>
         </span>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Link to="/analytics">
+          <Button size="small">Learn More</Button>
+        </Link>
       </CardActions>
     </Card>
   );

@@ -34,22 +34,26 @@ const Item = styled(Button)(({ theme }) => ({
 export default function Leftbar() {
   return (
     <CustomContainer>
-      <Link to="/">
+      <Link to="/" style={{ width: "100%" }}>
         <Item size="large" startIcon={<Home />}>
           <Typography>Homepage</Typography>
         </Item>
       </Link>
-      <Item size="large" startIcon={<TrendingUp />}>
-        <Typography>Analytics</Typography>
-      </Item>
-      <Link to="/users">
+      <Link to="/analytics" style={{ width: "100%" }}>
+        <Item size="large" startIcon={<TrendingUp />}>
+          <Typography>Analytics</Typography>
+        </Item>
+      </Link>
+      <Link to="/users" style={{ width: "100%" }}>
         <Item size="large" startIcon={<Person />}>
           <Typography>Users</Typography>
         </Item>
       </Link>
-      <Item size="large" startIcon={<School />}>
-        <Typography>Courses</Typography>
-      </Item>
+      <Link to="/courses" style={{ width: "100%" }}>
+        <Item size="large" startIcon={<School />}>
+          <Typography>Courses</Typography>
+        </Item>
+      </Link>
       <Item size="large" startIcon={<Restaurant />}>
         <Typography>Food</Typography>
       </Item>
