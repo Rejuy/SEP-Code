@@ -9,17 +9,12 @@ def globalSearch (like):
         "index_begin": 0,
         "item_count": 500
     }
-    lst = db.getGlobalItemList(info)
+    lst = db.getGlobalItemList(info)[0]
     return lst
 
-def limitedSearch(table, like):
-    key_list = ["star"]
-    if table == "food_list":
-        key_list = FOOD_KEY
-    elif table == "place_list":
-        key_list = PLACE_KEY
-    elif table == "course_list":
-        key_list = COURSES_KEY
+def limitedSearch(class_id, like):
+    key_list = INT_TO_KEY_LIST[class_id]
+    table = INT_TO_TABLE[class_id]
 
     info = {
         "like": like,

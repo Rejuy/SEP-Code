@@ -1,5 +1,5 @@
 from services.mysql_service import db
-from headers import INT_TO_TABLE, INT_TO_KEY_LIST
+from headers import INT_TO_TABLE, INT_TO_BASIC_KEY_LIST
 def updateProfilePicture (user_id, pic_url):
     db.updateData("user", "id", user_id, "image", pic_url)
 
@@ -21,7 +21,7 @@ def getUserLike (user_name):
 def getUserItems (user_id, class_id):
     try:
         table = INT_TO_TABLE[class_id]
-        key_list = INT_TO_KEY_LIST[class_id]
+        key_list = INT_TO_BASIC_KEY_LIST[class_id]
     except Exception as e:
         print("Error in <add_item_service.checkItemExisted>")
         print(e)

@@ -107,4 +107,5 @@ GLOBAL_ITEM_KEY = ["id", "name", "star", "score", "heat", "table_name"]
 # 模块
 CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}
 INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
-INT_TO_KEY_LIST = ["", BASIC_COURSES_KEY, BASIC_FOOD_KEY, BASIC_PLACE_KEY]
+INT_TO_BASIC_KEY_LIST = ["", BASIC_COURSES_KEY, BASIC_FOOD_KEY, BASIC_PLACE_KEY]
+INT_TO_KEY_LIST = ["", COURSES_KEY, FOOD_KEY, PLACE_KEY]
