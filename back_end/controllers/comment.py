@@ -25,7 +25,7 @@ comment = {
     "mask": str,
     "star": str,
     "text": str,
-    "imageurls": list of urls(str),
+    "image_urls": list of urls(str),
     "upper_comment_id": 如果是对推荐的评论：那么这里是推荐的id，否则为-1
 }
 
@@ -35,14 +35,14 @@ comment = {
     "user": "zhangbw",
     "star": 4,
     "text": "good!",
-    "imageurls": ["thurec.xyz/static/efaIZYWqFoyH3c3ee2488ab73f783cefd929f008c8fc.png"],
+    "image_urls": ["thurec.xyz/static/efaIZYWqFoyH3c3ee2488ab73f783cefd929f008c8fc.png"],
     "upper_comment_id": -1
 }
         """ 
 
         id = coder.decode(comment['mask'])
         comment['user'] = getNameByID(id)
-        comment['image'] = json.dumps(comment['imageurls']) # 将url列表转换为字符串保存。
+        comment['image'] = json.dumps(comment['image_urls']) # 将url列表转换为字符串保存。
 
         table_name = ["hhh", "course_list", "food_list", "place_list"]
         comment['table'] = table_name[comment['class']]

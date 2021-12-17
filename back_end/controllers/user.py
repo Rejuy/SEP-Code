@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
-from services.user_service import updateProfilePicture, getProfilePicture, getUserInfo, getUserFavorite, getUserLike
+from services.user_service import updateProfilePicture, getProfilePicture, getUserInfo, getUserFavorite, getUserLike, getUserItems
 from services.save_image_service import saveImage
 from headers import *
 from services.code_service import coder
@@ -64,3 +64,15 @@ def get_user_likes():
         return jsonify({'state': 0, 'likes': user_info}), 200
     except KeyError:
         return jsonify({'state': 1}), 400
+
+# 获取用户创作的推荐
+@bp.route('/api/v1.0/get_user_items', methods=['POST'])
+def get_user_items():
+    try:
+        info = request.get_json()
+        user_id = coder.decode(info['mask'])
+        user_items = getUserItems(user_id, info['class'])
+        return jsonify({'state': 0, 'items': user_items}), 200
+    except KeyError:
+        return jsonify({'state': 1}), 400
+

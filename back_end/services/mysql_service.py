@@ -830,11 +830,11 @@ class MySQLDb:
         '''
         try:
             # 获得数据
-            sql = "SELECT * FROM (SELECT id, name, star, heat, 'course_list' FROM course_list WHERE name LIKE '%"\
+            sql = "SELECT * FROM (SELECT id, name, star, score, heat, 'course_list' FROM course_list WHERE name LIKE '%"\
                   + info['like']\
-                  + "%' UNION SELECT id, name, star, heat, 'food_list' FROM food_list WHERE name LIKE '%"\
+                  + "%' UNION SELECT id, name, star, score, heat, 'food_list' FROM food_list WHERE name LIKE '%"\
                   + info['like']\
-                  + "%' UNION SELECT id, name, star, heat, 'place_list' FROM place_list WHERE name LIKE '%"\
+                  + "%' UNION SELECT id, name, star, score, heat, 'place_list' FROM place_list WHERE name LIKE '%"\
                   + info['like']\
                   + "%') AS c ORDER BY "
             sql += info['sort_criteria']

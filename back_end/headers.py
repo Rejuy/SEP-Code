@@ -41,17 +41,13 @@ INSERT_USER_KEY = ["user_name", "password", "email", "account_birth", "collectio
 # 获取user表的时候所需的键值
 ADMIN_GET_USER_KEY = ['id', 'user_name', 'email', 'account_birth', 'collection_count', 'like_count', 'comment_count', 'item_count', 'activated']
 
-# 模块
-CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}
-INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
-
 # courses表
 # 所有key值
 COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 插入时所需键值
 INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 返回的key值（基本）
-BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star"]
+BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star", "score"]
 # 颜色和属性对应
 COURSE_COLOR = ["", "#228B22", "#000000", "#FFA500", "#8B4513", "#9400D3", "#FF0000", "#0000FF", "#FF1493"]
 # item
@@ -65,7 +61,7 @@ FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment
 # 插入时所需键值
 INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 返回的key值（基本）
-BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star"]
+BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
 # item
 ITEM_FOOD_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
@@ -77,7 +73,7 @@ PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "commen
 # 插入时所需键值
 INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 返回的key值（基本）
-BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star"]
+BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
 # item
 ITEM_PLACE_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
@@ -106,7 +102,10 @@ INSERT_COLLECTION_KEY = ["user_id", "class", "item_id", "time", "item_name"]
 COLLECTION_KEY = ["id", "user_id", "class", "item_id", "time", "item_name"]
 
 # 模块global获取的item键
-GLOBAL_ITEM_KEY = ["id", "name", "star", "heat", "table_name"]
+GLOBAL_ITEM_KEY = ["id", "name", "star", "score", "heat", "table_name"]
 
-
-
+# 模块
+CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}
+INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
+INT_TO_BASIC_KEY_LIST = ["", BASIC_COURSES_KEY, BASIC_FOOD_KEY, BASIC_PLACE_KEY]
+INT_TO_KEY_LIST = ["", COURSES_KEY, FOOD_KEY, PLACE_KEY]
