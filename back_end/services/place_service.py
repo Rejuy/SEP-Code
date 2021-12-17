@@ -19,7 +19,7 @@ def getPlacesList(raw_info):
         "sort_order": "not_sort",
         "sort_criteria": "",
         "index_begin": raw_info['begin'],
-        "content_count": raw_info['end'] - raw_info['begin'] + 1
+        "item_count": raw_info['end'] - raw_info['begin'] + 1
     }
     # 改变filter至函数需要
     if raw_info['place_type'] != 0:
@@ -39,7 +39,7 @@ def getPlacesList(raw_info):
     else:
         new_info['sort_criteria'] = 'star'
     # 获取列表
-    raw_list, result = db.getItemList("place_list", new_info)
+    raw_list, place_count, result = db.getItemList("place_list", new_info)
     if result:
         new_list = [db.tupleToDict(raw_tuple, BASIC_PLACE_KEY) for raw_tuple in raw_list]
         for i in range(len(new_list)):
@@ -47,7 +47,7 @@ def getPlacesList(raw_info):
             if i + raw_info['begin'] + 1 <= 15:
                 new_list[i]['tag'] = 'TOP' + str(i + raw_info['begin'] + 1)
         print(new_list)
-    place_count = db.getTableCount("place_list")
+    # place_count = db.getTableCount("place_list")
     return new_list, place_count, result
 
 

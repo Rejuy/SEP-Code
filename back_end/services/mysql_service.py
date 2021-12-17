@@ -378,44 +378,53 @@ class MySQLDb:
             # 获得数据
             sql = "SELECT " + self.getKeysStr(info['key_list']) + " FROM " + table
             val = ()
+            locate_sql = ""
             # 判断是否需要筛选，若是则加上筛选部分sql语句
             if len(info['filter']) != 0:
-                sql += " WHERE " + info['filter'][0]['key'] + " = %s "
+                locate_sql += " WHERE " + info['filter'][0]['key'] + " = %s "
                 val += (info['filter'][0]['value'], )
                 if len(info['filter']) > 1:
                     for i in range(1, len(info['filter'])):
-                        sql += " and " + info['filter'][i]['key'] + " = %s "
+                        locate_sql += " and " + info['filter'][i]['key'] + " = %s "
                         val += (info['filter'][i]['value'], )
                 # 判断是否要模糊匹配
-                if info['like'] != "":
-                    sql += " AND ("
+                if 'like' in info.keys() and info['like'] != "":
+                    locate_sql += " AND ("
                     if table == "course_list":
-                        sql += "teacher LIKE '%" + info['like'] + "%') "
+                        locate_sql += "teacher LIKE '%" + info['like'] + "%') "
                     else:
-                        sql += "position LIKE '%" + info['like'] + "%') "
+                        locate_sql += "position LIKE '%" + info['like'] + "%') "
             else:
                 # 判断是否要模糊匹配
-                if info['like'] != "":
-                    sql += " WHERE (name LIKE '%" + info['like'] + "%' OR "
+                if 'like' in info.keys() and info['like'] != "":
+                    locate_sql += " WHERE (name LIKE '%" + info['like'] + "%' OR "
                     if table == "course_list":
-                        sql += "teacher LIKE '%" + info['like'] + "%') "
+                        locate_sql += "teacher LIKE '%" + info['like'] + "%') "
                     else:
-                        sql += "position LIKE '%" + info['like'] + "%') "
+                        locate_sql += "position LIKE '%" + info['like'] + "%') "
+            # 先根据条件获得数量
+            count_sql = "SELECT COUNT(*) FROM " + table + locate_sql
+            self.cursor.execute(count_sql, val)
+            # 获得返回值
+            count = self.cursor.fetchall()[0][0]
+            # 排序分页的数据量sql
+            num_sql = ""
             # 判断是否需要排序，若是则加上排序部分sql语句
             if info['sort_order'] != "not_sort":
-                sql += " order by " + info['sort_criteria'] + " "
+                num_sql += " order by " + info['sort_criteria'] + " "
                 if info['sort_order'] == 'desc':
-                    sql += 'desc '
+                    num_sql += 'desc '
             # 进行分页操作
-            sql += " LIMIT " + str(info['item_count']) + " OFFSET " + str(info['index_begin'])
+            num_sql += " LIMIT " + str(info['item_count']) + " OFFSET " + str(info['index_begin'])
+            sql += locate_sql + num_sql
             self.cursor.execute(sql, val)
             content_list = self.cursor.fetchall()
-            return content_list, True
+            return content_list, count, True
         except Exception as e:
             print("[Error] (getItemList)：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
-            return [], False
+            return [], -1, False
 
     def getTableCount(self, table):
         try:

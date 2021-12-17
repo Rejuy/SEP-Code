@@ -306,7 +306,6 @@ class MySQLServiceTest(unittest.TestCase):
         }
         self.assertEqual(db.addComment(comment_info), True)
 
-
     def testAddComment2(self):
         comment_info = {
             "class": 1,
