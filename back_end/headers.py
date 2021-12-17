@@ -106,7 +106,7 @@ INSERT_COLLECTION_KEY = ["user_id", "class", "item_id", "time", "item_name"]
 COLLECTION_KEY = ["id", "user_id", "class", "item_id", "time", "item_name"]
 
 # 模块global获取的item键
-GLOBAL_ITEM_KEY = ["id", "name", "star", "heat", "table_name"]
+GLOBAL_ITEM_KEY = ["id", "name", "star", "score", "heat", "table_name"]
 
 
 

@@ -31,7 +31,7 @@ def limitedSearch(table, like):
         "filter": []
     }
     lst = db.getItemList(table, info)[0]
-    print(lst)
+    # print(lst)
     for i in range(len(lst)):
         lst[i] = dict(zip(key_list, lst[i]))
     return lst
