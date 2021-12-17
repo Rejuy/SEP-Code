@@ -51,7 +51,7 @@ COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", 
 # 插入时所需键值
 INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 返回的key值（基本）
-BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star"]
+BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star", "score"]
 # 颜色和属性对应
 COURSE_COLOR = ["", "#228B22", "#000000", "#FFA500", "#8B4513", "#9400D3", "#FF0000", "#0000FF", "#FF1493"]
 # item
@@ -65,7 +65,7 @@ FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment
 # 插入时所需键值
 INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 返回的key值（基本）
-BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star"]
+BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
 # item
 ITEM_FOOD_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
@@ -77,7 +77,7 @@ PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "commen
 # 插入时所需键值
 INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
 # 返回的key值（基本）
-BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star"]
+BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
 # item
 ITEM_PLACE_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
