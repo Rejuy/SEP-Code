@@ -1,7 +1,8 @@
 import { styled, Container, Grid } from "@mui/material";
 import React from "react";
-import Chart from "../components/chart/Chart";
-import FeaturedInfo from "../components/featuredInfo/FeaturedInfo";
+import UserChangePlot from "../components/userChangePlot/UserchangePlot";
+import UserChange from "../components/userchange/Userchange";
+import Timeonline from "../components/timeOnline/Timeonline";
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   paddingTop: theme.spacing(12),
@@ -17,20 +18,14 @@ function Homepage() {
     <CustomContainer>
       <CustomGrid container spacing={4}>
         <Grid item sm={4}>
-          <FeaturedInfo></FeaturedInfo>
+          <UserChange></UserChange>
         </Grid>
         <Grid item sm={4}>
-          <FeaturedInfo></FeaturedInfo>
-        </Grid>
-        <Grid item sm={4}>
-          <FeaturedInfo></FeaturedInfo>
+          <Timeonline />
         </Grid>
       </CustomGrid>
       <CustomGrid>
-        <Chart />
-      </CustomGrid>
-      <CustomGrid>
-        <Chart />
+        <UserChangePlot />
       </CustomGrid>
     </CustomContainer>
   );

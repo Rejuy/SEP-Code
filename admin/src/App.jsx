@@ -4,6 +4,9 @@ import Navbar from "./components/navbar/Navbar";
 import Homepage from "./pages/homepage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Userpage from "./pages/userpage";
+import Coursepage from "./pages/coursepage";
+import Userinfo from "./pages/userinfo";
+import Analytics from "./pages/analytics";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="/users" element={<Userpage />} />
+              <Route path="/courses" element={<Coursepage />} />
+              <Route path="/user/:uid" element={<Userinfo />} />
+              <Route path="/analytics" element={<Analytics />} />
             </Routes>
           </Grid>
         </Grid>
