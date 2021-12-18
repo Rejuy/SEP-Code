@@ -38,7 +38,7 @@ export default function Timeonline() {
           style={{
             display: "flex",
             alignItems: "baseline",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
           }}
         >
           <Typography sx={{ fontSize: 24 }} color="text.primary" gutterBottom>

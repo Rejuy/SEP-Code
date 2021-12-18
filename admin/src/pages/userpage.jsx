@@ -83,7 +83,7 @@ function ActionInit(params) {
         </DialogActions>
       </Dialog>
       <Link to={"/user/" + params.row.id} style={{ marginRight: "10px" }}>
-        <Button variant="outlined">Details</Button>
+        <Button variant="outlined">Edit</Button>
       </Link>
       <Button
         onClick={jsonDetail}
