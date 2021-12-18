@@ -15,7 +15,7 @@ def getCommentsByName (user_name, offset, size):
         'filter': [{'key': 'user', 'value': user_name}],
         'sort_order': 'not_sort',
         'index_begin': offset,
-        'content_count': size
+        'item_count': size
     }
     commentState = db.getItemList('comment', info)
     # print(commentState[1])
@@ -32,7 +32,7 @@ def getCommentsByItem (class_id, item_id):
         'filter': [{'key': 'class', 'value': class_id}, {'key': 'item_id', 'value': item_id}],
         'sort_order': 'not_sort',
         'index_begin': 0,
-        'content_count': 500
+        'item_count': 500
     }
     commentState = db.getItemList('comment', info)
     # print(commentState[1])
@@ -49,7 +49,7 @@ def getCommentsByComment (comment_id):
         'filter': [{'key': 'upper_comment_id', 'value': comment_id}],
         'sort_order': 'not_sort',
         'index_begin': 0,
-        'content_count': 500
+        'item_count': 500
     }
     commentState = db.getItemList('comment', info)
     # print(commentState[1])
