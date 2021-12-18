@@ -416,9 +416,10 @@ class MySQLDb:
             num_sql = ""
             # 判断是否需要排序，若是则加上排序部分sql语句
             if info['sort_order'] != "not_sort":
-                num_sql += " order by " + info['sort_criteria'] + " , id "
+                num_sql += " order by " + info['sort_criteria'] + " "
                 if info['sort_order'] == 'desc':
                     num_sql += 'desc '
+                num_sql += " , id "
             # 进行分页操作
             num_sql += " LIMIT " + str(info['item_count']) + " OFFSET " + str(info['index_begin'])
             sql += locate_sql + num_sql
