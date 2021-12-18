@@ -21,7 +21,7 @@ from controllers import (
     user_count,
     user_list,
     add_item,
-    admin_get_inactivated_item_list,
+    admin_get_item_list,
     admin_operate_item
 )
 
@@ -46,6 +46,6 @@ blueprints = [
     user_count.bp,
     user_list.bp,
     add_item.bp,
-    admin_get_inactivated_item_list.bp,
+    admin_get_item_list.bp,
     admin_operate_item.bp
 ]

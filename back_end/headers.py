@@ -57,7 +57,7 @@ COURSE_COLOR = ["", "#228B22", "#000000", "#FFA500", "#8B4513", "#9400D3", "#FF0
 # item
 ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "star", "credit"]
 # 返回给管理员的key
-ADMIN_COURSE_KEY = ["id", "name", "teacher", "department", "type", "credit", "time"]
+ADMIN_COURSE_KEY = ["id", "name", "teacher", "department", "type", "credit", "time", "activated"]
 
 # food表
 # 所有key值
@@ -69,7 +69,7 @@ BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star"]
 # item
 ITEM_FOOD_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
-ADMIN_FOOD_KEY = ["id", "name", "position", "scope", "type", "time"]
+ADMIN_FOOD_KEY = ["id", "name", "position", "scope", "type", "time", "activated"]
 
 # place表
 # 所有key值
@@ -81,7 +81,7 @@ BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star"]
 # item
 ITEM_PLACE_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
-ADMIN_PLACE_KEY = ["id", "name", "position", "scope", "type", "time"]
+ADMIN_PLACE_KEY = ["id", "name", "position", "scope", "type", "time", "activated"]
 
 # comment
 # 插入时所需key值
