@@ -47,9 +47,9 @@ INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
 
 # courses表
 # 所有key值
-COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
+COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "schedule"]
 # 插入时所需键值
-INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
+INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "schedule"]
 # 返回的key值（基本）
 BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star"]
 # 颜色和属性对应
