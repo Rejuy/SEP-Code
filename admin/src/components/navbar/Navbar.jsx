@@ -10,6 +10,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 import { Mail, Settings } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
@@ -42,16 +43,22 @@ const CustomUser = styled("div")(({ theme }) => ({
   width: "5%",
 }));
 
+const CustomLink = styled(Link)(({ theme }) => ({
+  textDecoration: "none",
+}));
+
 export default function Navbar() {
   return (
     <AppBar position="fixed">
       <CustomToolbar>
-        <Typography
-          variant="h6"
-          style={{ display: "flex", alignItems: "center" }}
-        >
-          Admin
-        </Typography>
+        <CustomLink to="/">
+          <Typography
+            variant="h6"
+            style={{ display: "flex", alignItems: "center", color: "white" }}
+          >
+            Admin
+          </Typography>
+        </CustomLink>
         <Search>
           <SearchIcon></SearchIcon>
           <CustomInput placeholder="Search.."></CustomInput>
