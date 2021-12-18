@@ -272,7 +272,7 @@ class MySQLDb:
             if activated:
                 # key_list = ["user_id", "id"]
                 sql = "SELECT user_id, id FROM " + table + locate
-                self.cursor.execute(sql, val)
+                self.cursor.execute(sql, locate_val)
                 user_id, item_id = self.cursor.fetchone()
                 # 更新其他表格数据
                 # 用户表
@@ -307,6 +307,7 @@ class MySQLDb:
             department: Int ,
             type: Int ,
             credit: Int ,
+            schedule: Int ,
             user_id: Int
         }
         food{
@@ -335,6 +336,9 @@ class MySQLDb:
                 key_list = INSERT_FOOD_KEY
             elif table == "place_list":
                 key_list = INSERT_PLACE_KEY
+
+            if 'user_id' not in item_info.keys():
+                item_info['activated'] = 1
 
             sql += self.getKeysStr(key_list) + ") VALUES " + self.producePlaceHolder(len(key_list))
             for key in key_list:
