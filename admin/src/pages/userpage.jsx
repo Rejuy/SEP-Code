@@ -13,6 +13,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../config";
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   paddingTop: theme.spacing(12),
@@ -42,7 +43,7 @@ function ActionInit(params) {
 
   const activateUser = () => {
     axios
-      .post("http://localhost:5000/api/admin/activate_user", {
+      .post(global.config.backendUrl + "/api/admin/activate_user", {
         id: params.row.id,
       })
       .then((res) => {
@@ -83,7 +84,7 @@ function ActionInit(params) {
         </DialogActions>
       </Dialog>
       <Link to={"/user/" + params.row.id} style={{ marginRight: "10px" }}>
-        <Button variant="outlined">Details</Button>
+        <Button variant="outlined">Edit</Button>
       </Link>
       <Button
         onClick={jsonDetail}
@@ -195,9 +196,10 @@ function Userpage() {
         id="datagrid"
         rows={data}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={8}
+        rowsPerPageOptions={[8]}
         checkboxSelection
+        autoHeight={true}
       />
     </CustomContainer>
   );

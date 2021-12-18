@@ -16,7 +16,7 @@ class AdminTest(unittest.TestCase):
             "offset": 0,
             "size": 2
         }
-        item_list, flag = getInactivatedItemList(raw_info)
+        item_list, flag = adminGetItemList(raw_info)
         self.assertEqual(flag, True)
         print(item_list)
 
@@ -28,8 +28,9 @@ class AdminTest(unittest.TestCase):
             "offset": 0,
             "size": 2
         }
-        item_list, flag = getInactivatedItemList(raw_info)
+        item_list, flag = adminGetItemList(raw_info)
         self.assertEqual(flag, False)
+        print(item_list)
 
     def testOperateItem1(self):
         raw_info = {

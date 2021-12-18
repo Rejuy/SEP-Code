@@ -24,7 +24,7 @@ def getUserList(info):
     return db.getUserList(info)
 
 
-def getInactivatedItemList(raw_info):
+def adminGetItemList(raw_info):
     # 获得键值
     if raw_info['class'] == 1:
         key_list = ADMIN_COURSE_KEY
@@ -47,10 +47,10 @@ def getInactivatedItemList(raw_info):
     info = {
         "key_list": key_list,
         "filter": [
-            {
-                "key": "activated",
-                "value": 0
-            }
+            #{
+             #   "key": "activated",
+              #  "value": 0
+            #}
         ],
         "like": "",
         "sort_order": order,
@@ -58,7 +58,7 @@ def getInactivatedItemList(raw_info):
         "index_begin": raw_info['offset'],
         "item_count": raw_info['size']
     }
-    item_list, flag = db.getItemList(INT_TO_TABLE[raw_info['class']], info)
+    item_list, count, flag = db.getItemList(INT_TO_TABLE[raw_info['class']], info)
     for i in range(len(item_list)):
         item_list[i] = db.tupleToDict(item_list[i], key_list)
         item_list[i]['time'] = db.timeToStr(item_list[i]['time'])

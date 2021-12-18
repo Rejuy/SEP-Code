@@ -43,17 +43,17 @@ ADMIN_GET_USER_KEY = ['id', 'user_name', 'email', 'account_birth', 'collection_c
 
 # courses表
 # 所有key值
-COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
+COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "schedule"]
 # 插入时所需键值
-INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
+INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "schedule"]
 # 返回的key值（基本）
 BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star", "score"]
 # 颜色和属性对应
 COURSE_COLOR = ["", "#228B22", "#000000", "#FFA500", "#8B4513", "#9400D3", "#FF0000", "#0000FF", "#FF1493"]
 # item
-ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "star", "credit"]
+ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "star", "credit", "schedule"]
 # 返回给管理员的key
-ADMIN_COURSE_KEY = ["id", "name", "teacher", "department", "type", "credit", "time"]
+ADMIN_COURSE_KEY = ["id", "name", "teacher", "department", "type", "credit", "time", "activated"]
 
 # food表
 # 所有key值
@@ -65,7 +65,7 @@ BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
 # item
 ITEM_FOOD_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
-ADMIN_FOOD_KEY = ["id", "name", "position", "scope", "type", "time"]
+ADMIN_FOOD_KEY = ["id", "name", "position", "scope", "type", "time", "activated"]
 
 # place表
 # 所有key值
@@ -77,7 +77,7 @@ BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
 # item
 ITEM_PLACE_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
-ADMIN_PLACE_KEY = ["id", "name", "position", "scope", "type", "time"]
+ADMIN_PLACE_KEY = ["id", "name", "position", "scope", "type", "time", "activated"]
 
 # comment
 # 插入时所需key值
