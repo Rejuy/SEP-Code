@@ -19,7 +19,12 @@ def checkItemExisted(raw_info):
 
 
 def userAddItem(raw_info, user_id):
-    table = INT_TO_TABLE[raw_info['class']]
+    try:
+        table = INT_TO_TABLE[raw_info['class']]
+    except Exception as e:
+        print("Error in <add_item_service.userAddItem>")
+        print(e)
+        return "error"
     raw_info['info']['user_id'] = user_id
     return db.addItem(table, raw_info['info'])
 

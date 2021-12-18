@@ -63,3 +63,27 @@ def getInactivatedItemList(raw_info):
         item_list[i] = db.tupleToDict(item_list[i], key_list)
         item_list[i]['time'] = db.timeToStr(item_list[i]['time'])
     return item_list, flag
+
+
+def operateItem(raw_info):
+    try:
+        table = INT_TO_TABLE[raw_info['class']]
+    except Exception as e:
+        print("Error in <add_item_service.checkItemExisted>")
+        print(e)
+        return "error"
+    # 判断操作
+    if raw_info['operation'] == 0:
+        # 删除item
+        if db.delItem(table, ["id"], [raw_info['id']], 0):
+            return 0
+    elif raw_info['operation'] == 1:
+        # 激活item
+        if db.updateData(table, "id", raw_info['id'], "activated", 1):
+            class_name = table.split("_")[0][0].upper() + table.split("_")[0][1:]
+            db.selfChangeData("class", ["name"], [class_name], "count", 1)
+            result, flag = db.getData(table, ["id"], [raw_info["id"]], ["user_id"])
+            user_id = result[0]['user_id']
+            db.selfChangeData("user", ["id"], [user_id], "item_count", 1)
+            return 1
+    return -1

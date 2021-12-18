@@ -12,6 +12,7 @@ def modifyUserLike(raw_info):
     :return: bool
     """
     liked = db.checkCommentLiked(raw_info['user'], raw_info['comment_id'])
+    print(raw_info['user'], raw_info['comment_id'], liked)
     if raw_info['operation'] == 1:
         if liked:
             return False
@@ -22,3 +23,5 @@ def modifyUserLike(raw_info):
         db.delLike(raw_info['user'], raw_info['comment_id'])
     else:
         return False
+
+    return True

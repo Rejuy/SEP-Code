@@ -19,7 +19,7 @@ def getCoursesList(raw_info):
         "sort_order": "not_sort",
         "sort_criteria": "",
         "index_begin": raw_info['begin'],
-        "content_count": raw_info['end'] - raw_info['begin'] + 1
+        "item_count": raw_info['end'] - raw_info['begin'] + 1
     }
     # 改变filter至函数需要
     if raw_info['course_type'] != 0:
@@ -39,7 +39,7 @@ def getCoursesList(raw_info):
     elif raw_info['course_order'] == 2:
         new_info['sort_criteria'] = 'time'
     # 获取列表
-    raw_list, result = db.getItemList("course_list", new_info)
+    raw_list, course_count, result = db.getItemList("course_list", new_info)
     new_list = []
     if result:
         new_list = [db.tupleToDict(raw_tuple, BASIC_COURSES_KEY) for raw_tuple in raw_list]
@@ -47,9 +47,9 @@ def getCoursesList(raw_info):
             new_list[i]['tag'] = ''
             if i + raw_info['begin'] + 1 <= 15:
                 new_list[i]['tag'] = 'TOP' + str(i + raw_info['begin'] + 1)
-            new_list[i]['color'] = COURSE_COLOR[new_list[i]['type']]
+            # new_list[i]['color'] = COURSE_COLOR[new_list[i]['type']]
         print(new_list)
-    course_count = db.getTableCount("course_list")
+    # course_count = db.getTableCount("course_list")
     return new_list, course_count, result
 
 

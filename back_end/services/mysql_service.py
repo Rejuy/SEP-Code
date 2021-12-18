@@ -253,6 +253,50 @@ class MySQLDb:
             self.connection.rollback()
             return [], False
 
+    def delItem(self, table, locate_key, locate_value, activated):
+        """
+        删除item
+        :param table:
+        :param locate_key: <list>
+        :param locate_value: <list>
+        :return:
+        """
+        try:
+            # 定位
+            locate = " WHERE " + locate_key[0] + " = %s "
+            locate_val = (locate_value[0],)
+            for i in range(1, len(locate_key)):
+                locate += " AND " + locate_key[i] + " = %s "
+                locate_val += (locate_value[i],)
+            # 获得相应数据
+            if activated:
+                # key_list = ["user_id", "id"]
+                sql = "SELECT user_id, id FROM " + table + locate
+                self.cursor.execute(sql, val)
+                user_id, item_id = self.cursor.fetchone()
+                # 更新其他表格数据
+                # 用户表
+                sql = "UPDATE user SET item_count = item_count - 1 WHERE id = %s"
+                val = (user_id,)
+                self.cursor.execute(sql, val)
+                # 模块表
+                sql = "UPDATE class SET count = count - 1 WHERE name = %s"
+                class_name = table.split("_")[0][0].upper() + table.split("_")[0][1:]
+                val = (class_name,)
+                self.cursor.execute(sql, val)
+                # TODO 评论表
+            # 删除数据
+            sql = "DELETE FROM " + table + locate
+            self.cursor.execute(sql, locate_val)
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (delItem)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
     def addItem(self, table, item_info):
         """
         :param table: 表名
@@ -304,18 +348,6 @@ class MySQLDb:
             # 写入新数据
             self.cursor.execute(sql, val)
             # 数据表内容更新
-            # self.connection.commit()
-            # 更新class表的count值
-            sql = "UPDATE class SET count = count + 1 WHERE name = %s"
-            class_name = table.split("_")[0][0].upper() + table.split("_")[0][1:]
-            val = (class_name, )
-            self.cursor.execute(sql, val)
-            # 更新用户添加item
-            if item_info['user_id'] != 0:
-                sql = "UPDATE user SET item_count = item_count + 1 WHERE id = %s"
-                val = (item_info['user_id'], )
-                self.cursor.execute(sql, val)
-            # 数据表内容更新
             self.connection.commit()
             return True
         except Exception as e:
@@ -346,44 +378,53 @@ class MySQLDb:
             # 获得数据
             sql = "SELECT " + self.getKeysStr(info['key_list']) + " FROM " + table
             val = ()
+            locate_sql = ""
             # 判断是否需要筛选，若是则加上筛选部分sql语句
             if len(info['filter']) != 0:
-                sql += " WHERE " + info['filter'][0]['key'] + " = %s "
+                locate_sql += " WHERE " + info['filter'][0]['key'] + " = %s "
                 val += (info['filter'][0]['value'], )
                 if len(info['filter']) > 1:
                     for i in range(1, len(info['filter'])):
-                        sql += " and " + info['filter'][i]['key'] + " = %s "
+                        locate_sql += " and " + info['filter'][i]['key'] + " = %s "
                         val += (info['filter'][i]['value'], )
                 # 判断是否要模糊匹配
-                if info['like'] != "":
-                    sql += " AND ("
+                if 'like' in info.keys() and info['like'] != "":
+                    locate_sql += " AND ("
                     if table == "course_list":
-                        sql += "teacher LIKE '%" + info['like'] + "%') "
+                        locate_sql += "teacher LIKE '%" + info['like'] + "%') "
                     else:
-                        sql += "position LIKE '%" + info['like'] + "%') "
+                        locate_sql += "position LIKE '%" + info['like'] + "%') "
             else:
                 # 判断是否要模糊匹配
-                if info['like'] != "":
-                    sql += " WHERE (name LIKE '%" + info['like'] + "%' OR "
+                if 'like' in info.keys() and info['like'] != "":
+                    locate_sql += " WHERE (name LIKE '%" + info['like'] + "%' OR "
                     if table == "course_list":
-                        sql += "teacher LIKE '%" + info['like'] + "%') "
+                        locate_sql += "teacher LIKE '%" + info['like'] + "%') "
                     else:
-                        sql += "position LIKE '%" + info['like'] + "%') "
+                        locate_sql += "position LIKE '%" + info['like'] + "%') "
+            # 先根据条件获得数量
+            count_sql = "SELECT COUNT(*) FROM " + table + locate_sql
+            self.cursor.execute(count_sql, val)
+            # 获得返回值
+            count = self.cursor.fetchall()[0][0]
+            # 排序分页的数据量sql
+            num_sql = ""
             # 判断是否需要排序，若是则加上排序部分sql语句
             if info['sort_order'] != "not_sort":
-                sql += " order by " + info['sort_criteria'] + " "
+                num_sql += " order by " + info['sort_criteria'] + " "
                 if info['sort_order'] == 'desc':
-                    sql += 'desc '
+                    num_sql += 'desc '
             # 进行分页操作
-            sql += " LIMIT " + str(info['item_count']) + " OFFSET " + str(info['index_begin'])
+            num_sql += " LIMIT " + str(info['item_count']) + " OFFSET " + str(info['index_begin'])
+            sql += locate_sql + num_sql
             self.cursor.execute(sql, val)
             content_list = self.cursor.fetchall()
-            return content_list, True
+            return content_list, count, True
         except Exception as e:
             print("[Error] (getItemList)：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
-            return [], False
+            return [], -1, False
 
     def getTableCount(self, table):
         try:
@@ -789,11 +830,11 @@ class MySQLDb:
         '''
         try:
             # 获得数据
-            sql = "SELECT * FROM (SELECT id, name, star, heat, 'course_list' FROM course_list WHERE name LIKE '%"\
+            sql = "SELECT * FROM (SELECT id, name, star, score, heat, 'course_list' FROM course_list WHERE name LIKE '%"\
                   + info['like']\
-                  + "%' UNION SELECT id, name, star, heat, 'food_list' FROM food_list WHERE name LIKE '%"\
+                  + "%' UNION SELECT id, name, star, score, heat, 'food_list' FROM food_list WHERE name LIKE '%"\
                   + info['like']\
-                  + "%' UNION SELECT id, name, star, heat, 'place_list' FROM place_list WHERE name LIKE '%"\
+                  + "%' UNION SELECT id, name, star, score, heat, 'place_list' FROM place_list WHERE name LIKE '%"\
                   + info['like']\
                   + "%') AS c ORDER BY "
             sql += info['sort_criteria']
@@ -812,6 +853,34 @@ class MySQLDb:
             # 回滚所有更改
             self.connection.rollback()
             return [], False
+
+    def selfChangeData(self, table, locate_key, locate_value, update_key, num):
+        """
+        使一个数据自增或自减
+        :param table:
+        :param locate_key: <list>
+        :param locate_value: <list>
+        :param update_key: str
+        :param num: int
+        :return:
+        """
+        try:
+            # 定位
+            locate = " WHERE " + locate_key[0] + " = %s "
+            locate_val = (locate_value[0],)
+            for i in range(1, len(locate_key)):
+                locate += " AND " + locate_key[i] + " = %s "
+                locate_val += (locate_value[i],)
+            # 更新数据
+            sql = "UPDATE " + table + " SET " + update_key + " = " + update_key + " + (" + str(num) + ")" + locate
+            self.cursor.execute(sql, locate_val)
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (selfChangeData)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
 
     # ==========后为功能性函数
 
