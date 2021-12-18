@@ -24,6 +24,7 @@ Page({
 
         range_table: ['校内餐饮', '校外餐饮'],
         outside_type_table: ['汉堡披萨','龙虾烧烤','香锅火锅','米线拉面','日韩料理','简餐便当','各类饮品',],
+        outside_color_table: ['#FF976A', '#8A2BE2','#FF0000','#696969','#800000','#DAA520','#FF00FF',],
         inside_type_table: ['家园','甲所','寓园','融园','澜园','荷园','北园','南园','桃李园','紫荆园','清芬园','听涛园','观畴园','玉树园','芝兰园','丁香园','熙春园','清真食堂',],
 
         search_value: '',
@@ -44,10 +45,7 @@ Page({
         current_page: 0,
         show_popup: false,
 
-        food_list: [
-            { id: 1, name: '汉堡王', position: '海淀区华清嘉园7号楼', range: '校外餐饮', type: '汉堡披萨', star: 4.0, score: 8.3, tag: 'TOP15', color: '#FF976A'}, 
-            { id: 2, name: '李先生牛肉面大王', position: '海淀区双清苑1号楼', range: '校外餐饮', type: '米线拉面', star: 4.0, score: 8.0, tag: '', color: '#EE0A24'},             
-        ]
+        food_list: []
     },
 
     marco: {
@@ -55,14 +53,102 @@ Page({
         INSIDE_CAMPUS: 1,
         OUTSIDE_CAMPUS: 2,
 
+        THU_PURPLE: '#82318E',
         DEFAULT_RANGE_TITLE: '选择范围',
         DEFAULT_TYPE_TITLE: '选择类型',
     },
+
+    onLoad: function () {
+        this.getFoodList();
+    },
+
+    onReachBottom: function () {
+        if(this.data.current_page >= this.data.total_pages) {
+            console.log("已无下一页数据");
+        }else {
+            this.setData({
+                current_page: this.data.current_page + 1
+            })
+            this.getFoodList();
+        }
+    },
+
+    getFoodList: function() {
+        const app = getApp();
+        let begin = this.data.current_page * this.marco.PAGE_CAPACITY;
+        let end = begin + this.marco.PAGE_CAPACITY - 1;
+
+        wx.request({
+          url: app.global_data.global_domain + '/api/v1.0/get_food_list',
+          method: 'POST',  
+          data: {
+              begin: begin,
+              end: end,
+              food_scope: this.data.range_value,
+              food_type: this.data.type_value,
+              food_order: this.data.order_value
+          },
+          dataType: JSON,
+          enableCache: true,
+          enableHttp2: true,
+          enableQuic: true,
+          header: {
+            "content-type": "application/json"
+          },
+          timeout: 0,
+          success: (result) => {
+              let rtn = JSON.parse(result.data);
+              let array_length = rtn.food.length;
+              for(let i = 0; i < array_length; i ++) {
+                  let tmp_range_value = rtn.food[i].scope;
+                  let tmp_type_value = rtn.food[i].type - 1;
+
+                  if(tmp_range_value == 0) {
+                      rtn.food[i].color = this.marco.THU_PURPLE;
+                      rtn.food[i].type = this.data.inside_type_table[tmp_type_value];
+                  }else {
+                      rtn.food[i].color = this.data.outside_color_table[tmp_type_value];
+                      rtn.food[i].type = this.data.outside_type_table[tmp_type_value];
+                  }
+                  rtn.food[i].range = this.data.range_table[tmp_range_value];
+              }
+              this.data.food_list.push.apply(this.data.food_list, rtn.food);
+              this.data.total_pages = Math.ceil(rtn.total_food / this.marco.PAGE_CAPACITY) - 1;
+              this.setData({
+                  food_list: this.data.food_list,
+                  total_pages: this.data.total_pages,
+              })
+          }, fail: (error) => {
+              console.log(error);
+          }, complete: (res) => {},
+        })
+    },    
 
     onSearch: function(result) {
         this.setData({
             search_value: result.detail
         });
+    },
+
+    rangeSelected: function(result) {
+        this.setData({
+            current_page: 0,
+            range_value: result.detail,
+        });      
+    },
+
+    typeSelected: function(result) {
+        this.setData({
+            current_page: 0,
+            type_value: result.detail,
+        });      
+    },    
+
+    orderSelected: function(result) {
+        this.setData({
+            current_page: 0,
+            order_value: result.detail,
+        });      
     },
 
     showPopup: function() {
@@ -212,11 +298,6 @@ Page({
         })
     },
 
-    // 生命周期函数--监听页面加载
-    onLoad: function (options) {
-
-    },
-
     // 生命周期函数--监听页面初次渲染完成
     onReady: function () {
 
@@ -239,11 +320,6 @@ Page({
 
     // 页面相关事件处理函数--监听用户下拉动作
     onPullDownRefresh: function () {
-
-    },
-
-    // 页面上拉触底事件的处理函数
-    onReachBottom: function () {
 
     },
 

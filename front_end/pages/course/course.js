@@ -120,7 +120,9 @@ Page({
         if(this.data.current_page >= this.data.total_pages) {
             console.log("已无下一页数据");
         }else {
-            this.data.current_page ++;
+            this.setData({
+                current_page: this.data.current_page + 1
+            })
             this.getCourseList();
         }
     },
@@ -160,7 +162,6 @@ Page({
               }
               this.data.courses_list.push.apply(this.data.courses_list, rtn.courses);
               this.data.total_pages = Math.ceil(rtn.total_courses / this.marco.PAGE_CAPACITY) - 1;
-
               this.setData({
                   courses_list: this.data.courses_list,
                   total_pages: this.data.total_pages,

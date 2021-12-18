@@ -73,8 +73,8 @@
     
     <van-dropdown-menu active-color="#1989fa" :color="red">
         <van-dropdown-item value="{{ range_value }}" options="{{ range }}" bind:change="rangeSelected"/>
-        <van-dropdown-item value="{{ type_value }}" options="{{ type }}" disabled="{{ uncertain_range }}"/>
-        <van-dropdown-item value="{{ order_value }}" options="{{ order }}" />
+        <van-dropdown-item value="{{ type_value }}" options="{{ type }}" disabled="{{ uncertain_range }}" bind:change="typeSelected"/>
+        <van-dropdown-item value="{{ order_value }}" options="{{ order }}" bind:change="orderSelected" />
     </van-dropdown-menu>    
 
     <view wx:for="{{ food_list }}" wx:key="id">

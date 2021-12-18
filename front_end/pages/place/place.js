@@ -28,6 +28,7 @@ Page({
 
         range_table: ['校内地点', '校外地点'],
         type_table: ['自习场所', '锻炼场所', '会议场所', '娱乐场所'],
+        color_table: ['#800080', '#FF69B4', '#000080', '#228B22'],
 
         search_value: '',
         range_value: 0,
@@ -42,14 +43,11 @@ Page({
         place_range_title: '选择范围',
         place_type_title: '选择类型',
 
-        current_page: 0,
         total_pages: 0,
+        current_page: 0,
         show_popup: false,
 
-        place_list: [
-            { id: 1, name: '第一教室楼', position: '清华大学西南方向', range: '校内地点', type: '自习场所', star: 4.0, score: 8.3, tag: 'TOP3', color: '#07C160'},    
-            { id: 2, name: '邺架轩', position: '清华大学李文正图书馆下沉广场', range: '校内地点', type: '自习场所', star: 3.5, score: 7.2, tag: '', color: '#07C160'},        
-        ]
+        places_list: []
     },
 
     marco: {
@@ -61,10 +59,91 @@ Page({
         DEFAULT_TYPE_TITLE: '选择类型',
     },
 
+    onLoad: function () {
+        this.getPlaceList();
+    },
+
+    onReachBottom: function () {
+        if(this.data.current_page >= this.data.total_pages) {
+            console.log("已无下一页数据");
+        }else {
+            this.setData({
+                current_page: this.data.current_page + 1
+            })
+            this.getPlaceList();
+        }
+    },
+
+    getPlaceList: function() {
+        const app = getApp();
+        let begin = this.data.current_page * this.marco.PAGE_CAPACITY;
+        let end = begin + this.marco.PAGE_CAPACITY - 1;
+
+        wx.request({
+          url: app.global_data.global_domain + '/api/v1.0/get_places_list',
+          method: 'POST',  
+          data: {
+              begin: begin,
+              end: end,
+              place_scope: this.data.range_value,
+              place_type: this.data.type_value,
+              place_order: this.data.order_value
+          },
+          dataType: JSON,
+          enableCache: true,
+          enableHttp2: true,
+          enableQuic: true,
+          header: {
+            "content-type": "application/json"
+          },
+          timeout: 0,
+          success: (result) => {
+              let rtn = JSON.parse(result.data);
+              let array_length = rtn.places.length;
+              for(let i = 0; i < array_length; i ++) {
+                  let tmp_range_value = rtn.places[i].scope - 1;
+                  let tmp_type_value = rtn.places[i].type - 1;
+                  rtn.places[i].color = this.data.color_table[tmp_type_value];
+                  rtn.places[i].type = this.data.type_table[tmp_type_value];
+                  rtn.places[i].range = this.data.range_table[tmp_range_value];
+              }
+              this.data.places_list.push.apply(this.data.places_list, rtn.places);
+              this.data.total_pages = Math.ceil(rtn.total_places / this.marco.PAGE_CAPACITY) - 1;
+              this.setData({
+                  places_list: this.data.places_list,
+                  total_pages: this.data.total_pages,
+              })
+          }, fail: (error) => {
+              console.log(error);
+          }, complete: (res) => {},
+        })
+    },
+
     onSearch: function(result) {
         this.setData({
             search_value: result.detail
         });
+    },
+
+    rangeSelected: function(result) {
+        this.setData({
+            current_page: 0,
+            range_value: result.detail,
+        });      
+    },
+
+    typeSelected: function(result) {
+        this.setData({
+            current_page: 0,
+            type_value: result.detail,
+        });      
+    },    
+
+    orderSelected: function(result) {
+        this.setData({
+            current_page: 0,
+            order_value: result.detail,
+        });      
     },
 
     showPopup: function() {
@@ -147,10 +226,6 @@ Page({
             });
     },
 
-    onLoad: function (options) {
-
-    },
-
     // 生命周期函数--监听页面初次渲染完成
     onReady: function () {
 
@@ -173,11 +248,6 @@ Page({
 
     // 页面相关事件处理函数--监听用户下拉动作
     onPullDownRefresh: function () {
-
-    },
-
-    // 页面上拉触底事件的处理函数
-    onReachBottom: function () {
 
     },
 
