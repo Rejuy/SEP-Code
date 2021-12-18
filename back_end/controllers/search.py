@@ -26,7 +26,7 @@ def limited_search():
     
     try:
         info = request.get_json()
-        item_list = search_service.limitedSearch(info['table'], info['like'])
+        item_list = search_service.limitedSearch(info['class'], info['like'])
         return jsonify({'state': 0, 'items': item_list})
     except KeyError:
         return jsonify({'state': -1})

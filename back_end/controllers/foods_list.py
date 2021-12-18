@@ -11,7 +11,7 @@ bp = Blueprint(
 )
 
 
-@bp.route('/api/v1.0/get_foods_list', methods=['POST'])
+@bp.route('/api/v1.0/get_food_list', methods=['POST'])
 def foodsList():
     try:
         print("Enter get_foods_list......")

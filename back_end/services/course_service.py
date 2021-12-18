@@ -47,7 +47,7 @@ def getCoursesList(raw_info):
             new_list[i]['tag'] = ''
             if i + raw_info['begin'] + 1 <= 15:
                 new_list[i]['tag'] = 'TOP' + str(i + raw_info['begin'] + 1)
-            new_list[i]['color'] = COURSE_COLOR[new_list[i]['type']]
+            # new_list[i]['color'] = COURSE_COLOR[new_list[i]['type']]
         print(new_list)
     # course_count = db.getTableCount("course_list")
     return new_list, course_count, result

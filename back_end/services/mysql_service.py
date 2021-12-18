@@ -411,11 +411,12 @@ class MySQLDb:
             self.cursor.execute(count_sql, val)
             # 获得返回值
             count = self.cursor.fetchall()[0][0]
+            count = 0
             # 排序分页的数据量sql
             num_sql = ""
             # 判断是否需要排序，若是则加上排序部分sql语句
             if info['sort_order'] != "not_sort":
-                num_sql += " order by " + info['sort_criteria'] + " "
+                num_sql += " order by " + info['sort_criteria'] + " , id "
                 if info['sort_order'] == 'desc':
                     num_sql += 'desc '
             # 进行分页操作
@@ -834,11 +835,11 @@ class MySQLDb:
         '''
         try:
             # 获得数据
-            sql = "SELECT * FROM (SELECT id, name, star, heat, 'course_list' FROM course_list WHERE name LIKE '%"\
+            sql = "SELECT * FROM (SELECT id, name, star, score, heat, 'course_list' FROM course_list WHERE name LIKE '%"\
                   + info['like']\
-                  + "%' UNION SELECT id, name, star, heat, 'food_list' FROM food_list WHERE name LIKE '%"\
+                  + "%' UNION SELECT id, name, star, score, heat, 'food_list' FROM food_list WHERE name LIKE '%"\
                   + info['like']\
-                  + "%' UNION SELECT id, name, star, heat, 'place_list' FROM place_list WHERE name LIKE '%"\
+                  + "%' UNION SELECT id, name, star, score, heat, 'place_list' FROM place_list WHERE name LIKE '%"\
                   + info['like']\
                   + "%') AS c ORDER BY "
             sql += info['sort_criteria']
