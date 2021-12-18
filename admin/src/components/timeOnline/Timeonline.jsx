@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../../config";
 
 export default function Timeonline() {
   const [count, setCount] = useState(0);
@@ -16,7 +17,7 @@ export default function Timeonline() {
     if (!start) {
       setStart(true);
       axios
-        .get("http://localhost:5000/api/admin/get_online_time")
+        .get(global.config.backendUrl + "/api/admin/get_online_time")
         .then((res) => {
           setCount((new Date() - new Date(res.data.date)) / 1000);
           setInterval(() => {
