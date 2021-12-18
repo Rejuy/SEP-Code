@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import "../../config";
 
 const CustomCard = styled(Card)(({ theme }) => ({
   width: "100%",
@@ -19,7 +20,7 @@ export default function UserChangePlot() {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/admin/get_user_change_monthly")
+      .get(global.config.backendUrl + "/api/admin/get_user_change_monthly")
       .then((res) => {
         var monthlyData = [];
         const resData = res.data.change;

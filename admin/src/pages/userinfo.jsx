@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Container, styled } from "@mui/material";
+import { CircularProgress, Container, styled, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "../config";
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   paddingTop: theme.spacing(12),
@@ -10,21 +11,38 @@ const CustomContainer = styled(Container)(({ theme }) => ({
 
 export default function Userinfo() {
   const { uid } = useParams();
-  const [loadjsx, setLoadJsx] = useState(<></>);
+  const [userData, setUserData] = useState(null);
+  const loadingJsx = (
+    <div
+      className="loading"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Typography variant="h5">Loading User</Typography>
+      <CircularProgress />
+    </div>
+  );
+
+  const dataJsx = <div>Data</div>;
 
   useEffect(() => {
     axios
-      .post("http://localhost:5000/api/admin/user", { id: uid })
+      .post(global.config.backendUrl + "/api/admin/user", { id: uid })
       .then((res) => {
-        const userData = res.data.user;
-        setLoadJsx(
-          <div>
-            Id: {userData.id}, Username : {userData.username}
-          </div>
-        );
+        setUserData(res.data.user);
       })
       .catch((err) => console.log(err));
   }, [uid]);
 
-  return <CustomContainer>{loadjsx}</CustomContainer>;
+  return (
+    <CustomContainer
+      style={{ display: "flex", justifyContent: "space-evenly" }}
+    >
+      {userData ? dataJsx : loadingJsx}
+    </CustomContainer>
+  );
 }

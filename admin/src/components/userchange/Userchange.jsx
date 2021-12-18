@@ -9,15 +9,18 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../../config";
 
 export default function UserChange() {
   const [count, setcount] = useState(0);
   const [percent, setpercent] = useState(0);
   useEffect(() => {
-    axios.get("http://localhost:5000/api/admin/get_user_change").then((res) => {
-      setcount(res.data.change);
-      setpercent(res.data.percent);
-    });
+    axios
+      .get(global.config.backendUrl + "/api/admin/get_user_change")
+      .then((res) => {
+        setcount(res.data.change);
+        setpercent(res.data.percent);
+      });
   }, []);
   return (
     <Card>
