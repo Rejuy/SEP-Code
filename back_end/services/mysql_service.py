@@ -411,11 +411,12 @@ class MySQLDb:
             self.cursor.execute(count_sql, val)
             # 获得返回值
             count = self.cursor.fetchall()[0][0]
+            count = 0
             # 排序分页的数据量sql
             num_sql = ""
             # 判断是否需要排序，若是则加上排序部分sql语句
             if info['sort_order'] != "not_sort":
-                num_sql += " order by " + info['sort_criteria'] + " "
+                num_sql += " order by " + info['sort_criteria'] + " , id "
                 if info['sort_order'] == 'desc':
                     num_sql += 'desc '
             # 进行分页操作

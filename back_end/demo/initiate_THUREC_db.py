@@ -24,6 +24,10 @@ if __name__ == "__main__":
     )
     mycursor = mydb.cursor()
     print("测试")
+    sql = 'SELECT id, name, teacher, department, type, star, score FROM course_list order by star LIMIT 0,16 '
+    #order by star
+    mycursor.execute(sql)
+    print(mycursor.fetchall())
     #mycursor.execute("CREATE TABLE comment (id INT AUTO_INCREMENT PRIMARY KEY, class TINYINT, content_id INT, from_user_id INT, like_count INT, upper_comment_id INT, lower_comment_count INT, time DATETIME, star FLOAT, text TEXT, deleted TINYINT)")
     #sql = "INSERT INTO place_list (name, range) VALUES (%s, %s)"
     #val = ('第二教室楼', 1)
@@ -32,11 +36,11 @@ if __name__ == "__main__":
     #mydb.commit()
     #sql = "UPDATE course_list SET comment_count = 1, credit = 2, heat = 0 WHERE id = 1"
     #sql = "SELECT place_list.name, food_list.name, course_list.name FROM place_list, food_list, course_list WHERE place_list.name LIKE '%清%' OR food_list.name LIKE '%清%' OR course_list.name LIKE '%清%'"
-    sql = "select * from (select name, star, 'course_list' from course_list where name like '%清%' " \
-          "union select id, name, star, 'place_list' from place_list where name like '%清%' " \
-          "union select id, name, star, 'food_list' from food_list where name like '%汉堡%') as c order by star desc"
-    mycursor.execute(sql)
-    print(mycursor.fetchall())
+    #sql = "select * from (select name, star, 'course_list' from course_list where name like '%清%' " \
+     #     "union select id, name, star, 'place_list' from place_list where name like '%清%' " \
+      #    "union select id, name, star, 'food_list' from food_list where name like '%汉堡%') as c order by star desc"
+    #mycursor.execute(sql)
+    #print(mycursor.fetchall())
     """
     mycursor.execute("alter table destination_content default character set utf8")
     mycursor.execute("alter table destination_content change name name varchar(255) character set utf8")
