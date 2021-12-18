@@ -2,7 +2,7 @@
     <van-search value="{{ search_value }}" bind:search="onSearch" background="#82318E" placeholder="请输入搜索关键词"></van-search>
 
     <view class="create">
-        <van-button color="#07C160" icon="add-o" block bindtap="publishRecommendation">写点什么</van-button>
+        <van-button color="#07C160" icon="add-o" block bindtap="showPopup">写点什么</van-button>
         <van-button color="#1989FA" icon="star-o" block>我的创作</van-button>
 
         <van-popup closeable position="bottom" custom-style="height: 85%" show="{{ show_popup }}" bind:close="closePopup">
@@ -40,7 +40,7 @@
                 default-index="{{ 0 }}" 
                 visible-item-count="{{ 2 }}"
                 title="{{ food_range_title }}"
-                columns="{{ range_for_create }}" 
+                columns="{{ range_table }}" 
                 bind:confirm="editFoodRange"
                 bind:cancel="cancelFoodRange">
                 </van-picker>
@@ -49,7 +49,7 @@
                 default-index="{{ 9 }}" 
                 visible-item-count="{{ 6 }}"               
                 title="{{ food_type_title }}"
-                columns="{{ inside_type_for_create }}" 
+                columns="{{ inside_type_table }}" 
                 bind:confirm="editFoodType"
                 bind:cancel="cancelFoodType"
                 wx:if="{{ edit_range_value == 1 }}">
@@ -59,7 +59,7 @@
                 default-index="{{ 2 }}" 
                 visible-item-count="{{ 4 }}"
                 title="{{ food_type_title }}"
-                columns="{{ outside_type_for_create }}" 
+                columns="{{ outside_type_table }}" 
                 bind:confirm="editFoodType"
                 bind:cancel="cancelFoodType"
                 wx:if="{{ edit_range_value == 2 }}">
@@ -72,9 +72,9 @@
     </view>
     
     <van-dropdown-menu active-color="#1989fa" :color="red">
-        <van-dropdown-item value="{{ range_value }}" options="{{ range_type }}" bind:change="rangeSelected"/>
-        <van-dropdown-item value="{{ food_value }}" options="{{ food_type }}" disabled="{{ uncertain_range }}"/>
-        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" />
+        <van-dropdown-item value="{{ range_value }}" options="{{ range }}" bind:change="rangeSelected"/>
+        <van-dropdown-item value="{{ type_value }}" options="{{ type }}" disabled="{{ uncertain_range }}"/>
+        <van-dropdown-item value="{{ order_value }}" options="{{ order }}" />
     </van-dropdown-menu>    
 
     <view wx:for="{{ food_list }}" wx:key="id">

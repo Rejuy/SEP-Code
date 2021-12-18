@@ -4,44 +4,44 @@ import Dialog from '@vant/weapp/dialog/dialog';
 
 Page({
     data: {
-        range_type: [
+        range: [
             { text: '全部餐饮', value: 0 },
             { text: '校内餐饮', value: 1 },
             { text: '校外餐饮', value: 2 },
         ],
-        food_type: [
+        
+        type: [
             { text: '任意类型', value: 0 },
         ],
-        rank_type: [
+
+        order: [
             { text: '评分排序', value: 0 },
             { text: '热度排序', value: 1 },
             { text: '时间排序', value: 2 },
         ],
 
-        range_for_create: ['校内餐饮', '校外餐饮'],
-        outside_type_for_create: ['汉堡披萨','龙虾烧烤','香锅火锅','米线拉面','日韩料理','简餐便当','各类饮品',],
-        inside_type_for_create: ['家园','甲所','寓园','融园','澜园','荷园','北园','南园','桃李园','紫荆园','清芬园','听涛园','观畴园','玉树园','芝兰园','丁香园','熙春园','清真食堂',],
+        image_url: "https://z3.ax1x.com/2021/12/03/odK6aD.jpg",
+
+        range_table: ['校内餐饮', '校外餐饮'],
+        outside_type_table: ['汉堡披萨','龙虾烧烤','香锅火锅','米线拉面','日韩料理','简餐便当','各类饮品',],
+        inside_type_table: ['家园','甲所','寓园','融园','澜园','荷园','北园','南园','桃李园','紫荆园','清芬园','听涛园','观畴园','玉树园','芝兰园','丁香园','熙春园','清真食堂',],
 
         search_value: '',
         range_value: 0,
-        food_value: 0,
-        rank_value: 0,
+        type_value: 0,
+        order_value: 0,
         uncertain_range: true,
 
         edit_food_name: '',
         edit_food_position: '',
         edit_business_hours: '',
-
         edit_range_value: 0,
         edit_food_type: '',
-
         food_range_title: '选择范围',
         food_type_title: '选择类型',
 
-        image_url: "https://z3.ax1x.com/2021/12/03/odK6aD.jpg",
-
-        current_page: 0,
         total_pages: 0,
+        current_page: 0,
         show_popup: false,
 
         food_list: [
@@ -65,16 +65,16 @@ Page({
         });
     },
 
+    showPopup: function() {
+        this.setData({
+            show_popup: true
+        })
+    },
+
     closePopup: function() {
         this.setData({
             show_popup: false
         });
-    },
-
-    publishRecommendation: function() {
-        this.setData({
-            show_popup: true
-        })
     },
 
     editFoodRange: function(event) {
@@ -178,7 +178,7 @@ Page({
             ];
             this.setData({
                 uncertain_range: false,
-                food_type: inside_food_type
+                type: inside_food_type,
             });            
         }else if(tmp_value == this.marco.OUTSIDE_CAMPUS) {
             let outside_food_type = [
@@ -193,7 +193,7 @@ Page({
             ];
             this.setData({
                 uncertain_range: false,
-                food_type: outside_food_type
+                type: outside_food_type,
             });   
         }else {
             let default_food_type = [
@@ -201,7 +201,7 @@ Page({
             ];
             this.setData({
                 uncertain_range: true,
-                food_type: default_food_type
+                type: default_food_type,
             });   
         }
     },
@@ -211,58 +211,43 @@ Page({
           url: '../food_item/food_item',
         })
     },
-    /**
-     * 生命周期函数--监听页面加载
-     */
+
+    // 生命周期函数--监听页面加载
     onLoad: function (options) {
 
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
+    // 生命周期函数--监听页面初次渲染完成
     onReady: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
+    // 生命周期函数--监听页面显示
     onShow: function () {
         
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
+    // 生命周期函数--监听页面隐藏
     onHide: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
+    // 生命周期函数--监听页面卸载
     onUnload: function () {
 
     },
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
+    // 页面相关事件处理函数--监听用户下拉动作
     onPullDownRefresh: function () {
 
     },
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
+    // 页面上拉触底事件的处理函数
     onReachBottom: function () {
 
     },
 
-    /**
-     * 用户点击右上角分享
-     */
+    // 用户点击右上角分享
     onShareAppMessage: function () {
 
     }

@@ -10,7 +10,15 @@ Page({
         url: "../notice/notice",
         path: "https://s3.bmp.ovh/imgs/2021/12/d4d723c1a40f1385.jpg"
       }
-    ]
+    ],
+
+    search_value: '',
+  },
+
+  onSearch: function(result) {
+    this.setData({
+        search_value: result.detail
+    });
   },
 
   /*

@@ -9,19 +9,19 @@
         <view class="information">
             <view class="attribute">
                 <text class="attribute_name">课程名：</text>
-                <text class="attribute_value">{{course_name}}</text>
+                <text class="attribute_value">{{ course_name }}</text>
             </view>
             <view class="attribute">
                 <text class="attribute_name">课程学分：</text>
-                <text class="attribute_value">{{course_credit}}</text>
+                <text class="attribute_value">{{ course_credit }}</text>
             </view>
             <view class="attribute">
                 <text class="attribute_name">主讲教师：</text>
-                <text class="attribute_value">{{course_teacher}}</text>
+                <text class="attribute_value">{{ course_teacher }}</text>
             </view>
             <view class="attribute">
                 <text class="attribute_name">开课时间：</text>
-                <text class="attribute_value">{{course_schedule}}</text>
+                <text class="attribute_value">{{ course_schedule }}</text>
             </view>
             <view class="tags">
                 <van-tag type="primary" size="medium">{{ course_department }}</van-tag>

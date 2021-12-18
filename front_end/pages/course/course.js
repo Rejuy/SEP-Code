@@ -4,7 +4,19 @@ import Dialog from '@vant/weapp/dialog/dialog';
 
 Page({
     data: {
-        department_type: [
+        type: [
+            { text: '全部课程', value: 0 },
+            { text: '专业课', value: 1 },
+            { text: '数理课', value: 2 },
+            { text: '外文课', value: 3 },
+            { text: '实验课', value: 4 },
+            { text: '体育课', value: 5 },
+            { text: '思政课', value: 6 },
+            { text: '文核课', value: 7 },
+            { text: '文素课', value: 8 },
+        ],
+
+        department: [
             { text: '任意院系', value: 0 },
             { text: '车辆学院', value: 1 },
             { text: '材料学院', value: 2 },
@@ -56,31 +68,25 @@ Page({
             { text: '自动化系', value: 48 },
             { text: '其他开课单位', value: 49 },
         ],
-        course_type: [
-            { text: '全部课程', value: 0 },
-            { text: '专业课', value: 1 },
-            { text: '数理课', value: 2 },
-            { text: '外文课', value: 3 },
-            { text: '实验课', value: 4 },
-            { text: '体育课', value: 5 },
-            { text: '思政课', value: 6 },
-            { text: '文核课', value: 7 },
-            { text: '文素课', value: 8 },
-        ],
-        rank_type: [
+
+        order: [
             { text: '评分排序', value: 0 },
             { text: '热度排序', value: 1 },
             { text: '时间排序', value: 2 },
         ],
-        
-        schedule_for_create: ['春季学期', '夏季学期', '秋季学期', '春、秋季学期'],
-        type_for_create: ['专业课', '数理课', '外文课', '实验课', '体育课', '思政课', '文核课', '文素课'],
-        department_for_create: ['车辆学院','材料学院','电机系','电子系','法学院','工物系','公管学院','工业工程系','航院','化学系','化工系','环境学院','机械系','经管学院','金融学院','建筑学院','计算机系','交叉信息院','集成电路学院','美术学院','马克思主义学院','能动系','求真书院','清华-伯克利深圳学院','日新书院','软件学院','人文学院','数学系','水利系','社科学院','生命学院','苏世民书院','土木系','体育部','土水学院','外文系','物理系','未央书院','新雅书院','行健书院','新闻学院','训练中心','医学院','药学院','语言中心','艺教中心','致理书院','自动化系','其他开课单位'],
+
+        image_url: "https://learn.tsinghua.edu.cn/b/wlxt/kc/v_kcxx_jskcxx/teacher/showImageById?wlkcid=2021-2022-1142764790&_csrf=d39592c7-bbb0-416a-affb-a39b1ab00ba4",
+
+        init_flag: true,
+        type_table: [],
+        department_table: [],
+        schedule_table: ['春季学期', '夏季学期', '秋季学期', '春、秋季学期'],
+        color_table: ['', '#228B22', '#000000', '#FFA500', '#8B4513', '#9400D3', '#DC143C', '#0000FF', '#FF1493'],
 
         search_value: '',
+        type_value: 0,
         department_value: 0,
-        course_value: 0,
-        rank_value: 0,
+        order_value: 0,
 
         edit_course_name: '',
         edit_course_teacher: '',
@@ -88,40 +94,81 @@ Page({
         edit_course_schedule: '',
         edit_course_type: '',
         edit_course_department: '',
-
         course_schedule_title: '开课时间',
         course_type_title: '课程类型',
         course_department_title: '开课院系',
 
-        image_url: "https://learn.tsinghua.edu.cn/b/wlxt/kc/v_kcxx_jskcxx/teacher/showImageById?wlkcid=2021-2022-1142764790&_csrf=d39592c7-bbb0-416a-affb-a39b1ab00ba4",
-
-        current_page: 0,
         total_pages: 0,
+        current_page: 0,
         show_popup: false,
-
-        courses_list: [
-            { id: 1, name: '软件工程', teacher: '刘强', department: '软件学院', type: '专业课', star: 5.0, score: 10.0, tag: 'TOP1', color: '#228B22'},
-            { id: 2, name: '概率论与数理统计', teacher: '梁恒', department: '数学系', type: '数理课', star: 4.0, score: 8.1, tag: '', color: '#000000'},
-            { id: 3, name: '美国社会与文化', teacher: 'TULP RUSSELL ALAN', department: '语言中心', type: '外文课', star: 4.5, score: 9.5, tag: 'TOP15', color: '#FFA500' },  
-            { id: 4, name: '物理实验B(2)', teacher: '梁昌林', department: '物理系', type: '实验课', star: 0.0, score: 0.4, tag: '', color: '#8B4513' },  
-            { id: 5, name: '二年级男生散手', teacher: '马勇志', department: '体育部', type: '体育课', star: 3.5, score: 7.3, tag: '', color: '#9400D3' },    
-            { id: 7, name: '不朽的艺术：走进大师与经典', teacher: '孙晶', department: ' 人文学院', type: '文核课', star: 5.0, score: 9.7, tag: 'TOP8', color: '	#0000FF' },   
-            { id: 8, name: '亲密关系：爱情、婚姻与心理学', teacher: '廖江群', department: '社科学院', type: '文素课', star: 4.0, score: 8.2, tag: '', color: '#FF1493' },   
-        ]
+        
+        courses_list: [],
     },
 
     marco: {
         PAGE_CAPACITY: 8,
-        SCORE_DESCENDING_ORDER: 100,
-        POPULARITY_DESCENDING_ORDER: 200,
-        TIME_DESCENDING_ORDER: 300,
-        SCORE_ASCENDING_ORDER: -100,
-        POPULARITY_ASCENDING_ORDER: -200,
-        TIME_ASCENDING_ORDER: -300,
-
         DEFAULT_SCHEDULE_TITLE: '开课时间',
         DEFAULT_TYPE_TITLE: '课程类型',
         DEFAULT_DEPARTMENT_TITLE: '开课院系',
+    },
+
+    onLoad: function () {
+        this.getCourseList();
+    },
+
+    onReachBottom: function () {
+        if(this.data.current_page >= this.data.total_pages) {
+            console.log("已无下一页数据");
+        }else {
+            this.data.current_page ++;
+            this.getCourseList();
+        }
+    },
+
+    getCourseList: function() {
+        const app = getApp();
+        let begin = this.data.current_page * this.marco.PAGE_CAPACITY;
+        let end = begin + this.marco.PAGE_CAPACITY - 1;
+
+        wx.request({
+          url: app.global_data.global_domain + '/api/v1.0/get_courses_list',
+          method: 'POST',  
+          data: {
+              begin: begin,
+              end: end,
+              course_type: this.data.type_value,
+              course_department: this.data.department_value,
+              course_order: this.data.order_value
+          },
+          dataType: JSON,
+          enableCache: true,
+          enableHttp2: true,
+          enableQuic: true,
+          header: {
+            "content-type": "application/json"
+          },
+          timeout: 0,
+          success: (result) => {
+              let rtn = JSON.parse(result.data);
+              let array_length = rtn.courses.length;
+              for(let i = 0; i < array_length; i ++) {
+                  let tmp_type_value = rtn.courses[i].type;
+                  let tmp_department_value = rtn.courses[i].department;
+                  rtn.courses[i].color = this.data.color_table[tmp_type_value];
+                  rtn.courses[i].type = this.data.type[tmp_type_value].text;
+                  rtn.courses[i].department = this.data.department[tmp_department_value].text;
+              }
+              this.data.courses_list.push.apply(this.data.courses_list, rtn.courses);
+              this.data.total_pages = Math.ceil(rtn.total_courses / this.marco.PAGE_CAPACITY) - 1;
+
+              this.setData({
+                  courses_list: this.data.courses_list,
+                  total_pages: this.data.total_pages,
+              })
+          }, fail: (error) => {
+              console.log(error);
+          }, complete: (res) => {},
+        })
     },
 
     onSearch: function(result) {
@@ -130,16 +177,57 @@ Page({
         });
     },
 
+    typeSelected: function(result) {
+        this.setData({
+            current_page: 0,
+            type_value: result.detail,
+        });        
+    },
+
+    departmentSelected: function(result) {
+        this.setData({
+            current_page: 0,
+            department_value: result.detail
+        });     
+    },
+
+    orderSelected: function(result) {
+        this.setData({
+            current_page: 0,
+            order_value: result.detail
+        });
+    },
+
+    viewCourseItem: function() {
+        wx.navigateTo({
+          url: '../course_item/course_item',
+        })
+    },
+
+    showPopup: function() {
+        if(this.data.init_flag) {
+            let tmp_type_table = [...this.data.type];
+            let tmp_department_table = [...this.data.department];
+            
+            tmp_type_table.shift();
+            tmp_department_table.shift();
+
+            this.setData({
+                init_flag: false,
+                type_table: tmp_type_table,
+                department_table: tmp_department_table,
+            })
+        }
+
+        this.setData({
+            show_popup: true,
+        })
+    },
+
     closePopup: function() {
         this.setData({
             show_popup: false
         });
-    },
-
-    publishRecommendation: function() {
-        this.setData({
-            show_popup: true
-        })
     },
 
     editCourseSchedule: function(event) {
@@ -155,8 +243,8 @@ Page({
     editCourseType: function(event) {
         const { value } = event.detail;
         this.setData({
-            edit_course_type: value,
-            course_type_title: value
+            edit_course_type: value.text,
+            course_type_title: value.text,
         });
         Toast.success('设置成功');
         console.log(this.data.edit_course_type);
@@ -165,8 +253,8 @@ Page({
     editCourseDepartment: function(event) {
         const { value } = event.detail;
         this.setData({
-            edit_course_department: value,
-            course_department_title: value
+            edit_course_department: value.text,
+            course_department_title: value.text,
         });
         Toast.success('设置成功');
         console.log(this.data.edit_course_department);
@@ -220,121 +308,32 @@ Page({
             });
     },
 
-    courseTypeSelected: function(result) {
-        this.setData({
-            course_value: result.detail
-        });        
-        console.log("course_value ", this.data.course_value);
-    },
-
-    departmentTypeSelected: function(result) {
-        this.setData({
-            department_value: result.detail
-        });     
-        console.log("department_value ", this.data.department_value);
-    },
-
-    rankTypeSelected: function(result) {
-        this.setData({
-            rank_value: result.detail
-        });
-        console.log("rank_value ", this.data.rank_value);  
-    },
-
-    viewCourseItem: function() {
-        wx.navigateTo({
-          url: '../course_item/course_item',
-        })
-    },
-
-    getCourseList: function() {
-        let begin = this.data.current_page * PAGE_CAPACITY;
-        let end = begin + PAGE_CAPACITY;
-
-        wx.request({
-          url: 'url',
-          method: 'GET',  
-          data: {
-              begin: begin,
-              end: end,
-              course_type: this.data.course_value,
-              course_department: this.data.department_value,
-              course_order: this.marco.SCORE_DESCENDING_ORDER
-          },
-          dataType: JSON,
-          enableCache: true,
-          enableHttp2: true,
-          enableQuic: true,
-          header: {
-            "content-type": "application/json"
-          },
-          timeout: 0,
-          success: (result) => {
-              console.log(result);
-              // 在此处完成开课院系和int的转换, type = hash_table[i]
-          }, fail: (error) => {
-              console.log(error);
-          }, complete: (res) => {},
-        })
-    },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
+    // 生命周期函数--监听页面初次渲染完成
     onReady: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
+    // 生命周期函数--监听页面显示
     onShow: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
+    // 生命周期函数--监听页面隐藏
     onHide: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
+    // 生命周期函数--监听页面卸载
     onUnload: function () {
 
     },
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
+    // 页面相关事件处理函数--监听用户下拉动作
     onPullDownRefresh: function () {
 
     },
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-        if(this.data.current_page >= this.data.total_pages) {
-            console.log("已无下一页数据");
-        }else {
-            this.data.current_page ++;
-            // 更新 coursers_list
-        }
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
+    // 用户点击右上角分享
     onShareAppMessage: function () {
 
     }

@@ -3,7 +3,7 @@
     </van-search>
 
     <view class="create">
-        <van-button color="#07C160" icon="add-o" block bindtap="publishRecommendation">写点什么</van-button>
+        <van-button color="#07C160" icon="add-o" block bindtap="showPopup">写点什么</van-button>
         <van-button color="#1989FA" icon="star-o" block>我的创作</van-button>
 
         <van-popup closeable position="bottom" custom-style="height: 85%" show="{{ show_popup }}" bind:close="closePopup">
@@ -15,7 +15,7 @@
                     icon="question-o"
                     placeholder="请输入课程名"
                     bind:click-icon="editCourseNameTips"
-                    model:value="{{ edit_course_name }}"
+                    model:value="{{ edit_name }}"
                 />
 
                 <van-field
@@ -39,7 +39,7 @@
                 title="{{ course_schedule_title }}" 
                 default-index="{{ 1 }}" 
                 visible-item-count="{{ 4 }}"
-                columns="{{ schedule_for_create }}" 
+                columns="{{ schedule_table }}" 
                 bind:confirm="editCourseSchedule"
                 bind:cancel="cancelEditSchedule">
                 </van-picker>
@@ -47,7 +47,7 @@
                 <van-picker show-toolbar 
                 title="{{ course_type_title }}"
                 default-index="{{ 4 }}" 
-                columns="{{ type_for_create }}" 
+                columns="{{ type_table }}" 
                 bind:confirm="editCourseType"
                 bind:cancel="cancelEditType">
                 </van-picker>
@@ -55,7 +55,7 @@
                 <van-picker show-toolbar 
                 title="{{ course_department_title }}"
                 default-index="{{ 25 }}" 
-                columns="{{ department_for_create }}" 
+                columns="{{ department_table }}" 
                 bind:confirm="editCourseDepartment"
                 bind:cancel="cancelEditDepartment">
                 </van-picker>
@@ -67,9 +67,9 @@
     </view>
 
     <van-dropdown-menu active-color="#1989fa" :color="red">
-        <van-dropdown-item value="{{ course_value }}" options="{{ course_type }}" bind:change="courseTypeSelected"/>
-        <van-dropdown-item value="{{ department_value }}" options="{{ department_type }}" bind:change="departmentTypeSelected"/>
-        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" bind:change="rankTypeSelected"/>
+        <van-dropdown-item value="{{ type_value }}" options="{{ type }}" bind:change="typeSelected"/>
+        <van-dropdown-item value="{{ department_value }}" options="{{ department }}" bind:change="departmentSelected"/>
+        <van-dropdown-item value="{{ order_value }}" options="{{ order }}" bind:change="orderSelected"/>
     </van-dropdown-menu>
 
     <view wx:for="{{ courses_list }}" wx:key="id">
