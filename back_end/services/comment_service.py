@@ -10,6 +10,7 @@ def getTitle (item_class, item_id):
     return db.getData(table, ["id"], [item_id], ["name"])[0][0]["name"]
 
 def getCommentsByName (user_name, offset, size):
+    print('13')
     info = {
         'key_list': ['class', 'item_id', 'user', 'text', 'image', 'star', 'time', 'likes'],
         'filter': [{'key': 'user', 'value': user_name}],
@@ -17,6 +18,7 @@ def getCommentsByName (user_name, offset, size):
         'index_begin': offset,
         'item_count': size
     }
+    print('23')
     commentState = db.getItemList('comment', info)
     # print(commentState[1])
     commentList = commentState[0]

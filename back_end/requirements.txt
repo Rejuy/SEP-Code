@@ -5,3 +5,4 @@ matplotlib
 gunicorn
 Crypto
 pycrypto
+flask_cors
