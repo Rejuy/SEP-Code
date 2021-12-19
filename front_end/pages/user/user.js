@@ -23,12 +23,14 @@ Page({
   choose_icon() {
     wx.chooseImage({
       count: 1,
-      success: (res) => {
-        const temp_path = res.tempFilePaths[0];
+      success: (res_img) => {
+        const temp_path = res_img.tempFilePaths[0];
+        console.log("img", res_img);
         wx.saveFile({
           tempFilePath: temp_path,
-          success: (r) => {
-            const saved_path = r.savedFilePath;
+          success: (res_save) => {
+            const saved_path = res_save.savedFilePath;
+            console.log("save", res_save);
             wx.uploadFile({
               filePath: saved_path,
               name: 'image',
@@ -36,16 +38,18 @@ Page({
               formData: {
                 'mask': getApp().global_data.global_user_token
               },
-              success: (res) => {
+              success: (res_send) => {
+                console.log("send", res_send);
                 Notify({
                   type: "success",
                   message: "上传成功"
                 });
                 this.setData({
-                  user_icon_path: r.savedFilePath
+                  user_icon_path: saved_path
                 })
               },
-              fail() {
+              fail(err) {
+                console.log(err);
                 Notify({
                   type: "danger",
                   message: "上传失败"
@@ -53,14 +57,22 @@ Page({
               }
             })
           },
-          fail() {
+          fail(err) {
+            console.log(err)
             Notify({
               type: "danger",
-              message: "上传失败"
+              message: "存储失败"
             });
           }
         })
       },
+      fail(err){
+        console.log(err);
+        Notify({
+          type: "danger",
+          message: "选择失败"
+        })
+      }
     })
   },
   onReady() {
