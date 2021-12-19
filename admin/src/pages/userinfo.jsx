@@ -11,7 +11,8 @@ const CustomContainer = styled(Container)(({ theme }) => ({
 
 export default function Userinfo() {
   const { uid } = useParams();
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
+  const [dataJsx, setDataJsx] = useState(<></>);
   const loadingJsx = (
     <div
       className="loading"
@@ -27,7 +28,14 @@ export default function Userinfo() {
     </div>
   );
 
-  const dataJsx = <div>Data</div>;
+  useEffect(() => {
+    setDataJsx(
+      <div>
+        id: {userData.id}, username: {userData.username}, email:{" "}
+        {userData.email}, activated: {userData.activated}
+      </div>
+    );
+  }, [userData]);
 
   useEffect(() => {
     axios
