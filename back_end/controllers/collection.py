@@ -3,6 +3,8 @@ from flask import Blueprint, jsonify, request
 from services.collection_service import modifyUserCollection
 from headers import *
 from services.code_service import coder
+from services.mysql_service import db
+
 
 bp = Blueprint(
     'collection',
@@ -25,6 +27,7 @@ def modifyCollection():
     }
     """
     try:
+        db.reconnectDatabase()
         raw_info = request.get_json()
         raw_info['user_id'] = coder.decode(raw_info['mask'])
         modifyUserCollection(raw_info)

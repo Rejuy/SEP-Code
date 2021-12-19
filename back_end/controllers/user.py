@@ -6,6 +6,8 @@ from headers import *
 from services.code_service import coder
 from services.id_to_name_service import getNameByID
 from services.code_service import coder
+from services.mysql_service import db
+
 
 bp = Blueprint(
     'user',
@@ -17,6 +19,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/save_user_icon', methods=['POST'])
 def save_user_icon():
     try:
+        db.reconnectDatabase()
         user_id = coder.decode(request.form['mask'])
         imageFileStorage = request.files['image']
         filepath = saveImage(imageFileStorage)
@@ -28,6 +31,7 @@ def save_user_icon():
 @bp.route('/api/v1.0/get_user_icon', methods=['POST'])
 def get_user_icon():
     try:
+        db.reconnectDatabase()
         user_id = coder.decode(request.get_json()['mask'])
         print(user_id)
         filepath = getProfilePicture(user_id)
@@ -38,6 +42,7 @@ def get_user_icon():
 @bp.route('/api/v1.0/get_user_info', methods=['POST'])
 def get_user_info():
     try:
+        db.reconnectDatabase()
         user_id = coder.decode(request.get_json()['mask'])
         user_info = getUserInfo(user_id)
         return jsonify({'state': 0, 'user': user_info}), 200
@@ -48,6 +53,7 @@ def get_user_info():
 @bp.route('/api/v1.0/get_user_favorites', methods=['POST'])
 def get_user_favorites():
     try:
+        db.reconnectDatabase()
         user_id = coder.decode(request.get_json()['mask'])
         user_info = getUserFavorite(user_id)
         return jsonify({'state': 0, 'favorites': user_info}), 200
@@ -58,6 +64,7 @@ def get_user_favorites():
 @bp.route('/api/v1.0/get_user_likes', methods=['POST'])
 def get_user_likes():
     try:
+        db.reconnectDatabase()
         user_id = coder.decode(request.get_json()['mask'])
         user_name = getNameByID(user_id)
         user_info = getUserLike(user_name)
@@ -69,6 +76,7 @@ def get_user_likes():
 @bp.route('/api/v1.0/get_user_items', methods=['POST'])
 def get_user_items():
     try:
+        db.reconnectDatabase()
         info = request.get_json()
         user_id = coder.decode(info['mask'])
         user_items = getUserItems(user_id, info['class'])

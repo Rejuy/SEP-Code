@@ -39,7 +39,7 @@ USER_KEY = ["id", "user_name", "password", "email", "account_birth", "collection
 # 插入时所需键值
 INSERT_USER_KEY = ["user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "item_count", "activated"]
 # 获取user表的时候所需的键值
-ADMIN_GET_USER_KEY = ['id', 'user_name', 'email', 'account_birth', 'collection_count', 'like_count', 'comment_count', 'item_count', 'activated']
+ADMIN_GET_USER_KEY = ['id', 'user_name', 'email', 'account_birth', 'collection_count', 'like_count', 'comment_count', 'item_count', 'activated', "image"]
 
 # courses表
 # 所有key值

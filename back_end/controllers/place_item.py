@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify, request
 from services.place_service import getPlaceItem
 from headers import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -14,6 +15,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/get_place_item', methods=['POST'])
 def placeItem():
     try:
+        db.reconnectDatabase()
         info = request.get_json()
         if info is None:
             return jsonify({'item': {}}), 400
