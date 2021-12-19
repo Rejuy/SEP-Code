@@ -5,6 +5,8 @@ from services import register_user_service
 from headers import *
 from io import BytesIO
 import matplotlib.pyplot as plt
+from services.mysql_service import db
+
 
 bp = Blueprint(
     'feedback',
@@ -16,6 +18,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/post_user_feedback', methods=['POST'])
 def postUserFeedback():
     try:
+        db.reconnectDatabase()
         user_info = request.get_json()
         # print(user_info)
         user_text = user_info['user_text']

@@ -17,6 +17,12 @@ class MySQLDb:
         # 通过 cursor() 创建游标对象
         self.cursor = self.connection.cursor()
 
+    def reconnectDatabase(self):
+        self.connection.reconnect(attempts=1, delay=0)
+
+    def disconnectDatabase(self):
+        self.connection.close()
+
     def checkUserExistence(self, email):
         try:
             sql = "SELECT * FROM user WHERE email = %s"

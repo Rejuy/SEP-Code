@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify, request
 from services import admin_service
 from headers import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -14,6 +15,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/admin_get_user_count', methods=['POST'])
 def adminGetUserCount():
     try:
+        db.reconnectDatabase()
         user_info = request.get_json()
         if user_info is None:
             return jsonify({'status': 1, 'user_count': -1}), 400

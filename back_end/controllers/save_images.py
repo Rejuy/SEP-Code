@@ -6,6 +6,8 @@ from services.save_image_service import saveImage
 from headers import *
 from io import BytesIO
 import matplotlib.pyplot as plt
+from services.mysql_service import db
+
 
 bp = Blueprint(
     'savefile',
@@ -17,6 +19,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/save_images', methods=['POST'])
 def save_images():
     try:
+        db.reconnectDatabase()
         imageFileStorage = request.files['image']
         filepath = saveImage(imageFileStorage)
         return filepath
