@@ -176,27 +176,48 @@ Page({
         this.setData({
             search_value: result.detail
         });
+        wx.request({
+          url: 'url',
+          data: data,
+          dataType: dataType,
+          enableCache: true,
+          enableHttp2: true,
+          enableQuic: true,
+          header: header,
+          method: method,
+          responseType: responseType,
+          timeout: 0,
+          success: (result) => {},
+          fail: (res) => {},
+          complete: (res) => {},
+        })
     },
 
     typeSelected: function(result) {
         this.setData({
             current_page: 0,
+            courses_list: [],
             type_value: result.detail,
-        });        
+        });      
+        this.getCourseList();  
     },
 
     departmentSelected: function(result) {
         this.setData({
             current_page: 0,
+            courses_list: [],
             department_value: result.detail
         });     
+        this.getCourseList();  
     },
 
     orderSelected: function(result) {
         this.setData({
             current_page: 0,
+            courses_list: [],
             order_value: result.detail
         });
+        this.getCourseList();  
     },
 
     viewCourseItem: function() {

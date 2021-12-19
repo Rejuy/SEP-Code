@@ -133,22 +133,79 @@ Page({
     rangeSelected: function(result) {
         this.setData({
             current_page: 0,
+            food_list: [],
             range_value: result.detail,
-        });      
+        });
+        let tmp_value = this.data.range_value;
+        if(tmp_value == this.marco.INSIDE_CAMPUS) {
+            let inside_food_type = [
+                { text: '任意食堂', value: 0 },
+                { text: '家园', value: 1 },
+                { text: '甲所', value: 2 },
+                { text: '寓园', value: 3 },
+                { text: '融园', value: 4 },
+                { text: '澜园', value: 5 },
+                { text: '荷园', value: 6 },
+                { text: '北园', value: 7 },
+                { text: '南园', value: 8 },
+                { text: '桃李园', value: 9 },
+                { text: '紫荆园', value: 10 },
+                { text: '清芬园', value: 11 },
+                { text: '听涛园', value: 12 },
+                { text: '观畴园', value: 13 },
+                { text: '玉树园', value: 14 },
+                { text: '芝兰园', value: 15 },
+                { text: '丁香园', value: 16 },
+                { text: '熙春园', value: 17 },
+                { text: '清真食堂', value: 18 },
+            ];
+            this.setData({
+                uncertain_range: false,
+                type: inside_food_type,
+            });            
+        }else if(tmp_value == this.marco.OUTSIDE_CAMPUS) {
+            let outside_food_type = [
+                { text: '任意类型', value: 0 },
+                { text: '汉堡披萨', value: 1 },
+                { text: '龙虾烧烤', value: 2 },
+                { text: '香锅火锅', value: 3 },
+                { text: '米线拉面', value: 4 },
+                { text: '日韩料理', value: 5 },
+                { text: '简餐便当', value: 6 },
+                { text: '各类饮品', value: 7 },
+            ];
+            this.setData({
+                uncertain_range: false,
+                type: outside_food_type,
+            });   
+        }else {
+            let default_food_type = [
+                { text: '任意类型', value: 0 },
+            ];
+            this.setData({
+                uncertain_range: true,
+                type: default_food_type,
+            });   
+        }
+        this.getFoodList();
     },
 
     typeSelected: function(result) {
         this.setData({
             current_page: 0,
+            food_list: [],
             type_value: result.detail,
         });      
+        this.getFoodList();
     },    
 
     orderSelected: function(result) {
         this.setData({
             current_page: 0,
+            food_list: [],
             order_value: result.detail,
-        });      
+        });   
+        this.getFoodList();   
     },
 
     showPopup: function() {
@@ -232,64 +289,6 @@ Page({
             }).catch(() => {
               // on cancel
             });
-    },
-
-    rangeSelected: function(result) {
-        this.setData({
-            range_value: result.detail
-        });
-        let tmp_value = this.data.range_value;
-        
-        if(tmp_value == this.marco.INSIDE_CAMPUS) {
-            let inside_food_type = [
-                { text: '任意食堂', value: 0 },
-                { text: '家园', value: 1 },
-                { text: '甲所', value: 2 },
-                { text: '寓园', value: 3 },
-                { text: '融园', value: 4 },
-                { text: '澜园', value: 5 },
-                { text: '荷园', value: 6 },
-                { text: '北园', value: 7 },
-                { text: '南园', value: 8 },
-                { text: '桃李园', value: 9 },
-                { text: '紫荆园', value: 10 },
-                { text: '清芬园', value: 11 },
-                { text: '听涛园', value: 12 },
-                { text: '观畴园', value: 13 },
-                { text: '玉树园', value: 14 },
-                { text: '芝兰园', value: 15 },
-                { text: '丁香园', value: 16 },
-                { text: '熙春园', value: 17 },
-                { text: '清真食堂', value: 18 },
-            ];
-            this.setData({
-                uncertain_range: false,
-                type: inside_food_type,
-            });            
-        }else if(tmp_value == this.marco.OUTSIDE_CAMPUS) {
-            let outside_food_type = [
-                { text: '任意类型', value: 0 },
-                { text: '汉堡披萨', value: 1 },
-                { text: '龙虾烧烤', value: 2 },
-                { text: '香锅火锅', value: 3 },
-                { text: '米线拉面', value: 4 },
-                { text: '日韩料理', value: 5 },
-                { text: '简餐便当', value: 6 },
-                { text: '各类饮品', value: 7 },
-            ];
-            this.setData({
-                uncertain_range: false,
-                type: outside_food_type,
-            });   
-        }else {
-            let default_food_type = [
-                { text: '任意类型', value: 0 },
-            ];
-            this.setData({
-                uncertain_range: true,
-                type: default_food_type,
-            });   
-        }
     },
 
     viewFoodItem: function() {
