@@ -15,7 +15,9 @@
     
     "pages/course_item/course_item",
     "pages/food_item/food_item",
-    "pages/place_item/place_item"
+    "pages/place_item/place_item",
+
+    "pages/user_comments/user_comments"
   ],
   "window": {
     "backgroundTextStyle": "light",
