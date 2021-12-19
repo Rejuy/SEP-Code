@@ -1,7 +1,9 @@
 from app import createApp
+from flask_cors import CORS
 
 
 app = createApp()
+CORS(app)
 
 #TODO
 #研究flask蓝图模块，重新调整目录结构

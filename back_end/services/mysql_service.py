@@ -191,9 +191,11 @@ class MySQLDb:
         """
         try:
             # 获得数据
+            print(info)
             sql = "SELECT " + self.getKeysStr(ADMIN_GET_USER_KEY) + " FROM user"
             sql += " LIMIT " + str(info['size']) + " OFFSET " + str(info['offset'])
             self.cursor.execute(sql)
+            print(198)
             user_list = self.cursor.fetchall()
             for i in range(len(user_list)):
                 user_list[i] = self.tupleToDict(user_list[i], ADMIN_GET_USER_KEY)
