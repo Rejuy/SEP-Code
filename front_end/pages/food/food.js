@@ -103,14 +103,14 @@ Page({
                   let tmp_range_value = rtn.food[i].scope;
                   let tmp_type_value = rtn.food[i].type - 1;
 
-                  if(tmp_range_value == 0) {
+                  if(tmp_range_value == 1) {
                       rtn.food[i].color = this.marco.THU_PURPLE;
                       rtn.food[i].type = this.data.inside_type_table[tmp_type_value];
                   }else {
                       rtn.food[i].color = this.data.outside_color_table[tmp_type_value];
                       rtn.food[i].type = this.data.outside_type_table[tmp_type_value];
                   }
-                  rtn.food[i].range = this.data.range_table[tmp_range_value];
+                  rtn.food[i].range = this.data.range_table[tmp_range_value - 1];
               }
               this.data.food_list.push.apply(this.data.food_list, rtn.food);
               this.data.total_pages = Math.ceil(rtn.total_food / this.marco.PAGE_CAPACITY) - 1;
