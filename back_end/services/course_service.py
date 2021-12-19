@@ -39,7 +39,7 @@ def getCoursesList(raw_info):
     elif raw_info['course_order'] == 2:
         new_info['sort_criteria'] = 'time'
 
-    if "like" in raw_info.keys():
+    if raw_info['like'] != "":
         new_info['like'] = raw_info['like']
 
     # 获取列表

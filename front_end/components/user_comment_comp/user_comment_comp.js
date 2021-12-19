@@ -48,6 +48,7 @@ Component({
   lifetimes: {
     ready() {
       if (this.properties.is_self) {
+        console.log(this.properties.imageurls);
         this.setData({
           tag: "自己",
         })

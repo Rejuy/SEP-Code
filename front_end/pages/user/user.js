@@ -42,7 +42,7 @@ Page({
                   message: "上传成功"
                 });
                 this.setData({
-                  user_icon_path: res.data.path
+                  user_icon_path: r.savedFilePath
                 })
               },
               fail() {

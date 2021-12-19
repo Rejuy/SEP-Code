@@ -39,7 +39,7 @@ def getFoodsList(raw_info):
     else:
         new_info['sort_criteria'] = 'star'
 
-    if "like" in raw_info.keys():
+    if raw_info['like'] != "":
         new_info['like'] = raw_info['like']
 
     # 获取列表
