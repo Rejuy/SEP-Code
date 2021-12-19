@@ -8,9 +8,9 @@ Page({
             "https://mmbiz.qpic.cn/mmbiz_jpg/HhoEMZZMsiaQgcfIVLkACUh2wiaMRyVkiaaxScRDXzvmA4erdq8HzhF34JzQzH7PsjdZRtgcn51XdE93IIiaCZNqUw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1",
         ],
 
+        // 记得处理下 id, 这次 id 可能有重复, 需要识别是什么类型的，然后改成字符串 eg: id + class
         content_list: [
-            { id: 1, title: '软件工程', desc: '刘强', range: '软件学院', type: '专业课', star: 5.0, score: 10.0, tag: 'TOP1', color: 
-            '#228B22'},
+            { id: 1, title: '软件工程', desc: '刘强', range: '软件学院', type: '专业课', star: 5.0, score: 10.0, tag: 'TOP1', color: '#D8BFD8'},
             { id: 2, title: '汉堡王', desc: '海淀区华清嘉园7号楼', range: '校外餐饮', type: '汉堡披萨', star: 4.0, score: 8.3, tag: 'TOP15', color: '#FF976A'}, 
         ],
     },

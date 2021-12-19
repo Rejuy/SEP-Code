@@ -2,7 +2,7 @@
     <view wx:for="{{ content_list }}" wx:key="id">
         <van-card
         tag="{{ item.tag }}"
-        desc="主讲教师: {{ item.desc }}"
+        desc="{{ item.desc }}"
         title="{{ item.title }}"
         thumb="{{ image_url }}"
         thumb-mode="aspectFill"

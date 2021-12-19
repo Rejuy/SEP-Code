@@ -80,7 +80,7 @@
     <view wx:for="{{ food_list }}" wx:key="id">
         <van-card
         tag="{{ item.tag }}"
-        desc="{{ item.position }}"
+        desc="餐饮方位: {{ item.position }}"
         title="{{ item.name }}"
         thumb="{{ image_url }}"
         thumb-mode="aspectFill"

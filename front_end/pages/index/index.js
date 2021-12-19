@@ -19,6 +19,9 @@ Page({
     this.setData({
         search_value: result.detail
     });
+    wx.redirectTo({
+      url: '../search/search',
+    })
   },
 
   /*

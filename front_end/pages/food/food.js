@@ -84,6 +84,7 @@ Page({
           data: {
               begin: begin,
               end: end,
+              like: this.data.search_value,
               food_scope: this.data.range_value,
               food_type: this.data.type_value,
               food_order: this.data.order_value
@@ -126,8 +127,11 @@ Page({
 
     onSearch: function(result) {
         this.setData({
+            current_page: 0,
+            food_list: [],
             search_value: result.detail
         });
+        this.getFoodList();
     },
 
     rangeSelected: function(result) {

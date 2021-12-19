@@ -85,6 +85,7 @@ Page({
           data: {
               begin: begin,
               end: end,
+              like: this.data.search_value,
               place_scope: this.data.range_value,
               place_type: this.data.type_value,
               place_order: this.data.order_value
@@ -121,8 +122,11 @@ Page({
 
     onSearch: function(result) {
         this.setData({
-            search_value: result.detail
+            current_page: 0,
+            places_list: [],
+            search_value: result.detail,
         });
+        this.getPlaceList();
     },
 
     rangeSelected: function(result) {
