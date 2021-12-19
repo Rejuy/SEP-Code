@@ -140,7 +140,7 @@ Page({
               begin: begin,
               end: end,
               like: this.data.search_value,
-              course_type: this.data.type_value,
+              course_type: this.data.type_value + 1,
               course_department: this.data.department_value,
               course_order: this.data.order_value
           },
@@ -243,9 +243,9 @@ Page({
     },
 
     editCourseSchedule: function(event) {
-        const { value } = event.detail;
+        const { value, index } = event.detail;
         this.setData({
-            edit_course_schedule: value,
+            edit_course_schedule: index + 1,
             course_schedule_title: value
         });
         Toast.success('设置成功');
@@ -253,9 +253,9 @@ Page({
     },
 
     editCourseType: function(event) {
-        const { value } = event.detail;
+        const { value, index } = event.detail;
         this.setData({
-            edit_course_type: value.text,
+            edit_course_type: index + 1,
             course_type_title: value.text,
         });
         Toast.success('设置成功');
@@ -263,9 +263,9 @@ Page({
     },
 
     editCourseDepartment: function(event) {
-        const { value } = event.detail;
+        const { value, index } = event.detail;
         this.setData({
-            edit_course_department: value.text,
+            edit_course_department: index,
             course_department_title: value.text,
         });
         Toast.success('设置成功');
@@ -300,24 +300,64 @@ Page({
         Dialog.confirm({
             title: '确认提交？',
             message: '请仔细检查所填信息是否真实有效，多次提交无用的内容会浪费他人的时间，并可能导致您的账号信用受到影响。',
-          }).then(() => {
-              // on confirm
-              let tmp_course_name = this.data.edit_course_name;
-              let tmp_course_teacher = this.data.edit_course_teacher;
-              if(tmp_course_name == '' || tmp_course_teacher == '') {
-                  Toast.fail('缺少关键内容');
-                  return;
-              }
-              let tmp_course_schedule = this.data.edit_course_schedule;
-              let tmp_course_type = this.data.edit_course_type;
-              let tmp_course_department = this.data.edit_course_department;
-              if(tmp_course_schedule == this.marco.DEFAULT_SCHEDULE_TITLE || tmp_course_type == this.marco.DEFAULT_TYPE_TITLE || tmp_course_department == this.marco.DEFAULT_DEPARTMENT_TITLE) {
+        }).then(() => {
+            // on confirm
+            let tmp_course_name = this.data.edit_course_name;
+            let tmp_course_teacher = this.data.edit_course_teacher;
+            if(tmp_course_name == '' || tmp_course_teacher == '') {
                 Toast.fail('缺少关键内容');
                 return;
-            }              
-            }).catch(() => {
+            }
+            let tmp_course_schedule = this.data.edit_course_schedule;
+            let tmp_course_type = this.data.edit_course_type;
+            let tmp_course_department = this.data.edit_course_department;
+            if(tmp_course_schedule == this.marco.DEFAULT_SCHEDULE_TITLE || tmp_course_type == this.marco.DEFAULT_TYPE_TITLE || tmp_course_department == this.marco.DEFAULT_DEPARTMENT_TITLE) {
+                Toast.fail('缺少关键内容');
+                return;
+            }
+
+            const app = getApp();
+
+            wx.request({
+              url: app.global_data.global_domain + '/api/v1.0/add_item',
+              method: 'POST',
+              data: {
+                  "mask": app.global_data.global_user_token,
+                  "class": 1, 
+                  "info": {
+                      "name": this.data.edit_course_name,
+                      "teacher": this.data.edit_course_teacher,
+                      "credit": this.data.edit_course_credit,
+                      "schedule": this.data.edit_course_schedule,
+                      "type": this.data.edit_course_type,
+                      "department": this.data.edit_course_department
+                }                  
+              },
+              dataType: JSON,
+              enableCache: true,
+              enableHttp2: true,
+              enableQuic: true,
+              header: {
+                "content-type": "application/json"
+              },
+              timeout: 0,
+              success: (result) => {
+                let rtn = JSON.parse(result.data);
+                if(rtn.status == 2) {
+                    Toast.success('请等待审核');
+                }else {
+                    Toast.fail('发布失败');
+                }
+              },
+              fail: (error) => {
+                  console.log(error);
+                  Toast.fail('发布失败');
+              },
+              complete: (res) => {},
+            })              
+        }).catch(() => {
               // on cancel
-            });
+        });
     },
 
     // 生命周期函数--监听页面初次渲染完成

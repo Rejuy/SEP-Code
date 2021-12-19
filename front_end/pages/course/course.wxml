@@ -15,7 +15,7 @@
                     icon="question-o"
                     placeholder="请输入课程名"
                     bind:click-icon="editCourseNameTips"
-                    model:value="{{ edit_name }}"
+                    model:value="{{ edit_course_name }}"
                 />
 
                 <van-field
