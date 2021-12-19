@@ -13,7 +13,12 @@ def globalSearch (like):
     return lst
 
 def limitedSearch(class_id, like):
-    key_list = INT_TO_KEY_LIST[class_id]
+    if class_id == 1:
+        key_list = BASIC_COURSES_KEY
+    elif class_id == 2:
+        key_list = BASIC_FOOD_KEY
+    elif class_id == 3:
+        key_list = BASIC_PLACE_KEY
     table = INT_TO_TABLE[class_id]
 
     info = {
