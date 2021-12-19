@@ -16,8 +16,8 @@ def global_search():
     
     try:
         info = request.get_json()
-        item_list = search_service.globalSearch(info['like'])
-        return jsonify({'state': 0, 'items': item_list})
+        item_list, count = search_service.globalSearch(info)
+        return jsonify({'state': 0, 'items': item_list, "count": count})
     except KeyError:
         return jsonify({'state': -1})
 
