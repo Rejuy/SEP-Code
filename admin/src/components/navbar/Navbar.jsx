@@ -2,15 +2,17 @@ import {
   alpha,
   AppBar,
   Badge,
+  IconButton,
   InputBase,
   styled,
   Toolbar,
   Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import React from "react";
+import React, { useState } from "react";
 import { Mail, Settings } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import SettingsPage from "../../pages/settings";
 
 const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
@@ -48,6 +50,12 @@ const CustomLink = styled(Link)(({ theme }) => ({
 }));
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <AppBar position="fixed">
       <CustomToolbar>
@@ -64,12 +72,21 @@ export default function Navbar() {
           <CustomInput placeholder="Search.."></CustomInput>
         </Search>
         <CustomUser>
-          <Settings></Settings>
-          <Badge badgeContent={4} color="secondary">
-            <Mail></Mail>
-          </Badge>
+          <IconButton
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            <Settings style={{ color: "white" }} />
+          </IconButton>
+          <IconButton>
+            <Badge badgeContent={4} color="secondary">
+              <Mail style={{ color: "white" }} />
+            </Badge>
+          </IconButton>
         </CustomUser>
       </CustomToolbar>
+      <SettingsPage open={open} handleClose={handleClose} />
     </AppBar>
   );
 }

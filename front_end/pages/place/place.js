@@ -128,22 +128,28 @@ Page({
     rangeSelected: function(result) {
         this.setData({
             current_page: 0,
+            places_list: [],
             range_value: result.detail,
         });      
+        this.getPlaceList();
     },
 
     typeSelected: function(result) {
         this.setData({
             current_page: 0,
+            places_list: [],
             type_value: result.detail,
         });      
+        this.getPlaceList();
     },    
 
     orderSelected: function(result) {
         this.setData({
             current_page: 0,
+            places_list: [],
             order_value: result.detail,
-        });      
+        });   
+        this.getPlaceList();   
     },
 
     showPopup: function() {

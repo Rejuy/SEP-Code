@@ -112,7 +112,7 @@ function ActionInit(params) {
 function Userpage() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/api/admin/get_users").then((res) => {
+    axios.get(global.config.backendUrl + "/api/admin/get_users").then((res) => {
       setData(res.data.users);
     });
   }, []);
