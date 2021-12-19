@@ -27,6 +27,7 @@ export default function Login() {
       .then((res) => {
         if (res.data.status === 0) {
           global.config.isLogin = true;
+          localStorage.setItem("isLogin", true);
           navigate("/");
         } else {
           setOpen(true);
