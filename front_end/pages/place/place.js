@@ -122,7 +122,9 @@ Page({
 
     onSearch: function(result) {
         this.setData({
-            search_value: result.detail
+            current_page: 0,
+            places_list: [],
+            search_value: result.detail,
         });
         this.getPlaceList();
     },

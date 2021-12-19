@@ -127,6 +127,8 @@ Page({
 
     onSearch: function(result) {
         this.setData({
+            current_page: 0,
+            food_list: [],
             search_value: result.detail
         });
         this.getFoodList();
