@@ -1,19 +1,28 @@
 from services.mysql_service import db
 from headers import *
 
-def globalSearch (like):
-    info = {
-        "like": like,
+def globalSearch (info):
+    new_info = {
+        "like": info['like'],
         "sort_order": "desc",
         "sort_criteria": "star",
-        "index_begin": 0,
-        "item_count": 500
+        "index_begin": info['begin'],
+        "item_count": info['end'] - info['begin'] + 1
     }
-    lst = db.getGlobalItemList(info)[0]
-    return lst
+    lst, count, flag = db.getGlobalItemList(new_info)
+    for i in range(len(lst)):
+        lst[i]['tag'] = ''
+        if i + info['begin'] + 1 <= 15:
+            lst[i]['tag'] = 'TOP' + str(i + info['begin'] + 1)
+    return lst, count
 
 def limitedSearch(class_id, like):
-    key_list = INT_TO_KEY_LIST[class_id]
+    if class_id == 1:
+        key_list = BASIC_COURSES_KEY
+    elif class_id == 2:
+        key_list = BASIC_FOOD_KEY
+    elif class_id == 3:
+        key_list = BASIC_PLACE_KEY
     table = INT_TO_TABLE[class_id]
 
     info = {

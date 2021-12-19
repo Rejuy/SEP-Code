@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
 from services.add_item_service import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -13,6 +14,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/add_item', methods=['POST'])
 def addItem():
     try:
+        db.reconnectDatabase()
         item_info = request.get_json()
         # 判断info是否合法
         if item_info is None:

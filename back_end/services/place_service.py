@@ -38,6 +38,10 @@ def getPlacesList(raw_info):
         new_info['sort_criteria'] = 'time'
     else:
         new_info['sort_criteria'] = 'star'
+
+    if raw_info['like'] != "":
+        new_info['like'] = raw_info['like']
+
     # 获取列表
     raw_list, place_count, result = db.getItemList("place_list", new_info)
     if result:

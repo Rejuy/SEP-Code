@@ -38,6 +38,10 @@ def getCoursesList(raw_info):
         new_info['sort_criteria'] = 'heat'
     elif raw_info['course_order'] == 2:
         new_info['sort_criteria'] = 'time'
+
+    if raw_info['like'] != "":
+        new_info['like'] = raw_info['like']
+
     # 获取列表
     raw_list, course_count, result = db.getItemList("course_list", new_info)
     new_list = []

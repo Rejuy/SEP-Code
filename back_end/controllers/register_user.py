@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify, request
 from services import register_user_service
 from headers import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -14,6 +15,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/register_user_info', methods=['POST', 'GET'])
 def registerUserInfo():
     try:
+        db.reconnectDatabase()
         user_info = request.get_json()
         print("18======")
         if user_info is None:

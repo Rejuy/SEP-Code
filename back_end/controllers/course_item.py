@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify, request
 from services.course_service import getCourseItem
 from headers import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -15,6 +16,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/get_course_item', methods=['POST'])
 def courseItem():
     try:
+        db.reconnectDatabase()
         info = request.get_json()
         if info is None:
             return jsonify({'item': None}), 400

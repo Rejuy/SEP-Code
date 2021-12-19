@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify, request
 from services import search_service
 from headers import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -15,9 +16,10 @@ bp = Blueprint(
 def global_search():
     
     try:
+        db.reconnectDatabase()
         info = request.get_json()
-        item_list = search_service.globalSearch(info['like'])
-        return jsonify({'state': 0, 'items': item_list})
+        item_list, count = search_service.globalSearch(info)
+        return jsonify({'state': 0, 'items': item_list, "count": count})
     except KeyError:
         return jsonify({'state': -1})
 
@@ -25,6 +27,7 @@ def global_search():
 def limited_search():
     
     try:
+        db.reconnectDatabase()
         info = request.get_json()
         item_list = search_service.limitedSearch(info['class'], info['like'])
         return jsonify({'state': 0, 'items': item_list})

@@ -6,6 +6,8 @@ from services.id_to_name_service import getNameByID
 from headers import *
 from services.code_service import coder
 import json
+from services.mysql_service import db
+
 
 bp = Blueprint(
     'comment',
@@ -17,6 +19,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/add_comment', methods=['POST'])
 def addComment():
     try:
+        db.reconnectDatabase()
         comment = request.get_json()
         """
 comment = {
