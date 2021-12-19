@@ -24,49 +24,37 @@ Page({
     wx.chooseImage({
       count: 1,
       success: (res_img) => {
+        console.log("img", res_img)
         const temp_path = res_img.tempFilePaths[0];
-        console.log("img", res_img);
-        wx.saveFile({
-          tempFilePath: temp_path,
-          success: (res_save) => {
-            const saved_path = res_save.savedFilePath;
-            console.log("save", res_save);
-            wx.uploadFile({
-              filePath: saved_path,
-              name: 'image',
-              url: getApp().global_data.global_domain + '/api/v1.0/save_user_icon',
-              formData: {
-                'mask': getApp().global_data.global_user_token
-              },
-              success: (res_send) => {
-                console.log("send", res_send);
-                Notify({
-                  type: "success",
-                  message: "上传成功"
-                });
-                this.setData({
-                  user_icon_path: saved_path
-                })
-              },
-              fail(err) {
-                console.log(err);
-                Notify({
-                  type: "danger",
-                  message: "上传失败"
-                });
-              }
+        wx.uploadFile({
+          filePath: temp_path,
+          name: 'image',
+          url: getApp().global_data.global_domain + '/api/v1.0/save_user_icon',
+          formData: {
+            'mask': getApp().global_data.global_user_token
+          },
+          success: (res_send) => {
+            console.log("send", res_send);
+            const send_path = getApp().global_data.global_domain + "/" + JSON.parse(res_send.data).path;
+            console.log(send_path);
+            Notify({
+              type: "success",
+              message: "上传成功"
+            });
+            this.setData({
+              user_icon_path: send_path
             })
           },
           fail(err) {
-            console.log(err)
+            console.log(err);
             Notify({
               type: "danger",
-              message: "存储失败"
+              message: "上传失败"
             });
           }
         })
       },
-      fail(err){
+      fail(err) {
         console.log(err);
         Notify({
           type: "danger",
