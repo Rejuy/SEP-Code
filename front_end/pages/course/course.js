@@ -14,6 +14,7 @@ Page({
             { text: '思政课', value: 6 },
             { text: '文核课', value: 7 },
             { text: '文素课', value: 8 },
+            { text: '实践课', value: 9 },
         ],
 
         department: [
@@ -81,7 +82,7 @@ Page({
         type_table: [],
         department_table: [],
         schedule_table: ['春季学期', '夏季学期', '秋季学期', '春、秋季学期'],
-        color_table: ['', '#228B22', '#000000', '#FFA500', '#8B4513', '#9400D3', '#DC143C', '#0000FF', '#FF1493'],
+        color_table: ['', '#228B22', '#000000', '#FFA500', '#8B4513', '#9400D3', '#DC143C', '#0000FF', '#FF1493', '#D8BFD8'],
 
         search_value: '',
         type_value: 0,
@@ -138,6 +139,7 @@ Page({
           data: {
               begin: begin,
               end: end,
+              like: this.data.search_value,
               course_type: this.data.type_value,
               course_department: this.data.department_value,
               course_order: this.data.order_value
@@ -174,23 +176,11 @@ Page({
 
     onSearch: function(result) {
         this.setData({
+            current_page: 0,
+            courses_list: [],
             search_value: result.detail
         });
-        wx.request({
-          url: 'url',
-          data: data,
-          dataType: dataType,
-          enableCache: true,
-          enableHttp2: true,
-          enableQuic: true,
-          header: header,
-          method: method,
-          responseType: responseType,
-          timeout: 0,
-          success: (result) => {},
-          fail: (res) => {},
-          complete: (res) => {},
-        })
+        this.getCourseList();
     },
 
     typeSelected: function(result) {

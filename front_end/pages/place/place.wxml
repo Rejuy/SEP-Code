@@ -69,7 +69,7 @@
     <view wx:for="{{ places_list }}" wx:key="id">
         <van-card
         tag="{{ item.tag }}"
-        desc="{{ item.position }}"
+        desc="地点方位: {{ item.position }}"
         title="{{ item.name }}"
         thumb="{{ image_url }}"
         thumb-mode="aspectFill"
