@@ -40,12 +40,14 @@ Page({
               },
               success: (res_send) => {
                 console.log("send", res_send);
+                const send_path = getApp().global_data.global_domain + "/" + JSON.parse(res_send.data).path;
+                console.log(send_path);
                 Notify({
                   type: "success",
                   message: "上传成功"
                 });
                 this.setData({
-                  user_icon_path: saved_path
+                  user_icon_path: send_path
                 })
               },
               fail(err) {
@@ -66,7 +68,7 @@ Page({
           }
         })
       },
-      fail(err){
+      fail(err) {
         console.log(err);
         Notify({
           type: "danger",
