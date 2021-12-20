@@ -322,6 +322,7 @@ class MySQLDb:
             name: String ,
             position: String ,
             scope: Int ,
+            hours: String ,
             type: Int ,
             user_id: Int
         }
@@ -329,6 +330,7 @@ class MySQLDb:
             name: String ,
             position: String ,
             scope: Int ,
+            hours: String ,
             type: Int ,
             user_id: Int
         }
