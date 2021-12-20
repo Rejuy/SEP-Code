@@ -227,7 +227,7 @@ Page({
               }
               let tmp_range_value = this.data.edit_range_value;
               let tmp_place_type = this.data.edit_place_type;
-              if(tmp_range_value == 0 || tmp_place_type == 0) {
+              if(tmp_range_value === 0 || tmp_place_type === 0) {
                   Toast.fail('缺少关键内容');
                   return;
               } 
