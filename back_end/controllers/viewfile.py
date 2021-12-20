@@ -4,6 +4,7 @@
 from flask import Blueprint, jsonify, request
 from services import mail_service
 from headers import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -16,6 +17,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/viewfile', methods=['GET'])
 def activate_register():
     try:
+        db.reconnectDatabase()
         target_url = request.args.get('f')
         return '验证成功', 200
     except KeyError:

@@ -4,6 +4,8 @@ from services.user_icon_service import updateProfilePicture
 from services.save_image_service import saveImage
 from headers import *
 from services.code_service import coder
+from services.mysql_service import db
+
 
 bp = Blueprint(
     'user_icon',
@@ -15,6 +17,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/save_user_icon', methods=['POST'])
 def save_user_icon():
     try:
+        db.reconnectDatabase()
         user_id = coder.decode(request.form['mask'])
         imageFileStorage = request.files['image']
         filepath = saveImage(imageFileStorage)
@@ -26,6 +29,7 @@ def save_user_icon():
 @bp.route('/api/v1.0/get_user_icon', methods=['POST'])
 def get_user_icon():
     try:
+        db.reconnectDatabase()
         user_id = coder.decode(request.json()['mask'])
         GetProfilePicture(user_id, filepath)
         return jsonify({'state': 0, 'path': filepath}), 200

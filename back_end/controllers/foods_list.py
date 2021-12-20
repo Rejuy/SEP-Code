@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify, request
 from services.food_service import getFoodsList
 from headers import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -14,6 +15,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/get_food_list', methods=['POST'])
 def foodsList():
     try:
+        db.reconnectDatabase()
         print("Enter get_foods_list......")
         raw_info = request.get_json()
         if raw_info is None:

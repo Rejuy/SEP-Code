@@ -17,6 +17,12 @@ class MySQLDb:
         # 通过 cursor() 创建游标对象
         self.cursor = self.connection.cursor()
 
+    def reconnectDatabase(self):
+        self.connection.reconnect(attempts=1, delay=0)
+
+    def disconnectDatabase(self):
+        self.connection.close()
+
     def checkUserExistence(self, email):
         try:
             sql = "SELECT * FROM user WHERE email = %s"
@@ -191,9 +197,11 @@ class MySQLDb:
         """
         try:
             # 获得数据
+            print(info)
             sql = "SELECT " + self.getKeysStr(ADMIN_GET_USER_KEY) + " FROM user"
             sql += " LIMIT " + str(info['size']) + " OFFSET " + str(info['offset'])
             self.cursor.execute(sql)
+            print(198)
             user_list = self.cursor.fetchall()
             for i in range(len(user_list)):
                 user_list[i] = self.tupleToDict(user_list[i], ADMIN_GET_USER_KEY)

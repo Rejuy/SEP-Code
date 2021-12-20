@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify, request
 from services import login_service
 from headers import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -14,6 +15,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/login', methods=['POST'])
 def login():
     try:
+        db.reconnectDatabase()
         user_info = request.get_json()
         if user_info is None:
             return jsonify({'state': BAD_ARGUMENTS}), 400

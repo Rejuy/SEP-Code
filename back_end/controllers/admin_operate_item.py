@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, jsonify, request
 from services.admin_service import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -13,6 +14,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/admin_operate_item', methods=['POST'])
 def adminOperateItem():
     try:
+        db.reconnectDatabase()
         info = request.get_json()
         if info is None:
             return jsonify({'status': 1, 'flag': -1}), 400

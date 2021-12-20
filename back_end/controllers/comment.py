@@ -6,6 +6,8 @@ from services.id_to_name_service import getNameByID
 from headers import *
 from services.code_service import coder
 import json
+from services.mysql_service import db
+
 
 bp = Blueprint(
     'comment',
@@ -17,6 +19,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/add_comment', methods=['POST'])
 def addComment():
     try:
+        db.reconnectDatabase()
         comment = request.get_json()
         """
 comment = {
@@ -61,7 +64,6 @@ def get_comment_by_id():
         id = coder.decode(info['mask'])
         # print(id)
         user_name = getNameByID(id)
-        # print(user_name)
         comments = getCommentsByName(user_name, info['offset'], info['size']) #TODO
         # commentList = [{"id": 5, "user": "zbw"}, {"id": 5, "user": "zxl"}]
         return jsonify({'state': int(info['size'] != len(comments)), 'comments': comments})
