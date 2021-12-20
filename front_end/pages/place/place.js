@@ -39,7 +39,7 @@ Page({
         edit_place_position: '',
         edit_opening_hours: '',
         edit_range_value: 0,
-        edit_place_type: '',
+        edit_place_type: 0,
         place_range_title: '选择范围',
         place_type_title: '选择类型',
 
@@ -187,9 +187,9 @@ Page({
     },
 
     editPlaceType: function(event) {
-        const { value } = event.detail;
+        const { value, index } = event.detail;
         this.setData({
-            edit_place_type: value,
+            edit_place_type: index + 1,
             place_type_title: value
         });
         Toast.success('设置成功');
@@ -227,10 +227,49 @@ Page({
               }
               let tmp_range_value = this.data.edit_range_value;
               let tmp_place_type = this.data.edit_place_type;
-              if(tmp_range_value == 0 || tmp_place_type == this.marco.DEFAULT_TYPE_TITLE) {
-                Toast.fail('缺少关键内容');
-                return;
-            }              
+              if(tmp_range_value == 0 || tmp_place_type == 0) {
+                  Toast.fail('缺少关键内容');
+                  return;
+              } 
+
+              const app = getApp();
+              
+              wx.request({
+                url: app.global_data.global_domain + '/api/v1.0/add_item',
+                method: 'POST',
+                data: {
+                    "mask": app.global_data.global_user_token,
+                    "class": 3, 
+                    "info": {
+                        "name": this.data.edit_place_name,
+                        "position": this.data.edit_place_position,
+                        "hours": this.data.edit_opening_hours,
+                        "scope": this.data.edit_range_value,
+                        "type": this.data.edit_place_type, 
+                  }                  
+                },
+                dataType: JSON,
+                enableCache: true,
+                enableHttp2: true,
+                enableQuic: true,
+                header: {
+                  "content-type": "application/json"
+                },
+                timeout: 0,
+                success: (result) => {
+                  let rtn = JSON.parse(result.data);
+                  if(rtn.status == 2) {
+                      Toast.success('请等待审核');
+                  }else {
+                      Toast.fail('发布失败');
+                  }
+                },
+                fail: (error) => {
+                    console.log(error);
+                    Toast.fail('发布失败');
+                },
+                complete: (res) => {},
+              })  
             }).catch(() => {
               // on cancel
             });

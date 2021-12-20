@@ -317,7 +317,7 @@ Page({
             }
 
             const app = getApp();
-
+            
             wx.request({
               url: app.global_data.global_domain + '/api/v1.0/add_item',
               method: 'POST',
