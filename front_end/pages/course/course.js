@@ -92,9 +92,9 @@ Page({
         edit_course_name: '',
         edit_course_teacher: '',
         edit_course_credit: 0,
-        edit_course_schedule: '',
-        edit_course_type: '',
-        edit_course_department: '',
+        edit_course_schedule: 0,
+        edit_course_type: 0,
+        edit_course_department: 0,
         course_schedule_title: '开课时间',
         course_type_title: '课程类型',
         course_department_title: '开课院系',
@@ -265,7 +265,7 @@ Page({
     editCourseDepartment: function(event) {
         const { value, index } = event.detail;
         this.setData({
-            edit_course_department: index,
+            edit_course_department: index + 1,
             course_department_title: value.text,
         });
         Toast.success('设置成功');
@@ -274,7 +274,7 @@ Page({
 
     cancelEditSchedule: function() {
         this.setData({
-            edit_course_schedule: this.marco.DEFAULT_SCHEDULE_TITLE,
+            edit_course_schedule: 0,
             course_schedule_title: this.marco.DEFAULT_SCHEDULE_TITLE
         });
         Toast.fail('请重新选择');
@@ -282,7 +282,7 @@ Page({
 
     cancelEditType: function() {
         this.setData({
-            edit_course_type: this.marco.DEFAULT_TYPE_TITLE,
+            edit_course_type: 0,
             course_type_title: this.marco.DEFAULT_TYPE_TITLE
         });
         Toast.fail('请重新选择');
@@ -290,7 +290,7 @@ Page({
 
     cancelEditDepartment: function() {
         this.setData({
-            edit_course_department: this.marco.DEFAULT_DEPARTMENT_TITLE,
+            edit_course_department: 0,
             course_department_title: this.marco.DEFAULT_DEPARTMENT_TITLE
         });
         Toast.fail('请重新选择');        
@@ -311,7 +311,7 @@ Page({
             let tmp_course_schedule = this.data.edit_course_schedule;
             let tmp_course_type = this.data.edit_course_type;
             let tmp_course_department = this.data.edit_course_department;
-            if(tmp_course_schedule == this.marco.DEFAULT_SCHEDULE_TITLE || tmp_course_type == this.marco.DEFAULT_TYPE_TITLE || tmp_course_department == this.marco.DEFAULT_DEPARTMENT_TITLE) {
+            if(tmp_course_schedule == 0 || tmp_course_type == 0 || tmp_course_department == 0) {
                 Toast.fail('缺少关键内容');
                 return;
             }
@@ -330,7 +330,7 @@ Page({
                       "credit": this.data.edit_course_credit,
                       "schedule": this.data.edit_course_schedule,
                       "type": this.data.edit_course_type,
-                      "department": this.data.edit_course_department + 1
+                      "department": this.data.edit_course_department 
                 }                  
               },
               dataType: JSON,
