@@ -403,7 +403,7 @@ class MySQLDb:
                         val += (info['filter'][i]['value'], )
                 # 判断是否要模糊匹配
                 if 'like' in info.keys() and info['like'] != "":
-                    locate_sql += " AND ("
+                    locate_sql += " AND (name LIKE '%" + info['like'] + "%' OR "
                     if table == "course_list":
                         locate_sql += "teacher LIKE '%" + info['like'] + "%') "
                     else:
