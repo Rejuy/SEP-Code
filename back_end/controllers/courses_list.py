@@ -18,6 +18,8 @@ def coursesList():
         db.reconnectDatabase()
         print("Enter get_courses_list......")
         raw_info = request.get_json()
+        print("GG")
+        print(raw_info)
         if raw_info is None:
             return jsonify({'total_courses': -1, 'courses': []}), 400
         print("Request no problem")
