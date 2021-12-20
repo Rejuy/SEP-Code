@@ -456,7 +456,7 @@ class MySQLDb:
 
     def getItem(self, table, table_id, id, key_list):
         """
-        recommendation: {
+        comments: {
     	    user: ...;  # 用户
     	    star: ...;  # 评分 [0.0 - 5.0] 允许 .5
      	    time: ...;  # 发布时间
@@ -480,12 +480,12 @@ class MySQLDb:
             self.cursor.execute(sql, val)
             comments_list = self.cursor.fetchall()
             for i in range(len(comments_list)):
-                comments_list[i] = self.tupleToDict(comments_list[i], BASIC_ITEM_COMMENT_KEY)
+                comments_list[i] = self.tupleToDict(comments_list[i], COMMENT_KEY)
                 del comments_list[i]['id']
                 comments_list[i]['time'] = self.timeToStr(comments_list[i]['time'])
                 comments_list[i]['comment_numbers'] = comments_list[i]['lower_comment_count']
                 del comments_list[i]['lower_comment_count']
-            item['recommendations'] = comments_list
+            item['comments'] = comments_list
             # 更新heat值
             sql = "UPDATE " + table + " SET heat = heat + 1 WHERE id = %s"
             val = (id,)
