@@ -140,7 +140,7 @@ Page({
               begin: begin,
               end: end,
               like: this.data.search_value,
-              course_type: this.data.type_value + 1,
+              course_type: this.data.type_value,
               course_department: this.data.department_value,
               course_order: this.data.order_value
           },
@@ -330,7 +330,7 @@ Page({
                       "credit": this.data.edit_course_credit,
                       "schedule": this.data.edit_course_schedule,
                       "type": this.data.edit_course_type,
-                      "department": this.data.edit_course_department
+                      "department": this.data.edit_course_department + 1
                 }                  
               },
               dataType: JSON,
