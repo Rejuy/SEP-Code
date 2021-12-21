@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogActions,
   DialogContent,
+  CircularProgress,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
@@ -44,14 +45,15 @@ function ActionInit(params) {
 
   const verifyItem = () => {
     axios
-      .post(global.config.backendUrl + "/api/v1.0/admin_activate_item", {
+      .post(global.config.backendUrl + "/api/v1.0/admin_edit_item", {
         secret_code: localStorage.getItem("secretCode"),
         class: 1,
-        id: params.row.id,
+        item: { ...params.row, activated: true },
+        delete: false,
       })
       .then((res) => {
-        if (res.data.state === 0) {
-          params.row.activated = true;
+        if (res.data.status === 0) {
+          params.row.activated = 1;
           params.api.forceUpdate();
         }
       });
@@ -114,6 +116,7 @@ function ActionInit(params) {
 
 function Coursepage() {
   const [data, setData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     axios
       .post(global.config.backendUrl + "/api/v1.0/admin_get_item_list", {
@@ -125,50 +128,66 @@ function Coursepage() {
       })
       .then((res) => {
         setData(res.data.items.sort((a, b) => a.id - b.id));
+        setLoaded(true);
       });
   }, []);
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "id", headerName: "ID", flex: 1 },
     {
       field: "name",
       headerName: "Course Name",
       headerAlign: "center",
-      width: 160,
+      flex: 4,
     },
     {
       field: "teacher",
       headerName: "Teacher",
       headerAlign: "center",
       align: "center",
-      width: 125,
+      flex: 1,
     },
     {
       field: "department",
       headerName: "Department",
       headerAlign: "center",
       align: "center",
-      width: 125,
+      flex: 1,
     },
     {
       field: "type",
       headerName: "Type",
       headerAlign: "center",
       align: "center",
-      width: 125,
+      flex: 1,
+      valueFormatter: (params) => {
+        const courseType = [
+          "全部课程",
+          "专业课",
+          "数理课",
+          "外文课",
+          "实验课",
+          "体育课",
+          "思政课",
+          "文核课",
+          "文素课",
+          "实践课",
+        ];
+        return courseType[params.value];
+      },
     },
     {
       field: "credit",
       headerName: "Credit",
       headerAlign: "center",
       align: "center",
-      width: 125,
+      flex: 1,
     },
     {
       field: "time",
       headerName: "Time",
       headerAlign: "center",
       align: "center",
-      width: 125,
+      flex: 1,
       valueFormatter: (params) => {
         return new Date(params.value).toLocaleDateString("zh-Hans-CN");
       },
@@ -177,7 +196,7 @@ function Coursepage() {
       field: "activated",
       headerName: "Activated",
       headerAlign: "center",
-      width: 125,
+      flex: 1,
       renderCell: (params) => {
         if (params.value === 1) {
           return <Check style={{ width: "100%" }} />;
@@ -191,12 +210,28 @@ function Coursepage() {
       headerName: "Actions",
       headerAlign: "center",
       sortable: false,
-      width: 300,
+      flex: 6,
       renderCell: ActionInit,
     },
   ];
-  return (
-    <CustomContainer>
+
+  const loadingJsx = (
+    <div
+      className="loading"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Typography variant="h5">Loading Courses</Typography>
+      <CircularProgress />
+    </div>
+  );
+
+  const dataGridJsx = (
+    <div style={{ width: "100%" }}>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
         Course
       </Typography>
@@ -210,6 +245,14 @@ function Coursepage() {
         autoHeight={true}
         style={{ width: "100%" }}
       />
+    </div>
+  );
+
+  return (
+    <CustomContainer
+      style={{ display: "flex", justifyContent: "space-evenly" }}
+    >
+      {loaded ? dataGridJsx : loadingJsx}
     </CustomContainer>
   );
 }
