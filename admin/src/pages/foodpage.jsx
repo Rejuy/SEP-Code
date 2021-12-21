@@ -62,9 +62,9 @@ function ActionInit(params) {
   return (
     <>
       <Dialog open={open} onClose={handleDialogClose}>
-        <DialogTitle>Activate User</DialogTitle>
+        <DialogTitle>激活</DialogTitle>
         <DialogContent>
-          Would You Like to Activate Food "{params.row.name}"?
+          是否想要激活 "{params.row.name}"?
         </DialogContent>
         <DialogActions>
           <Button
@@ -74,7 +74,7 @@ function ActionInit(params) {
             variant="outlined"
             color="error"
           >
-            No
+            否
           </Button>
           <Button
             onClick={() => {
@@ -84,12 +84,12 @@ function ActionInit(params) {
             variant="outlined"
             color="success"
           >
-            Yes
+            是
           </Button>
         </DialogActions>
       </Dialog>
       <Link to={"/food/" + params.row.id} style={{ marginRight: "10px" }}>
-        <Button variant="outlined">Edit</Button>
+        <Button variant="outlined">修改</Button>
       </Link>
       <Button
         onClick={jsonDetail}
@@ -107,7 +107,7 @@ function ActionInit(params) {
           }}
           color="success"
         >
-          Activate
+          激活
         </Button>
       )}
     </>
@@ -135,7 +135,7 @@ function Foodpage() {
     { field: "id", headerName: "ID", flex: 1 },
     {
       field: "name",
-      headerName: "Food Name",
+      headerName: "名称",
       headerAlign: "center",
       flex: 4,
     },
@@ -153,13 +153,13 @@ function Foodpage() {
     },
     {
       field: "type",
-      headerName: "Type",
+      headerName: "类型",
       headerAlign: "center",
       flex: 1,
     },
     {
       field: "time",
-      headerName: "Time",
+      headerName: "时间",
       headerAlign: "center",
       align: "center",
       flex: 1,
@@ -169,7 +169,7 @@ function Foodpage() {
     },
     {
       field: "activated",
-      headerName: "Activated",
+      headerName: "激活",
       headerAlign: "center",
       flex: 1,
       renderCell: (params) => {
@@ -182,10 +182,10 @@ function Foodpage() {
     },
     {
       field: "action",
-      headerName: "Actions",
+      headerName: "操作",
       headerAlign: "center",
       sortable: false,
-      flex: 6,
+      flex: 5,
       renderCell: ActionInit,
     },
   ];
@@ -200,7 +200,7 @@ function Foodpage() {
         justifyContent: "space-evenly",
       }}
     >
-      <Typography variant="h5">Loading Foods</Typography>
+      <Typography variant="h5">加载饮食模块</Typography>
       <CircularProgress />
     </div>
   );
@@ -208,7 +208,7 @@ function Foodpage() {
   const dataGridJsx = (
     <div style={{ width: "100%" }}>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
-        Foods
+        饮食
       </Typography>
       <DataGrid
         id="datagrid"

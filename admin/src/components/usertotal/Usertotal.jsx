@@ -25,11 +25,11 @@ export default function UserTotal() {
     <Card>
       <CardContent>
         <Typography variant="h6" component="div">
-          Total User Count
+          总用户数
         </Typography>
         <span>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Since Begin
+            Since Beginning
           </Typography>
         </span>
         <span
@@ -40,13 +40,13 @@ export default function UserTotal() {
           }}
         >
           <Typography sx={{ fontSize: 30 }} color="text.primary" gutterBottom>
-            {count} Users
+            {count} 位用户
           </Typography>
         </span>
       </CardContent>
       <CardActions>
         <Link to="/users">
-          <Button size="small">Learn More</Button>
+          <Button size="small">了解更多</Button>
         </Link>
       </CardActions>
     </Card>

@@ -62,9 +62,9 @@ function ActionInit(params) {
   return (
     <>
       <Dialog open={open} onClose={handleDialogClose}>
-        <DialogTitle>Activate User</DialogTitle>
+        <DialogTitle>激活</DialogTitle>
         <DialogContent>
-          Would You Like to Activate Course "{params.row.name}"?
+          是否想要激活 "{params.row.name}"?
         </DialogContent>
         <DialogActions>
           <Button
@@ -74,7 +74,7 @@ function ActionInit(params) {
             variant="outlined"
             color="error"
           >
-            No
+            否
           </Button>
           <Button
             onClick={() => {
@@ -84,12 +84,12 @@ function ActionInit(params) {
             variant="outlined"
             color="success"
           >
-            Yes
+            是
           </Button>
         </DialogActions>
       </Dialog>
       <Link to={"/course/" + params.row.id} style={{ marginRight: "10px" }}>
-        <Button variant="outlined">Edit</Button>
+        <Button variant="outlined">修改</Button>
       </Link>
       <Button
         onClick={jsonDetail}
@@ -107,7 +107,7 @@ function ActionInit(params) {
           }}
           color="success"
         >
-          Activate
+          激活
         </Button>
       )}
     </>
@@ -135,20 +135,20 @@ function Coursepage() {
     { field: "id", headerName: "ID", flex: 1 },
     {
       field: "name",
-      headerName: "Course Name",
+      headerName: "课程名称",
       headerAlign: "center",
       flex: 4,
     },
     {
       field: "teacher",
-      headerName: "Teacher",
+      headerName: "老师",
       headerAlign: "center",
       align: "center",
       flex: 1,
     },
     {
       field: "department",
-      headerName: "Department",
+      headerName: "院系",
       headerAlign: "center",
       align: "center",
       flex: 1,
@@ -159,7 +159,7 @@ function Coursepage() {
     },
     {
       field: "type",
-      headerName: "Type",
+      headerName: "类型",
       headerAlign: "center",
       align: "center",
       flex: 1,
@@ -169,14 +169,14 @@ function Coursepage() {
     },
     {
       field: "credit",
-      headerName: "Credit",
+      headerName: "学分",
       headerAlign: "center",
       align: "center",
       flex: 1,
     },
     {
       field: "time",
-      headerName: "Time",
+      headerName: "时间",
       headerAlign: "center",
       align: "center",
       flex: 1,
@@ -186,7 +186,7 @@ function Coursepage() {
     },
     {
       field: "activated",
-      headerName: "Activated",
+      headerName: "激活",
       headerAlign: "center",
       flex: 1,
       renderCell: (params) => {
@@ -199,10 +199,10 @@ function Coursepage() {
     },
     {
       field: "action",
-      headerName: "Actions",
+      headerName: "操作",
       headerAlign: "center",
       sortable: false,
-      flex: 6,
+      flex: 5,
       renderCell: ActionInit,
     },
   ];
@@ -217,7 +217,7 @@ function Coursepage() {
         justifyContent: "space-evenly",
       }}
     >
-      <Typography variant="h5">Loading Courses</Typography>
+      <Typography variant="h5">加载课程</Typography>
       <CircularProgress />
     </div>
   );
@@ -225,7 +225,7 @@ function Coursepage() {
   const dataGridJsx = (
     <div style={{ width: "100%" }}>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
-        Course
+        课程
       </Typography>
       <DataGrid
         id="datagrid"

@@ -15,11 +15,11 @@ export default function SettingsPage(props) {
   return (
     <Dialog open={open} onClose={handleClose} fullWidth>
       <DialogTitle style={{ display: "flex", justifyContent: "center" }}>
-        Settings
+        设置
       </DialogTitle>
       <DialogContent>
         <Button variant="outlined" color="error" onClick={logout} fullWidth>
-          Logout
+          登出
         </Button>
       </DialogContent>
     </Dialog>

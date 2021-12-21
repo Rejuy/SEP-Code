@@ -48,7 +48,7 @@ export default function Userinfo() {
         justifyContent: "space-evenly",
       }}
     >
-      <Typography variant="h5">Loading User</Typography>
+      <Typography variant="h5">加载用户</Typography>
       <CircularProgress />
     </div>
   );
@@ -75,7 +75,7 @@ export default function Userinfo() {
       user_icon_element = (
         <img
           src={"http://thurec.xyz/" + user_icon_url}
-          alt="User Icon"
+          alt="头像"
           style={{
             width: "64px",
             height: "64px",
@@ -105,7 +105,7 @@ export default function Userinfo() {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {user_icon_element}
           <TextField
-            label="User Icon"
+            label="头像URL"
             variant="standard"
             value={userData.image || ""}
             onChange={(e) => {
@@ -122,13 +122,13 @@ export default function Userinfo() {
             InputProps={{
               readOnly: true,
             }}
-            label="User Id"
+            label="ID"
             variant="standard"
             value={userData.id}
           />
           <TextField
             required
-            label="Username"
+            label="用户名"
             variant="standard"
             value={userData.user_name}
             onChange={(e) => {
@@ -139,7 +139,7 @@ export default function Userinfo() {
         <div style={{ display: "flex", alignItems: "center" }}>
           <TextField
             required
-            label="Email"
+            label="邮箱"
             variant="standard"
             value={userData.email}
             onChange={(e) => {
@@ -159,7 +159,7 @@ export default function Userinfo() {
                   }}
                 />
               }
-              label="Activated"
+              label="激活"
             />
           </FormGroup>
         </div>
@@ -180,7 +180,7 @@ export default function Userinfo() {
                 });
             }}
           >
-            Change
+            修改
           </Button>
         </div>
         <div style={{ marginTop: "10px" }}>
@@ -200,7 +200,7 @@ export default function Userinfo() {
                 });
             }}
           >
-            Delete
+            删除
           </Button>
         </div>
         <div style={{ marginTop: "10px" }}>
@@ -212,7 +212,7 @@ export default function Userinfo() {
               navigate("/users");
             }}
           >
-            Back
+            返回
           </Button>
         </div>
       </Box>

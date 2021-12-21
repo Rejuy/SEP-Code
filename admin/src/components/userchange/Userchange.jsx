@@ -28,11 +28,11 @@ export default function UserChange() {
     <Card>
       <CardContent>
         <Typography variant="h6" component="div">
-          New User Count
+          新用户数量
         </Typography>
         <span>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Since Last Month
+            上月
           </Typography>
         </span>
         <span
@@ -44,7 +44,7 @@ export default function UserChange() {
         >
           <Typography sx={{ fontSize: 30 }} color="text.primary" gutterBottom>
             {count >= 0 ? "+" : null}
-            {count} Users
+            {count} 位用户
           </Typography>
           <span style={{ display: "flex", alignItems: "bottom" }}>
             {count >= 0 ? (
@@ -60,7 +60,7 @@ export default function UserChange() {
       </CardContent>
       <CardActions>
         <Link to="/users">
-          <Button size="small">Learn More</Button>
+          <Button size="small">了解更多</Button>
         </Link>
       </CardActions>
     </Card>

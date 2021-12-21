@@ -39,10 +39,10 @@ export default class Timeonline extends Component {
       <Card>
         <CardContent>
           <Typography variant="h6" component="div">
-            Server Online Time
+            服务器在线时长
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Since Last Boot
+            上次重启
           </Typography>
           <div
             style={{
@@ -52,22 +52,22 @@ export default class Timeonline extends Component {
             }}
           >
             <Typography sx={{ fontSize: 26 }} color="text.primary" gutterBottom>
-              {Math.floor(count / 3600 / 60)} Days
+              {Math.floor(count / 3600 / 60)} 天
             </Typography>
             <Typography sx={{ fontSize: 24 }} color="text.primary" gutterBottom>
-              {Math.floor((count / 3600) % 60)} Hr
+              {Math.floor((count / 3600) % 60)} 小时
             </Typography>
             <Typography sx={{ fontSize: 20 }} gutterBottom>
-              {Math.floor((count / 60) % 60)} Min
+              {Math.floor((count / 60) % 60)} 分
             </Typography>
             <Typography sx={{ fontSize: 16 }} gutterBottom>
-              {Math.floor(count % 60)} s
+              {Math.floor(count % 60)} 秒
             </Typography>
           </div>
         </CardContent>
         <CardActions>
           <Link to="/">
-            <Button size="small">Learn More</Button>
+            <Button size="small">了解更多</Button>
           </Link>
         </CardActions>
       </Card>

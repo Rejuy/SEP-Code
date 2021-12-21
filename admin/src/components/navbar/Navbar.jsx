@@ -64,13 +64,13 @@ export default function Navbar() {
             variant="h6"
             style={{ display: "flex", alignItems: "center", color: "white" }}
           >
-            Admin
+            清声细语
           </Typography>
         </CustomLink>
         <Search>
           <SearchIcon></SearchIcon>
           <CustomInput
-            placeholder="Search.."
+            placeholder="搜索.."
             onKeyPress={(e) => {
               if (e.key === "Enter") {
                 navigate(e.target.value);

@@ -47,7 +47,7 @@ export default function Foodinfo() {
         justifyContent: "space-evenly",
       }}
     >
-      <Typography variant="h5">Loading Food</Typography>
+      <Typography variant="h5">加载饮食模块</Typography>
       <CircularProgress />
     </div>
   );
@@ -86,7 +86,7 @@ export default function Foodinfo() {
           />
           <TextField
             required
-            label="Food Name"
+            label="名称"
             variant="standard"
             value={data.name}
             onChange={(e) => {
@@ -129,7 +129,7 @@ export default function Foodinfo() {
           />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
-              label="Time"
+              label="时间"
               inputFormat="dd/MM/yyyy"
               variant="standard"
               value={data.time}
@@ -164,7 +164,7 @@ export default function Foodinfo() {
                   }}
                 />
               }
-              label="Activated"
+              label="激活"
             />
           </FormGroup>
         </div>
@@ -174,7 +174,6 @@ export default function Foodinfo() {
             color="success"
             fullWidth
             onClick={() => {
-              console.log(data);
               axios
                 .post(global.config.backendUrl + "/api/v1.0/admin_edit_item", {
                   secret_code: localStorage.getItem("secretCode"),
@@ -187,7 +186,7 @@ export default function Foodinfo() {
                 });
             }}
           >
-            Change
+            修改
           </Button>
         </div>
         <div style={{ marginTop: "10px" }}>
@@ -208,7 +207,7 @@ export default function Foodinfo() {
                 });
             }}
           >
-            Delete
+            删除
           </Button>
         </div>
         <div style={{ marginTop: "10px" }}>
@@ -220,7 +219,7 @@ export default function Foodinfo() {
               navigate("/foods");
             }}
           >
-            Back
+            返回
           </Button>
         </div>
       </Box>
