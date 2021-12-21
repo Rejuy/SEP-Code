@@ -8,7 +8,7 @@ export default function SettingsPage(props) {
 
   const logout = () => {
     handleClose();
-    localStorage.setItem("isLogin", false);
+    localStorage.setItem("secretCode", "");
     navigate("/login");
   };
 

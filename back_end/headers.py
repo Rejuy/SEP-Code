@@ -85,7 +85,6 @@ INSERT_COMMENT_KEY = ["class", "item_id", "user", "star", "time", "likes", "text
 # 所有key值
 COMMENT_KEY = ["id", "class", "item_id", "user", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
 # 获取时的key
-BASIC_ITEM_COMMENT_KEY = ["id", "user", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
 BASIC_USER_COMMENT_KEY = ["id", "class", "item_id", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
 
 

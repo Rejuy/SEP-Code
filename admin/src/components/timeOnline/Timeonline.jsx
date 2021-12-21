@@ -18,7 +18,9 @@ export default class Timeonline extends Component {
 
   componentDidMount() {
     axios
-      .get(global.config.backendUrl + "/api/admin/get_online_time")
+      .post(global.config.backendUrl + "/api/v1.0/get_online_time", {
+        secret_code: localStorage.getItem("secretCode"),
+      })
       .then((res) => {
         this.setState({ count: (new Date() - new Date(res.data.date)) / 1000 });
         this.timerId = setInterval(() => {
