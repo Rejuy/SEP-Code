@@ -49,7 +49,6 @@ function ActionInit(params) {
         id: params.row.id,
       })
       .then((res) => {
-        console.log(res);
         if (res.data.state === 0) {
           params.row.activated = true;
           params.api.forceUpdate();
