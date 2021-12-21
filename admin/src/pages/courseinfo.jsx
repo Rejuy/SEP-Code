@@ -47,7 +47,7 @@ export default function Courseinfo() {
         justifyContent: "space-evenly",
       }}
     >
-      <Typography variant="h5">Loading Course</Typography>
+      <Typography variant="h5">加载课程</Typography>
       <CircularProgress />
     </div>
   );
@@ -86,7 +86,7 @@ export default function Courseinfo() {
           />
           <TextField
             required
-            label="Course Name"
+            label="课程名称"
             variant="standard"
             value={data.name}
             onChange={(e) => {
@@ -97,7 +97,7 @@ export default function Courseinfo() {
         <div>
           <TextField
             required
-            label="Teacher"
+            label="老师"
             variant="standard"
             value={data.teacher}
             onChange={(e) => {
@@ -106,7 +106,7 @@ export default function Courseinfo() {
           />
           <TextField
             required
-            label="Department"
+            label="院系"
             variant="standard"
             value={data.department}
             onChange={(e) => {
@@ -120,7 +120,7 @@ export default function Courseinfo() {
         <div>
           <TextField
             required
-            label="Type"
+            label="类型"
             variant="standard"
             value={data.type}
             onChange={(e) => {
@@ -129,7 +129,7 @@ export default function Courseinfo() {
           />
           <TextField
             required
-            label="Credit"
+            label="学分"
             variant="standard"
             type="number"
             value={data.credit}
@@ -141,7 +141,7 @@ export default function Courseinfo() {
         <div style={{ display: "flex", alignItems: "center" }}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
-              label="Time"
+              label="时间"
               inputFormat="dd/MM/yyyy"
               variant="standard"
               value={data.time}
@@ -167,7 +167,7 @@ export default function Courseinfo() {
                   }}
                 />
               }
-              label="Activated"
+              label="激活"
             />
           </FormGroup>
         </div>
@@ -190,7 +190,7 @@ export default function Courseinfo() {
                 });
             }}
           >
-            Change
+            修改
           </Button>
         </div>
         <div style={{ marginTop: "10px" }}>
@@ -211,7 +211,7 @@ export default function Courseinfo() {
                 });
             }}
           >
-            Delete
+            删除
           </Button>
         </div>
         <div style={{ marginTop: "10px" }}>
@@ -223,7 +223,7 @@ export default function Courseinfo() {
               navigate("/courses");
             }}
           >
-            Back
+            返回
           </Button>
         </div>
       </Box>

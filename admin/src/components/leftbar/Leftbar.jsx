@@ -35,27 +35,27 @@ export default function Leftbar() {
     <CustomContainer>
       <Link to="/" style={{ width: "100%" }}>
         <Item size="large" startIcon={<TrendingUp />}>
-          <Typography>Analytics</Typography>
+          <Typography>数据</Typography>
         </Item>
       </Link>
       <Link to="/users" style={{ width: "100%" }}>
         <Item size="large" startIcon={<Person />}>
-          <Typography>Users</Typography>
+          <Typography>用户</Typography>
         </Item>
       </Link>
       <Link to="/courses" style={{ width: "100%" }}>
         <Item size="large" startIcon={<School />}>
-          <Typography>Courses</Typography>
+          <Typography>课程</Typography>
         </Item>
       </Link>
       <Link to="/foods" style={{ width: "100%" }}>
         <Item size="large" startIcon={<Restaurant />}>
-          <Typography>Food</Typography>
+          <Typography>饮食</Typography>
         </Item>
       </Link>
       <Link to="/places" style={{ width: "100%" }}>
         <Item size="large" startIcon={<Terrain />}>
-          <Typography>Places</Typography>
+          <Typography>景点</Typography>
         </Item>
       </Link>
     </CustomContainer>

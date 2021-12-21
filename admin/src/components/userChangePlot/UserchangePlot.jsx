@@ -35,7 +35,7 @@ export default function UserChangePlot() {
   return (
     <CustomCard style={{ width: "100%" }}>
       <Typography variant="h6" component="div" style={{ marginBottom: "20px" }}>
-        User Analytics: User Change
+        用户增加曲线
       </Typography>
       <ResponsiveContainer width="100%" aspect={4 / 1}>
         <LineChart data={data}>
@@ -44,21 +44,7 @@ export default function UserChangePlot() {
           <Line type="monotone" dataKey="change" />
           <Tooltip
             labelFormatter={(l) => {
-              const months = [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-              ];
-              return months[l];
+              return l + "月";
             }}
           ></Tooltip>
         </LineChart>

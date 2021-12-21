@@ -61,9 +61,9 @@ function ActionInit(params) {
   return (
     <>
       <Dialog open={open} onClose={handleDialogClose}>
-        <DialogTitle>Activate User</DialogTitle>
+        <DialogTitle>激活</DialogTitle>
         <DialogContent>
-          Would You Like to Activate User "{params.row.user_name}"?
+          是否想要激活用户 "{params.row.user_name}"?
         </DialogContent>
         <DialogActions>
           <Button
@@ -73,7 +73,7 @@ function ActionInit(params) {
             variant="outlined"
             color="error"
           >
-            No
+            否
           </Button>
           <Button
             onClick={() => {
@@ -83,12 +83,12 @@ function ActionInit(params) {
             variant="outlined"
             color="success"
           >
-            Yes
+            是
           </Button>
         </DialogActions>
       </Dialog>
       <Link to={"/user/" + params.row.id} style={{ marginRight: "10px" }}>
-        <Button variant="outlined">Edit</Button>
+        <Button variant="outlined">修改</Button>
       </Link>
       <Button
         onClick={jsonDetail}
@@ -106,7 +106,7 @@ function ActionInit(params) {
           }}
           color="success"
         >
-          Activate
+          激活
         </Button>
       )}
     </>
@@ -132,7 +132,7 @@ function Userpage() {
     { field: "id", headerName: "ID", flex: 1 },
     {
       field: "user_name",
-      headerName: "Username",
+      headerName: "用户名",
       headerAlign: "center",
       flex: 4,
       renderCell: (params) => {
@@ -180,14 +180,14 @@ function Userpage() {
     },
     {
       field: "email",
-      headerName: "Email",
+      headerName: "邮箱",
       headerAlign: "center",
       align: "center",
       flex: 2,
     },
     {
       field: "account_birth",
-      headerName: "Account Birth",
+      headerName: "帐号生日",
       headerAlign: "center",
       align: "center",
       type: "date",
@@ -198,35 +198,35 @@ function Userpage() {
     },
     {
       field: "collection_count",
-      headerName: "Collection Count",
+      headerName: "收藏个数",
       headerAlign: "center",
       align: "center",
       flex: 1,
     },
     {
       field: "like_count",
-      headerName: "Like Count",
+      headerName: "点赞个数",
       headerAlign: "center",
       align: "center",
       flex: 1,
     },
     {
       field: "comment_count",
-      headerName: "Comment Count",
+      headerName: "评论个数",
       headerAlign: "center",
       align: "center",
       flex: 1,
     },
     {
       field: "item_count",
-      headerName: "Item Count",
+      headerName: "发帖个数",
       headerAlign: "center",
       align: "center",
       flex: 1,
     },
     {
       field: "activated",
-      headerName: "Account Active",
+      headerName: "激活",
       headerAlign: "center",
       flex: 1,
       renderCell: (params) => {
@@ -239,7 +239,7 @@ function Userpage() {
     },
     {
       field: "action",
-      headerName: "Actions",
+      headerName: "操作",
       headerAlign: "center",
       sortable: false,
       flex: 8,
@@ -265,7 +265,7 @@ function Userpage() {
   const dataGridJsx = (
     <div style={{ width: "100%" }}>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
-        Users
+        用户
       </Typography>
       <DataGrid
         id="datagrid"
