@@ -3,12 +3,14 @@ Page({
     data: {
         loading: true,
 
-        place_name: '第一教室楼',
-        place_position: '清华大学西南方向',
+        place_name: '',
+        place_position: '',
         opening_hours: '07:00-22:00',
-        place_range: '校内地点',
-        place_type: '自习场所',
+        place_range: '',
+        place_type: '',
 
+        place_score: 0.0,
+        place_star: 0.0,
         negative_radio: 10,
         neutral_radio: 30,
         positive_radio: 60,
@@ -21,8 +23,20 @@ Page({
         ]
     },
 
+    marco: {
+        PAGE_CAPACITY: 8,
+    },
+
     onLoad: function (options) {
+        let content = JSON.parse(options.content);
+
         this.setData({
+            place_name: content.name,
+            place_position: content.position,
+            place_range: content.range,
+            place_type: content.type,
+            place_score: content.score.toFixed(1),
+            place_star: content.star.toFixed(1),
             loading: false,
         })
     },

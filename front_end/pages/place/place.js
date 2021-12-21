@@ -275,6 +275,14 @@ Page({
             });
     },
 
+    viewPlaceItem: function(event) {
+        let index = event.currentTarget.dataset.index;
+        let content = JSON.stringify(this.data.places_list[index]);
+        wx.navigateTo({
+          url: '../place_item/place_item?content=' + content,
+        })
+    },
+
     // 生命周期函数--监听页面初次渲染完成
     onReady: function () {
 
