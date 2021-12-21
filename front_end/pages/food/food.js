@@ -334,9 +334,11 @@ Page({
             });
     },
 
-    viewFoodItem: function() {
+    viewFoodItem: function(event) {
+        let index = event.currentTarget.dataset.index;
+        let content = JSON.stringify(this.data.food_list[index]);
         wx.navigateTo({
-          url: '../food_item/food_item',
+          url: '../food_item/food_item?content=' + content,
         })
     },
 

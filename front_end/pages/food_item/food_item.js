@@ -1,14 +1,15 @@
-// pages/food_item/food_item.js
 Page({
     data: {
         loading: true,
 
-        food_name: '汉堡王',
-        food_position: '海淀区华清嘉园7号楼',
+        food_name: '',
+        food_position: '',
         business_hours: '07:00-22:00',
-        food_range: '校外餐饮',
-        food_type: '汉堡披萨',
+        food_range: '',
+        food_type: '',
 
+        food_score: 0.0,
+        food_star: 0.0,
         negative_radio: 30,
         neutral_radio: 20,
         positive_radio: 50,
@@ -21,8 +22,20 @@ Page({
         ]
     },
 
+    marco: {
+        PAGE_CAPACITY: 8,
+    },
+
     onLoad: function (options) {
+        let content = JSON.parse(options.content);
+
         this.setData({
+            food_name: content.name,
+            food_position: content.position,
+            food_range: content.range,
+            food_type: content.type,
+            food_score: content.score.toFixed(1),
+            food_star: content.star.toFixed(1),
             loading: false,
         })
     },

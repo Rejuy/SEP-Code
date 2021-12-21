@@ -1,4 +1,3 @@
-// pages/course_item/course_item.js
 Page({
     data: {
         loading: true,
