@@ -4,11 +4,11 @@
             平台公告区
         </van-divider>
         <van-collapse accordion value="{{ active_number }}" bind:change="changeCollapse">
-            <van-collapse-item title="平台审核机制" name="1">
-                呵，距离审核机制成熟还差亿点点
+            <van-collapse-item title="平台排序设置" name="1">
+                推荐列表支持多种排序方法，在各项规则中位列前15名的推荐，会拥有TOP标签；评论则一律按照点赞数进行排列，我们有理由相信，点赞数在一定程度上反映了评论的质量。
             </van-collapse-item>
-            <van-collapse-item title="平台热榜设置" name="2">
-                呵，距离搞出来热榜还远着呢
+            <van-collapse-item title="平台审核机制" name="2">
+                清声细语平台设有专门的管理端进行内容审核，管理员也可以对用户设置各种权限。当然，良好的平台秩序还需要每一位用户和我们一同营造。在此，感谢各位的支持与理解。
             </van-collapse-item>           
         </van-collapse>
     </view>
