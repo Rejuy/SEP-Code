@@ -17,17 +17,17 @@ export default function Login() {
   const navigate = useNavigate();
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // info tag
   const HandleLogin = () => {
     axios
-      .post(global.config.backendUrl + "/api/admin/admin_login", {
-        username: username,
+      .post(global.config.backendUrl + "/api/v1.0/admin_login", {
+        user_name: username,
         password: password,
       })
       .then((res) => {
+        console.log(res);
         if (res.data.status === 0) {
-          global.config.isLogin = true;
-          localStorage.setItem("isLogin", true);
+          localStorage.setItem("secretCode", res.data.secret_code);
           navigate("/");
         } else {
           setOpen(true);
@@ -52,7 +52,7 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          Login Failed, Username password is Admin Admin
+          Login Failed, Username password is admin admin
         </Alert>
       </Snackbar>
       <Box

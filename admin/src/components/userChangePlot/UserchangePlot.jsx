@@ -20,7 +20,9 @@ export default function UserChangePlot() {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get(global.config.backendUrl + "/api/admin/get_user_change_monthly")
+      .post(global.config.backendUrl + "/api/v1.0/get_user_change_monthly", {
+        secret_code: localStorage.getItem("secretCode"),
+      })
       .then((res) => {
         var monthlyData = [];
         const resData = res.data.change;
