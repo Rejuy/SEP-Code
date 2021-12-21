@@ -126,6 +126,7 @@ export default function Courseinfo() {
             required
             label="Credit"
             variant="standard"
+            type="number"
             value={data.credit}
             onChange={(e) => {
               setData((prev) => ({ ...prev, credit: e.target.value }));

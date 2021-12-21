@@ -28,7 +28,7 @@ export default function Userinfo() {
     id: -1,
     user_name: "",
     email: "",
-    user_icon: "",
+    image: "",
     activated: false,
     account_birth: new Date(),
     collection_count: 0,
@@ -55,24 +55,26 @@ export default function Userinfo() {
 
   useEffect(() => {
     axios
-      .post(global.config.backendUrl + "/api/v1.0/user", {
+      .post(global.config.backendUrl + "/api/v1.0/admin_get_single_user", {
         secret_code: localStorage.getItem("secretCode"),
         id: uid,
       })
       .then((res) => {
-        setUserData(res.data.user);
-        setLoaded(true);
+        if (res.data.status === 0) {
+          setUserData(res.data.user);
+          setLoaded(true);
+        }
       })
       .catch((err) => console.log(err));
   }, [uid]);
 
   useEffect(() => {
     var user_icon_element,
-      user_icon_url = userData.user_icon;
+      user_icon_url = userData.image;
     if (user_icon_url) {
       user_icon_element = (
         <img
-          src={user_icon_url}
+          src={"http://thurec.xyz/" + user_icon_url}
           alt="User Icon"
           style={{
             width: "64px",
@@ -105,12 +107,12 @@ export default function Userinfo() {
           <TextField
             label="User Icon"
             variant="standard"
-            value={userData.user_icon || ""}
+            value={userData.image || ""}
             onChange={(e) => {
               if (e.target.value !== "") {
-                setUserData((prev) => ({ ...prev, user_icon: e.target.value }));
+                setUserData((prev) => ({ ...prev, image: e.target.value }));
               } else {
-                setUserData((prev) => ({ ...prev, user_icon: null }));
+                setUserData((prev) => ({ ...prev, image: null }));
               }
             }}
           />
@@ -148,11 +150,11 @@ export default function Userinfo() {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={userData.activated}
+                  checked={userData.activated === 1}
                   onChange={(e) => {
                     setUserData((prev) => ({
                       ...prev,
-                      activated: e.target.checked,
+                      activated: e.target.checked ? 1 : 0,
                     }));
                   }}
                 />
@@ -168,9 +170,10 @@ export default function Userinfo() {
             fullWidth
             onClick={() => {
               axios
-                .post(global.config.backendUrl + "/api/v1.0/edit_user", {
+                .post(global.config.backendUrl + "/api/v1.0/admin_edit_user", {
                   secret_code: localStorage.getItem("secretCode"),
-                  user: userData,
+                  user: { ...userData, activated: userData.activated ? 1 : 0 },
+                  delete: false,
                 })
                 .then((res) => {
                   navigate("/users");
@@ -187,9 +190,10 @@ export default function Userinfo() {
             fullWidth
             onClick={() => {
               axios
-                .post(global.config.backendUrl + "/api/v1.0/delete_user", {
+                .post(global.config.backendUrl + "/api/v1.0/admin_edit_user", {
                   secret_code: localStorage.getItem("secretCode"),
-                  id: userData.id,
+                  user: { id: userData.id },
+                  delete: true,
                 })
                 .then((res) => {
                   navigate("/users");
