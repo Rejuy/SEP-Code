@@ -62,7 +62,11 @@ export default function Navbar() {
         <CustomLink to="/">
           <Typography
             variant="h6"
-            style={{ display: "flex", alignItems: "center", color: "white" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              color: "white",
+            }}
           >
             清声细语
           </Typography>

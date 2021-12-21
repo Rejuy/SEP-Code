@@ -67,7 +67,7 @@ export default function Login() {
           <LockOutlined />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          管理员登录
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>
           <TextField
@@ -75,7 +75,7 @@ export default function Login() {
             required
             fullWidth
             id="username"
-            label="Username"
+            label="用户名"
             name="adminUsername"
             onChange={(e) => {
               setusername(e.target.value);
@@ -87,7 +87,7 @@ export default function Login() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="密码"
             type="password"
             id="password"
             onChange={(e) => {
@@ -102,7 +102,7 @@ export default function Login() {
             sx={{ mt: 3, mb: 2 }}
             onClick={HandleLogin}
           >
-            Sign In
+            登录
           </Button>
         </Box>
       </Box>
