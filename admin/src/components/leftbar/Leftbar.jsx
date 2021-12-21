@@ -1,5 +1,4 @@
 import {
-  Home,
   Person,
   Restaurant,
   School,
@@ -35,11 +34,6 @@ export default function Leftbar() {
   return (
     <CustomContainer>
       <Link to="/" style={{ width: "100%" }}>
-        <Item size="large" startIcon={<Home />}>
-          <Typography>Homepage</Typography>
-        </Item>
-      </Link>
-      <Link to="/analytics" style={{ width: "100%" }}>
         <Item size="large" startIcon={<TrendingUp />}>
           <Typography>Analytics</Typography>
         </Item>

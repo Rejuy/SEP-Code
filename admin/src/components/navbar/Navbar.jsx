@@ -10,7 +10,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useState } from "react";
 import { Settings } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SettingsPage from "../../pages/settings";
 
 const CustomToolbar = styled(Toolbar)(({ theme }) => ({
@@ -49,6 +49,7 @@ const CustomLink = styled(Link)(({ theme }) => ({
 }));
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -68,7 +69,14 @@ export default function Navbar() {
         </CustomLink>
         <Search>
           <SearchIcon></SearchIcon>
-          <CustomInput placeholder="Search.."></CustomInput>
+          <CustomInput
+            placeholder="Search.."
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                navigate(e.target.value);
+              }
+            }}
+          ></CustomInput>
         </Search>
         <CustomUser>
           <IconButton

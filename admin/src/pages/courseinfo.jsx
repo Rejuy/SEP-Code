@@ -14,29 +14,26 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "../config";
 import { Box } from "@mui/system";
-import { AccountBox } from "@mui/icons-material";
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   paddingTop: theme.spacing(12),
   height: theme.spacing(75),
 }));
 
-export default function Userinfo() {
+export default function Courseinfo() {
   const navigate = useNavigate();
-  const { uid } = useParams();
-  const [userData, setUserData] = useState({
-    id: -1,
-    user_name: "",
-    email: "",
-    user_icon: "",
-    activated: false,
-    account_birth: new Date(),
-    collection_count: 0,
-    like_count: 0,
-    comment_count: 0,
-    item_count: 0,
-  });
+  const { id } = useParams();
   const [loaded, setLoaded] = useState(false);
+  const [data, setData] = useState({
+    id: -1,
+    name: "",
+    teacher: "",
+    department: 0,
+    type: 0,
+    credit: 0,
+    time: "",
+    verified: false,
+  });
   const [dataJsx, setDataJsx] = useState(<></>);
   const loadingJsx = (
     <div
@@ -48,50 +45,26 @@ export default function Userinfo() {
         justifyContent: "space-evenly",
       }}
     >
-      <Typography variant="h5">Loading User</Typography>
+      <Typography variant="h5">Loading Course</Typography>
       <CircularProgress />
     </div>
   );
 
   useEffect(() => {
     axios
-      .post(global.config.backendUrl + "/api/v1.0/user", {
+      .post(global.config.backendUrl + "/api/v1.0/admin_get_item", {
         secret_code: localStorage.getItem("secretCode"),
-        id: uid,
+        id: id,
+        class: 1,
       })
       .then((res) => {
-        setUserData(res.data.user);
+        setData(res.data.item);
         setLoaded(true);
       })
       .catch((err) => console.log(err));
-  }, [uid]);
+  }, [id]);
 
   useEffect(() => {
-    var user_icon_element,
-      user_icon_url = userData.user_icon;
-    if (user_icon_url) {
-      user_icon_element = (
-        <img
-          src={user_icon_url}
-          alt="User Icon"
-          style={{
-            width: "64px",
-            height: "64px",
-            borderRadius: "2px",
-            objectFit: "fill",
-          }}
-        />
-      );
-    } else {
-      user_icon_element = (
-        <AccountBox
-          style={{
-            width: "64px",
-            height: "64px",
-          }}
-        />
-      );
-    }
     setDataJsx(
       <Box
         sx={{
@@ -100,64 +73,89 @@ export default function Userinfo() {
         noValidate
         autoComplete="off"
       >
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          {user_icon_element}
-          <TextField
-            label="User Icon"
-            variant="standard"
-            value={userData.user_icon || ""}
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setUserData((prev) => ({ ...prev, user_icon: e.target.value }));
-              } else {
-                setUserData((prev) => ({ ...prev, user_icon: null }));
-              }
-            }}
-          />
-        </div>
         <div>
           <TextField
             InputProps={{
               readOnly: true,
             }}
-            label="User Id"
+            label="Id"
             variant="standard"
-            value={userData.id}
+            value={data.id}
           />
           <TextField
             required
-            label="Username"
+            label="Course Name"
             variant="standard"
-            value={userData.user_name}
+            value={data.name}
             onChange={(e) => {
-              setUserData((prev) => ({ ...prev, user_name: e.target.value }));
+              setData((prev) => ({ ...prev, name: e.target.value }));
+            }}
+          />
+        </div>
+        <div>
+          <TextField
+            required
+            label="Teacher"
+            variant="standard"
+            value={data.teacher}
+            onChange={(e) => {
+              setData((prev) => ({ ...prev, teacher: e.target.value }));
+            }}
+          />
+          <TextField
+            required
+            label="Department"
+            variant="standard"
+            value={data.department}
+            onChange={(e) => {
+              setData((prev) => ({ ...prev, department: e.target.value }));
+            }}
+          />
+        </div>
+        <div>
+          <TextField
+            required
+            label="Type"
+            variant="standard"
+            value={data.type}
+            onChange={(e) => {
+              setData((prev) => ({ ...prev, type: e.target.value }));
+            }}
+          />
+          <TextField
+            required
+            label="Credit"
+            variant="standard"
+            value={data.credit}
+            onChange={(e) => {
+              setData((prev) => ({ ...prev, credit: e.target.value }));
             }}
           />
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
           <TextField
             required
-            label="Email"
+            label="Time"
             variant="standard"
-            value={userData.email}
+            value={data.time}
             onChange={(e) => {
-              setUserData((prev) => ({ ...prev, email: e.target.value }));
+              setData((prev) => ({ ...prev, time: e.target.value }));
             }}
           />
           <FormGroup>
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={userData.activated}
+                  checked={data.verified}
                   onChange={(e) => {
-                    setUserData((prev) => ({
+                    setData((prev) => ({
                       ...prev,
-                      activated: e.target.checked,
+                      verified: e.target.checked,
                     }));
                   }}
                 />
               }
-              label="Activated"
+              label="Verified"
             />
           </FormGroup>
         </div>
@@ -168,12 +166,13 @@ export default function Userinfo() {
             fullWidth
             onClick={() => {
               axios
-                .post(global.config.backendUrl + "/api/v1.0/edit_user", {
+                .post(global.config.backendUrl + "/api/v1.0/edit_item", {
                   secret_code: localStorage.getItem("secretCode"),
-                  user: userData,
+                  class: 1,
+                  item: data,
                 })
                 .then((res) => {
-                  navigate("/users");
+                  navigate("/courses");
                 });
             }}
           >
@@ -187,12 +186,13 @@ export default function Userinfo() {
             fullWidth
             onClick={() => {
               axios
-                .post(global.config.backendUrl + "/api/v1.0/delete_user", {
+                .post(global.config.backendUrl + "/api/v1.0/delete_item", {
                   secret_code: localStorage.getItem("secretCode"),
-                  id: userData.id,
+                  id: data.id,
+                  class: 1,
                 })
                 .then((res) => {
-                  navigate("/users");
+                  navigate("/courses");
                 });
             }}
           >
@@ -205,7 +205,7 @@ export default function Userinfo() {
             color="primary"
             fullWidth
             onClick={() => {
-              navigate("/users");
+              navigate("/courses");
             }}
           >
             Back
@@ -213,7 +213,7 @@ export default function Userinfo() {
         </div>
       </Box>
     );
-  }, [userData, navigate]);
+  }, [data, navigate]);
 
   return (
     <CustomContainer
