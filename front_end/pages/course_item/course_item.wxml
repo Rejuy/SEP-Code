@@ -31,7 +31,7 @@
 
         <view class="score">
             <view class="average_score">
-                7.3
+                {{ course_score }}
             </view>
             <van-rate 
             allow-half 
@@ -40,7 +40,7 @@
             color="#ffd21e" 
             void-color="#eee"
             void-icon="star" 
-            readonly value="3.5" />
+            readonly value="{{ course_star}} " />
             <text>评级</text>
             <view class="statistics">
                 <text>差评</text>

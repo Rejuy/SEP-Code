@@ -210,9 +210,11 @@ Page({
         this.getCourseList();  
     },
 
-    viewCourseItem: function() {
+    viewCourseItem: function(event) {
+        let index = event.currentTarget.dataset.index;
+        let content = JSON.stringify(this.data.courses_list[index]);
         wx.navigateTo({
-          url: '../course_item/course_item',
+          url: '../course_item/course_item?content=' + content,
         })
     },
 
