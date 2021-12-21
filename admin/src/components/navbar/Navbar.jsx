@@ -1,7 +1,6 @@
 import {
   alpha,
   AppBar,
-  Badge,
   IconButton,
   InputBase,
   styled,
@@ -10,7 +9,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useState } from "react";
-import { Mail, Settings } from "@mui/icons-material";
+import { Settings } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import SettingsPage from "../../pages/settings";
 
@@ -79,11 +78,11 @@ export default function Navbar() {
           >
             <Settings style={{ color: "white" }} />
           </IconButton>
-          <IconButton>
+          {/* <IconButton>
             <Badge badgeContent={4} color="secondary">
               <Mail style={{ color: "white" }} />
             </Badge>
-          </IconButton>
+          </IconButton> */}
         </CustomUser>
       </CustomToolbar>
       <SettingsPage open={open} handleClose={handleClose} />

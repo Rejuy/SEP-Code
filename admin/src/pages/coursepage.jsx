@@ -1,99 +1,210 @@
-import { styled, Container, Typography } from "@mui/material";
+import { Check, Close } from "@mui/icons-material";
+import {
+  styled,
+  Container,
+  Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "../config";
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   paddingTop: theme.spacing(12),
   height: theme.spacing(75),
+  width: "100%",
 }));
 
+function ActionInit(params) {
+  const [open, setOpen] = useState(false);
+
+  const handleDialogClose = () => {
+    setOpen(false);
+  };
+
+  const jsonDetail = (e) => {
+    e.stopPropagation();
+
+    const api = params.api;
+    const thisRow = {};
+
+    api
+      .getAllColumns()
+      .filter((c) => c.field !== "__check__" && !!c)
+      .forEach((c) => (thisRow[c.field] = params.getValue(params.id, c.field)));
+
+    return alert(JSON.stringify(thisRow, null, 4));
+  };
+
+  const verifyItem = () => {
+    axios
+      .post(global.config.backendUrl + "/api/v1.0/admin_activate_item", {
+        secret_code: localStorage.getItem("secretCode"),
+        class: 1,
+        id: params.row.id,
+      })
+      .then((res) => {
+        if (res.data.state === 0) {
+          params.row.activated = true;
+          params.api.forceUpdate();
+        }
+      });
+  };
+
+  return (
+    <>
+      <Dialog open={open} onClose={handleDialogClose}>
+        <DialogTitle>Activate User</DialogTitle>
+        <DialogContent>
+          Would You Like to Verify Course "{params.row.name}"?
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              setOpen(false);
+            }}
+            variant="outlined"
+            color="error"
+          >
+            No
+          </Button>
+          <Button
+            onClick={() => {
+              setOpen(false);
+              verifyItem();
+            }}
+            variant="outlined"
+            color="success"
+          >
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Link to={"/course/" + params.row.id} style={{ marginRight: "10px" }}>
+        <Button variant="outlined">Edit</Button>
+      </Link>
+      <Button
+        onClick={jsonDetail}
+        variant="outlined"
+        style={{ marginRight: "10px" }}
+      >
+        JSON
+      </Button>
+      {params.row.verified ? null : (
+        <Button
+          variant="outlined"
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpen(true);
+          }}
+          color="success"
+        >
+          Verify
+        </Button>
+      )}
+    </>
+  );
+}
+
 function Coursepage() {
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35, activated: false },
-    {
-      id: 2,
-      lastName: "Lannister",
-      firstName: "Cersei",
-      age: 42,
-      activated: true,
-    },
-    {
-      id: 3,
-      lastName: "Lannister",
-      firstName: "Jaime",
-      age: 45,
-      activated: true,
-    },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16, activated: true },
-    {
-      id: 5,
-      lastName: "Targaryen",
-      firstName: "Daenerys",
-      age: null,
-      activated: true,
-    },
-    {
-      id: 6,
-      lastName: "Melisandre",
-      firstName: null,
-      age: 150,
-      activated: false,
-    },
-    {
-      id: 7,
-      lastName: "Clifford",
-      firstName: "Ferrara",
-      age: 44,
-      activated: false,
-    },
-    {
-      id: 8,
-      lastName: "Frances",
-      firstName: "Rossini",
-      age: 36,
-      activated: true,
-    },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65, activated: true },
-  ];
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post(global.config.backendUrl + "/api/v1.0/admin_get_item_list", {
+        secret_code: localStorage.getItem("secretCode"),
+        offset: 0,
+        size: 1000,
+        class: 1,
+      })
+      .then((res) => {
+        setData(res.data.items.sort((a, b) => a.id - b.id));
+      });
+  }, []);
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First name", width: 130 },
-    { field: "lastName", headerName: "Last name", width: 130 },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 90,
-    },
-    {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
+      field: "name",
+      headerName: "Course Name",
+      headerAlign: "center",
       width: 160,
-      valueGetter: (params) =>
-        `${params.getValue(params.id, "firstName") || ""} ${
-          params.getValue(params.id, "lastName") || ""
-        }`,
     },
     {
-      field: "activated",
-      headerName: "Account Active",
-      width: 100,
-      valueGetter: (params) => "a",
+      field: "teacher",
+      headerName: "Teacher",
+      headerAlign: "center",
+      align: "center",
+      width: 125,
+    },
+    {
+      field: "department",
+      headerName: "Department",
+      headerAlign: "center",
+      align: "center",
+      width: 125,
+    },
+    {
+      field: "type",
+      headerName: "Type",
+      headerAlign: "center",
+      align: "center",
+      width: 125,
+    },
+    {
+      field: "credit",
+      headerName: "Credit",
+      headerAlign: "center",
+      align: "center",
+      width: 125,
+    },
+    {
+      field: "time",
+      headerName: "Time",
+      headerAlign: "center",
+      align: "center",
+      width: 125,
+    },
+    {
+      field: "verified",
+      headerName: "Verified",
+      headerAlign: "center",
+      width: 125,
+      renderCell: (params) => {
+        if (params.value) {
+          return <Check style={{ width: "100%" }} />;
+        } else {
+          return <Close style={{ width: "100%" }} />;
+        }
+      },
+    },
+    {
+      field: "action",
+      headerName: "Actions",
+      headerAlign: "center",
+      sortable: false,
+      width: 300,
+      renderCell: ActionInit,
     },
   ];
   return (
     <CustomContainer>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
-        Courses
+        Course
       </Typography>
       <DataGrid
-        rows={rows}
+        id="datagrid"
+        rows={data}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={8}
+        rowsPerPageOptions={[8]}
         checkboxSelection
+        autoHeight={true}
+        style={{ width: "100%" }}
       />
     </CustomContainer>
   );

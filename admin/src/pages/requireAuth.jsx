@@ -4,8 +4,8 @@ import "../config";
 
 export default function RequireAuth({ children }) {
   if (
-    !localStorage.getItem("isLogin") ||
-    localStorage.getItem("isLogin") === "false"
+    !localStorage.getItem("secretCode") ||
+    localStorage.getItem("secretCode") === ""
   ) {
     return <Navigate to="/login" />;
   }
