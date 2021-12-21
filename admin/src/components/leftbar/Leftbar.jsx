@@ -48,12 +48,16 @@ export default function Leftbar() {
           <Typography>Courses</Typography>
         </Item>
       </Link>
-      <Item size="large" startIcon={<Restaurant />}>
-        <Typography>Food</Typography>
-      </Item>
-      <Item size="large" startIcon={<Terrain />}>
-        <Typography>Places</Typography>
-      </Item>
+      <Link to="/foods" style={{ width: "100%" }}>
+        <Item size="large" startIcon={<Restaurant />}>
+          <Typography>Food</Typography>
+        </Item>
+      </Link>
+      <Link to="/places" style={{ width: "100%" }}>
+        <Item size="large" startIcon={<Terrain />}>
+          <Typography>Places</Typography>
+        </Item>
+      </Link>
     </CustomContainer>
   );
 }
