@@ -298,11 +298,11 @@ class MySQLServiceTest(unittest.TestCase):
         comment_info = {
             "class": 1,
             "table": "course_list",  # (class对应的表名)
-            "item_id": 3,
+            "item_id": 2003,
             "user": "renjy",
-            "upper_comment_id": 0,
+            "upper_comment_id": -1,
             "star": 3,
-            "text": "我对这门课无可奉告。"
+            "text": "测试评论1。"
         }
         self.assertEqual(db.addComment(comment_info), True)
 
@@ -310,11 +310,11 @@ class MySQLServiceTest(unittest.TestCase):
         comment_info = {
             "class": 1,
             "table": "course_list",  # (class对应的表名)
-            "item_id": 3,
+            "item_id": 2003,
             "user": "zengxl",
-            "upper_comment_id": 0,
+            "upper_comment_id": -1,
             "star": 4,
-            "text": "我对这门课无可奉告呀。"
+            "text": "测试评论2."
         }
         self.assertEqual(db.addComment(comment_info), True)
 
