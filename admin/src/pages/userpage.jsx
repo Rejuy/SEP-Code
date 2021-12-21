@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogActions,
   DialogContent,
+  CircularProgress,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
@@ -114,6 +115,7 @@ function ActionInit(params) {
 
 function Userpage() {
   const [data, setData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     axios
       .post(global.config.backendUrl + "/api/v1.0/admin_get_users", {
@@ -123,15 +125,16 @@ function Userpage() {
       })
       .then((res) => {
         setData(res.data.users.sort((a, b) => a.id - b.id));
+        setLoaded(true);
       });
   }, []);
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "id", headerName: "ID", flex: 1 },
     {
       field: "user_name",
       headerName: "Username",
       headerAlign: "center",
-      width: 160,
+      flex: 4,
       renderCell: (params) => {
         var user_icon_element,
           user_icon_url = params.row.image;
@@ -180,7 +183,7 @@ function Userpage() {
       headerName: "Email",
       headerAlign: "center",
       align: "center",
-      width: 125,
+      flex: 2,
     },
     {
       field: "account_birth",
@@ -188,7 +191,7 @@ function Userpage() {
       headerAlign: "center",
       align: "center",
       type: "date",
-      width: 125,
+      flex: 2,
       valueFormatter: (params) => {
         return new Date(params.value).toLocaleDateString("zh-Hans-CN");
       },
@@ -198,34 +201,34 @@ function Userpage() {
       headerName: "Collection Count",
       headerAlign: "center",
       align: "center",
-      width: 100,
+      flex: 1,
     },
     {
       field: "like_count",
       headerName: "Like Count",
       headerAlign: "center",
       align: "center",
-      width: 100,
+      flex: 1,
     },
     {
       field: "comment_count",
       headerName: "Comment Count",
       headerAlign: "center",
       align: "center",
-      width: 100,
+      flex: 1,
     },
     {
       field: "item_count",
       headerName: "Item Count",
       headerAlign: "center",
       align: "center",
-      width: 100,
+      flex: 1,
     },
     {
       field: "activated",
       headerName: "Account Active",
       headerAlign: "center",
-      width: 125,
+      flex: 1,
       renderCell: (params) => {
         if (params.value) {
           return <Check style={{ width: "100%" }} />;
@@ -239,12 +242,28 @@ function Userpage() {
       headerName: "Actions",
       headerAlign: "center",
       sortable: false,
-      width: 300,
+      flex: 8,
       renderCell: ActionInit,
     },
   ];
-  return (
-    <CustomContainer>
+
+  const loadingJsx = (
+    <div
+      className="loading"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Typography variant="h5">Loading Users</Typography>
+      <CircularProgress />
+    </div>
+  );
+
+  const dataGridJsx = (
+    <div style={{ width: "100%" }}>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
         Users
       </Typography>
@@ -258,6 +277,14 @@ function Userpage() {
         autoHeight={true}
         style={{ width: "100%" }}
       />
+    </div>
+  );
+
+  return (
+    <CustomContainer
+      style={{ display: "flex", justifyContent: "space-evenly" }}
+    >
+      {loaded ? dataGridJsx : loadingJsx}
     </CustomContainer>
   );
 }

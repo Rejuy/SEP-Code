@@ -10,10 +10,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "../config";
 import { Box } from "@mui/system";
+import { DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   paddingTop: theme.spacing(12),
@@ -32,7 +34,7 @@ export default function Courseinfo() {
     type: 0,
     credit: 0,
     time: "",
-    verified: false,
+    activated: false,
   });
   const [dataJsx, setDataJsx] = useState(<></>);
   const loadingJsx = (
@@ -52,7 +54,7 @@ export default function Courseinfo() {
 
   useEffect(() => {
     axios
-      .post(global.config.backendUrl + "/api/v1.0/admin_get_item", {
+      .post(global.config.backendUrl + "/api/v1.0/admin_get_single_item", {
         secret_code: localStorage.getItem("secretCode"),
         id: id,
         class: 1,
@@ -108,7 +110,10 @@ export default function Courseinfo() {
             variant="standard"
             value={data.department}
             onChange={(e) => {
-              setData((prev) => ({ ...prev, department: e.target.value }));
+              setData((prev) => ({
+                ...prev,
+                department: Number(e.target.value),
+              }));
             }}
           />
         </div>
@@ -119,7 +124,7 @@ export default function Courseinfo() {
             variant="standard"
             value={data.type}
             onChange={(e) => {
-              setData((prev) => ({ ...prev, type: e.target.value }));
+              setData((prev) => ({ ...prev, type: Number(e.target.value) }));
             }}
           />
           <TextField
@@ -129,34 +134,37 @@ export default function Courseinfo() {
             type="number"
             value={data.credit}
             onChange={(e) => {
-              setData((prev) => ({ ...prev, credit: e.target.value }));
+              setData((prev) => ({ ...prev, credit: Number(e.target.value) }));
             }}
           />
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <TextField
-            required
-            label="Time"
-            variant="standard"
-            value={data.time}
-            onChange={(e) => {
-              setData((prev) => ({ ...prev, time: e.target.value }));
-            }}
-          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              label="Time"
+              inputFormat="dd/MM/yyyy"
+              variant="standard"
+              value={data.time}
+              onChange={(e) => {
+                setData((prev) => ({ ...prev, time: e.toString() }));
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
           <FormGroup>
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={data.verified}
+                  checked={data.activated === 1}
                   onChange={(e) => {
                     setData((prev) => ({
                       ...prev,
-                      verified: e.target.checked,
+                      activated: e.target.checked ? 1 : 0,
                     }));
                   }}
                 />
               }
-              label="Verified"
+              label="Activated"
             />
           </FormGroup>
         </div>
@@ -166,11 +174,13 @@ export default function Courseinfo() {
             color="success"
             fullWidth
             onClick={() => {
+              console.log(data);
               axios
-                .post(global.config.backendUrl + "/api/v1.0/edit_item", {
+                .post(global.config.backendUrl + "/api/v1.0/admin_edit_item", {
                   secret_code: localStorage.getItem("secretCode"),
                   class: 1,
                   item: data,
+                  delete: false,
                 })
                 .then((res) => {
                   navigate("/courses");
@@ -187,10 +197,11 @@ export default function Courseinfo() {
             fullWidth
             onClick={() => {
               axios
-                .post(global.config.backendUrl + "/api/v1.0/delete_item", {
+                .post(global.config.backendUrl + "/api/v1.0/admin_edit_item", {
                   secret_code: localStorage.getItem("secretCode"),
-                  id: data.id,
+                  item: { id: data.id },
                   class: 1,
+                  delete: true,
                 })
                 .then((res) => {
                   navigate("/courses");

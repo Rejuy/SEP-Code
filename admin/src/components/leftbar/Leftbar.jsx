@@ -13,7 +13,7 @@ const CustomContainer = styled(Container)(({ theme }) => ({
   paddingTop: theme.spacing(12),
   backgroundColor: theme.palette.primary.main,
   height: "100vh",
-  width: theme.spacing(35),
+  width: "15%",
   color: "white",
   display: "flex",
   flexDirection: "column",
