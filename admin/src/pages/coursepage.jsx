@@ -96,7 +96,7 @@ function ActionInit(params) {
       >
         JSON
       </Button>
-      {params.row.verified ? null : (
+      {params.row.activated === 1 ? null : (
         <Button
           variant="outlined"
           onClick={(e) => {
@@ -105,7 +105,7 @@ function ActionInit(params) {
           }}
           color="success"
         >
-          Verify
+          Activate
         </Button>
       )}
     </>
@@ -119,8 +119,9 @@ function Coursepage() {
       .post(global.config.backendUrl + "/api/v1.0/admin_get_item_list", {
         secret_code: localStorage.getItem("secretCode"),
         offset: 0,
-        size: 1000,
+        size: 99999,
         class: 1,
+        order: 0,
       })
       .then((res) => {
         setData(res.data.items.sort((a, b) => a.id - b.id));
@@ -170,12 +171,12 @@ function Coursepage() {
       width: 125,
     },
     {
-      field: "verified",
-      headerName: "Verified",
+      field: "activated",
+      headerName: "Activated",
       headerAlign: "center",
       width: 125,
       renderCell: (params) => {
-        if (params.value) {
+        if (params.value === 1) {
           return <Check style={{ width: "100%" }} />;
         } else {
           return <Close style={{ width: "100%" }} />;
