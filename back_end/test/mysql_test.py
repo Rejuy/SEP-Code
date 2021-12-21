@@ -22,8 +22,8 @@ class MySQLServiceTest(unittest.TestCase):
 
     def testAddUser1(self):
         user_info = {
-            "user_name": "testUser",
-            "password": "Testpassword1",
+            "user_name": "test",
+            "password": "test",
             "email": "testEmail19"
         }
         self.assertEqual(db.addUser(user_info), True)
@@ -45,7 +45,7 @@ class MySQLServiceTest(unittest.TestCase):
         self.assertEqual(db.addUser(user_info), True)
 
     def testDelUser1(self):
-        self.assertEqual(db.delUser("id", 5), True)
+        self.assertEqual(db.delUser("id", 9), True)
 
     def testDelUser2(self):
         self.assertEqual(db.delUser("username", "testUser"), True)
