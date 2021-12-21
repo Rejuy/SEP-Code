@@ -22,7 +22,10 @@ from controllers import (
     user_list,
     add_item,
     admin_get_item_list,
-    admin_operate_item
+    admin_operate_item,
+    admin_edit_user,
+    admin_get_single_user,
+    admin_get_single_item
 )
 
 blueprints = [
@@ -47,5 +50,8 @@ blueprints = [
     user_list.bp,
     add_item.bp,
     admin_get_item_list.bp,
-    admin_operate_item.bp
+    admin_operate_item.bp,
+    admin_edit_user.bp,
+    admin_get_single_user.bp,
+    admin_get_single_item.bp
 ]

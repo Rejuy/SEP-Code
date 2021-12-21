@@ -24,6 +24,7 @@ def adminGetItems():
         if not checkSecretCode(raw_info['secret_code']):
             return jsonify({'status': 1, 'items': []}), 400
         print(24)
+        print(raw_info)
         item_list, flag = adminGetItemList(raw_info)
         if not flag:
             return jsonify({'status': 1, 'items': []}), 200
