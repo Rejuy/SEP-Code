@@ -43,11 +43,11 @@ function ActionInit(params) {
     return alert(JSON.stringify(thisRow, null, 4));
   };
 
-  const verifyItem = () => {
+  const activateItem = () => {
     axios
       .post(global.config.backendUrl + "/api/v1.0/admin_edit_item", {
         secret_code: localStorage.getItem("secretCode"),
-        class: 1,
+        class: 2,
         item: { ...params.row, activated: 1 },
         delete: false,
       })
@@ -64,7 +64,7 @@ function ActionInit(params) {
       <Dialog open={open} onClose={handleDialogClose}>
         <DialogTitle>Activate User</DialogTitle>
         <DialogContent>
-          Would You Like to Activate Course "{params.row.name}"?
+          Would You Like to Activate Food "{params.row.name}"?
         </DialogContent>
         <DialogActions>
           <Button
@@ -79,7 +79,7 @@ function ActionInit(params) {
           <Button
             onClick={() => {
               setOpen(false);
-              verifyItem();
+              activateItem();
             }}
             variant="outlined"
             color="success"
@@ -88,7 +88,7 @@ function ActionInit(params) {
           </Button>
         </DialogActions>
       </Dialog>
-      <Link to={"/course/" + params.row.id} style={{ marginRight: "10px" }}>
+      <Link to={"/food/" + params.row.id} style={{ marginRight: "10px" }}>
         <Button variant="outlined">Edit</Button>
       </Link>
       <Button
@@ -114,7 +114,7 @@ function ActionInit(params) {
   );
 }
 
-function Coursepage() {
+function Foodpage() {
   const [data, setData] = useState([]);
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
@@ -123,7 +123,7 @@ function Coursepage() {
         secret_code: localStorage.getItem("secretCode"),
         offset: 0,
         size: 99999,
-        class: 1,
+        class: 2,
         order: 0,
       })
       .then((res) => {
@@ -135,43 +135,26 @@ function Coursepage() {
     { field: "id", headerName: "ID", flex: 1 },
     {
       field: "name",
-      headerName: "Course Name",
+      headerName: "Food Name",
       headerAlign: "center",
       flex: 4,
     },
     {
-      field: "teacher",
-      headerName: "Teacher",
+      field: "position",
+      headerName: "Position",
       headerAlign: "center",
-      align: "center",
       flex: 1,
     },
     {
-      field: "department",
-      headerName: "Department",
+      field: "scope",
+      headerName: "Scope",
       headerAlign: "center",
-      align: "center",
       flex: 1,
-      valueFormatter: (params) => {
-        const departmentText = global.config.departmentList[params.value].text;
-        return departmentText.substring(4, departmentText.length);
-      },
     },
     {
       field: "type",
       headerName: "Type",
       headerAlign: "center",
-      align: "center",
-      flex: 1,
-      valueFormatter: (params) => {
-        return global.config.courseType[params.value];
-      },
-    },
-    {
-      field: "credit",
-      headerName: "Credit",
-      headerAlign: "center",
-      align: "center",
       flex: 1,
     },
     {
@@ -217,7 +200,7 @@ function Coursepage() {
         justifyContent: "space-evenly",
       }}
     >
-      <Typography variant="h5">Loading Courses</Typography>
+      <Typography variant="h5">Loading Foods</Typography>
       <CircularProgress />
     </div>
   );
@@ -225,7 +208,7 @@ function Coursepage() {
   const dataGridJsx = (
     <div style={{ width: "100%" }}>
       <Typography variant="h5" style={{ marginBottom: "20px" }}>
-        Course
+        Foods
       </Typography>
       <DataGrid
         id="datagrid"
@@ -249,4 +232,4 @@ function Coursepage() {
   );
 }
 
-export default Coursepage;
+export default Foodpage;
