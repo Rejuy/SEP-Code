@@ -2,15 +2,15 @@
     <view wx:for="{{ content_list }}" wx:key="id">
         <van-card
         tag="{{ item.tag }}"
-        desc="{{ item.desc }}"
+        desc="{{ item.description }}"
         title="{{ item.title }}"
-        thumb="{{ image_url }}"
+        thumb="{{ item.image_url }}"
         thumb-mode="aspectFill"
         thumb-link="../course_item/course_item"
         >
             <view slot="tags">
                 <van-tag plain type="primary">{{ item.range }}</van-tag>
-                <van-tag plain color="{{ item.color }}">{{ item.type }}</van-tag>
+                <van-tag plain type="success">{{ item.type }}</van-tag>
             </view>
             <star slot="price">
                 <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ item.star }}" />

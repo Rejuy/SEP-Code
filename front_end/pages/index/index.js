@@ -1,6 +1,5 @@
 Page({
   data: {
-    // 后续可以通过 onLoad 函数获取数据
     swiper_data: [{
         id: 1,
         url: "../notice/notice",
@@ -20,20 +19,16 @@ Page({
         search_value: result.detail
     });
     wx.redirectTo({
-      url: '../search/search',
+      url: '../search/search?search_value=' + this.data.search_value,
     })
   },
 
-  /*
-   * 生命周期函数--监听页面加载
-  */
+ //生命周期函数--监听页面加载
   onLoad: function (options) {
     
   },
 
-  /*
-   * 生命周期函数--监听页面初次渲染完成
-  */
+  // 生命周期函数--监听页面初次渲染完成
   onReady: function () {
     if (getApp().global_data.global_user_token === ""){
       // not logged in
