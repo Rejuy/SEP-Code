@@ -152,6 +152,10 @@ function Coursepage() {
       headerAlign: "center",
       align: "center",
       flex: 1,
+      valueFormatter: (params) => {
+        const departmentText = global.config.departmentList[params.value].text;
+        return departmentText.substring(4, departmentText.length);
+      },
     },
     {
       field: "type",
@@ -160,19 +164,7 @@ function Coursepage() {
       align: "center",
       flex: 1,
       valueFormatter: (params) => {
-        const courseType = [
-          "全部课程",
-          "专业课",
-          "数理课",
-          "外文课",
-          "实验课",
-          "体育课",
-          "思政课",
-          "文核课",
-          "文素课",
-          "实践课",
-        ];
-        return courseType[params.value];
+        return global.config.courseType[params.value];
       },
     },
     {
