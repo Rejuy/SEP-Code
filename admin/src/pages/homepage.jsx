@@ -23,6 +23,9 @@ function Homepage() {
         <Grid item sm={4}>
           <Timeonline />
         </Grid>
+        <Grid item sm={4}>
+          <UserChange />
+        </Grid>
       </CustomGrid>
       <CustomGrid>
         <UserChangePlot />

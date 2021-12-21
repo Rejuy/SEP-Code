@@ -6,9 +6,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Userpage from "./pages/userpage";
 import Coursepage from "./pages/coursepage";
 import Userinfo from "./pages/userinfo";
-import Analytics from "./pages/analytics";
 import Login from "./pages/login";
 import RequireAuth from "./pages/requireAuth";
+import Courseinfo from "./pages/courseinfo";
+import NotFound from "./pages/notfoundpage";
 
 function App() {
   return (
@@ -29,9 +30,10 @@ function App() {
                     <Routes>
                       <Route path="/" element={<Homepage />} />
                       <Route path="/users" element={<Userpage />} />
-                      <Route path="/courses" element={<Coursepage />} />
                       <Route path="/user/:uid" element={<Userinfo />} />
-                      <Route path="/analytics" element={<Analytics />} />
+                      <Route path="/courses" element={<Coursepage />} />
+                      <Route path="/course/:id" element={<Courseinfo />} />
+                      <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Grid>
                 </Grid>

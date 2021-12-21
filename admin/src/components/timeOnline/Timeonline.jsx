@@ -66,7 +66,7 @@ export default class Timeonline extends Component {
           </div>
         </CardContent>
         <CardActions>
-          <Link to="/analytics">
+          <Link to="/">
             <Button size="small">Learn More</Button>
           </Link>
         </CardActions>

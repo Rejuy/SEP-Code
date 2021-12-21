@@ -59,7 +59,7 @@ export default function UserChange() {
         </span>
       </CardContent>
       <CardActions>
-        <Link to="/analytics">
+        <Link to="/users">
           <Button size="small">Learn More</Button>
         </Link>
       </CardActions>
