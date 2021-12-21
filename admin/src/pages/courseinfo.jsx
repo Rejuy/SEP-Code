@@ -146,7 +146,10 @@ export default function Courseinfo() {
               variant="standard"
               value={data.time}
               onChange={(e) => {
-                setData((prev) => ({ ...prev, time: e.toString() }));
+                setData((prev) => ({
+                  ...prev,
+                  time: e.toLocaleDateString("zh-Hans-CN"),
+                }));
               }}
               renderInput={(params) => <TextField {...params} />}
             />
