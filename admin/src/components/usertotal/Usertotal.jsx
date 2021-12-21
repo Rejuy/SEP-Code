@@ -18,7 +18,7 @@ export default function UserTotal() {
         secret_code: localStorage.getItem("secretCode"),
       })
       .then((res) => {
-        setcount(res.data.count);
+        setcount(res.data.user_count);
       });
   }, []);
   return (

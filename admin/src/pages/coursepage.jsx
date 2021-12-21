@@ -169,6 +169,9 @@ function Coursepage() {
       headerAlign: "center",
       align: "center",
       width: 125,
+      valueFormatter: (params) => {
+        return new Date(params.value).toLocaleDateString("zh-Hans-CN");
+      },
     },
     {
       field: "activated",

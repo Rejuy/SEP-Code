@@ -44,12 +44,13 @@ function ActionInit(params) {
 
   const activateUser = () => {
     axios
-      .post(global.config.backendUrl + "/api/v1.0/activate_user", {
+      .post(global.config.backendUrl + "/api/v1.0/admin_edit_user", {
         secret_code: localStorage.getItem("secretCode"),
-        id: params.row.id,
+        user: { ...params.row, activated: 1 },
+        delete: false,
       })
       .then((res) => {
-        if (res.data.state === 0) {
+        if (res.data.status === 0) {
           params.row.activated = true;
           params.api.forceUpdate();
         }
