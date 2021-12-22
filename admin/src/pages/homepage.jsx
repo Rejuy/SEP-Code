@@ -4,6 +4,7 @@ import UserChangePlot from "../components/userChangePlot/UserchangePlot";
 import UserChange from "../components/userchange/Userchange";
 import Timeonline from "../components/timeOnline/Timeonline";
 import UserTotal from "../components/usertotal/Usertotal";
+import Databasesize from "../components/databasesize/Databasesize";
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   paddingTop: theme.spacing(12),
@@ -27,6 +28,9 @@ function Homepage() {
         <Grid item sm={4}>
           <UserTotal />
         </Grid>
+      </CustomGrid>
+      <CustomGrid>
+        <Databasesize />
       </CustomGrid>
       <CustomGrid>
         <UserChangePlot />

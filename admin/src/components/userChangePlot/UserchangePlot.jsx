@@ -45,7 +45,7 @@ export default function UserChangePlot() {
           <Line type="monotone" dataKey="change" />
           <Tooltip
             labelFormatter={(l) => {
-              return l + "月";
+              return l + 1 + "月";
             }}
           ></Tooltip>
         </LineChart>
