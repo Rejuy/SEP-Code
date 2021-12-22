@@ -55,6 +55,7 @@ def getPlacesList(raw_info):
     return new_list, place_count, result
 
 
-def getPlaceItem(id):
-    item, flag = db.getItem("place_list", 3, id, ITEM_PLACE_KEY)
+def getPlaceItem(info):
+    info["count"] = info['end'] - info['begin'] + 1
+    item, flag = db.getItem("place_list", 3, info, ITEM_PLACE_KEY)
     return item, flag

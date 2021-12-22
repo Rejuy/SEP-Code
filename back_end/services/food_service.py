@@ -55,6 +55,7 @@ def getFoodsList(raw_info):
     return new_list, food_count, result
 
 
-def getFoodItem(id):
-    item, flag = db.getItem("food_list", 2, id, ITEM_FOOD_KEY)
+def getFoodItem(info):
+    info["count"] = info['end'] - info['begin'] + 1
+    item, flag = db.getItem("food_list", 2, info, ITEM_FOOD_KEY)
     return item, flag
