@@ -184,6 +184,7 @@ Page({
         const app = getApp();
         wx.request({
           url: app.global_data.global_domain + '/api/v1.0/like',
+          method: 'POST',
           data: {
               mask: app.global_data.global_user_token,
               comment_id: this.data.comments_list[index].id
@@ -198,18 +199,30 @@ Page({
           timeout: 0,
           success: (result) => {
             let rtn = JSON.parse(result.data);
-            console.log(rtn);
+            switch(rtn.state) {
+                case 1:
+                    this.data.comments_list[index].likes += 1;
+                    Notify({ type: 'success', message: '点赞成功' });
+                    break;
+                case 0:
+                    this.data.comments_list[index].likes -= 1;
+                    Notify({ type: 'warning', message: '取消成功' });
+                    break;
+                case -1:
+                    Notify({ type: 'danger', message: '操作失败' });
+                    break;
+                default:
+                    console.log("course_item.js error")
+            }
+            this.setData({
+                comments_list: this.data.comments_list
+            })
           },
           fail: (error) => {
               console.log(error);
           },
           complete: (res) => {},
         })
-
-        // this.data.comments_list[index].likes += 1;
-        // this.setData({
-        //     comments_list: this.data.comments_list
-        // })
     },
 
     viewFullContent: function (event) {
