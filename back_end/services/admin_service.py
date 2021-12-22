@@ -34,15 +34,6 @@ def adminGetItemList(raw_info):
         key_list = ADMIN_PLACE_KEY
     else:
         return [], False
-    # 获得排序方式
-    if raw_info['order'] == 0:
-        order = "not_sort"
-    elif raw_info['order'] == 1:
-        order = "asc"
-    elif raw_info['order'] == 2:
-        order = "desc"
-    else:
-        order = ""
     # 构造info
     info = {
         "key_list": key_list,
@@ -53,7 +44,7 @@ def adminGetItemList(raw_info):
             #}
         ],
         "like": "",
-        "sort_order": order,
+        "sort_order": "not_sort",
         "sort_criteria": "",
         "index_begin": raw_info['offset'],
         "item_count": raw_info['size']
@@ -96,10 +87,11 @@ def editUser(raw_info):
         return db.delUser("id", raw_info['user']['id'])
     else:
         # edit user
-        for key in ADMIN_UPDATE_USER_KEY:
+        for key in raw_info['user'].keys():
+            if key == "id":
+                continue
             if not db.updateData("user", "id", raw_info['user']['id'], key, raw_info['user'][key]):
                 return False
-            print(102)
         return True
 
 
@@ -122,26 +114,37 @@ def getSingleItem(raw_info):
         key_list = ADMIN_FOOD_KEY
     elif raw_info['class'] == 3:
         key_list = ADMIN_PLACE_KEY
+    else:
+        return None, False
     return db.getData(INT_TO_TABLE[raw_info['class']], ["id"], [raw_info['id']], key_list, get_all=False)
 
 
 def editItem(raw_info):
+    """
     if raw_info['class'] == 1:
         key_list = ADMIN_COURSE_KEY
     elif raw_info['class'] == 2:
         key_list = ADMIN_FOOD_KEY
     elif raw_info['class'] == 3:
         key_list = ADMIN_PLACE_KEY
+
+        """
+    try:
+        table = INT_TO_TABLE[raw_info['class']]
+    except Exception as e:
+        print("Error in <add_item_service.checkItemExisted>")
+        print(e)
+        return "error"
     if raw_info['delete']:
         # delete item
-        item_activated = db.getData(INT_TO_TABLE[raw_info["class"]], ["id"], [raw_info['item']['id']], ["activated"])
-        return db.delItem(INT_TO_TABLE[raw_info["class"]], ["id"], [raw_info['item']['id']], item_activated)
+        item_activated = db.getData(table, ["id"], [raw_info['item']['id']], ["activated"])
+        return db.delItem(table, ["id"], [raw_info['item']['id']], item_activated)
     else:
         # edit item
         for key in raw_info['item'].keys():
             if key == "id":
                 continue
-            if not db.updateData(INT_TO_TABLE[raw_info["class"]], "id", raw_info['item']['id'], key, raw_info['item'][key]):
+            if not db.updateData(table, "id", raw_info['item']['id'], key, raw_info['item'][key]):
                 return False
         return True
 
