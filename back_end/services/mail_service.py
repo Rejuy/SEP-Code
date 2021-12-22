@@ -72,7 +72,7 @@ def send_register_email(recipient):
 <p>Cheers!</p>'
     # 将要发送的链接嵌进去
     confirm_url = 'https://thurec.xyz' + '/api/v1.0/activate?code=' + generate_confirmation_token(recipient)
-    send_email('test subject', app.config['MAIL_USERNAME'], [recipient+"@mails.tsinghua.edu.cn"], 'text body',
+    send_email('清声细语——请激活你的账户', app.config['MAIL_USERNAME'], [recipient+"@mails.tsinghua.edu.cn"], 'text body',
                html_body=html_body.format(confirm_url=confirm_url))
 
 

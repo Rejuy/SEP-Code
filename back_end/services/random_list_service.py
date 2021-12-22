@@ -1,5 +1,6 @@
 import random
 from services.mysql_service import db
+from headers import *
 
 
 def randomList():
@@ -9,27 +10,36 @@ def randomList():
     course_index = random.randint(0, course_count - 1)
     food_index = random.randint(0, food_count - 1)
     place_index = random.randint(0, place_count - 1)
-    course_id, flag1 = db.randomItemId("course_list", course_index)
+    course, flag1 = db.randomItemId("course_list", course_index, COURSES_KEY)
     if not flag1:
         return []
-    food_id, flag2 = db.randomItemId("food_list", food_index)
+    food, flag2 = db.randomItemId("food_list", food_index, FOOD_KEY)
     if not flag2:
         return []
-    place_id, flag3 = db.randomItemId("place_list", place_index)
+    place, flag3 = db.randomItemId("place_list", place_index, PLACE_KEY)
     if not flag3:
         return []
+    course['department'] = course_scope_table[course['department']]
+    course['type'] = course_type_table[course['type']]
+    if food['scope'] == 1:
+        food['type'] = inside_food_type_table[food['type']]
+    else:
+        food['type'] = outside_food_type_table[food['type']]
+    food['scope'] = food_scope_table[food['scope']]
+    place['type'] = place_type_table[place['type']]
+    place['scope'] = place_scope_table[place['scope']]
     return [
         {
             "type": 1,
-            "id": course_id
+            "data": course
         },
         {
             "type": 2,
-            "id": food_id
+            "data": food
         },
         {
             "type": 3,
-            "id": place_id
+            "data": place
         }
     ]
 

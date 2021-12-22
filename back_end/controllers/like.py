@@ -31,9 +31,12 @@ def modifyLike():
         raw_info = request.get_json()
         id = coder.decode(raw_info['mask'])
         raw_info['user'] = getNameByID(id)
-        if modifyUserLike(raw_info):
-            return jsonify({'state': 0})
+        flag, liked = modifyUserLike(raw_info)
+        if not flag:
+            return jsonify({"state": -1})
+        if liked:
+            return jsonify({"state": 0})
         else:
-            return jsonify({'state': 1})
+            return jsonify({"state": 1})
     except KeyError:
-        return jsonify({"state": 1})
+        return jsonify({"state": -1})

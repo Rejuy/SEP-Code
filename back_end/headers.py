@@ -71,7 +71,7 @@ ADMIN_FOOD_KEY = ["id", "name", "position", "scope", "type", "time", "activated"
 
 # place表
 # 所有key值
-PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "hours"]
+PLACE_KEY = ["id", "name", "position", "type", "star", "score", "comment_count", "heat", "scope", "user_id", "activated", "time", "hours"]
 # 插入时所需键值
 INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "hours"]
 # 返回的key值（基本）
@@ -104,13 +104,28 @@ INSERT_COLLECTION_KEY = ["user_id", "class", "item_id", "time", "item_name"]
 COLLECTION_KEY = ["id", "user_id", "class", "item_id", "time", "item_name"]
 
 # 模块global获取的item键
-GLOBAL_ITEM_KEY = ["id", "title", "description", "star", "score", "class"]
+GLOBAL_ITEM_KEY = ["id", "title", "description", "star", "score", "scope", "type", "class"]
 
 # 模块
 CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}
 INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
 INT_TO_BASIC_KEY_LIST = ["", BASIC_COURSES_KEY, BASIC_FOOD_KEY, BASIC_PLACE_KEY]
 INT_TO_KEY_LIST = ["", COURSES_KEY, FOOD_KEY, PLACE_KEY]
+
+# hash
+course_scope_table = ['任意院系','车辆学院','材料学院','电机系','电子系','法学院','工物系','公管学院','工业工程系','航院','化学系','化工系','环境学院','机械系','经管学院','金融学院','建筑学院','计算机系','交叉信息院','集成电路学院','美术学院','马克思主义学院','能动系','求真书院','清华-伯克利深圳学院','日新书院','软件学院','人文学院','数学系','水利系','社科学院','生命学院','苏世民书院','土木系','体育部','土水学院','外文系','物理系','未央书院','新雅书院','行健书院','新闻学院','训练中心','医学院','药学院','语言中心','艺教中心','致理书院','自动化系','其他开课单位',]
+
+course_type_table = ['全部课程','专业课','数理课','外文课','实验课','体育课','思政课','文核课','文素课','实践课',]
+
+food_scope_table = ['', '校内餐饮', '校外餐饮']
+
+inside_food_type_table = ['','家园','甲所','寓园','融园','澜园','荷园','北园','南园','桃李园','紫荆园','清芬园','听涛园','观畴园','玉树园','芝兰园','丁香园','熙春园','清真食堂',]
+
+outside_food_type_table = ['','汉堡披萨','龙虾烧烤','香锅火锅','米线拉面','日韩料理','简餐便当','各类饮品',]
+
+place_scope_table = ['','校内地点', '校外地点']
+
+place_type_table = ['', '自习场所', '锻炼场所', '会议场所', '娱乐场所']
 
 import datetime
 start_date = datetime.datetime.now()
