@@ -130,31 +130,31 @@ Page({
         })
     },
 
-    addImage: function() {
-        wx.chooseImage({
-          count: 9,
-          sizeType: ['original', 'compressed'],
-          sourceType: ['album', 'camera'],
-          success: (result) => {
-              this.setData({
-                  image_selected: [...this.data.image_selected, ...result.tempFilePaths]
-              })
-          }, fail: (error) => {
-              console.log(error);
-          },complete: (result) => {
+    // addImage: function() {
+    //     wx.chooseImage({
+    //       count: 9,
+    //       sizeType: ['original', 'compressed'],
+    //       sourceType: ['album', 'camera'],
+    //       success: (result) => {
+    //           this.setData({
+    //               image_selected: [...this.data.image_selected, ...result.tempFilePaths]
+    //           })
+    //       }, fail: (error) => {
+    //           console.log(error);
+    //       },complete: (result) => {
 
-          },
-        })
-    },
+    //       },
+    //     })
+    // },
 
-    removeImage: function(result) {
-        const { index } = result.currentTarget.dataset;
-        let { image_selected } = this.data;
-        image_selected.splice(index, 1);
-        this.setData({
-            image_selected
-        })
-    },
+    // removeImage: function(result) {
+    //     const { index } = result.currentTarget.dataset;
+    //     let { image_selected } = this.data;
+    //     image_selected.splice(index, 1);
+    //     this.setData({
+    //         image_selected
+    //     })
+    // },
 
     giveLikes: function (options) {
         console.log(options);
