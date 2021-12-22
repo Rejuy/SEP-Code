@@ -33,7 +33,7 @@ Page({
     },
 
     onLoad: function (options) {
-        let content = JSON.parse(options.content);
+        let content = JSON.parse(decodeURIComponent(options.content));
         
         this.setData({
             course_id: content.id,

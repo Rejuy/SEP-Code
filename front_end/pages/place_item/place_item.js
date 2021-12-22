@@ -32,7 +32,6 @@ Page({
 
     onLoad: function (options) {
         let content = JSON.parse(decodeURIComponent(options.content));
-        console.log(content);
         this.setData({
             place_id: content.id,
             image_url: content.image,
