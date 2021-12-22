@@ -15,7 +15,7 @@ Page({
         neutral_radio: 30,
         positive_radio: 60,
 
-        image_url: "https://mmbiz.qpic.cn/mmbiz_jpg/HhoEMZZMsiaQgcfIVLkACUh2wiaMRyVkiaaxScRDXzvmA4erdq8HzhF34JzQzH7PsjdZRtgcn51XdE93IIiaCZNqUw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1",
+        image_url: '',
 
         comment_list: [
             { id: 1, user: '平台测试组', star: 4.5, date: '2021.12.11', likes: 998, complete: true , brief_text: '一教环境相当好，电源充足，一度是个不错的好去处，但因为有社团在三楼开活动，也不是那么香了。'},
@@ -28,9 +28,10 @@ Page({
     },
 
     onLoad: function (options) {
-        let content = JSON.parse(options.content);
-
+        let content = JSON.parse(decodeURIComponent(options.content));
+        console.log(content);
         this.setData({
+            image_url: content.image,
             place_name: content.name,
             place_position: content.position,
             place_range: content.range,

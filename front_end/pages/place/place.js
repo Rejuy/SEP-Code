@@ -292,7 +292,7 @@ Page({
         let index = event.currentTarget.dataset.index;
         let content = JSON.stringify(this.data.places_list[index]);
         wx.navigateTo({
-          url: '../place_item/place_item?content=' + content,
+          url: '../place_item/place_item?content=' +  encodeURIComponent(content),
         })
     },
 

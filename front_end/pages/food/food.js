@@ -351,7 +351,7 @@ Page({
         let index = event.currentTarget.dataset.index;
         let content = JSON.stringify(this.data.food_list[index]);
         wx.navigateTo({
-          url: '../food_item/food_item?content=' + content,
+          url: '../food_item/food_item?content=' + encodeURIComponent(content),
         })
     },
 
