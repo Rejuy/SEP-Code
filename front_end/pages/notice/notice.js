@@ -79,8 +79,8 @@ Page({
               formData: {},
               timeout: 0,
               success: (result) => {
-                  // console.log(result);
-                  let str = domain + result.data;
+                  let str = domain + '/' + result.data;
+                  console.log(str);
                   this.images_url.push(str);
               },
               fail: (error) => {

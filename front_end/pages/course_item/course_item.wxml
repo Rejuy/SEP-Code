@@ -78,7 +78,8 @@
                 <van-rate allow-half value="{{ user_rate }}" void-icon="star" void-color="#eee" bind:change="userRate"/>
             </view>
             <textarea value="{{ user_text }}" bindinput="InputText" placeholder="请输入文字"></textarea>
-            <view class="add_image">
+
+            <!-- <view class="add_image">
                 <button bindtap="addImage">+</button>
 
                 <view class="thumbnails"
@@ -89,7 +90,7 @@
                 >
                     <thumbnail source="{{ item }}"></thumbnail>
                 </view>
-            </view>    
+            </view>     -->
 
             <view class="van-buttons">
                 <van-button type="info" bindtap="clearText">清除</van-button>
@@ -113,7 +114,7 @@
 
                 <view class="user_text">
                     <text style="display: inline;">{{ item.brief_text }}</text>
-                    <text class="unfold" wx:if="{{ ! item.complete }}" style="color: #3377AA; font-weight: bold;" bindtap="viewDetails">[展开]</text>
+                    <text class="unfold" wx:if="{{ ! item.complete }}" style="color: #3377AA; font-weight: bold;" bindtap="viewFullContent" data-index="{{ index }}">[展开]</text>
                 </view>
             </van-skeleton>
         </view>
