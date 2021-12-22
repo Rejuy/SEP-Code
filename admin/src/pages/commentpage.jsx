@@ -75,7 +75,16 @@ function Commentpage() {
       headerAlign: "center",
       flex: 1,
       renderCell: (params) => {
-        console.log(params);
+        const id = params.value;
+        if (params.row.class === 1) {
+          return <Link to={"/course/" + id}>{id}</Link>;
+        } else if (params.row.class === 2) {
+          return <Link to={"/course/" + id}>{id}</Link>;
+        } else if (params.row.class === 3) {
+          return <Link to={"/course/" + id}>{id}</Link>;
+        } else {
+          return <Typography>{id}</Typography>;
+        }
       },
     },
     {
@@ -91,6 +100,18 @@ function Commentpage() {
       headerAlign: "center",
       align: "center",
       flex: 1,
+      renderCell: (params) => {
+        const id = params.value;
+        if (params.row.class === 1) {
+          return <Link to={"/user/" + id}>{id}</Link>;
+        } else if (params.row.class === 2) {
+          return <Link to={"/user/" + id}>{id}</Link>;
+        } else if (params.row.class === 3) {
+          return <Link to={"/user/" + id}>{id}</Link>;
+        } else {
+          return <Typography>{id}</Typography>;
+        }
+      },
     },
     {
       field: "star",
