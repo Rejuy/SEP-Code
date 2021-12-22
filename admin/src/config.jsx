@@ -1,5 +1,5 @@
 module.exports = global.config = {
-  backendUrl: "http://localhost:5000",
+  backendUrl: "https://thurec.xyz",
   departmentList: [
     {},
     { text: "C···车辆学院", value: 1 },

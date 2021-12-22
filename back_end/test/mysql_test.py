@@ -341,6 +341,11 @@ class MySQLServiceTest(unittest.TestCase):
     def testSelfChangeData2(self):
         self.assertEqual(db.selfChangeData("class", ["name"], ["food"], "count", -1), True)
 
+    def testRandomItemId1(self):
+        id, flag = db.randomItemId("food_list", 4)
+        self.assertEqual(flag, True)
+        print(id)
+
 
 if __name__ == '__main__':
     unittest.main()

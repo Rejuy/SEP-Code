@@ -96,6 +96,31 @@ Page({
         })
     },
 
+    viewItem: function(event) {
+        let tmp_url = '';
+        let index = event.currentTarget.dataset.index;
+        let tmp_class = this.data.content_list[index].class;
+        let content = JSON.stringify(this.data.content_list[index]);
+
+        switch(tmp_class){
+            case 1:
+                tmp_url = '../course_item/course_item?content=';
+                break;
+            case 2:
+                tmp_url = '../food_item/food_item?content=';
+                break;
+            case 3:
+                tmp_url = '../place_item/place_item?content=';
+                break;
+            default:
+                console.log("search.js error");
+        }
+
+        wx.navigateTo({
+            url: tmp_url + encodeURIComponent(content),
+        })
+    },
+
     // 生命周期函数--监听页面初次渲染完成
     onReady: function () {
 
