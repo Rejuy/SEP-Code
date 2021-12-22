@@ -985,6 +985,28 @@ class MySQLDb:
             self.connection.rollback()
             return [], False
 
+    def getDatabaseInfo(self):
+        try:
+            info = {}
+            sql = "SELECT sum(DATA_LENGTH)+sum(INDEX_LENGTH) FROM information_schema.TABLES where TABLE_SCHEMA='THUREC_db'"
+            self.cursor.execute(sql)
+            info['total_length'] = self.cursor.fetchall()[0][0] / 1024
+            info['total_length'] = float(info['total_length'])
+            sql = "SELECT sum(DATA_LENGTH) FROM information_schema.TABLES where TABLE_SCHEMA='THUREC_db'"
+            self.cursor.execute(sql)
+            info['data_length'] = self.cursor.fetchall()[0][0] / 1024
+            info['data_length'] = float(info['data_length'])
+            sql = "SELECT sum(INDEX_LENGTH) FROM information_schema.TABLES where TABLE_SCHEMA='THUREC_db'"
+            self.cursor.execute(sql)
+            info['index_length'] = self.cursor.fetchall()[0][0] / 1024
+            info['index_length'] = float(info['index_length'])
+            return info, True
+        except Exception as e:
+            print("[Error] (getDatabaseInfo)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return {}, False
+
     # ==========后为功能性函数
 
     def tupleToDict(self, tuple, key_list):

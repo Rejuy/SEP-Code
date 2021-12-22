@@ -351,6 +351,11 @@ class MySQLServiceTest(unittest.TestCase):
         self.assertEqual(flag, True)
         print(count_list)
 
+    def testGetDatabaseInfo(self):
+        data, flag = db.getDatabaseInfo()
+        self.assertEqual(flag, True)
+        print(data)
+
 
 if __name__ == '__main__':
     unittest.main()

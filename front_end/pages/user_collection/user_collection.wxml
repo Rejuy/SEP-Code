@@ -1,0 +1,13 @@
+<!--pages/user_comments/user_comments.wxml-->
+<view class="container">
+    <van-skeleton title avatar row="3" loading="{{ loading }}">
+        <view wx:for="{{collection_list}}" wx:key="index">
+            <view>
+                <van-card tag="{{item.desc}}" title="{{item.item_name}}" thumb="{{item.url}}" />
+            </view>
+        </view>
+    </van-skeleton>
+</view>
+<van-tabbar>
+    <van-button type="primary" size="large" id="back_button" bindtap="back">返回个人中心</van-button>
+</van-tabbar>
