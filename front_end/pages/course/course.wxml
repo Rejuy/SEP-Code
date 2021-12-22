@@ -59,7 +59,8 @@
                 bind:confirm="editCourseDepartment"
                 bind:cancel="cancelEditDepartment">
                 </van-picker>
-
+                
+                <van-notify id="van-notify" />
                 <van-dialog id="van-dialog" />
                 <van-button type="primary" block bind:click="submitNewContent">提交</van-button>
             </van-cell-group>

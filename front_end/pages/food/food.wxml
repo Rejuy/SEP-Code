@@ -13,6 +13,7 @@
                     label="餐饮名称"
                     icon="question-o"
                     placeholder="请输入餐饮名称"
+                    bind:click-icon="editFoodNameTips"
                     model:value="{{ edit_food_name }}"
                 />
 
@@ -22,6 +23,7 @@
                     label="餐饮位置"
                     icon="question-o"
                     placeholder="请输入餐饮位置"
+                    bind:click-icon="editFoodPositionTips"
                     model:value="{{ edit_food_position }}"
                 />
 
@@ -31,6 +33,7 @@
                     label="营业时间"
                     icon="question-o"
                     placeholder="请输入营业时间"
+                    bind:click-icon="editFoodHoursTips"
                     model:value="{{ edit_business_hours }}"
                 />
 
@@ -65,6 +68,7 @@
                 wx:if="{{ edit_range_value == 2 }}">
                 </van-picker>
 
+                <van-notify id="van-notify" />
                 <van-dialog id="van-dialog" />
                 <van-button type="primary" block bind:click="submitNewContent">提交</van-button>
             </van-cell-group>

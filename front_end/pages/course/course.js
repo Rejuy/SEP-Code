@@ -1,5 +1,6 @@
 import Toast from '@vant/weapp/toast/toast';
 import Dialog from '@vant/weapp/dialog/dialog';
+import Notify from '@vant/weapp/notify/notify';
 
 
 Page({
@@ -242,6 +243,14 @@ Page({
         this.setData({
             show_popup: false
         });
+    },
+
+    editCourseNameTips: function() {
+        Notify({ type: 'primary', message: '请尽量与info信息保持一致' });
+    },
+
+    editCourseTeacherTips: function() {
+        Notify({ type: 'primary', message: '合开课程只需填写主讲教师' });
     },
 
     editCourseSchedule: function(event) {

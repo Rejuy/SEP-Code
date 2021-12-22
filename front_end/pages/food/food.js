@@ -1,5 +1,6 @@
 import Toast from '@vant/weapp/toast/toast';
 import Dialog from '@vant/weapp/dialog/dialog';
+import Notify from '@vant/weapp/notify/notify';
 
 
 Page({
@@ -222,6 +223,18 @@ Page({
         this.setData({
             show_popup: false
         });
+    },
+
+    editFoodNameTips: function() {
+        Notify({ type: 'primary', message: '必要时可以简写' });
+    },
+
+    editFoodPositionTips: function() {
+        Notify({ type: 'primary', message: '校内餐饮注明大概方位即可' });
+    },
+
+    editFoodHoursTips: function() {
+        Notify({ type: 'primary', message: '标准格式： 08:00 - 23:00' });
     },
 
     editFoodRange: function(event) {

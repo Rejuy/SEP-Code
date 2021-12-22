@@ -13,6 +13,7 @@
                     label="地点名称"
                     icon="question-o"
                     placeholder="请输入地点名称"
+                    bind:click-icon="editPlaceNameTips"
                     model:value="{{ edit_place_name }}"
                 />
 
@@ -22,6 +23,7 @@
                     label="具体方位"
                     icon="question-o"
                     placeholder="请输入具体方位"
+                    bind:click-icon="editPlacePositionTips"
                     model:value="{{ edit_place_position }}"
                 />
 
@@ -31,6 +33,7 @@
                     label="开放时间"
                     icon="question-o"
                     placeholder="请输入开放时间"
+                    bind:click-icon="editPlaceHoursTips"
                     model:value="{{ edit_opening_hours }}"
                 />
 
@@ -54,6 +57,7 @@
                 bind:cancel="cancelPlaceType">
                 </van-picker>
 
+                <van-notify id="van-notify" />
                 <van-dialog id="van-dialog" />
                 <van-button type="primary" block bind:click="submitNewContent">提交</van-button>
             </van-cell-group>
