@@ -21,6 +21,7 @@ def randomList():
         return []
     course['department'] = course_scope_table[course['department']]
     course['type'] = course_type_table[course['type']]
+    course['schedule'] = course_schedule_table[course['schedule']]
     if food['scope'] == 1:
         food['type'] = inside_food_type_table[food['type']]
     else:

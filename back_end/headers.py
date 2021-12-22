@@ -117,6 +117,8 @@ course_scope_table = ['任意院系','车辆学院','材料学院','电机系','
 
 course_type_table = ['全部课程','专业课','数理课','外文课','实验课','体育课','思政课','文核课','文素课','实践课',]
 
+course_schedule_table = ["", "春季学期", "夏季学期", "秋季学期", "春、秋学期"]
+
 food_scope_table = ['', '校内餐饮', '校外餐饮']
 
 inside_food_type_table = ['','家园','甲所','寓园','融园','澜园','荷园','北园','南园','桃李园','紫荆园','清芬园','听涛园','观畴园','玉树园','芝兰园','丁香园','熙春园','清真食堂',]
@@ -126,6 +128,8 @@ outside_food_type_table = ['','汉堡披萨','龙虾烧烤','香锅火锅','米�
 place_scope_table = ['','校内地点', '校外地点']
 
 place_type_table = ['', '自习场所', '锻炼场所', '会议场所', '娱乐场所']
+
+
 
 import datetime
 start_date = datetime.datetime.now()

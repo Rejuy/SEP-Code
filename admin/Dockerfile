@@ -4,7 +4,7 @@ COPY . .
 RUN npm install && npm run build
 
 FROM nginx:alpine
-COPY ./nginx /etc/nginx/conf.d
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=builder /app/build .
