@@ -52,7 +52,7 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          Login Failed, Username password is admin admin
+          登录失败
         </Alert>
       </Snackbar>
       <Box
