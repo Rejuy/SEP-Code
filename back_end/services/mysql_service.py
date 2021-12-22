@@ -536,10 +536,10 @@ class MySQLDb:
             val = (comment_info['user'],)
             self.cursor.execute(sql, val)
 
-            if comment_info['upper_comment_id'] != 0:
-                sql = "UPDATE comment SET lower_comment_count = lower_comment_count + 1 WHERE id = %s"
-                val = (comment_info['upper_comment_id'],)
-                self.cursor.execute(sql, val)
+            #if comment_info['upper_comment_id'] != 0:
+             #   sql = "UPDATE comment SET lower_comment_count = lower_comment_count + 1 WHERE id = %s"
+              #  val = (comment_info['upper_comment_id'],)
+               # self.cursor.execute(sql, val)
             # 数据表内容更新
             self.connection.commit()
             return True
