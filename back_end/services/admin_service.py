@@ -146,6 +146,6 @@ def editItem(raw_info):
                 continue
             if not db.updateData(table, "id", raw_info['item']['id'], key, raw_info['item'][key]):
                 return False
+            print(146)
         return True
-
 

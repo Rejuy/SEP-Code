@@ -1,7 +1,3 @@
-<!-- <view class="search">
-    <search_box></search_box>
-</view> -->
-
 <van-search value="{{ search_value }}" bind:search="onSearch" background="#82318E" placeholder="请输入搜索关键词">
 </van-search>
 
@@ -13,7 +9,7 @@
 
     <navigator class="item" url="../food/food">
         <image class="picture" src="/images/icons/food.png"></image>
-        <view class="word">饮食推荐</view>
+        <view class="word">餐饮推荐</view>
     </navigator>
 
     <navigator class="item" url="../place/place">
@@ -43,7 +39,37 @@
 
 <view class="random">
     <text class="random_title">随机漫步：</text>
-    <van-empty description="尽请期待" />
+    <view wx:for="{{ random_list }}" wx:key="id">
+        <van-card
+        title="???"
+        thumb="{{ item.image }}"
+        thumb-mode="aspectFill"
+        thumb-link="../course/course"
+        desc="随机解锁的{{ item.type }}~"
+        >
+            <view slot="tags">
+                <van-tag type="primary">随机推荐</van-tag>
+                <van-tag plain type="primary">神秘卡片</van-tag>
+            </view>
+            <star slot="price">
+                <van-rate 
+                readonly
+                allow-half 
+                void-color="#eee"  
+                icon="question"
+                void-icon="question-o"
+                value="5.0">
+                </van-rate>
+            </star>
+            <view slot="num" class="rate">
+                X.X
+            </view>
+            <view slot="footer">
+                <van-button size="mini" bindtap="viewCourseItem">详情</van-button>
+            </view>
+        </van-card>
+    </view>
+    <view class="block" style="height: 100rpx" />
 </view>
 
 <tabbar current_page="home" is_login="{{true}}" />

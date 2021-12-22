@@ -61,3 +61,7 @@ def getCourseItem(info):
     info["count"] = info['end'] - info['begin'] + 1
     item, flag = db.getItem("course_list", 1, info, ITEM_COURSE_KEY)
     return item, flag
+
+
+def getFullContent(id):
+    return db.getData("comment", ["id"], [id], ["text"], get_all=False)

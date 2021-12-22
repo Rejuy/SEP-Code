@@ -291,6 +291,5 @@ class AdminTest(unittest.TestCase):
         raw_info['delete'] = True
         editItem(raw_info)
 
-
 if __name__ == '__main__':
     unittest.main()

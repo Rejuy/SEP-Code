@@ -18,11 +18,11 @@ def placeItem():
         db.reconnectDatabase()
         info = request.get_json()
         if info is None:
-            return jsonify({'item': {}}), 400
-        item, flag = getPlaceItem(info['id'])  # content_list为查询到的列表，flag为访问是否正确
+            return jsonify({}), 400
+        item, flag = getPlaceItem(info)  # content_list为查询到的列表，flag为访问是否正确
         if not flag:
-            return jsonify({'item': {}}), 200
-        return jsonify({'item': item}), 200
+            return jsonify({}), 200
+        return jsonify(item), 200
     except KeyError:
-        return jsonify({'item': {}}), 400
+        return jsonify({}), 400
 
