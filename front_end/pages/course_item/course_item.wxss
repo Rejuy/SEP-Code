@@ -192,3 +192,55 @@ van-button .van-button--info .van-button__text {
 .comments .content .user_text .unfold {
     display: inline;
 }
+
+.comments .rating {
+    display: flex;
+    margin: 30rpx 0 10rpx 16rpx;
+}
+
+.comments .rating text {
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+.comments textarea {
+    width: 94%;
+    padding: 10rpx;
+    margin: 0 0 0 10rpx;
+    border: 2rpx solid #ccc;
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+/* .comments .add_image {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10rpx;
+    padding-bottom: 20rpx;
+}
+
+.comments .add_image button {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    color: #ccc;
+    margin-top: 10rpx;
+
+    width: 90rpx;
+    height: 90rpx;
+    font-size: 60rpx;
+    align-items: center;
+    justify-content: center;
+    border: 2rpx solid #ccc;
+}
+
+.comments .add_image .thumbnails {
+    display: flex;
+} */
+
+.comments .van-buttons {
+    margin-top: 20rpx;
+    text-align: center;
+}
+
+.comments .van-buttons van-button {
+    display: inline-block;
+}

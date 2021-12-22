@@ -35,11 +35,13 @@ COMMENT_COUNT_ORDER = 4  # 按评论数量排序
 
 # user表
 # 所有key值
-USER_KEY = ["id", "user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "item_count", "activated", "introduction"]
+USER_KEY = ["id", "user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "item_count", "activated", "introduction", "image"]
 # 插入时所需键值
 INSERT_USER_KEY = ["user_name", "password", "email", "account_birth", "collection_count", "like_count", "comment_count", "item_count", "activated"]
 # 获取user表的时候所需的键值
 ADMIN_GET_USER_KEY = ['id', 'user_name', 'email', 'account_birth', 'collection_count', 'like_count', 'comment_count', 'item_count', 'activated', "image"]
+# 管理员端修改用户所需的list
+ADMIN_UPDATE_USER_KEY = ["user_name", "email", "activated", "image"]
 
 # courses表
 # 所有key值
@@ -57,11 +59,11 @@ ADMIN_COURSE_KEY = ["id", "name", "teacher", "department", "type", "credit", "ti
 
 # food表
 # 所有key值
-FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
+FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "hours"]
 # 插入时所需键值
-INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
+INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "hours"]
 # 返回的key值（基本）
-BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
+BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "hours"]
 # item
 ITEM_FOOD_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
@@ -69,11 +71,11 @@ ADMIN_FOOD_KEY = ["id", "name", "position", "scope", "type", "time", "activated"
 
 # place表
 # 所有key值
-PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
+PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "hours"]
 # 插入时所需键值
-INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time"]
+INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "hours"]
 # 返回的key值（基本）
-BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
+BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "hours"]
 # item
 ITEM_PLACE_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
@@ -102,7 +104,7 @@ INSERT_COLLECTION_KEY = ["user_id", "class", "item_id", "time", "item_name"]
 COLLECTION_KEY = ["id", "user_id", "class", "item_id", "time", "item_name"]
 
 # 模块global获取的item键
-GLOBAL_ITEM_KEY = ["id", "title", "decription", "star", "score", "class"]
+GLOBAL_ITEM_KEY = ["id", "title", "description", "star", "score", "class"]
 
 # 模块
 CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}

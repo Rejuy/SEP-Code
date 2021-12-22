@@ -227,7 +227,7 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
-    def getData(self, table, locate_key, locate_value, get_key):
+    def getData(self, table, locate_key, locate_value, get_key, get_all=True):
         """
         获取某条数据的某一些属性
         :param table: 表名
@@ -245,21 +245,34 @@ class MySQLDb:
                 sql += " and " + locate_key[i] + " = %s "
                 val += (locate_value[i],)
             self.cursor.execute(sql, val)
-            data_list = self.cursor.fetchall()
-            if len(data_list) == 0:
-                return [], False
+            if get_all:
+                data_list = self.cursor.fetchall()
+                if len(data_list) == 0:
+                    return [], False
 
-            for i in range(len(data_list)):
-                data_list[i] = self.tupleToDict(data_list[i], get_key)
+                for i in range(len(data_list)):
+                    data_list[i] = self.tupleToDict(data_list[i], get_key)
+                    for key in get_key:
+                        if type(data_list[i][key]) == datetime.datetime:
+                            data_list[i][key] = self.timeToStr(data_list[i][key])
+                return data_list, True
+            else:
+                data = self.cursor.fetchone()
+                if not data:
+                    return None, False
+                data = self.tupleToDict(data, get_key)
                 for key in get_key:
-                    if type(data_list[i][key]) == datetime.datetime:
-                        data_list[i][key] = self.timeToStr(data_list[i][key])
-            return data_list, True
+                    if type(data[key]) == datetime.datetime:
+                        data[key] = self.timeToStr(data[key])
+                return data, True
         except Exception as e:
             print("[Error] (getData)：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
-            return [], False
+            if get_all:
+                return [], False
+            else:
+                return None, False
 
     def delItem(self, table, locate_key, locate_value, activated):
         """
@@ -322,6 +335,7 @@ class MySQLDb:
             name: String ,
             position: String ,
             scope: Int ,
+            hours: String ,
             type: Int ,
             user_id: Int
         }
@@ -329,6 +343,7 @@ class MySQLDb:
             name: String ,
             position: String ,
             scope: Int ,
+            hours: String ,
             type: Int ,
             user_id: Int
         }
@@ -401,7 +416,7 @@ class MySQLDb:
                         val += (info['filter'][i]['value'], )
                 # 判断是否要模糊匹配
                 if 'like' in info.keys() and info['like'] != "":
-                    locate_sql += " AND ("
+                    locate_sql += " AND (name LIKE '%" + info['like'] + "%' OR "
                     if table == "course_list":
                         locate_sql += "teacher LIKE '%" + info['like'] + "%') "
                     else:
@@ -431,6 +446,7 @@ class MySQLDb:
             # 进行分页操作
             num_sql += " LIMIT " + str(info['item_count']) + " OFFSET " + str(info['index_begin'])
             sql += locate_sql + num_sql
+            print(sql)
             self.cursor.execute(sql, val)
             content_list = self.cursor.fetchall()
             return content_list, count, True

@@ -17,7 +17,7 @@ Page({
     },
 
     addImage: function() {
-        wx-wx.chooseImage({
+        wx.chooseImage({
           count: 9,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
@@ -34,8 +34,8 @@ Page({
     },
 
     removeImage: function(result) {
-        const {index} = result.currentTarget.dataset;
-        let {image_selected} = this.data;
+        const { index } = result.currentTarget.dataset;
+        let { image_selected } = this.data;
         image_selected.splice(index, 1);
         this.setData({
             image_selected
@@ -79,8 +79,8 @@ Page({
               formData: {},
               timeout: 0,
               success: (result) => {
-                  // console.log(result);
-                  let str = domain + result.data;
+                  let str = domain + '/' + result.data;
+                  console.log(str);
                   this.images_url.push(str);
               },
               fail: (error) => {

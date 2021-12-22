@@ -35,3 +35,6 @@
     font-family: 'Courier New', Courier, monospace; 
 }
 
+van-search .van-search__action{
+    padding: var(--search-action-padding, 0 24rpx);
+}

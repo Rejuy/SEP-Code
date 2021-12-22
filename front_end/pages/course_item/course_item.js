@@ -1,18 +1,26 @@
-// pages/course_item/course_item.js
 Page({
     data: {
         loading: true,
+        show_popup: false,
 
-        course_name: '实验室科研探究',
-        course_credit: 1,
-        course_teacher: '汤彬',
+        course_name: '',
+        course_credit: 0,
+        course_teacher: '',
         course_schedule: '春、秋季学期',
-        course_department: '训练中心',
-        course_type: '文化素质核心课程',
+        course_department: '',
+        course_type: '',
 
+        course_score: 0.0,
+        course_star: 0.0,
         negative_radio: 30,
         neutral_radio: 20,
         positive_radio: 50,
+
+        user_text: '',
+        user_rate: 0.0,
+        image_selected: [],
+
+        schedule_table: ['', '春季学期', '夏季学期', '秋季学期', '春、秋季学期'],
 
         image_url: "https://learn.tsinghua.edu.cn/b/wlxt/kc/v_kcxx_jskcxx/teacher/showImageById?wlkcid=2021-2022-1142764790&_csrf=d39592c7-bbb0-416a-affb-a39b1ab00ba4",
 
@@ -22,9 +30,77 @@ Page({
         ]
     },
 
+    marco: {
+        PAGE_CAPACITY: 8,
+    },
+
     onLoad: function (options) {
+        let content = JSON.parse(options.content);
+        
         this.setData({
+            course_name: content.name,
+            course_teacher: content.teacher,
+            course_department: content.department,
+            course_type: content.type,
+            course_score: content.score.toFixed(1),
+            course_star: content.star.toFixed(1),
             loading: false,
+        })
+    },
+
+    showPopup: function() {
+        this.setData({
+            show_popup: true
+        })        
+    },
+
+    closePopup: function() {
+        this.setData({
+            show_popup: false
+        })
+    },
+
+    userRate: function(event) {
+        this.setData({
+            user_rate: event.detail,
+        });        
+    },
+
+    InputText: function(result) {
+        this.setData({
+            user_text: result.detail.value
+        })
+    },
+
+    clearText: function() {
+        this.setData({
+            user_text: ""
+        })
+    },
+
+    addImage: function() {
+        wx.chooseImage({
+          count: 9,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera'],
+          success: (result) => {
+              this.setData({
+                  image_selected: [...this.data.image_selected, ...result.tempFilePaths]
+              })
+          }, fail: (error) => {
+              console.log(error);
+          },complete: (result) => {
+
+          },
+        })
+    },
+
+    removeImage: function(result) {
+        const { index } = result.currentTarget.dataset;
+        let { image_selected } = this.data;
+        image_selected.splice(index, 1);
+        this.setData({
+            image_selected
         })
     },
 
@@ -32,55 +108,41 @@ Page({
         console.log(options);
     },
 
-    viewDetails: function (options) {
-        console.log("hit");
+    viewFullContent: function (event) {
+        console.log(event.currentTarget.dataset.index);
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
+    // 生命周期函数--监听页面初次渲染完成
     onReady: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
+    // 生命周期函数--监听页面显示
     onShow: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
+    // 生命周期函数--监听页面隐藏
     onHide: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
+    // 生命周期函数--监听页面卸载
     onUnload: function () {
 
     },
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
+    // 页面相关事件处理函数--监听用户下拉动作
     onPullDownRefresh: function () {
 
     },
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
+    // 页面上拉触底事件的处理函数
     onReachBottom: function () {
 
     },
 
-    /**
-     * 用户点击右上角分享
-     */
+    // 用户点击右上角分享
     onShareAppMessage: function () {
 
     }

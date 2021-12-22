@@ -23,37 +23,30 @@ Page({
   choose_icon() {
     wx.chooseImage({
       count: 1,
-      success: (res) => {
-        const temp_path = res.tempFilePaths[0];
-        wx.saveFile({
-          tempFilePath: temp_path,
-          success: (r) => {
-            const saved_path = r.savedFilePath;
-            wx.uploadFile({
-              filePath: saved_path,
-              name: 'image',
-              url: getApp().global_data.global_domain + '/api/v1.0/save_user_icon',
-              formData: {
-                'mask': getApp().global_data.global_user_token
-              },
-              success: (res) => {
-                Notify({
-                  type: "success",
-                  message: "上传成功"
-                });
-                this.setData({
-                  user_icon_path: res.data.path
-                })
-              },
-              fail() {
-                Notify({
-                  type: "danger",
-                  message: "上传失败"
-                });
-              }
+      success: (res_img) => {
+        console.log("img", res_img)
+        const temp_path = res_img.tempFilePaths[0];
+        wx.uploadFile({
+          filePath: temp_path,
+          name: 'image',
+          url: getApp().global_data.global_domain + '/api/v1.0/save_user_icon',
+          formData: {
+            'mask': getApp().global_data.global_user_token
+          },
+          success: (res_send) => {
+            console.log("send", res_send);
+            const send_path = getApp().global_data.global_domain + "/" + JSON.parse(res_send.data).path;
+            console.log(send_path);
+            Notify({
+              type: "success",
+              message: "上传成功"
+            });
+            this.setData({
+              user_icon_path: send_path
             })
           },
-          fail() {
+          fail(err) {
+            console.log(err);
             Notify({
               type: "danger",
               message: "上传失败"
@@ -61,6 +54,13 @@ Page({
           }
         })
       },
+      fail(err) {
+        console.log(err);
+        Notify({
+          type: "danger",
+          message: "选择失败"
+        })
+      }
     })
   },
   onReady() {

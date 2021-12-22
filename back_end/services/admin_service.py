@@ -54,10 +54,11 @@ def adminGetItemList(raw_info):
         ],
         "like": "",
         "sort_order": order,
-        "sort_criteria": "time",
+        "sort_criteria": "",
         "index_begin": raw_info['offset'],
         "item_count": raw_info['size']
     }
+    print(61)
     item_list, count, flag = db.getItemList(INT_TO_TABLE[raw_info['class']], info)
     for i in range(len(item_list)):
         item_list[i] = db.tupleToDict(item_list[i], key_list)
@@ -87,8 +88,6 @@ def operateItem(raw_info):
             db.selfChangeData("user", ["id"], [user_id], "item_count", 1)
             return 1
     return -1
-<<<<<<< Updated upstream
-=======
 
 
 def editUser(raw_info):
@@ -144,7 +143,6 @@ def editItem(raw_info):
                 continue
             if not db.updateData(INT_TO_TABLE[raw_info["class"]], "id", raw_info['item']['id'], key, raw_info['item'][key]):
                 return False
-            print(146)
         return True
 
->>>>>>> Stashed changes
+

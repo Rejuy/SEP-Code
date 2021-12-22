@@ -3,17 +3,19 @@ Page({
     data: {
         loading: true,
 
-        place_name: '第一教室楼',
-        place_position: '清华大学西南方向',
+        place_name: '',
+        place_position: '',
         opening_hours: '07:00-22:00',
-        place_range: '校内地点',
-        place_type: '自习场所',
+        place_range: '',
+        place_type: '',
 
+        place_score: 0.0,
+        place_star: 0.0,
         negative_radio: 10,
         neutral_radio: 30,
         positive_radio: 60,
 
-        image_url: "https://mmbiz.qpic.cn/mmbiz_jpg/HhoEMZZMsiaQgcfIVLkACUh2wiaMRyVkiaaxScRDXzvmA4erdq8HzhF34JzQzH7PsjdZRtgcn51XdE93IIiaCZNqUw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1",
+        image_url: '',
 
         comment_list: [
             { id: 1, user: '平台测试组', star: 4.5, date: '2021.12.11', likes: 998, complete: true , brief_text: '一教环境相当好，电源充足，一度是个不错的好去处，但因为有社团在三楼开活动，也不是那么香了。'},
@@ -21,8 +23,21 @@ Page({
         ]
     },
 
+    marco: {
+        PAGE_CAPACITY: 8,
+    },
+
     onLoad: function (options) {
+        let content = JSON.parse(decodeURIComponent(options.content));
+        console.log(content);
         this.setData({
+            image_url: content.image,
+            place_name: content.name,
+            place_position: content.position,
+            place_range: content.range,
+            place_type: content.type,
+            place_score: content.score.toFixed(1),
+            place_star: content.star.toFixed(1),
             loading: false,
         })
     },

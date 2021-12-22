@@ -50,8 +50,6 @@ class AdminTest(unittest.TestCase):
         }
         self.assertEqual(operateItem(raw_info), 1)
 
-<<<<<<< Updated upstream
-=======
     def testAdminEditUser1(self):
         raw_info = {
             "user": {
@@ -106,7 +104,7 @@ class AdminTest(unittest.TestCase):
             "delete": False
         }
         self.assertEqual(editItem(raw_info), True)
->>>>>>> Stashed changes
+
 
 
 if __name__ == '__main__':

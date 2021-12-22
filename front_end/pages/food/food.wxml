@@ -2,7 +2,7 @@
     <van-search value="{{ search_value }}" bind:search="onSearch" background="#82318E" placeholder="请输入搜索关键词"></van-search>
 
     <view class="create">
-        <van-button color="#07C160" icon="add-o" block bindtap="publishRecommendation">写点什么</van-button>
+        <van-button color="#07C160" icon="add-o" block bindtap="showPopup">写点什么</van-button>
         <van-button color="#1989FA" icon="star-o" block>我的创作</van-button>
 
         <van-popup closeable position="bottom" custom-style="height: 85%" show="{{ show_popup }}" bind:close="closePopup">
@@ -13,6 +13,7 @@
                     label="餐饮名称"
                     icon="question-o"
                     placeholder="请输入餐饮名称"
+                    bind:click-icon="editFoodNameTips"
                     model:value="{{ edit_food_name }}"
                 />
 
@@ -22,6 +23,7 @@
                     label="餐饮位置"
                     icon="question-o"
                     placeholder="请输入餐饮位置"
+                    bind:click-icon="editFoodPositionTips"
                     model:value="{{ edit_food_position }}"
                 />
 
@@ -31,6 +33,7 @@
                     label="营业时间"
                     icon="question-o"
                     placeholder="请输入营业时间"
+                    bind:click-icon="editFoodHoursTips"
                     model:value="{{ edit_business_hours }}"
                 />
 
@@ -40,7 +43,7 @@
                 default-index="{{ 0 }}" 
                 visible-item-count="{{ 2 }}"
                 title="{{ food_range_title }}"
-                columns="{{ range_for_create }}" 
+                columns="{{ range_table }}" 
                 bind:confirm="editFoodRange"
                 bind:cancel="cancelFoodRange">
                 </van-picker>
@@ -49,7 +52,7 @@
                 default-index="{{ 9 }}" 
                 visible-item-count="{{ 6 }}"               
                 title="{{ food_type_title }}"
-                columns="{{ inside_type_for_create }}" 
+                columns="{{ inside_type_table }}" 
                 bind:confirm="editFoodType"
                 bind:cancel="cancelFoodType"
                 wx:if="{{ edit_range_value == 1 }}">
@@ -59,12 +62,13 @@
                 default-index="{{ 2 }}" 
                 visible-item-count="{{ 4 }}"
                 title="{{ food_type_title }}"
-                columns="{{ outside_type_for_create }}" 
+                columns="{{ outside_type_table }}" 
                 bind:confirm="editFoodType"
                 bind:cancel="cancelFoodType"
                 wx:if="{{ edit_range_value == 2 }}">
                 </van-picker>
 
+                <van-notify id="van-notify" />
                 <van-dialog id="van-dialog" />
                 <van-button type="primary" block bind:click="submitNewContent">提交</van-button>
             </van-cell-group>
@@ -72,19 +76,18 @@
     </view>
     
     <van-dropdown-menu active-color="#1989fa" :color="red">
-        <van-dropdown-item value="{{ range_value }}" options="{{ range_type }}" bind:change="rangeSelected"/>
-        <van-dropdown-item value="{{ food_value }}" options="{{ food_type }}" disabled="{{ uncertain_range }}"/>
-        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" />
+        <van-dropdown-item value="{{ range_value }}" options="{{ range }}" bind:change="rangeSelected"/>
+        <van-dropdown-item value="{{ type_value }}" options="{{ type }}" disabled="{{ uncertain_range }}" bind:change="typeSelected"/>
+        <van-dropdown-item value="{{ order_value }}" options="{{ order }}" bind:change="orderSelected" />
     </van-dropdown-menu>    
 
     <view wx:for="{{ food_list }}" wx:key="id">
         <van-card
         tag="{{ item.tag }}"
-        desc="{{ item.position }}"
+        desc="餐饮方位: {{ item.position }}"
         title="{{ item.name }}"
-        thumb="{{ image_url }}"
+        thumb="{{ item.image }}"
         thumb-mode="aspectFill"
-        thumb-link="../food_item/food_item"
         >
             <view slot="tags">
                 <van-tag plain type="primary">{{ item.range }}</van-tag>
@@ -97,7 +100,7 @@
                 {{ func.toFixed(item.score) }}
             </view>
             <view slot="footer">
-                <van-button size="mini" bindtap="viewCourseItem">详情</van-button>
+                <van-button size="mini" bindtap="viewFoodItem" data-index="{{ index }}">详情</van-button>
             </view>
             <wxs module="func">
                 var toFixed = function(value) {

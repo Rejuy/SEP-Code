@@ -1,1 +1,12 @@
-/* pages/search/search.wxss */
+van-tag {
+    margin-right: 10rpx;
+}
+
+van-card .rate {
+    float: right;
+    margin-right: 22rpx;
+    display: inline-flex;
+    color: #EE0A24;
+    font-size: 150%;
+    font-weight: bold;
+}

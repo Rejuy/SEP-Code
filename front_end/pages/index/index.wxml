@@ -1,6 +1,9 @@
-<view class="search">
+<!-- <view class="search">
     <search_box></search_box>
-</view>
+</view> -->
+
+<van-search value="{{ search_value }}" bind:search="onSearch" background="#82318E" placeholder="请输入搜索关键词">
+</van-search>
 
 <scroll-view class="module" scroll-x>
     <navigator class="item" url="../course/course">
