@@ -1,3 +1,7 @@
+import Dialog from '@vant/weapp/dialog/dialog';
+import Notify from '@vant/weapp/notify/notify';
+
+
 Page({
     data: {
         loading: true,
@@ -125,6 +129,24 @@ Page({
     clearText: function() {
         this.setData({
             user_text: ""
+        })
+    },
+
+    handleSubmit: function() {
+        Dialog.confirm({
+            title: '确认提交？',
+            message: '或许还可以再检查检查~',
+        }).then(() => {
+            // on confirm
+            if(this.data.user_rate == 0) {
+                Dialog.confirm({
+                    title: '确认评分？',
+                    message: '您一定要给它0分吗？',
+                }).then(() => {
+                    console.log(this.data.user_rate);
+                    Notify({ type: 'success', message: '发布成功' });
+                })
+            }
         })
     },
 

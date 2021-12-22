@@ -1,6 +1,5 @@
-// pages/search/search.js
 Page({
-    data: {
+    data: {        
         image_table: [
             "https://learn.tsinghua.edu.cn/b/wlxt/kc/v_kcxx_jskcxx/teacher/showImageById?wlkcid=2021-2022-1142764790&_csrf=d39592c7-bbb0-416a-affb-a39b1ab00ba4",
             "https://z3.ax1x.com/2021/12/03/odK6aD.jpg",
@@ -11,7 +10,7 @@ Page({
         current_page: 0,
         search_value: '',
 
-        // 记得处理下 id, 这次 id 可能有重复, 需要识别是什么类型的，然后改成字符串 eg: id + class
+        // id 可能有重复
         content_list: [],
     },
 

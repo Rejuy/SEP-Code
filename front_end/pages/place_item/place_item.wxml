@@ -75,6 +75,9 @@
             </view>
             <textarea value="{{ user_text }}" bindinput="InputText" placeholder="请输入文字"></textarea>
 
+            <van-notify id="van-notify" />
+            <van-dialog id="van-dialog" />
+            
             <view class="van-buttons">
                 <van-button type="info" bindtap="clearText">清除</van-button>
                 <van-button type="primary" bindtap="handleSubmit">提交</van-button>
