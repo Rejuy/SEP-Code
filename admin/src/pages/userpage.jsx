@@ -257,7 +257,7 @@ function Userpage() {
         justifyContent: "space-evenly",
       }}
     >
-      <Typography variant="h5">Loading Users</Typography>
+      <Typography variant="h5">加载用户</Typography>
       <CircularProgress />
     </div>
   );
