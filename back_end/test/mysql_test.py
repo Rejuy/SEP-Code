@@ -311,15 +311,20 @@ class MySQLServiceTest(unittest.TestCase):
             "class": 1,
             "table": "course_list",  # (class对应的表名)
             "item_id": 2003,
-            "user": "zengxl",
+            "user": "zhangbw",
             "upper_comment_id": -1,
-            "star": 4,
-            "text": "测试评论2."
+            "star": 1,
+            "text": "测试五十个字。测试五十个字。测试五十个字。测试五十个字。测试五十个字。测试五十个字。测试五十个字。测试五十个字。测试五十个字。测试五十个字。"
         }
         self.assertEqual(db.addComment(comment_info), True)
 
     def testGetItem1(self):
-        result, flag = db.getItem("food_list", 2, 1, ITEM_FOOD_KEY)
+        info = {
+            "id": 2003,
+            "begin": 0,
+            "count": 3
+        }
+        result, flag = db.getItem("course_list", 1, info, ITEM_COURSE_KEY)
         self.assertEqual(flag, True)
         print(result)
 

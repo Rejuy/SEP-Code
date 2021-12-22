@@ -57,8 +57,9 @@ def getCoursesList(raw_info):
     return new_list, course_count, result
 
 
-def getCourseItem(id):
-    item, flag = db.getItem("course_list", 1, id, ITEM_COURSE_KEY)
+def getCourseItem(info):
+    info["count"] = info['end'] - info['begin'] + 1
+    item, flag = db.getItem("course_list", 1, info, ITEM_COURSE_KEY)
     return item, flag
 
 
