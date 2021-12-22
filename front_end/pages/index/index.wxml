@@ -45,7 +45,7 @@
         thumb="{{ item.image }}"
         thumb-mode="aspectFill"
         thumb-link="../course/course"
-        desc="随机解锁的{{ item.type }}"
+        desc="随机解锁的{{ item.type }}~"
         >
             <view slot="tags">
                 <van-tag type="primary">随机推荐</van-tag>

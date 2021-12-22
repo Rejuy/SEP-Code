@@ -99,7 +99,7 @@
         </van-popup>
 
         <view class="content">
-            <van-skeleton wx:for="{{ comment_list }}" wx:key="id" title avatar row="3" loading="{{ loading }}">
+            <van-skeleton wx:for="{{ comments_list }}" wx:key="id" title avatar row="3" loading="{{ loading }}">
                 <view class="user_info">
                     <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="70rpx"/>
                     <text>{{ item.user }}</text>
