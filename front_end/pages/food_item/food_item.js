@@ -16,6 +16,8 @@ Page({
 
         image_url: '',
 
+        total_pages: 0,
+        current_page: 0,
         comment_list: [
             { id: 1, user: '平台测试组', star: 2.5, date: '2021.12.11', likes: 998, complete: true , brief_text: '早期满80-40的确是诚意满满，现在配送费上去了，福利却莫得了，差评差评！'},
             { id: 2, user: '老八', star: 5.0, date: '2021.12.07', likes: 213, complete: true , brief_text: '美食界里我老八，万人称我美食家！'},            
@@ -39,6 +41,10 @@ Page({
             food_star: content.star.toFixed(1),
             loading: false,
         })
+    },
+
+    onReachBottom: function () {
+
     },
 
     giveLikes: function (options) {
@@ -71,11 +77,6 @@ Page({
 
     // 页面相关事件处理函数--监听用户下拉动作
     onPullDownRefresh: function () {
-
-    },
-
-    // 页面上拉触底事件的处理函数
-    onReachBottom: function () {
 
     },
 

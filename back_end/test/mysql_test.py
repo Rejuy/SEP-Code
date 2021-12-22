@@ -358,7 +358,7 @@ class MySQLServiceTest(unittest.TestCase):
         print(result)
 
     def testGetData1(self):
-        result, flag = db.getData("comment", ["star"], [2], ["text"])
+        result, flag = db.getData("course_list", ["name"], ["测试"], ["id"], get_all=False)
         self.assertEqual(flag, True)
         print(result)
 
