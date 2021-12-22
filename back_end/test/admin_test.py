@@ -96,13 +96,15 @@ class AdminTest(unittest.TestCase):
 
     def testAdminEditItem1(self):
         raw_info = {
-            "user": {
+            "class": 1,
+            "item": {
                 "id": 2003,
-                "name": ""
+                "name": "清声细语测试"
             },
             "delete": False
         }
-        self.assertEqual(editUser(raw_info), True)
+        self.assertEqual(editItem(raw_info), True)
+
 
 
 if __name__ == '__main__':

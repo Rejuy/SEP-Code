@@ -25,7 +25,8 @@ from controllers import (
     admin_operate_item,
     admin_edit_user,
     admin_get_single_user,
-    admin_get_single_item
+    admin_get_single_item,
+    admin_edit_item
 )
 
 blueprints = [
@@ -53,5 +54,6 @@ blueprints = [
     admin_operate_item.bp,
     admin_edit_user.bp,
     admin_get_single_user.bp,
-    admin_get_single_item.bp
+    admin_get_single_item.bp,
+    admin_edit_item.bp
 ]
