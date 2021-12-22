@@ -85,6 +85,7 @@ Page({
         schedule_table: ['春季学期', '夏季学期', '秋季学期', '春、秋季学期'],
         color_table: ['', '#228B22', '#000000', '#FFA500', '#8B4513', '#9400D3', '#DC143C', '#0000FF', '#FF1493', '#D8BFD8'],
 
+        mask_value: '',
         search_value: '',
         type_value: 0,
         department_value: 0,
@@ -103,7 +104,6 @@ Page({
         total_pages: 0,
         current_page: 0,
         show_popup: false,
-        hide_creation: true,
         
         courses_list: [],
     },
@@ -141,6 +141,7 @@ Page({
           data: {
               begin: begin,
               end: end,
+              mask: this.data.mask_value,
               like: this.data.search_value,
               course_type: this.data.type_value,
               course_department: this.data.department_value,
@@ -247,9 +248,13 @@ Page({
     },
 
     showMyCreation: function() {
+        const app = getApp();
         this.setData({
-            hide_creation: false
+            current_page: 0,
+            courses_list: [],
+            mask_value: app.global_data.global_user_token,
         })
+        this.getCourseList();
     },
 
     editCourseNameTips: function() {

@@ -45,7 +45,7 @@ ADMIN_UPDATE_USER_KEY = ["user_name", "email", "activated", "image"]
 
 # courses表
 # 所有key值
-COURSES_KEY = ["id", "name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "schedule"]
+COURSES_KEY = ["id", "name", "teacher", "department", "type", "star", "score", "credit", "comment_count", "heat", "user_id", "activated", "time", "schedule"]
 # 插入时所需键值
 INSERT_COURSES_KEY = ["name", "teacher", "department", "type", "credit", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "schedule"]
 # 返回的key值（基本）

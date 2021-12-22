@@ -90,7 +90,7 @@ Page({
               this.data.total_pages = Math.ceil(rtn.counts / this.marco.PAGE_CAPACITY) - 1;
               this.setData({
                   course_credit: rtn.credit,
-                  course_schedule: rtn.schedule,
+                  course_schedule: this.data.schedule_table[rtn.schedule],
                   negative_radio: rtn.negative,
                   neutral_radio: rtn.neutral,
                   positive_radio: rtn.positive,
@@ -166,7 +166,8 @@ Page({
                         Notify({ type: 'danger', message: '发布失败' });
                     }
                     this.setData({
-                        comments_list: []
+                        current_page: 0,
+                        comments_list: [],
                     })
                     this.getCommentList();
                 },

@@ -165,6 +165,7 @@ Page({
                         Notify({ type: 'danger', message: '发布失败' });
                     }
                     this.setData({
+                        current_page: 0,
                         comments_list: []
                     })
                     this.getCommentList();
