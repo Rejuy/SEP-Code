@@ -87,3 +87,64 @@ def operateItem(raw_info):
             db.selfChangeData("user", ["id"], [user_id], "item_count", 1)
             return 1
     return -1
+<<<<<<< Updated upstream
+=======
+
+
+def editUser(raw_info):
+    if raw_info['delete']:
+        # delete user
+        return db.delUser("id", raw_info['user']['id'])
+    else:
+        # edit user
+        for key in ADMIN_UPDATE_USER_KEY:
+            if not db.updateData("user", "id", raw_info['user']['id'], key, raw_info['user'][key]):
+                return False
+            print(102)
+        return True
+
+
+def getSingleUser(id):
+    user = db.getUser("id", id)
+    if not user:
+        return None
+    user = db.tupleToDict(user, USER_KEY)
+    del user['password']
+    del user['introduction']
+    user['account_birth'] = db.timeToStr(user['account_birth'])
+    return user
+
+
+def getSingleItem(raw_info):
+    # 获得键值
+    if raw_info['class'] == 1:
+        key_list = ADMIN_COURSE_KEY
+    elif raw_info['class'] == 2:
+        key_list = ADMIN_FOOD_KEY
+    elif raw_info['class'] == 3:
+        key_list = ADMIN_PLACE_KEY
+    return db.getData(INT_TO_TABLE[raw_info['class']], ["id"], [raw_info['id']], key_list, get_all=False)
+
+
+def editItem(raw_info):
+    if raw_info['class'] == 1:
+        key_list = ADMIN_COURSE_KEY
+    elif raw_info['class'] == 2:
+        key_list = ADMIN_FOOD_KEY
+    elif raw_info['class'] == 3:
+        key_list = ADMIN_PLACE_KEY
+    if raw_info['delete']:
+        # delete item
+        item_activated = db.getData(INT_TO_TABLE[raw_info["class"]], ["id"], [raw_info['item']['id']], ["activated"])
+        return db.delItem(INT_TO_TABLE[raw_info["class"]], ["id"], [raw_info['item']['id']], item_activated)
+    else:
+        # edit item
+        for key in raw_info['item'].keys():
+            if key == "id":
+                continue
+            if not db.updateData(INT_TO_TABLE[raw_info["class"]], "id", raw_info['item']['id'], key, raw_info['item'][key]):
+                return False
+            print(146)
+        return True
+
+>>>>>>> Stashed changes

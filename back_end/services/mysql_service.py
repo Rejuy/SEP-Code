@@ -454,7 +454,7 @@ class MySQLDb:
             self.connection.rollback()
             return -1
 
-    def getItem(self, table, table_id, id, key_list):
+    def getItem(self, table, table_id, info, key_list):
         """
         comments: {
     	    user: ...;  # 用户
@@ -469,26 +469,50 @@ class MySQLDb:
         try:
             # 获得数据
             sql = "SELECT " + self.getKeysStr(key_list) + " FROM " + table + " WHERE id = %s"
-            val = (id, )
+            val = (info['id'], )
             self.cursor.execute(sql, val)
             raw_item = self.cursor.fetchone()
             # 转成字典
             item = self.tupleToDict(raw_item, key_list)
             # 获得相应评论
-            sql = "SELECT * FROM comment WHERE class = %s AND item_id = %s"
-            val = (table_id, id)
+            sql = "SELECT COUNT(*) FROM comment WHERE class = %s AND item_id = %s"
+            val = (table_id, info['id'])
+            self.cursor.execute(sql, val)
+            item['counts'] = self.cursor.fetchall()[0][0]
+            item['negative'] = 0
+            neutral_sql = sql + " AND star >= 2 AND star <= 3.5"
+            self.cursor.execute(neutral_sql, val)
+            item['neutral'] = self.cursor.fetchall()[0][0]
+            positive_sql = sql + " AND star >= 4"
+            self.cursor.execute(positive_sql, val)
+            item['positive'] = self.cursor.fetchall()[0][0]
+            if item['counts'] != 0:
+                item['positive'] = int(item['positive'] / item['counts'] * 1000)
+                item['neutral'] = int(item['neutral'] / item['counts'] * 1000)
+                item['negative'] = 1000 - item['positive'] - item['neutral']
+                item['positive'] /= 10
+                item['neutral'] /= 10
+                item['negative'] /= 10
+            sql = "SELECT " + self.getKeysStr(ITEM_COMMENT_KEY) + " FROM comment WHERE class = %s AND item_id = %s ORDER BY likes desc, id  LIMIT " + str(info['count']) + " OFFSET " + str(info['begin'])
             self.cursor.execute(sql, val)
             comments_list = self.cursor.fetchall()
+
             for i in range(len(comments_list)):
-                comments_list[i] = self.tupleToDict(comments_list[i], COMMENT_KEY)
-                del comments_list[i]['id']
-                comments_list[i]['time'] = self.timeToStr(comments_list[i]['time'])
-                comments_list[i]['comment_numbers'] = comments_list[i]['lower_comment_count']
-                del comments_list[i]['lower_comment_count']
+                comments_list[i] = self.tupleToDict(comments_list[i], ITEM_COMMENT_KEY)
+                comments_list[i]['date'] = self.timeToStr(comments_list[i]['time'])
+                del comments_list[i]['time']
+                if len(comments_list[i]['text']) <= 50:
+                    comments_list[i]['complete'] = 1
+                    comments_list[i]['brief_text'] = comments_list[i]['text']
+                    del comments_list[i]['text']
+                else:
+                    comments_list[i]['complete'] = 0
+                    comments_list[i]['brief_text'] = comments_list[i]['text'][0: 50]
+                    del comments_list[i]['text']
             item['comments'] = comments_list
             # 更新heat值
             sql = "UPDATE " + table + " SET heat = heat + 1 WHERE id = %s"
-            val = (id,)
+            val = (info['id'],)
             self.cursor.execute(sql, val)
             # 数据表内容更新
             self.connection.commit()

@@ -50,6 +50,63 @@ class AdminTest(unittest.TestCase):
         }
         self.assertEqual(operateItem(raw_info), 1)
 
+<<<<<<< Updated upstream
+=======
+    def testAdminEditUser1(self):
+        raw_info = {
+            "user": {
+                "id": 10,
+                "user_name": "admin",
+                "email": "testAdmin",
+                "activated": 1,
+                "image": ""
+            },
+            "delete": True
+        }
+        self.assertEqual(editUser(raw_info), True)
+
+    def testAdminEditUser2(self):
+        raw_info = {
+            "user": {
+                "id": 11,
+                "user_name": "admin",
+                "email": "testAdmin",
+                "activated": 1,
+                "image": ""
+            },
+            "delete": False
+        }
+        self.assertEqual(editUser(raw_info), True)
+
+    def testGetSingleUser(self):
+        user = getSingleUser(4)
+        if user:
+            flag = True
+        else:
+            flag = False
+        self.assertEqual(flag, True)
+        print(user)
+
+    def testGetSingleItem1(self):
+        info = {
+            "class": 1,
+            "id": 110
+        }
+        item, flag = getSingleItem(info)
+        self.assertEqual(flag, True)
+        print(item)
+
+    def testAdminEditItem1(self):
+        raw_info = {
+            "class": 1,
+            "item": {
+                "id": 2003,
+                "name": "清声细语测试"
+            },
+            "delete": False
+        }
+        self.assertEqual(editItem(raw_info), True)
+>>>>>>> Stashed changes
 
 
 if __name__ == '__main__':
