@@ -346,6 +346,11 @@ class MySQLServiceTest(unittest.TestCase):
         self.assertEqual(flag, True)
         print(id)
 
+    def testUserCount(self):
+        count_list, flag = db.getNewUserCount(12)
+        self.assertEqual(flag, True)
+        print(count_list)
+
 
 if __name__ == '__main__':
     unittest.main()

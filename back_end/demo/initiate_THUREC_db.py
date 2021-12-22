@@ -1,4 +1,5 @@
 import mysql.connector
+from services.mysql_service import db
 
 
 if __name__ == "__main__":
@@ -15,15 +16,26 @@ if __name__ == "__main__":
     mydb.close()
     '''
 
-    # 连接数据库
-    mydb = mysql.connector.connect(
-        host="49.233.1.189",
-        user="root",
-        passwd="123456",
-        database="THUREC_db"
-    )
-    mycursor = mydb.cursor()
-    print("测试")
+    user_info_list = [{
+        "user_name": "user1",
+        "password": "user1",
+        "email": "user119"
+    }, {
+        "user_name": "user2",
+        "password": "user2",
+        "email": "user219"
+    }, {
+        "user_name": "user3",
+        "password": "user3",
+        "email": "user319"
+    }, {
+        "user_name": "user4",
+        "password": "user4",
+        "email": "user419"
+    }
+    ]
+    for user in user_info_list:
+        db.addUser(user)
     #sql = 'SELECT id, name, teacher, department, type, star, score FROM course_list order by star LIMIT 0,16 '
     #order by star
     #mycursor.execute(sql)

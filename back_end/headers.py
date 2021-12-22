@@ -53,7 +53,7 @@ BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star", "sco
 # 颜色和属性对应
 COURSE_COLOR = ["", "#228B22", "#000000", "#FFA500", "#8B4513", "#9400D3", "#FF0000", "#0000FF", "#FF1493"]
 # item
-ITEM_COURSE_KEY = ["credit"]
+ITEM_COURSE_KEY = ["credit", "schedule"]
 # 返回给管理员的key
 ADMIN_COURSE_KEY = ["id", "name", "teacher", "department", "type", "credit", "time", "activated"]
 
