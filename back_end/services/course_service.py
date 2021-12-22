@@ -60,3 +60,7 @@ def getCoursesList(raw_info):
 def getCourseItem(id):
     item, flag = db.getItem("course_list", 1, id, ITEM_COURSE_KEY)
     return item, flag
+
+
+def getFullContent(id):
+    return db.getData("comment", ["id"], [id], ["text"], get_all=False)

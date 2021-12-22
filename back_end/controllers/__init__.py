@@ -25,7 +25,13 @@ from controllers import (
     admin_operate_item,
     admin_edit_user,
     admin_get_single_user,
+<<<<<<< Updated upstream
     admin_get_single_item
+=======
+    admin_get_single_item,
+    admin_edit_item,
+    view_full_content
+>>>>>>> Stashed changes
 )
 
 blueprints = [
@@ -53,5 +59,11 @@ blueprints = [
     admin_operate_item.bp,
     admin_edit_user.bp,
     admin_get_single_user.bp,
+<<<<<<< Updated upstream
     admin_get_single_item.bp
+=======
+    admin_get_single_item.bp,
+    admin_edit_item.bp,
+    view_full_content.bp
+>>>>>>> Stashed changes
 ]

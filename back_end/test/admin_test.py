@@ -102,7 +102,11 @@ class AdminTest(unittest.TestCase):
             },
             "delete": False
         }
+<<<<<<< Updated upstream
         self.assertEqual(editUser(raw_info), True)
+=======
+        self.assertEqual(editItem(raw_info), True)
+>>>>>>> Stashed changes
 
 
 if __name__ == '__main__':
