@@ -938,6 +938,19 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
+    def randomItemId(self, table, offset):
+        try:
+            # 获得数据
+            sql = "SELECT id FROM " + table + " LIMIT 1 OFFSET " + str(offset)
+            self.cursor.execute(sql)
+            id = self.cursor.fetchone()[0]
+            return id, True
+        except Exception as e:
+            print("[Error] (getItem)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return 0, False
+
     # ==========后为功能性函数
 
     def tupleToDict(self, tuple, key_list):
