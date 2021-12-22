@@ -137,13 +137,13 @@ function Foodpage() {
       field: "name",
       headerName: "名称",
       headerAlign: "center",
-      flex: 4,
+      flex: 2,
     },
     {
       field: "position",
-      headerName: "Position",
+      headerName: "地址",
       headerAlign: "center",
-      flex: 1,
+      flex: 2,
     },
     {
       field: "scope",

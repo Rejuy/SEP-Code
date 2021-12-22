@@ -4,307 +4,254 @@ from services.mysql_service import db
 
 
 class MySQLServiceTest(unittest.TestCase):
-    def testCheckUserExistence1(self):
+    def test01CheckUserExistence1(self):
         email = "asdf"
         self.assertEqual(db.checkUserExistence(email), False)
 
-    def testCheckUserExistence2(self):
-        email = "testEmail19"
+    def test02CheckUserExistence2(self):
+        email = "renjy19"
         self.assertEqual(db.checkUserExistence(email), True)
 
-    def testCheckUserNameExistence1(self):
+    def test03CheckUserExistence3(self):
+        email = [1, 2, 3]
+        self.assertEqual(db.checkUserExistence(email), False)
+
+    def test04CheckUserNameExistence1(self):
         user_name = "jiliguala"
         self.assertEqual(db.checkUserNameExistence(user_name), False)
 
-    def testCheckUserNameExistence2(self):
-        user_name = "testUser"
+    def test05CheckUserNameExistence2(self):
+        user_name = "renjy"
         self.assertEqual(db.checkUserNameExistence(user_name), True)
 
-    def testAddUser1(self):
+    def test06CheckUserNameExistence3(self):
+        user_name = []
+        self.assertEqual(db.checkUserNameExistence(user_name), False)
+
+    def test07CheckDataExistence1(self):
+        user_name = "jiliguala"
+        self.assertEqual(db.checkDataExistence("user", "user_name", user_name), False)
+
+    def test08CheckDataExistence2(self):
+        user_name = "renjy"
+        self.assertEqual(db.checkDataExistence("user", "user_name", user_name), True)
+
+    def test09CheckDataExistence3(self):
+        user_name = []
+        self.assertEqual(db.checkDataExistence("user", "user_name", user_name), False)
+
+    def test10AddUser1(self):
         user_info = {
-            "user_name": "test",
+            "user_name": [],
             "password": "test",
             "email": "testEmail19"
         }
-        self.assertEqual(db.addUser(user_info), True)
+        self.assertEqual(db.addUser(user_info), False)
 
-    def testAddUser2(self):
+    def test11AddUser2(self):
         user_info = {
-            "user_name": "testUser2",
-            "password": "Ad000000$",
-            "email": "asd19"
+            "user_name": "test",
+            "password": "test",
+            "email": "test19"
         }
         self.assertEqual(db.addUser(user_info), True)
 
-    def testAddUser3(self):
-        user_info = {
-            "user_name": "任俊宇",
-            "password": "Ad000000$",
-            "email": "asd19"
+    def test12DelUser1(self):
+        id = db.getData("user", ["user_name"], ["test"], ["id"], get_all=False)[0]["id"]
+        self.assertEqual(db.delUser("id", id), True)
+
+    def test13DelUser2(self):
+        self.assertEqual(db.delUser("username", []), False)
+
+    def test14GetUser1(self):
+        user = db.getUser("id", 4)
+        if user:
+            flag = True
+        else:
+            flag = False
+        self.assertEqual(flag, True)
+        print(user)
+
+    def test14GetUser2(self):
+        user = db.getUser("iasdf", 4)
+        if user:
+            flag = True
+        else:
+            flag = False
+        self.assertEqual(flag, False)
+        print(user)
+
+    def test15GetUserList1(self):
+        info = {
+            "offset": 0,
+            "size": 4
         }
-        self.assertEqual(db.addUser(user_info), True)
+        user_list, flag = db.getUserList(info)
+        self.assertEqual(flag, True)
+        print(user_list)
 
-    def testDelUser1(self):
-        self.assertEqual(db.delUser("id", 9), True)
+    def test16GetUserList2(self):
+        info = {
+            "offset": 0
+        }
+        user_list, flag = db.getUserList(info)
+        self.assertEqual(flag, False)
+        print(user_list)
 
-    def testDelUser2(self):
-        self.assertEqual(db.delUser("username", "testUser"), True)
+    def test17UpdateData1(self):
+        self.assertEqual(db.updateData("course_list", "id", 2010, "activated", 1), True)
 
-    def testDelUser3(self):
-        self.assertEqual(db.delUser("email", "testEmail19"), True)
+    def test18UpdateData2(self):
+        self.assertEqual(db.updateData("course_list", "id", 2010, "activated", []), False)
 
-    def testUpdateData1(self):
-        self.assertEqual(db.updateData("user", "email", "testEmail19", "activated", 1), True)
+    def test19GetData1(self):
+        result, flag = db.getData("course_list", ["name"], ["测试"], ["time"], get_all=False)
+        self.assertEqual(flag, True)
+        print(result)
 
-    def testUpdateData2(self):
-        self.assertEqual(db.updateData("course_content", "number", "101", "rate_count", 1), True)
-        self.assertEqual(db.updateData("course_content", "number", "101", "rate", 3), True)
-        self.assertEqual(db.updateData("course_content", "number", "101", "comment_count", 1), True)
-        self.assertEqual(db.updateData("course_content", "number", "101", "heat", 8), True)
+    def test20GetData2(self):
+        result, flag = db.getData("course_list", ["name"], ["asdfasdf"], ["time"], get_all=False)
+        self.assertEqual(flag, False)
+        print(result)
 
-    def testUpdateData3(self):
-        self.assertEqual(db.updateData("user_like", "id", 4, "comment_id", 35), True)
+    def test21GetData3(self):
+        result, flag = db.getData("course_list", ["name"], ["测试"], 2, get_all=False)
+        self.assertEqual(flag, False)
+        print(result)
 
-    def testAddItem1(self):
+    def test22GetData4(self):
+        result, flag = db.getData("course_list", ["name"], ["测试"], ["time"])
+        self.assertEqual(flag, True)
+        print(result)
+
+    def test23GetData5(self):
+        result, flag = db.getData("course_list", ["name"], ["asdfasdf"], ["time"])
+        self.assertEqual(flag, False)
+        print(result)
+
+    def test24GetData6(self):
+        result, flag = db.getData("course_list", ["name"], ["测试"], 2)
+        self.assertEqual(flag, False)
+        print(result)
+
+    def test25AddItem1(self):
         info = {
             "type": 5,
-            "name": "清声细语4",
+            "name": "单元测试样例",
             "teacher": "平台测试组",
             "department": 1,
             "credit": 2
         }
         self.assertEqual(db.addItem("course_list", info), True)
 
-    def testAddItem2(self):
-        info = {
-            "type": 1,
-            "name": "第二教室楼",
-            "position": "清华大学西南方向",
-            "scope": 1
-        }
-        self.assertEqual(db.addItem("place_list", info), True)
+    def test26AddItem1(self):
+        self.assertEqual(db.addItem("course_list", 1), False)
 
-    def testAddItem3(self):
+    def test27GetItem1(self):
         info = {
-            "type": 1,
-            "name": "图书馆北馆（李文正馆）",
-            "position": "清华大学西北方向",
-            "scope": 1
+            "id": 2003,
+            "begin": 0,
+            "count": 3
         }
-        self.assertEqual(db.addItem("place_list", info, user_id=4), True)
+        result, flag = db.getItem("course_list", 1, info, ITEM_COURSE_KEY)
+        self.assertEqual(flag, True)
+        print(result)
 
-    def testAddItem4(self):
+    def test28GetItem2(self):
         info = {
-            "type": 1,
-            "name": "图书馆西馆（逸夫馆）",
-            "position": "清华大学西北方向",
-            "scope": 1
+            "id": 2003,
         }
-        self.assertEqual(db.addItem("place_list", info, user_id=4), True)
+        result, flag = db.getItem("course_list", 1, info, ITEM_COURSE_KEY)
+        self.assertEqual(flag, False)
+        print(result)
 
-    def testAddContent3(self):
-        info = {
-            "number": 102,
-            "type": TYPE_PRACTICE,
-            "name": "清声细语实践",
-            "teacher": "曾晓龙",
-            "department": DEPARTMENT_INFORMATION,
-            "schedule": "1-2",
-            "credit": 2,
-            "rate_count": 5,
-            "rate": 5,
-            "comment_count": 5,
-            "heat": 10
-        }
-        self.assertEqual(db.addContent("course_content", info), True)
-
-    def testAddContent4(self):
-        info = {
-            "number": 103,
-            "type": TYPE_EXPERIMENT,
-            "name": "实验室清声细语探究",
-            "teacher": "丁佳华",
-            "department": DEPARTMENT_INFORMATION,
-            "schedule": "1-4",
-            "credit": 4,
-            "rate_count": 3,
-            "rate": 4,
-            "comment_count": 3,
-            "heat": 9
-        }
-        self.assertEqual(db.addContent("course_content", info), True)
-
-    def testAddContent5(self):
-        info = {
-            "number": 104,
-            "type": TYPE_CULTURE,
-            "name": "清声细语中的哲学思辩",
-            "teacher": "任俊宇",
-            "department": DEPARTMENT_CULTURE,
-            "schedule": "1-5",
-            "credit": 3,
-            "rate_count": 10,
-            "rate": 1,
-            "comment_count": 10,
-            "heat": 4
-        }
-        self.assertEqual(db.addContent("course_content", info), True)
-
-    def testAddItem6(self):
-        info = {
-            "type": 1,
-            "name": "第三教室楼",
-            "position": "清华大学学堂路东",
-            "scope": 1
-        }
-        self.assertEqual(db.addItem("place_list", info), True)
-
-    def testAddItem7(self):
-        info = {
-            "type": 1,
-            "name": "第四教室楼",
-            "position": "清华大学学堂路西",
-            "scope": 1
-        }
-        self.assertEqual(db.addItem("place_list", info), True)
-
-    def testAddItem8(self):
-        info = {
-            "type": 1,
-            "name": "清华学堂",
-            "position": "清华大学中部大礼堂东南侧",
-            "scope": 1
-        }
-        self.assertEqual(db.addItem("place_list", info), True)
-
-    def testAddItem9(self):
-        info = {
-            "type": 1,
-            "name": "第五教室楼",
-            "position": "清华大学清华学堂东侧",
-            "scope": 1
-        }
-        self.assertEqual(db.addItem("place_list", info), True)
-
-    def testAddItem10(self):
-        info = {
-            "type": 1,
-            "name": "第六教学楼",
-            "position": "清华大学新民路西",
-            "scope": 1
-        }
-        self.assertEqual(db.addItem("place_list", info), True)
-
-    def testAddItem10(self):
-        info = {
-            "type": 1,
-            "name": "凯风人文社科图书馆",
-            "position": "清华大学学堂路东",
-            "scope": 1,
-            "user_id": 4
-        }
-        self.assertEqual(db.addItem("place_list", info), True)
-
-    def testAddItem11(self):
-        info = {
-            "type": 1,
-            "name": "法律图书馆",
-            "position": "清华大学东南方向学堂路东",
-            "scope": 1,
-            "user_id": 4
-        }
-        self.assertEqual(db.addItem("place_list", info), True)
-
-    def testAddItem12(self):
-        info = {
-            "type": 1,
-            "name": "啊哈，根本没有这个地儿",
-            "position": "清华大学",
-            "scope": 1,
-            "user_id": 4
-        }
-        self.assertEqual(db.addItem("place_list", info), True)
-
-    def testAddItem13(self):
-        info = {
-            "type": 1,
-            "name": "测试",
-            "department": 1,
-            "credit": 2,
-            "teacher": "测试"
-        }
-        self.assertEqual(db.addItem("course_list", info), True)
-
-    def testGetItemList1(self):
+    def test29GetItemList1(self):
         info = {
             "key_list": BASIC_COURSES_KEY,
-            "filter": "",
+            "filter": [
+                {
+                    "key": "name",
+                    "value": "单元测试样例"
+                },
+                {
+                    "key": "department",
+                    "value": 1
+                }
+            ],
+            "like": "测试",
             "sort_order": "desc",
             "sort_criteria": "star",
             "index_begin": 0,
-            "content_count": 4
+            "item_count": 4
         }
-
         result = db.getItemList("course_list", info)
         print(result[0])
-        self.assertEqual(result[1], True)
+        self.assertEqual(result[2], True)
 
-    def testGetItemList2(self):
+    def test30GetItemList2(self):
         info = {
             "key_list": BASIC_COURSES_KEY,
-            "filter": "",
+            "filter": [],
+            "like": "单元测试",
             "sort_order": "desc",
             "sort_criteria": "star",
             "index_begin": 0,
-            "content_count": 4,
-            "like": "2"
+            "item_count": 4
         }
-
         result = db.getItemList("course_list", info)
         print(result[0])
-        self.assertEqual(result[1], True)
+        self.assertEqual(result[2], True)
 
-    def testGetItemList3(self):
-        info = {
-            "key_list": BASIC_COURSES_KEY,
-            "filter": "",
-            "sort_order": "desc",
-            "sort_criteria": "star",
-            "index_begin": 0,
-            "content_count": 4,
-            "like": "2333"
-        }
-
-        result = db.getItemList("course_list", info)
+    def test31GetItemList3(self):
+        result = db.getItemList("course_list", 1)
         print(result[0])
-        self.assertEqual(result[1], True)
+        self.assertEqual(result[2], False)
 
-    def testGetItemList4(self):
-        info = {
-            "key_list": BASIC_PLACE_KEY,
-            "filter": "",
-            "sort_order": "desc",
-            "sort_criteria": "star",
-            "index_begin": 0,
-            "content_count": 4,
-            "like": "学堂路"
-        }
+    def test32GetTableCount1(self):
+        self.assertEqual(db.getTableCount("user"), 4)
 
-        result = db.getItemList("place_list", info)
-        print(result[0])
-        self.assertEqual(result[1], True)
+    def test33GetTableCount2(self):
+        self.assertEqual(db.getTableCount("as"), -1)
 
-    def testAddComment1(self):
+    def test34AddComment1(self):
         comment_info = {
             "class": 1,
             "table": "course_list",  # (class对应的表名)
-            "item_id": 2003,
+            "item_id": 2021,
             "user": "renjy",
             "upper_comment_id": -1,
             "star": 3,
             "text": "测试评论1。"
         }
         self.assertEqual(db.addComment(comment_info), True)
+
+    def test35AddComment2(self):
+        self.assertEqual(db.addComment(123), False)
+
+    def test36AddComment3(self):
+        comment_info = {
+            "class": 1,
+            "table": "course_list",  # (class对应的表名)
+            "item_id": 2021,
+            "user": "zengxl",
+            "upper_comment_id": -1,
+            "star": 4,
+            "text": "测试评论2。"
+        }
+        self.assertEqual(db.addComment(comment_info), True)
+
+    def test37DelComment1(self):
+        item_id = db.getData("course_list", ["name"], ["单元测试样例"], ["id"], get_all=False)[0]["id"]
+        id = db.getData("comment", ["item_id", "user"], [item_id, "renjy"], ["id"], get_all=False)[0]["id"]
+        self.assertEqual(db.delComment("id", id), True)
+
+    def test38DelComment2(self):
+        item_id = db.getData("course_list", ["name"], ["单元测试样例"], ["id"], get_all=False)[0]["id"]
+        id = db.getData("comment", ["item_id", "user"], [item_id, "zengxl"], ["id"], get_all=False)[0]["id"]
+        self.assertEqual(db.delComment("id", id), True)
+
+    def test39DelComment3(self):
+        self.assertEqual(db.delComment("id", []), False)
 
     def testAddComment2(self):
         comment_info = {
@@ -318,20 +265,7 @@ class MySQLServiceTest(unittest.TestCase):
         }
         self.assertEqual(db.addComment(comment_info), True)
 
-    def testGetItem1(self):
-        info = {
-            "id": 2003,
-            "begin": 0,
-            "count": 3
-        }
-        result, flag = db.getItem("course_list", 1, info, ITEM_COURSE_KEY)
-        self.assertEqual(flag, True)
-        print(result)
 
-    def testGetItem2(self):
-        result, flag = db.getItem("place_list", 3, 5, ITEM_PLACE_KEY)
-        self.assertEqual(flag, True)
-        print(result)
 
     def testAddLike(self):
         self.assertEqual(db.addLike("renjy", 29), True)
@@ -358,7 +292,7 @@ class MySQLServiceTest(unittest.TestCase):
         print(result)
 
     def testGetData1(self):
-        result, flag = db.getData("course_list", ["name"], ["测试"], ["id"], get_all=False)
+        result, flag = db.getData("course_list", ["name"], ["测试"], ["time"], get_all=False)
         self.assertEqual(flag, True)
         print(result)
 
@@ -379,11 +313,7 @@ class MySQLServiceTest(unittest.TestCase):
     def testItemCollected2(self):
         self.assertEqual(db.checkItemCollected(1,2,4), False)
 
-    def testDelComment1(self):
-        self.assertEqual(db.delComment("id", 34), True)
 
-    def testDelComment2(self):
-        self.assertEqual(db.delComment("id", 35), True)
 
     def testGetGlobalItemList1(self):
         info = {
@@ -397,14 +327,7 @@ class MySQLServiceTest(unittest.TestCase):
         self.assertEqual(flag, True)
         print(item_list)
 
-    def testGetUserList(self):
-        info = {
-            "offset": 0,
-            "size": 4
-        }
-        user_list, flag = db.getUserList(info)
-        self.assertEqual(flag, True)
-        print(user_list)
+
 
     def testCheckDataExistence1(self):
         self.assertEqual(db.checkDataExistence("user", "id", 4), True)

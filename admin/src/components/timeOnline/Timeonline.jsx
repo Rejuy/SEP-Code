@@ -18,7 +18,7 @@ export default class Timeonline extends Component {
 
   componentDidMount() {
     axios
-      .post(global.config.backendUrl + "/api/v1.0/get_online_time", {
+      .post(global.config.backendUrl + "/api/v1.0/admin_get_online_time", {
         secret_code: localStorage.getItem("secretCode"),
       })
       .then((res) => {

@@ -141,20 +141,25 @@ function Placepage() {
     },
     {
       field: "position",
-      headerName: "Position",
+      headerName: "地址",
       headerAlign: "center",
       flex: 1,
     },
     {
       field: "scope",
-      headerName: "Scope",
+      headerName: "是否校内",
       headerAlign: "center",
+      align: "center",
       flex: 1,
+      valueFormatter: (params) => {
+      	return params.value === 1 ? "是" : "否";
+      }
     },
     {
       field: "type",
       headerName: "类型",
       headerAlign: "center",
+      align: "center",
       flex: 1,
     },
     {
