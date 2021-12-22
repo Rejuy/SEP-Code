@@ -1,6 +1,7 @@
 Page({
     data: {
         loading: true,
+        show_popup: false,
 
         food_name: '',
         food_position: '',
@@ -14,8 +15,10 @@ Page({
         neutral_radio: 20,
         positive_radio: 50,
 
-        image_url: '',
+        user_text: '',
+        user_rate: 0.0,
 
+        image_url: '',
         total_pages: 0,
         current_page: 0,
         comment_list: [
@@ -45,6 +48,36 @@ Page({
 
     onReachBottom: function () {
 
+    },
+
+    showPopup: function() {
+        this.setData({
+            show_popup: true
+        })        
+    },
+
+    closePopup: function() {
+        this.setData({
+            show_popup: false
+        })
+    },
+
+    userRate: function(event) {
+        this.setData({
+            user_rate: event.detail,
+        });        
+    },
+
+    InputText: function(result) {
+        this.setData({
+            user_text: result.detail.value
+        })
+    },
+
+    clearText: function() {
+        this.setData({
+            user_text: ""
+        })
     },
 
     giveLikes: function (options) {

@@ -1,7 +1,7 @@
-// pages/place_item/place_item.js
 Page({
     data: {
         loading: true,
+        show_popup: false,
 
         place_name: '',
         place_position: '',
@@ -15,8 +15,12 @@ Page({
         neutral_radio: 30,
         positive_radio: 60,
 
-        image_url: '',
+        user_text: '',
+        user_rate: 0.0,
 
+        image_url: '',
+        total_pages: 0,
+        current_page: 0,
         comment_list: [
             { id: 1, user: '平台测试组', star: 4.5, date: '2021.12.11', likes: 998, complete: true , brief_text: '一教环境相当好，电源充足，一度是个不错的好去处，但因为有社团在三楼开活动，也不是那么香了。'},
             { id: 2, user: '卢本伟', star: 5.0, date: '2021.12.07', likes: 213, complete: true , brief_text: '从今天起，这座广场就叫做卢本伟广场！'},            
@@ -45,6 +49,36 @@ Page({
     // 页面上拉触底事件的处理函数
     onReachBottom: function () {
 
+    },
+
+    showPopup: function() {
+        this.setData({
+            show_popup: true
+        })        
+    },
+
+    closePopup: function() {
+        this.setData({
+            show_popup: false
+        })
+    },
+
+    userRate: function(event) {
+        this.setData({
+            user_rate: event.detail,
+        });        
+    },
+
+    InputText: function(result) {
+        this.setData({
+            user_text: result.detail.value
+        })
+    },
+
+    clearText: function() {
+        this.setData({
+            user_text: ""
+        })
     },
 
     giveLikes: function (options) {
