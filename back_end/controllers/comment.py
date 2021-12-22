@@ -61,6 +61,7 @@ comment = {
 def get_comment_by_id():
     try:
         info = request.get_json()
+        print(info)
         id = coder.decode(info['mask'])
         # print(id)
         user_name = getNameByID(id)

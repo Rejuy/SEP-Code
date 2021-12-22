@@ -23,6 +23,7 @@ def getCommentsByName (user_name, offset, size):
     # print(commentState[1])
     commentList = commentState[0]
     for i in range(len(commentList)):
+        print(commentList[i])
         commentList[i] = dict(zip(info['key_list'], commentList[i]))
         commentList[i]['image'] = json.loads(commentList[i]['image'])
         commentList[i]['item_title'] = getTitle(commentList[i]['class'], commentList[i]['item_id'])
