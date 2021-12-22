@@ -51,8 +51,14 @@ Page({
             app.global_data.global_user_info.account_birth = user_data.account_birth;
             app.global_data.global_user_info.username = user_data.user_name;
             */
-          } else {
-            Notify({ type: "danger", message: "登录失败" });
+          } else if (res.data.state === 1) {
+            Notify({ type: "danger", message: "用户不存在" });
+          }else if (res.data.state === 2) {
+            Notify({ type: "danger", message: "密码错误" });
+          }else if (res.data.state === 3){
+            Notify({ type: "danger", message: "用户未激活" });
+          }else{
+            Notify({ type: "danger", message: "连接失败，请稍后重试" });
           }
         },
         fail: function (res) {

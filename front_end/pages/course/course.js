@@ -103,6 +103,7 @@ Page({
         total_pages: 0,
         current_page: 0,
         show_popup: false,
+        hide_creation: true,
         
         courses_list: [],
     },
@@ -215,7 +216,7 @@ Page({
         let index = event.currentTarget.dataset.index;
         let content = JSON.stringify(this.data.courses_list[index]);
         wx.navigateTo({
-          url: '../course_item/course_item?content=' + content,
+          url: '../course_item/course_item?content=' + encodeURIComponent(content),
         })
     },
 
@@ -243,6 +244,12 @@ Page({
         this.setData({
             show_popup: false
         });
+    },
+
+    showMyCreation: function() {
+        this.setData({
+            hide_creation: false
+        })
     },
 
     editCourseNameTips: function() {
