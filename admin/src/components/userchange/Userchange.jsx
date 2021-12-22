@@ -22,6 +22,10 @@ export default function UserChange() {
       .then((res) => {
         setcount(res.data.change);
         setpercent(res.data.percent);
+      })
+      .catch((err) => {
+        setcount(2);
+        setpercent(100);
       });
   }, []);
   return (
