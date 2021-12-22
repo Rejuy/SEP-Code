@@ -1,5 +1,6 @@
 from headers import *
 from services.mysql_service import db
+from services.code_service import coder
 
 
 def getCoursesList(raw_info):
@@ -26,6 +27,8 @@ def getCoursesList(raw_info):
         new_info['filter'].append({"key": "type", "value": raw_info['course_type']})
     if raw_info['course_department'] != 0:
         new_info['filter'].append({"key": "department", "value": raw_info['course_department']})
+    if raw_info['mask'] != "":
+        new_info['filter'].append({"key": "user_id", "value": coder.decode(raw_info['mask'])})
     # 改变sort_order至函数需要
     new_info['sort_order'] = 'desc'
     # if raw_info['sort_order'] == ASCENDING:

@@ -21,28 +21,8 @@ def addComment():
     try:
         db.reconnectDatabase()
         comment = request.get_json()
-        """
-comment = {
-    "class": str, class=1课程,class=2饮食,class=3出行
-    "item_id"： 推荐的物品在表中对应的id
-    "mask": str,
-    "star": str,
-    "text": str,
-    "image_urls": list of urls(str),
-    "upper_comment_id": 如果是对推荐的评论：那么这里是推荐的id，否则为-1
-}
-
-{
-    "class": 1,
-    "item_id": 1,
-    "user": "zhangbw",
-    "star": 4,
-    "text": "good!",
-    "image_urls": ["thurec.xyz/static/efaIZYWqFoyH3c3ee2488ab73f783cefd929f008c8fc.png"],
-    "upper_comment_id": -1
-}
-        """ 
-
+        if len(comment['user_text']) == 0:
+            return jsonify({'state': 0}), 400
         id = coder.decode(comment['mask'])
         comment['user'] = getNameByID(id)
         comment['text'] = comment['user_text']

@@ -10,7 +10,7 @@ Page({
         course_name: '',
         course_credit: 0,
         course_teacher: '',
-        course_schedule: '春、秋季学期',
+        course_schedule: '',
         course_department: '',
         course_type: '',
 
@@ -21,7 +21,7 @@ Page({
         positive_radio: 50,
 
         user_text: '',
-        user_rate: 0.0,
+        user_rate: 3.0,
 
         total_pages: 0,
         current_page: 0,
@@ -90,6 +90,7 @@ Page({
               this.data.total_pages = Math.ceil(rtn.counts / this.marco.PAGE_CAPACITY) - 1;
               this.setData({
                   course_credit: rtn.credit,
+                  course_schedule: rtn.schedule,
                   negative_radio: rtn.negative,
                   neutral_radio: rtn.neutral,
                   positive_radio: rtn.positive,
@@ -137,20 +138,47 @@ Page({
             title: '确认提交？',
             message: '或许还可以再检查检查~',
         }).then(() => {
-            // on confirm
-            if(this.data.user_rate == 0) {
-                Dialog.confirm({
-                    title: '确认评分？',
-                    message: '您一定要给它0分吗？',
-                }).then(() => {
-                    console.log(this.data.user_rate);
-                    Notify({ type: 'success', message: '发布成功' });
+            const app = getApp();
+
+            wx.request({
+                url: app.global_data.global_domain + '/api/v1.0/post_new_comment',
+                method: 'POST',
+                data: {
+                    class: 1, 
+                    id: this.data.course_id,    
+                    mask: app.global_data.global_user_token, 
+                    star: this.data.user_rate,
+                    user_text: this.data.user_text 
+                },
+                dataType: JSON,
+                enableCache: true,
+                enableHttp2: true,
+                enableQuic: true,
+                header: {
+                    "content-type": "application/json"
+                },
+                timeout: 0,
+                success: (result) => {
+                    let rtn = JSON.parse(result.data);
+                    if(rtn.state === 1) {
+                        Notify({ type: 'success', message: '发布成功' });
+                    }else {
+                        Notify({ type: 'danger', message: '发布失败' });
+                    }
+                    this.setData({
+                        comments_list: []
+                    })
+                    this.getCommentList();
+                },
+                fail: (error) => {
+                    console.log(error);
+                    Notify({ type: 'danger', message: '发布失败' });
+                },
+                complete: (res) => {},
                 })
-            }
         })
     },
     
-
     // addImage: function() {
     //     wx.chooseImage({
     //       count: 9,
