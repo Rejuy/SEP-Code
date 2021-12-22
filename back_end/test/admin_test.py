@@ -103,7 +103,7 @@ class AdminTest(unittest.TestCase):
             },
             "delete": False
         }
-        self.assertEqual(editUser(raw_info), True)
+        self.assertEqual(editItem(raw_info), True)
 
 
 if __name__ == '__main__':
