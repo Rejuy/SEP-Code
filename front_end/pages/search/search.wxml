@@ -6,7 +6,6 @@
         title="{{ item.title }}"
         thumb="{{ item.image }}"
         thumb-mode="aspectFill"
-        thumb-link="../course_item/course_item"
         >
             <view slot="tags">
                 <van-tag plain type="primary">{{ item.range }}</van-tag>
