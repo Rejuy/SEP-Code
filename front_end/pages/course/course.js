@@ -103,6 +103,7 @@ Page({
         total_pages: 0,
         current_page: 0,
         show_popup: false,
+        hide_creation: true,
         
         courses_list: [],
     },
@@ -243,6 +244,12 @@ Page({
         this.setData({
             show_popup: false
         });
+    },
+
+    showMyCreation: function() {
+        this.setData({
+            hide_creation: false
+        })
     },
 
     editCourseNameTips: function() {

@@ -83,13 +83,12 @@ Page({
           timeout: 0,
           success: (result) => {
               let rtn = JSON.parse(result.data);
-              console.log(rtn);
               this.data.comments_list.push.apply(this.data.comments_list, rtn.comments);
               this.data.total_pages = Math.ceil(rtn.counts / this.marco.PAGE_CAPACITY) - 1;
               this.setData({
                   course_credit: rtn.credit,
                   negative_radio: rtn.negative,
-                  neutral_radio: rtn.netural,
+                  neutral_radio: rtn.neutral,
                   positive_radio: rtn.positive,
                   comments_list: this.data.comments_list,
                   total_pages: this.data.total_pages,
