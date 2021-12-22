@@ -210,7 +210,7 @@ van-button .van-button--info .van-button__text {
     font-family: 'Courier New', Courier, monospace; 
 }
 
-.comments .add_image {
+/* .comments .add_image {
     display: flex;
     flex-wrap: wrap;
     margin-left: 10rpx;
@@ -234,9 +234,10 @@ van-button .van-button--info .van-button__text {
 
 .comments .add_image .thumbnails {
     display: flex;
-}
+} */
 
 .comments .van-buttons {
+    margin-top: 20rpx;
     text-align: center;
 }
 
