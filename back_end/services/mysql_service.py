@@ -938,18 +938,20 @@ class MySQLDb:
             self.connection.rollback()
             return False
 
-    def randomItemId(self, table, offset):
+    def randomItemId(self, table, offset, key_list):
         try:
             # 获得数据
-            sql = "SELECT id FROM " + table + " LIMIT 1 OFFSET " + str(offset)
+            sql = "SELECT * FROM " + table + " LIMIT 1 OFFSET " + str(offset)
             self.cursor.execute(sql)
-            id = self.cursor.fetchone()[0]
-            return id, True
+            data = self.cursor.fetchone()
+            data = self.tupleToDict(data, key_list)
+            data['time'] = self.timeToStr(data['time'])
+            return data, True
         except Exception as e:
             print("[Error] (getItem)：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
-            return 0, False
+            return None, False
 
     # ==========后为功能性函数
 
