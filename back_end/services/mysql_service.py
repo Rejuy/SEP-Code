@@ -985,6 +985,18 @@ class MySQLDb:
             self.connection.rollback()
             return [], False
 
+    def getDatabaseInfo(self):
+        try:
+            sql = "select concat(round(sum(data_length)/(1024*1024),2) + round(sum(index_length)/(1024*1024),2),'MB') as 'DB Size'from tables where table_schema='INVOICE';"
+            self.cursor.execute(sql)
+            data = self.cursor.fetchall()
+            return data, True
+        except Exception as e:
+            print("[Error] (getDatabaseInfo)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return {}, False
+
     # ==========后为功能性函数
 
     def tupleToDict(self, tuple, key_list):
