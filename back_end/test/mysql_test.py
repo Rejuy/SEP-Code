@@ -356,6 +356,11 @@ class MySQLServiceTest(unittest.TestCase):
         self.assertEqual(flag, True)
         print(data)
 
+    def testComments(self):
+        data_list, flag = db.getAllComments()
+        print(data_list)
+        self.assertEqual(flag, True)
+
 
 if __name__ == '__main__':
     unittest.main()
