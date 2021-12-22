@@ -9,7 +9,7 @@ Page({
       {
         id: 2,
         url: "../notice/notice",
-        path: "https://s3.bmp.ovh/imgs/2021/12/d4d723c1a40f1385.jpg"
+        path: "https://s3.bmp.ovh/imgs/2021/12/8cc8d6aa502879af.jpg"
       }
     ],
 
