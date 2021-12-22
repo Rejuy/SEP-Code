@@ -987,10 +987,20 @@ class MySQLDb:
 
     def getDatabaseInfo(self):
         try:
-            sql = "select concat(round(sum(data_length)/(1024*1024),2) + round(sum(index_length)/(1024*1024),2),'MB') as 'DB Size'from tables where table_schema='INVOICE';"
+            info = {}
+            sql = "SELECT sum(DATA_LENGTH)+sum(INDEX_LENGTH) FROM information_schema.TABLES where TABLE_SCHEMA='THUREC_db'"
             self.cursor.execute(sql)
-            data = self.cursor.fetchall()
-            return data, True
+            info['total_length'] = self.cursor.fetchall()[0][0] / 1024
+            info['total_length'] = float(info['total_length'])
+            sql = "SELECT sum(DATA_LENGTH) FROM information_schema.TABLES where TABLE_SCHEMA='THUREC_db'"
+            self.cursor.execute(sql)
+            info['data_length'] = self.cursor.fetchall()[0][0] / 1024
+            info['data_length'] = float(info['data_length'])
+            sql = "SELECT sum(INDEX_LENGTH) FROM information_schema.TABLES where TABLE_SCHEMA='THUREC_db'"
+            self.cursor.execute(sql)
+            info['index_length'] = self.cursor.fetchall()[0][0] / 1024
+            info['index_length'] = float(info['index_length'])
+            return info, True
         except Exception as e:
             print("[Error] (getDatabaseInfo)：{}".format(e))
             # 回滚所有更改

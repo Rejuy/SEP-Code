@@ -28,18 +28,8 @@ def randomList():
     food['scope'] = food_scope_table[food['scope']]
     place['type'] = place_type_table[place['type']]
     place['scope'] = place_scope_table[place['scope']]
-    return [
-        {
-            "type": 1,
-            "data": course
-        },
-        {
-            "type": 2,
-            "data": food
-        },
-        {
-            "type": 3,
-            "data": place
-        }
-    ]
+    course['class'] = "课程"
+    food['class'] = "餐饮"
+    place['class'] = "地点"
+    return [course, food, place]
 
