@@ -16,16 +16,16 @@
       <van-cell title="收藏信息" icon="star-o" value="{{collection_count}}" is-link link-type="reLaunch" url="/pages/user_collection/user_collection" />
     </van-cell-group>
     <van-cell-group title="消息">
-      <van-cell icon="chat-o" is-link>
+      <!-- <van-cell icon="chat-o" is-link>
         <view slot="title">
           <view class="van-cell-text" style="display:inline-block">用户消息</view>
           <van-tag type="danger" style="display:inline-block">1 条未读</van-tag>
         </view>
-      </van-cell>
+      </van-cell> -->
       <van-cell icon="chat-o" is-link>
         <view slot="title">
           <view class="van-cell-text" style="display:inline-block">系统消息</view>
-          <van-tag type="danger" style="display:inline-block">1 条未读</van-tag>
+          <van-tag type="danger" style="display:inline-block">0 条未读</van-tag>
         </view>
       </van-cell>
     </van-cell-group>

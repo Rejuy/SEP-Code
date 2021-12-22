@@ -14,6 +14,8 @@ import NotFound from "./pages/notfoundpage";
 import Foodinfo from "./pages/foodinfo";
 import Placepage from "./pages/placepage";
 import Placeinfo from "./pages/placeinfo";
+import Commentpage from "./pages/commentpage";
+import Commentinfo from "./pages/commentinfo";
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
                       <Route path="/food/:id" element={<Foodinfo />} />
                       <Route path="/places" element={<Placepage />} />
                       <Route path="/place/:id" element={<Placeinfo />} />
+                      <Route path="/comments" element={<Commentpage />} />
+                      <Route path="/comment/:id" element={<Commentinfo />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Grid>
