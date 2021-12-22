@@ -14,8 +14,22 @@ from controllers import (
     place_item,
     foods_list,
     food_item,
+    admin_login,
     like,
-    collection
+    collection,
+    search,
+    user_count,
+    user_list,
+    add_item,
+    admin_get_item_list,
+    admin_operate_item,
+    admin_edit_user,
+    admin_get_single_user,
+    admin_get_single_item,
+    admin_edit_item,
+    view_full_content,
+    admin_get_online_time,
+    get_random_list
 )
 
 blueprints = [
@@ -32,6 +46,20 @@ blueprints = [
     place_item.bp,
     foods_list.bp,
     food_item.bp,
+    admin_login.bp,
     like.bp,
-    collection.bp
+    collection.bp,
+    search.bp,
+    user_count.bp,
+    user_list.bp,
+    add_item.bp,
+    admin_get_item_list.bp,
+    admin_operate_item.bp,
+    admin_edit_user.bp,
+    admin_get_single_user.bp,
+    admin_get_single_item.bp,
+    admin_edit_item.bp,
+    view_full_content.bp,
+    admin_get_online_time.bp,
+    get_random_list.bp
 ]

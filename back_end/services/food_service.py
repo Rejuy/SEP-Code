@@ -19,7 +19,7 @@ def getFoodsList(raw_info):
         "sort_order": "not_sort",
         "sort_criteria": "",
         "index_begin": raw_info['begin'],
-        "content_count": raw_info['end'] - raw_info['begin'] + 1
+        "item_count": raw_info['end'] - raw_info['begin'] + 1
     }
     # 改变filter至函数需要
     if raw_info['food_type'] != 0:
@@ -38,8 +38,12 @@ def getFoodsList(raw_info):
         new_info['sort_criteria'] = 'time'
     else:
         new_info['sort_criteria'] = 'star'
+
+    if raw_info['like'] != "":
+        new_info['like'] = raw_info['like']
+
     # 获取列表
-    raw_list, result = db.getItemList("food_list", new_info)
+    raw_list, food_count, result = db.getItemList("food_list", new_info)
     if result:
         new_list = [db.tupleToDict(raw_tuple, BASIC_FOOD_KEY) for raw_tuple in raw_list]
         for i in range(len(new_list)):
@@ -47,10 +51,12 @@ def getFoodsList(raw_info):
             if i + raw_info['begin'] + 1 <= 15:
                 new_list[i]['tag'] = 'TOP' + str(i + raw_info['begin'] + 1)
         print(new_list)
-    food_count = db.getTableCount("food_list")
+    # food_count = db.getTableCount("food_list")
     return new_list, food_count, result
 
 
-def getFoodItem(id):
-    item, flag = db.getItem("food_list", 2, id, ITEM_FOOD_KEY)
+def getFoodItem(info):
+    info["count"] = info['end'] - info['begin'] + 1
+    item, flag = db.getItem("food_list", 2, info, ITEM_FOOD_KEY)
     return item, flag
+

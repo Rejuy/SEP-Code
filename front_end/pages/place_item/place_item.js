@@ -1,29 +1,152 @@
-// pages/place_item/place_item.js
+import Dialog from '@vant/weapp/dialog/dialog';
+import Notify from '@vant/weapp/notify/notify';
+
+
 Page({
     data: {
         loading: true,
+        show_popup: false,
 
-        place_name: '第一教室楼',
-        place_position: '清华大学西南方向',
-        opening_hours: '07:00-22:00',
-        place_range: '校内地点',
-        place_type: '自习场所',
+        place_id: 0,
+        place_range: '',
+        place_type: '',
+        place_name: '',
+        place_position: '',
+        opening_hours: '',
+        
 
+        place_score: 0.0,
+        place_star: 0.0,
         negative_radio: 10,
         neutral_radio: 30,
         positive_radio: 60,
 
-        image_url: "https://mmbiz.qpic.cn/mmbiz_jpg/HhoEMZZMsiaQgcfIVLkACUh2wiaMRyVkiaaxScRDXzvmA4erdq8HzhF34JzQzH7PsjdZRtgcn51XdE93IIiaCZNqUw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1",
+        user_text: '',
+        user_rate: 0.0,
 
-        comment_list: [
-            { id: 1, user: '平台测试组', star: 4.5, date: '2021.12.11', likes: 998, complete: true , brief_text: '一教环境相当好，电源充足，一度是个不错的好去处，但因为有社团在三楼开活动，也不是那么香了。'},
-            { id: 2, user: '卢本伟', star: 5.0, date: '2021.12.07', likes: 213, complete: true , brief_text: '从今天起，这座广场就叫做卢本伟广场！'},            
-        ]
+        image_url: '',
+        total_pages: 0,
+        current_page: 0,
+        comments_list: []
+    },
+
+    marco: {
+        PAGE_CAPACITY: 8,
     },
 
     onLoad: function (options) {
+        let content = JSON.parse(decodeURIComponent(options.content));
         this.setData({
+            place_id: content.id,
+            image_url: content.image,
+            place_name: content.name,
+            place_position: content.position,
+            place_range: content.range,
+            place_type: content.type,
+            place_score: content.score.toFixed(1),
+            place_star: content.star.toFixed(1),
             loading: false,
+        })
+
+        this.getCommentList();
+    },
+
+    // 页面上拉触底事件的处理函数
+    onReachBottom: function () {
+        if(this.data.current_page >= this.data.total_pages) {
+            console.log("已无下一页数据");
+        }else {
+            this.setData({
+                current_page: this.data.current_page + 1
+            })
+            this.getCommentList();
+        }
+    },
+
+    getCommentList: function() {
+        const app = getApp();
+        let begin = this.data.current_page * this.marco.PAGE_CAPACITY;
+        let end = begin + this.marco.PAGE_CAPACITY - 1;
+
+        wx.request({
+          url: app.global_data.global_domain + '/api/v1.0/get_place_item',
+          method: 'POST',  
+          data: {
+              id: this.data.place_id,
+              begin: begin,
+              end: end,
+          },
+          dataType: JSON,
+          enableCache: true,
+          enableHttp2: true,
+          enableQuic: true,
+          header: {
+            "content-type": "application/json"
+          },
+          timeout: 0,
+          success: (result) => {
+              let rtn = JSON.parse(result.data);
+              this.data.comments_list.push.apply(this.data.comments_list, rtn.comments);
+              this.data.total_pages = Math.ceil(rtn.counts / this.marco.PAGE_CAPACITY) - 1;
+              this.setData({
+                  opening_hours: rtn.hours,
+                  negative_radio: rtn.negative,
+                  neutral_radio: rtn.neutral,
+                  positive_radio: rtn.positive,
+                  comments_list: this.data.comments_list,
+                  total_pages: this.data.total_pages,
+              })
+          }, fail: (error) => {
+              console.log(error);
+          }, complete: (res) => {},
+        })
+    },    
+
+    showPopup: function() {
+        this.setData({
+            show_popup: true
+        })        
+    },
+
+    closePopup: function() {
+        this.setData({
+            show_popup: false
+        })
+    },
+
+    userRate: function(event) {
+        this.setData({
+            user_rate: event.detail,
+        });        
+    },
+
+    InputText: function(result) {
+        this.setData({
+            user_text: result.detail.value
+        })
+    },
+
+    clearText: function() {
+        this.setData({
+            user_text: ""
+        })
+    },
+
+    handleSubmit: function() {
+        Dialog.confirm({
+            title: '确认提交？',
+            message: '或许还可以再检查检查~',
+        }).then(() => {
+            // on confirm
+            if(this.data.user_rate == 0) {
+                Dialog.confirm({
+                    title: '确认评分？',
+                    message: '您一定要给它0分吗？',
+                }).then(() => {
+                    console.log(this.data.user_rate);
+                    Notify({ type: 'success', message: '发布成功' });
+                })
+            }
         })
     },
 
@@ -35,51 +158,32 @@ Page({
         console.log("hit");
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
+    // 生命周期函数--监听页面初次渲染完成
     onReady: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
+    // 生命周期函数--监听页面显示
     onShow: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
+    // 生命周期函数--监听页面隐藏
     onHide: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
+    // 生命周期函数--监听页面卸载
     onUnload: function () {
 
     },
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
+    // 页面相关事件处理函数--监听用户下拉动作
     onPullDownRefresh: function () {
 
     },
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
+    // 用户点击右上角分享
     onShareAppMessage: function () {
 
     }

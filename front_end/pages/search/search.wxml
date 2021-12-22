@@ -1,2 +1,37 @@
-<!--pages/search/search.wxml-->
-<text>pages/search/search.wxml</text>
+<view>
+    <view wx:for="{{ content_list }}" wx:key="id">
+        <van-card
+        tag="{{ item.tag }}"
+        desc="{{ item.description }}"
+        title="{{ item.title }}"
+        thumb="{{ item.image }}"
+        thumb-mode="aspectFill"
+        >
+            <view slot="tags">
+                <van-tag plain type="primary">{{ item.range }}</van-tag>
+                <van-tag plain type="success">{{ item.type }}</van-tag>
+            </view>
+            <star slot="price">
+                <van-rate allow-half void-color="#eee" void-icon="star" readonly value="{{ item.star }}" />
+            </star>
+            <view slot="num" class="rate">
+                {{ func.toFixed(item.score) }}
+            </view>
+            <view slot="footer">
+                <van-button size="mini" bindtap="viewItem" data-index="{{ index }}">详情</van-button>
+            </view>
+            <wxs module="func">
+                var toFixed = function(value) {
+                    return value.toFixed(1);
+                }
+                module.exports = {
+                    toFixed: toFixed
+                }
+            </wxs>
+        </van-card>
+    </view>
+
+    <view class="block" style="height: 100rpx" />    
+</view>
+
+<tabbar current_page="course" is_login="{{ true }}" />

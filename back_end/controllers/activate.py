@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify, request
 from services import mail_service
 from headers import *
+from services.mysql_service import db
 
 
 bp = Blueprint(
@@ -14,6 +15,7 @@ bp = Blueprint(
 @bp.route('/api/v1.0/activate', methods=['GET'])
 def activate_register():
     try:
+        db.reconnectDatabase()
         email = mail_service.confirm_token(request.args.get('code'))
         mail_service.activate_user(email)
         return '验证成功', 200

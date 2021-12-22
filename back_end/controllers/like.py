@@ -4,6 +4,8 @@ from services.like_service import modifyUserLike
 from headers import *
 from services.code_service import coder
 from services.id_to_name_service import getNameByID
+from services.mysql_service import db
+
 
 bp = Blueprint(
     'like',
@@ -25,10 +27,13 @@ def modifyLike():
     }
     """
     try:
+        db.reconnectDatabase()
         raw_info = request.get_json()
         id = coder.decode(raw_info['mask'])
         raw_info['user'] = getNameByID(id)
-        modifyUserLike(raw_info)
-        return jsonify({'state': 0})
+        if modifyUserLike(raw_info):
+            return jsonify({'state': 0})
+        else:
+            return jsonify({'state': 1})
     except KeyError:
         return jsonify({"state": 1})

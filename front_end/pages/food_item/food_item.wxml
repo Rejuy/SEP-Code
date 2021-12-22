@@ -27,7 +27,7 @@
 
         <view class="score">
             <view class="average_score">
-                7.3
+                {{ food_score }}
             </view>
             <van-rate 
             allow-half 
@@ -36,7 +36,7 @@
             color="#ffd21e" 
             void-color="#eee"
             void-icon="star" 
-            readonly value="3.5" />
+            readonly value="{{ food_star }}" />
             <text>评级</text>
             <view class="statistics">
                 <text>差评</text>
@@ -65,11 +65,27 @@
     <view class="comments">
         <view class="comments_title">
             <text class="left_side">评论区：</text>
-            <van-button class="right_side" size="small" icon="add-o" type="info" block>写点什么</van-button>
+            <van-button class="right_side" size="small" icon="add-o" type="info" block bindtap="showPopup">写点什么</van-button>
         </view>
 
+        <van-popup closeable position="bottom" custom-style="height: 60%" show="{{ show_popup }}" bind:close="closePopup">
+            <view class="rating">
+                <text>您的评分</text>
+                <van-rate allow-half value="{{ user_rate }}" void-icon="star" void-color="#eee" bind:change="userRate"/>
+            </view>
+            <textarea value="{{ user_text }}" bindinput="InputText" placeholder="请输入文字"></textarea>
+
+            <van-notify id="van-notify" />
+            <van-dialog id="van-dialog" />
+            
+            <view class="van-buttons">
+                <van-button type="info" bindtap="clearText">清除</van-button>
+                <van-button type="primary" bindtap="handleSubmit">提交</van-button>
+            </view>
+        </van-popup>        
+
         <view class="content">
-            <van-skeleton wx:for="{{ comment_list }}" wx:key="id" title avatar row="3" loading="{{ loading }}">
+            <van-skeleton wx:for="{{ comments_list }}" wx:key="id" title avatar row="3" loading="{{ loading }}">
                 <view class="user_info">
                     <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="70rpx"/>
                     <text>{{ item.user }}</text>

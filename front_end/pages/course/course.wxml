@@ -1,40 +1,80 @@
 <view>
-    <van-search value="{{ search_value }}" bind:search="onSearch" background="#82318E" placeholder="请输入搜索关键词">
+    <van-search 
+    value="{{ search_value }}" 
+    bind:search="onSearch" 
+    background="#82318E" 
+    placeholder="请输入搜索关键词">
     </van-search>
 
     <view class="create">
-        <van-button color="#07C160" icon="add-o" block bindtap="publishRecommendation">写点什么</van-button>
-        <van-popup closeable position="bottom" custom-style="height: 80%" show="{{ show_popup }}" bind:close="closePopup">
+        <van-button color="#07C160" icon="add-o" block bindtap="showPopup">写点什么</van-button>
+        <van-button color="#1989FA" icon="star-o" block bindtap="showMyCreation">我的创作</van-button>
+
+        <van-popup closeable position="bottom" custom-style="height: 85%" show="{{ show_popup }}" bind:close="closePopup">
             <van-cell-group>
                 <van-field
-                    value="{{ username }}"
                     required
                     clearable
                     label="课程名"
                     icon="question-o"
                     placeholder="请输入课程名"
-                    bind:click-icon="onClickIcon"
+                    bind:click-icon="editCourseNameTips"
+                    model:value="{{ edit_course_name }}"
                 />
+
                 <van-field
-                    value="{{ username }}"
                     required
                     clearable
                     label="主讲教师"
                     icon="question-o"
                     placeholder="请输入主讲教师"
-                    bind:click-icon="onClickIcon"
+                    bind:click-icon="editCourseTeacherTips"
+                    model:value="{{ edit_course_teacher }}"
                 />
-                <van-stepper value="{{ 1 }}" min="0" max="15" />
 
-                </van-cell-group>
+                <view class="credit">
+                    <text>课程学分</text>
+                    <van-stepper value="{{ 1 }}" min="0" max="15" />
+                </view>
+
+                <van-toast id="van-toast" />
+
+                <van-picker show-toolbar 
+                title="{{ course_schedule_title }}" 
+                default-index="{{ 1 }}" 
+                visible-item-count="{{ 4 }}"
+                columns="{{ schedule_table }}" 
+                bind:confirm="editCourseSchedule"
+                bind:cancel="cancelEditSchedule">
+                </van-picker>
+
+                <van-picker show-toolbar 
+                title="{{ course_type_title }}"
+                default-index="{{ 4 }}" 
+                columns="{{ type_table }}" 
+                bind:confirm="editCourseType"
+                bind:cancel="cancelEditType">
+                </van-picker>
+
+                <van-picker show-toolbar 
+                title="{{ course_department_title }}"
+                default-index="{{ 25 }}" 
+                columns="{{ department_table }}" 
+                bind:confirm="editCourseDepartment"
+                bind:cancel="cancelEditDepartment">
+                </van-picker>
+                
+                <van-notify id="van-notify" />
+                <van-dialog id="van-dialog" />
+                <van-button type="primary" block bind:click="submitNewContent">提交</van-button>
+            </van-cell-group>
         </van-popup>
-        <van-button color="#1989FA" icon="star-o" block>我的创作</van-button>
     </view>
 
     <van-dropdown-menu active-color="#1989fa" :color="red">
-        <van-dropdown-item value="{{ course_value }}" options="{{ course_type }}" bind:change="courseTypeSelected"/>
-        <van-dropdown-item value="{{ department_value }}" options="{{ department_type }}" bind:change="departmentTypeSelected"/>
-        <van-dropdown-item value="{{ rank_value }}" options="{{ rank_type }}" bind:change="rankTypeSelected"/>
+        <van-dropdown-item value="{{ type_value }}" options="{{ type }}" bind:change="typeSelected"/>
+        <van-dropdown-item value="{{ department_value }}" options="{{ department }}" bind:change="departmentSelected"/>
+        <van-dropdown-item value="{{ order_value }}" options="{{ order }}" bind:change="orderSelected"/>
     </van-dropdown-menu>
 
     <view wx:for="{{ courses_list }}" wx:key="id">
@@ -44,7 +84,6 @@
         title="{{ item.name }}"
         thumb="{{ image_url }}"
         thumb-mode="aspectFill"
-        thumb-link="../course_item/course_item"
         >
             <view slot="tags">
                 <van-tag plain type="primary">{{ item.department }}</van-tag>
@@ -57,7 +96,7 @@
                 {{ func.toFixed(item.score) }}
             </view>
             <view slot="footer">
-                <van-button size="mini" bindtap="viewCourseItem">详情</van-button>
+                <van-button size="mini" bindtap="viewCourseItem" data-index="{{ index }}">详情</van-button>
             </view>
             <wxs module="func">
                 var toFixed = function(value) {

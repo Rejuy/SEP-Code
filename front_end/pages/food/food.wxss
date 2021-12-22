@@ -13,9 +13,25 @@
     padding-right: 8rpx;
 }
 
+.create van-button .van-button--primary {
+    width: 98%;
+    margin-left: 8rpx;
+    margin-bottom: 10rpx;
+}
+
+.create van-button .van-button--primary .van-button__text {
+    font-size: 50rpx;
+    padding-top: 8rpx;
+    font-family: 'Courier New', Courier, monospace; 
+}
+
 .create van-button .van-button--default {
     font-size: 45rpx;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.create van-cell-group .van-hairline--top-bottom {
+    margin-top: 80rpx;
 }
 
 van-tag {
