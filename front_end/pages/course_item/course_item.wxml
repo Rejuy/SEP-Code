@@ -111,7 +111,7 @@
                 <view class="user_evaluation">
                     <van-rate readonly allow-half size="40rpx" gutter="0rpx" void-color="#eee" void-icon="star" value="{{ item.star }}"/>
                     <text>{{ item.date }}</text>
-                    <van-icon name="good-job" bindtap="giveLikes"style="display: inline;"/>
+                    <van-icon name="good-job" bindtap="giveLikes"style="display: inline;" data-index="{{ index }}"/>
                     <text style="color:#000000; padding-left: 10rpx;">{{ item.likes }}</text>
                 </view>
 

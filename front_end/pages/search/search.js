@@ -65,18 +65,12 @@ Page({
               for(let i = 0; i < array_length; i ++) {
                   switch(rtn.items[i].class) {
                       case 1:
-                          rtn.items[i].range = "课程推荐";
-                          rtn.items[i].type = "课程卡片";
                           rtn.items[i].image = this.data.image_table[0];
                           break;
                       case 2:
-                          rtn.items[i].range = "餐饮推荐";
-                          rtn.items[i].type = "餐饮卡片";
                           rtn.items[i].image = this.data.image_table[1];
                           break;
                       case 3:
-                          rtn.items[i].range = "出行推荐";
-                          rtn.items[i].type = "出行卡片";
                           rtn.items[i].image = this.data.image_table[2];
                           break;
                       default:
@@ -99,21 +93,29 @@ Page({
         let tmp_url = '';
         let index = event.currentTarget.dataset.index;
         let tmp_class = this.data.content_list[index].class;
-        let content = JSON.stringify(this.data.content_list[index]);
+        this.data.content_list[index].name = this.data.content_list[index].title;
 
         switch(tmp_class){
             case 1:
                 tmp_url = '../course_item/course_item?content=';
+                this.data.content_list[index].teacher = this.data.content_list[index].description;
+                this.data.content_list[index].department = this.data.content_list[index].scope;
                 break;
             case 2:
                 tmp_url = '../food_item/food_item?content=';
+                this.data.content_list[index].position = this.data.content_list[index].description;
+                this.data.content_list[index].range = this.data.content_list[index].scope;
                 break;
             case 3:
                 tmp_url = '../place_item/place_item?content=';
+                this.data.content_list[index].position = this.data.content_list[index].description;
+                this.data.content_list[index].range = this.data.content_list[index].scope;
                 break;
             default:
                 console.log("search.js error");
         }
+
+        let content = JSON.stringify(this.data.content_list[index]);
 
         wx.navigateTo({
             url: tmp_url + encodeURIComponent(content),

@@ -8,7 +8,7 @@
         thumb-mode="aspectFill"
         >
             <view slot="tags">
-                <van-tag plain type="primary">{{ item.range }}</van-tag>
+                <van-tag plain type="primary">{{ item.scope }}</van-tag>
                 <van-tag plain type="success">{{ item.type }}</van-tag>
             </view>
             <star slot="price">
