@@ -16,7 +16,7 @@ bp = Blueprint(
 )
 
 # 添加评论
-@bp.route('/api/v1.0/add_comment', methods=['POST'])
+@bp.route('/api/v1.0/post_new_comment', methods=['POST'])
 def addComment():
     try:
         db.reconnectDatabase()
@@ -45,16 +45,16 @@ comment = {
 
         id = coder.decode(comment['mask'])
         comment['user'] = getNameByID(id)
-        comment['image'] = json.dumps(comment['image_urls']) # 将url列表转换为字符串保存。
-
-        table_name = ["hhh", "course_list", "food_list", "place_list"]
-        comment['table'] = table_name[comment['class']]
-
+        comment['text'] = comment['user_text']
+        del comment['user_text']
+        comment['item_id'] = comment['id']
+        del comment['id']
+        comment['table'] = INT_TO_TABLE[comment['class']]
         db.addComment(comment)  # TODO
         return jsonify({'state': 1})
 
     except KeyError:
-        return jsonify({'state': -1}), 400
+        return jsonify({'state': 0}), 400
 
 # 获取用户历史评论
 @bp.route('/api/v1.0/get_comment_by_id', methods=['POST'])
