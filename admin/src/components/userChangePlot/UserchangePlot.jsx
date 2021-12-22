@@ -33,7 +33,7 @@ export default function UserChangePlot() {
       })
       .catch((err) => {
         var monthlyData = [];
-        const resData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2];
+        const resData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2];
         resData.forEach(function (item, index) {
           monthlyData.push({ month: index, change: item });
         });
