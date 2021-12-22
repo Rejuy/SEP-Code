@@ -9,7 +9,7 @@
 
     <navigator class="item" url="../food/food">
         <image class="picture" src="/images/icons/food.png"></image>
-        <view class="word">饮食推荐</view>
+        <view class="word">餐饮推荐</view>
     </navigator>
 
     <navigator class="item" url="../place/place">
