@@ -53,7 +53,7 @@ BASIC_COURSES_KEY = ["id", "name", "teacher", "department", "type", "star", "sco
 # 颜色和属性对应
 COURSE_COLOR = ["", "#228B22", "#000000", "#FFA500", "#8B4513", "#9400D3", "#FF0000", "#0000FF", "#FF1493"]
 # item
-ITEM_COURSE_KEY = ["name", "teacher", "department", "type", "star", "credit", "schedule"]
+ITEM_COURSE_KEY = ["credit"]
 # 返回给管理员的key
 ADMIN_COURSE_KEY = ["id", "name", "teacher", "department", "type", "credit", "time", "activated"]
 
@@ -65,7 +65,7 @@ INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "commen
 # 返回的key值（基本）
 BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
 # item
-ITEM_FOOD_KEY = ["name", "position", "scope", "star"]
+ITEM_FOOD_KEY = ["hours"]
 # 返回给管理员的key
 ADMIN_FOOD_KEY = ["id", "name", "position", "scope", "type", "time", "activated"]
 
@@ -77,7 +77,7 @@ INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comme
 # 返回的key值（基本）
 BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
 # item
-ITEM_PLACE_KEY = ["name", "position", "scope", "star"]
+ITEM_PLACE_KEY = ["hours"]
 # 返回给管理员的key
 ADMIN_PLACE_KEY = ["id", "name", "position", "scope", "type", "time", "activated"]
 

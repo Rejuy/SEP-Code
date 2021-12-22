@@ -50,7 +50,7 @@ comment = {
         table_name = ["hhh", "course_list", "food_list", "place_list"]
         comment['table'] = table_name[comment['class']]
 
-        db.addComment(comment) #TODO
+        db.addComment(comment)  # TODO
         return jsonify({'state': 1})
 
     except KeyError:
