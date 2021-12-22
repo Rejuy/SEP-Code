@@ -149,14 +149,15 @@ export default function Commentinfo() {
           }}
         >
           <div>
-            <Typography component="legend">Rating</Typography>
+            <Typography component="legend">评分</Typography>
             <Rating
-              label="Rating"
+              label="label"
               variant="standard"
               value={data.star}
               onChange={(e) => {
                 setData((prev) => ({ ...prev, star: e.target.value }));
               }}
+              precision={0.5}
             />
           </div>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
