@@ -86,7 +86,7 @@
         tag="{{ item.tag }}"
         desc="餐饮方位: {{ item.position }}"
         title="{{ item.name }}"
-        thumb="{{ image_url }}"
+        thumb="{{ item.image }}"
         thumb-mode="aspectFill"
         >
             <view slot="tags">

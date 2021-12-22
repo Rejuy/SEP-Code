@@ -4,7 +4,7 @@
         tag="{{ item.tag }}"
         desc="{{ item.description }}"
         title="{{ item.title }}"
-        thumb="{{ item.image_url }}"
+        thumb="{{ item.image }}"
         thumb-mode="aspectFill"
         thumb-link="../course_item/course_item"
         >

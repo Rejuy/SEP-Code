@@ -21,12 +21,11 @@ Page({
             { text: '时间排序', value: 2 },
         ],
 
-        image_url: "https://z3.ax1x.com/2021/12/03/odK6aD.jpg",
-
         range_table: ['校内餐饮', '校外餐饮'],
         outside_type_table: ['汉堡披萨','龙虾烧烤','香锅火锅','米线拉面','日韩料理','简餐便当','各类饮品',],
         outside_color_table: ['#FF976A', '#8A2BE2','#FF0000','#696969','#800000','#DAA520','#FF00FF',],
         inside_type_table: ['家园','甲所','寓园','融园','澜园','荷园','北园','南园','桃李园','紫荆园','清芬园','听涛园','观畴园','玉树园','芝兰园','丁香园','熙春园','清真食堂',],
+        image_table: ["https://inews.gtimg.com/newsapp_bt/0/13750087100/1000", "https://z3.ax1x.com/2021/12/03/odK6aD.jpg"],
 
         search_value: '',
         range_value: 0,
@@ -113,6 +112,7 @@ Page({
                       rtn.food[i].type = this.data.outside_type_table[tmp_type_value];
                   }
                   rtn.food[i].range = this.data.range_table[tmp_range_value - 1];
+                  rtn.food[i].image = this.data.image_table[tmp_range_value - 1];
               }
               this.data.food_list.push.apply(this.data.food_list, rtn.food);
               this.data.total_pages = Math.ceil(rtn.total_food / this.marco.PAGE_CAPACITY) - 1;

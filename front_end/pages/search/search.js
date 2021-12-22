@@ -1,7 +1,7 @@
 // pages/search/search.js
 Page({
     data: {
-        image_url_base: [
+        image_table: [
             "https://learn.tsinghua.edu.cn/b/wlxt/kc/v_kcxx_jskcxx/teacher/showImageById?wlkcid=2021-2022-1142764790&_csrf=d39592c7-bbb0-416a-affb-a39b1ab00ba4",
             "https://z3.ax1x.com/2021/12/03/odK6aD.jpg",
             "https://mmbiz.qpic.cn/mmbiz_jpg/HhoEMZZMsiaQgcfIVLkACUh2wiaMRyVkiaaxScRDXzvmA4erdq8HzhF34JzQzH7PsjdZRtgcn51XdE93IIiaCZNqUw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1",
@@ -68,17 +68,17 @@ Page({
                       case 1:
                           rtn.items[i].range = "课程推荐";
                           rtn.items[i].type = "课程卡片";
-                          rtn.items[i].image_url = this.data.image_url_base[0];
+                          rtn.items[i].image = this.data.image_table[0];
                           break;
                       case 2:
                           rtn.items[i].range = "餐饮推荐";
                           rtn.items[i].type = "餐饮卡片";
-                          rtn.items[i].image_url = this.data.image_url_base[1];
+                          rtn.items[i].image = this.data.image_table[1];
                           break;
                       case 3:
                           rtn.items[i].range = "出行推荐";
                           rtn.items[i].type = "出行卡片";
-                          rtn.items[i].image_url = this.data.image_url_base[2];
+                          rtn.items[i].image = this.data.image_table[2];
                           break;
                       default:
                           console.log("search.js : fail to match");

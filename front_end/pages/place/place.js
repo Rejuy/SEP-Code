@@ -25,11 +25,10 @@ Page({
             { text: '时间排序', value: 2 },
         ],
 
-        image_url: "https://mmbiz.qpic.cn/mmbiz_jpg/HhoEMZZMsiaQgcfIVLkACUh2wiaMRyVkiaaxScRDXzvmA4erdq8HzhF34JzQzH7PsjdZRtgcn51XdE93IIiaCZNqUw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1",
-
         range_table: ['校内地点', '校外地点'],
         type_table: ['自习场所', '锻炼场所', '会议场所', '娱乐场所'],
         color_table: ['#800080', '#FF69B4', '#000080', '#228B22'],
+        image_table: ['https://mmbiz.qpic.cn/mmbiz_jpg/HhoEMZZMsiaQgcfIVLkACUh2wiaMRyVkiaaxScRDXzvmA4erdq8HzhF34JzQzH7PsjdZRtgcn51XdE93IIiaCZNqUw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1', 'https://s3.bmp.ovh/imgs/2021/12/f65d8a82b2141e11.jpg'],
 
         search_value: '',
         range_value: 0,
@@ -108,6 +107,7 @@ Page({
                   rtn.places[i].color = this.data.color_table[tmp_type_value];
                   rtn.places[i].type = this.data.type_table[tmp_type_value];
                   rtn.places[i].range = this.data.range_table[tmp_range_value];
+                  rtn.places[i].image = this.data.image_table[tmp_range_value];
               }
               this.data.places_list.push.apply(this.data.places_list, rtn.places);
               this.data.total_pages = Math.ceil(rtn.total_places / this.marco.PAGE_CAPACITY) - 1;
