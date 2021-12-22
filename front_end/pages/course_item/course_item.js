@@ -177,8 +177,39 @@ Page({
     //     })
     // },
 
-    giveLikes: function (options) {
-        console.log(options);
+    giveLikes: function (event) {
+        let index = event.currentTarget.dataset.index;
+        console.log(this.data.comments_list[index].likes);
+
+        const app = getApp();
+        wx.request({
+          url: app.global_data.global_domain + '/api/v1.0/like',
+          data: {
+              mask: app.global_data.global_user_token,
+              comment_id: this.data.comments_list[index].id
+          },
+          dataType: JSON,
+          enableCache: true,
+          enableHttp2: true,
+          enableQuic: true,
+          header:{
+            "content-type": "application/json"
+          },
+          timeout: 0,
+          success: (result) => {
+            let rtn = JSON.parse(result.data);
+            console.log(rtn);
+          },
+          fail: (error) => {
+              console.log(error);
+          },
+          complete: (res) => {},
+        })
+
+        // this.data.comments_list[index].likes += 1;
+        // this.setData({
+        //     comments_list: this.data.comments_list
+        // })
     },
 
     viewFullContent: function (event) {

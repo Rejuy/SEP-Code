@@ -150,8 +150,9 @@ Page({
         })
     },
 
-    giveLikes: function (options) {
-        console.log(options);
+    giveLikes: function (event) {
+        let index = event.currentTarget.dataset.index;
+        console.log(this.data.comments_list[index].likes);
     },
 
     viewDetails: function (options) {
