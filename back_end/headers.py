@@ -90,6 +90,8 @@ COMMENT_KEY = ["id", "class", "item_id", "user", "star", "time", "likes", "text"
 BASIC_USER_COMMENT_KEY = ["id", "class", "item_id", "star", "time", "likes", "text", "image", "upper_comment_id", "lower_comment_count"]
 # item获取的comment_key
 ITEM_COMMENT_KEY = ["id", "user", "star", "time", "likes", "text"]
+# 返回给管理员端的key
+ADMIN_COMMENT_KEY = ["id", "class", "item_id", "user", "star", "time", "likes", "text"]
 
 # like
 # 插入时所需key值

@@ -150,3 +150,17 @@ def editItem(raw_info):
         return True
 
 
+def editComment(raw_info):
+    if raw_info['delete']:
+        # delete item
+        return db.delComment("id", raw_info['comment']['id'])
+    else:
+        # edit item
+        for key in raw_info['comment'].keys():
+            if key == "id":
+                continue
+            if not db.updateData("comment", "id", raw_info['comment']['id'], key, raw_info['comment'][key]):
+                return False
+        return True
+
+
