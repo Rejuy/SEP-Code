@@ -39,13 +39,13 @@
 
 <view class="random">
     <text class="random_title">随机漫步：</text>
-    <view wx:for="{{ random_list }}" wx:key="id">
+    <view wx:for="{{ random_list }}" wx:key="type">
         <van-card
         title="???"
         thumb="{{ item.image }}"
         thumb-mode="aspectFill"
         thumb-link="../course/course"
-        desc="随机解锁的{{ item.type }}~"
+        desc="随机解锁的{{ item.class }}~"
         >
             <view slot="tags">
                 <van-tag type="primary">随机推荐</van-tag>
@@ -65,7 +65,7 @@
                 X.X
             </view>
             <view slot="footer">
-                <van-button size="mini" bindtap="viewCourseItem">详情</van-button>
+                <van-button size="mini" bindtap="viewItem" data-index="{{ index }}">详情</van-button>
             </view>
         </van-card>
     </view>

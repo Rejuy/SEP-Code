@@ -30,6 +30,7 @@ Page({
         color_table: ['#800080', '#FF69B4', '#000080', '#228B22'],
         image_table: ['https://mmbiz.qpic.cn/mmbiz_jpg/HhoEMZZMsiaQgcfIVLkACUh2wiaMRyVkiaaxScRDXzvmA4erdq8HzhF34JzQzH7PsjdZRtgcn51XdE93IIiaCZNqUw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1', 'https://s3.bmp.ovh/imgs/2021/12/f65d8a82b2141e11.jpg'],
 
+        mask_value: '',
         search_value: '',
         range_value: 0,
         type_value: 0,
@@ -85,6 +86,7 @@ Page({
           data: {
               begin: begin,
               end: end,
+              mask: this.data.mask_value,
               like: this.data.search_value,
               place_scope: this.data.range_value,
               place_type: this.data.type_value,
@@ -167,6 +169,16 @@ Page({
         this.setData({
             show_popup: false
         });
+    },
+
+    showMyCreation: function() {
+        const app = getApp();
+        this.setData({
+            current_page: 0,
+            places_list: [],
+            mask_value: app.global_data.global_user_token,
+        })
+        this.getPlaceList();
     },
 
     editPlaceNameTips: function () {

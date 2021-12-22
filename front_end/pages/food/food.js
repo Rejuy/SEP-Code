@@ -27,6 +27,7 @@ Page({
         inside_type_table: ['家园','甲所','寓园','融园','澜园','荷园','北园','南园','桃李园','紫荆园','清芬园','听涛园','观畴园','玉树园','芝兰园','丁香园','熙春园','清真食堂',],
         image_table: ["https://inews.gtimg.com/newsapp_bt/0/13750087100/1000", "https://z3.ax1x.com/2021/12/03/odK6aD.jpg"],
 
+        mask_value: '',
         search_value: '',
         range_value: 0,
         type_value: 0,
@@ -84,6 +85,7 @@ Page({
           data: {
               begin: begin,
               end: end,
+              mask: this.data.mask_value,
               like: this.data.search_value,
               food_scope: this.data.range_value,
               food_type: this.data.type_value,
@@ -223,6 +225,16 @@ Page({
         this.setData({
             show_popup: false
         });
+    },
+
+    showMyCreation: function() {
+        const app = getApp();
+        this.setData({
+            current_page: 0,
+            food_list: [],
+            mask_value: app.global_data.global_user_token,
+        })
+        this.getFoodList();
     },
 
     editFoodNameTips: function() {
