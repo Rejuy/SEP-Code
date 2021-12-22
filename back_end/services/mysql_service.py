@@ -20,9 +20,6 @@ class MySQLDb:
     def reconnectDatabase(self):
         self.connection.reconnect(attempts=1, delay=0)
 
-    def disconnectDatabase(self):
-        self.connection.close()
-
     def checkUserExistence(self, email):
         try:
             sql = "SELECT * FROM user WHERE email = %s"
@@ -76,59 +73,6 @@ class MySQLDb:
             return False
         except Exception as e:
             print("[Error] (checkDataExistence)：{}".format(e))
-            # 回滚所有更改
-            self.connection.rollback()
-            return False
-
-    def delComment(self, key, val):
-        # 不同方式删除用户（指定键值）
-        try:
-            # 首先获取信息
-            info, flag = self.getData("comment", [key], [val], ["id", "class", "item_id", "user", "star"])
-            info = info[0]
-
-            # 更新其他表相应的值
-            sql = "SELECT score, comment_count FROM " + INT_TO_TABLE[info['class']] + " WHERE id = %s"
-            tval = (info['item_id'],)
-            self.cursor.execute(sql, tval)
-            result = self.cursor.fetchone()
-            score = result[0]
-            comment_count = result[1]
-            if comment_count == 1:
-                sql = "UPDATE " + INT_TO_TABLE[info['class']] + " SET score = 0, comment_count = 0, star = 0 WHERE id = %s"
-                tval = (info['item_id'],)
-                self.cursor.execute(sql, tval)  # 补上heat的更新
-            else:
-                score = (score * comment_count - 2 * info['star']) / (comment_count - 1)
-                if score - int(score) >= 0.5:
-                    new_score = int(score) + 1
-                else:
-                    new_score = int(score)
-                star = new_score / 2
-                sql = "UPDATE " + INT_TO_TABLE[info['class']] + " SET star = %s, score = %s, comment_count = comment_count - 1 WHERE id = %s"
-                tval = (star, score, info['item_id'])
-                self.cursor.execute(sql, tval)  # 补上heat的更新
-
-            sql = "UPDATE user SET comment_count = comment_count - 1 WHERE user_name = %s"
-            tval = (info['user'],)
-            self.cursor.execute(sql, tval)
-
-            # 数据表内容更新
-            self.connection.commit()
-
-            # 删除数据
-            user_list, flag = self.getData("user_like", ["comment_id"], [info['id']], ["user"])
-            for user in user_list:
-                self.delLike(user['user'], info['id'], comment_deleted=True)
-
-            sql = "DELETE FROM comment WHERE " + key + " = %s"
-            del_val = (val,)
-            self.cursor.execute(sql, del_val)
-            # 数据表内容更新
-            self.connection.commit()
-            return True
-        except Exception as e:
-            print("[Error] (delComment)：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
             return False
@@ -504,19 +448,16 @@ class MySQLDb:
             self.cursor.execute(positive_sql, val)
             item['positive'] = self.cursor.fetchall()[0][0]
             if item['counts'] != 0:
-                item['positive'] = int(item['positive'] / item['counts'] * 1000)
-                item['neutral'] = int(item['neutral'] / item['counts'] * 1000)
-                item['negative'] = 1000 - item['positive'] - item['neutral']
-                item['positive'] /= 10
-                item['neutral'] /= 10
-                item['negative'] /= 10
+                item['positive'] = int(item['positive'] / item['counts'] * 100)
+                item['neutral'] = int(item['neutral'] / item['counts'] * 100)
+                item['negative'] = 100 - item['positive'] - item['neutral']
             sql = "SELECT " + self.getKeysStr(ITEM_COMMENT_KEY) + " FROM comment WHERE class = %s AND item_id = %s ORDER BY likes desc, id  LIMIT " + str(info['count']) + " OFFSET " + str(info['begin'])
             self.cursor.execute(sql, val)
             comments_list = self.cursor.fetchall()
 
             for i in range(len(comments_list)):
                 comments_list[i] = self.tupleToDict(comments_list[i], ITEM_COMMENT_KEY)
-                comments_list[i]['date'] = self.timeToStr(comments_list[i]['time'])
+                comments_list[i]['date'] = self.timeToStr(comments_list[i]['time'])[0:10]
                 del comments_list[i]['time']
                 if len(comments_list[i]['text']) <= 50:
                     comments_list[i]['complete'] = 1
@@ -604,6 +545,59 @@ class MySQLDb:
             return True
         except Exception as e:
             print("[Error] (addComment)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return False
+
+    def delComment(self, key, val):
+        # 不同方式删除用户（指定键值）
+        try:
+            # 首先获取信息
+            info, flag = self.getData("comment", [key], [val], ["id", "class", "item_id", "user", "star"])
+            info = info[0]
+
+            # 更新其他表相应的值
+            sql = "SELECT score, comment_count FROM " + INT_TO_TABLE[info['class']] + " WHERE id = %s"
+            tval = (info['item_id'],)
+            self.cursor.execute(sql, tval)
+            result = self.cursor.fetchone()
+            score = result[0]
+            comment_count = result[1]
+            if comment_count == 1:
+                sql = "UPDATE " + INT_TO_TABLE[info['class']] + " SET score = 0, comment_count = 0, star = 0 WHERE id = %s"
+                tval = (info['item_id'],)
+                self.cursor.execute(sql, tval)  # 补上heat的更新
+            else:
+                score = (score * comment_count - 2 * info['star']) / (comment_count - 1)
+                if score - int(score) >= 0.5:
+                    new_score = int(score) + 1
+                else:
+                    new_score = int(score)
+                star = new_score / 2
+                sql = "UPDATE " + INT_TO_TABLE[info['class']] + " SET star = %s, score = %s, comment_count = comment_count - 1 WHERE id = %s"
+                tval = (star, score, info['item_id'])
+                self.cursor.execute(sql, tval)  # 补上heat的更新
+
+            sql = "UPDATE user SET comment_count = comment_count - 1 WHERE user_name = %s"
+            tval = (info['user'],)
+            self.cursor.execute(sql, tval)
+
+            # 数据表内容更新
+            self.connection.commit()
+
+            # 删除数据
+            user_list, flag = self.getData("user_like", ["comment_id"], [info['id']], ["user"])
+            for user in user_list:
+                self.delLike(user['user'], info['id'], comment_deleted=True)
+
+            sql = "DELETE FROM comment WHERE " + key + " = %s"
+            del_val = (val,)
+            self.cursor.execute(sql, del_val)
+            # 数据表内容更新
+            self.connection.commit()
+            return True
+        except Exception as e:
+            print("[Error] (delComment)：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
             return False
@@ -973,9 +967,9 @@ class MySQLDb:
             return raw_time.strftime("%Y-%m-%d %H:%M:%S")
         except:
             return ""
-
+"""
     def select_db(self, sql):
-        """查询"""
+        # 查询
         # 检查连接是否断开，如果断开就进行重连
         self.conn.ping(reconnect=True)
         # 使用 execute() 执行sql
@@ -985,7 +979,7 @@ class MySQLDb:
         return data
 
     def execute_db(self, sql):
-        """更新/新增/删除"""
+        # 更新/新增/删除
         try:
             # 检查连接是否断开，如果断开就进行重连
             self.connection.ping(reconnect=True)
@@ -997,6 +991,6 @@ class MySQLDb:
             print("操作出现错误：{}".format(e))
             # 回滚所有更改
             self.connection.rollback()
-
+"""
 
 db = MySQLDb(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DB)
