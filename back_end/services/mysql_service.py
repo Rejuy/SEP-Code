@@ -881,11 +881,11 @@ class MySQLDb:
             # 获得数据
             data_sql = "SELECT * "
             count_sql = "SELECT COUNT(*) "
-            locate_sql = "FROM (SELECT id, name, teacher as description, star, score, 1 FROM course_list WHERE name LIKE '%"\
+            locate_sql = "FROM (SELECT id, name, teacher as description, star, score, department as scope, type, 1 FROM course_list WHERE name LIKE '%"\
                   + info['like']\
-                  + "%' UNION SELECT id, name, position as description, star, score, 2  FROM food_list WHERE name LIKE '%"\
+                  + "%' UNION SELECT id, name, position as description, star, score, scope, type, 2  FROM food_list WHERE name LIKE '%"\
                   + info['like']\
-                  + "%' UNION SELECT id, name, position as description, star, score, 3  FROM place_list WHERE name LIKE '%"\
+                  + "%' UNION SELECT id, name, position as description, star, score, scope, type, 3  FROM place_list WHERE name LIKE '%"\
                   + info['like']\
                   + "%') AS c "
             count_sql += locate_sql
@@ -903,6 +903,18 @@ class MySQLDb:
             # 转化为字典
             for i in range(len(item_list)):
                 item_list[i] = self.tupleToDict(item_list[i], GLOBAL_ITEM_KEY)
+                if item_list[i]['class'] == 1:
+                    item_list[i]['scope'] = course_scope_table[item_list[i]['scope']]
+                    item_list[i]['type'] = course_type_table[item_list[i]['type']]
+                elif item_list[i]['class'] == 2:
+                    if item_list[i]['scope'] == 1:
+                        item_list[i]['type'] = inside_food_type_table[item_list[i]['type']]
+                    else:
+                        item_list[i]['type'] = outside_food_type_table[item_list[i]['type']]
+                    item_list[i]['scope'] = food_scope_table[item_list[i]['scope']]
+                else:
+                    item_list[i]['type'] = place_type_table[item_list[i]['type']]
+                    item_list[i]['scope'] = place_scope_table[item_list[i]['scope']]
             return item_list, count, True
         except Exception as e:
             print("[Error] (getGlobalItemList)：{}".format(e))
