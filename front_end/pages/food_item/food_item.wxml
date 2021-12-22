@@ -75,6 +75,9 @@
             </view>
             <textarea value="{{ user_text }}" bindinput="InputText" placeholder="请输入文字"></textarea>
 
+            <van-notify id="van-notify" />
+            <van-dialog id="van-dialog" />
+            
             <view class="van-buttons">
                 <van-button type="info" bindtap="clearText">清除</van-button>
                 <van-button type="primary" bindtap="handleSubmit">提交</van-button>
@@ -82,7 +85,7 @@
         </van-popup>        
 
         <view class="content">
-            <van-skeleton wx:for="{{ comment_list }}" wx:key="id" title avatar row="3" loading="{{ loading }}">
+            <van-skeleton wx:for="{{ comments_list }}" wx:key="id" title avatar row="3" loading="{{ loading }}">
                 <view class="user_info">
                     <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="70rpx"/>
                     <text>{{ item.user }}</text>
