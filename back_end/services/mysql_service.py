@@ -965,6 +965,26 @@ class MySQLDb:
             self.connection.rollback()
             return None, False
 
+    def getNewUserCount(self, month):
+        # 用于用户登录成功后返回给前端用户的基本信息，返回格式为字典
+        try:
+            count_list = [0] * month
+            # 获得数据
+            end_time = datetime.datetime.now()
+            for i in range(month):
+                start_time = end_time - datetime.timedelta(days=30)
+                sql = "SELECT COUNT(*) FROM user WHERE account_birth >= %s AND account_birth < %s"
+                val = (self.timeToStr(start_time), self.timeToStr(end_time))
+                self.cursor.execute(sql, val)
+                count_list[month - i - 1] = self.cursor.fetchall()[0][0]
+                end_time = start_time
+            return count_list, True
+        except Exception as e:
+            print("[Error] (getNewUserCount)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return [], False
+
     # ==========后为功能性函数
 
     def tupleToDict(self, tuple, key_list):
