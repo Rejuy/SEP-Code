@@ -100,7 +100,7 @@
 
                 <view class="user_text">
                     <text style="display: inline;">{{ item.brief_text }}</text>
-                    <text class="unfold" wx:if="{{ ! item.complete }}" style="color: #3377AA; font-weight: bold;" bindtap="viewDetails">[展开]</text>
+                    <text class="unfold" wx:if="{{ ! item.complete }}" style="color: #3377AA; font-weight: bold;" bindtap="viewFullContent" data-index="{{ index }}">[展开]</text>
                 </view>
             </van-skeleton>
         </view>

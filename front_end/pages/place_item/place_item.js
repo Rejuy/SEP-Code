@@ -227,8 +227,36 @@ Page({
         })
     },
 
-    viewDetails: function (options) {
-        console.log("hit");
+    viewFullContent: function (event) {
+        let index = event.currentTarget.dataset.index;
+
+        const app = getApp();
+
+        wx.request({
+          url: app.global_data.global_domain + '/api/v1.0/view_full_content',
+          method: 'POST',
+          data: {
+              id: this.data.comments_list[index].id
+          },
+          dataType: JSON,
+          enableCache: true,
+          enableHttp2: true,
+          enableQuic: true,
+          header: {
+            "content-type": "application/json"
+          },
+          timeout: 0,
+          success: (result) => {
+            let rtn = JSON.parse(result.data);
+            this.data.comments_list[index].complete = 1;
+            this.data.comments_list[index].brief_text = rtn.text;
+            this.setData({
+                comments_list: this.data.comments_list
+            })
+          },
+          fail: (res) => {},
+          complete: (res) => {},
+        })
     },
 
     // 生命周期函数--监听页面初次渲染完成
