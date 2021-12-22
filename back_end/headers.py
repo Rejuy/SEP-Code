@@ -63,7 +63,7 @@ FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "comment
 # 插入时所需键值
 INSERT_FOOD_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "hours"]
 # 返回的key值（基本）
-BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score", "hours"]
+BASIC_FOOD_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
 # item
 ITEM_FOOD_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
@@ -75,7 +75,7 @@ PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "commen
 # 插入时所需键值
 INSERT_PLACE_KEY = ["name", "position", "scope", "type", "star", "score", "comment_count", "heat", "user_id", "activated", "time", "hours"]
 # 返回的key值（基本）
-BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score", "hours"]
+BASIC_PLACE_KEY = ["id", "name", "position", "scope", "type", "star", "score"]
 # item
 ITEM_PLACE_KEY = ["name", "position", "scope", "star"]
 # 返回给管理员的key
@@ -111,3 +111,6 @@ CLASS_TO_INT = {"course": 1, "food": 2, "place": 3}
 INT_TO_TABLE = ["", "course_list", "food_list", "place_list"]
 INT_TO_BASIC_KEY_LIST = ["", BASIC_COURSES_KEY, BASIC_FOOD_KEY, BASIC_PLACE_KEY]
 INT_TO_KEY_LIST = ["", COURSES_KEY, FOOD_KEY, PLACE_KEY]
+
+import datetime
+start_date = datetime.datetime.now()

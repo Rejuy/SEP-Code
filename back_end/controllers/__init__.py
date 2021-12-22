@@ -27,7 +27,8 @@ from controllers import (
     admin_get_single_user,
     admin_get_single_item,
     admin_edit_item,
-    view_full_content
+    view_full_content,
+    admin_get_online_time
 )
 
 blueprints = [
@@ -57,5 +58,6 @@ blueprints = [
     admin_get_single_user.bp,
     admin_get_single_item.bp,
     admin_edit_item.bp,
-    view_full_content.bp
+    view_full_content.bp,
+    admin_get_online_time.bp
 ]

@@ -309,6 +309,7 @@ class MySQLDb:
             # 删除数据
             sql = "DELETE FROM " + table + locate
             self.cursor.execute(sql, locate_val)
+
             # 数据表内容更新
             self.connection.commit()
             return True
