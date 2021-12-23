@@ -249,7 +249,10 @@ class MySQLDb:
                 class_name = table.split("_")[0][0].upper() + table.split("_")[0][1:]
                 val = (class_name,)
                 self.cursor.execute(sql, val)
-                # TODO 评论表
+                # 删除评论
+                sql = "DELETE FROM comment WHERE item_id = %s"
+                val = (item_id, )
+                self.cursor.execute(sql, val)
             # 删除数据
             sql = "DELETE FROM " + table + locate
             self.cursor.execute(sql, locate_val)
@@ -1006,6 +1009,25 @@ class MySQLDb:
             # 回滚所有更改
             self.connection.rollback()
             return {}, False
+
+    def getAllComments(self):
+        try:
+            # 获取数据
+            sql = "SELECT " + self.getKeysStr(ADMIN_COMMENT_KEY) + " FROM comment"
+            self.cursor.execute(sql)
+            data_list = self.cursor.fetchall()
+            if len(data_list) == 0:
+                return [], False
+            for i in range(len(data_list)):
+                data_list[i] = self.tupleToDict(data_list[i], ADMIN_COMMENT_KEY)
+                data_list[i]['time'] = self.timeToStr(data_list[i]['time'])
+                data_list[i]['user_id'] = self.getData("user", ["user_name"], [data_list[i]["user"]], ["id"], get_all=False)[0]['id']
+            return data_list, True
+        except Exception as e:
+            print("[Error] (getData)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return [], False
 
     # ==========后为功能性函数
 

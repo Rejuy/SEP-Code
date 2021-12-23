@@ -31,7 +31,10 @@ from controllers import (
     admin_get_online_time,
     get_random_list,
     new_user_count,
-    admin_get_db_info
+    admin_get_db_info,
+    admin_get_comments,
+    admin_get_single_comment,
+    admin_edit_comment
 )
 
 blueprints = [
@@ -65,5 +68,8 @@ blueprints = [
     admin_get_online_time.bp,
     get_random_list.bp,
     new_user_count.bp,
-    admin_get_db_info.bp
+    admin_get_db_info.bp,
+    admin_get_comments.bp,
+    admin_get_single_comment.bp,
+    admin_edit_comment.bp
 ]

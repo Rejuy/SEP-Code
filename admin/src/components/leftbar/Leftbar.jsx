@@ -1,4 +1,5 @@
 import {
+  Comment,
   Person,
   Restaurant,
   School,
@@ -56,6 +57,11 @@ export default function Leftbar() {
       <Link to="/places" style={{ width: "100%" }}>
         <Item size="large" startIcon={<Terrain />}>
           <Typography>景点</Typography>
+        </Item>
+      </Link>
+      <Link to="/comments" style={{ width: "100%" }}>
+        <Item size="large" startIcon={<Comment />}>
+          <Typography>评论</Typography>
         </Item>
       </Link>
     </CustomContainer>
