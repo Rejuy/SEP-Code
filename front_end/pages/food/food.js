@@ -74,6 +74,14 @@ Page({
         }
     },
 
+    onPullDownRefresh: function() {
+        this.setData({
+            current_page: 0,
+            food_list: [],
+        })
+        this.getFoodList();
+    },
+
     getFoodList: function() {
         const app = getApp();
         let begin = this.data.current_page * this.marco.PAGE_CAPACITY;
@@ -126,6 +134,7 @@ Page({
               console.log(error);
           }, complete: (res) => {},
         })
+        wx.stopPullDownRefresh();
     },    
 
     onSearch: function(result) {
@@ -384,11 +393,6 @@ Page({
 
     // 生命周期函数--监听页面卸载
     onUnload: function () {
-
-    },
-
-    // 页面相关事件处理函数--监听用户下拉动作
-    onPullDownRefresh: function () {
 
     },
 

@@ -119,6 +119,14 @@ Page({
         this.getCourseList();
     },
 
+    onPullDownRefresh() {
+        this.setData({
+            current_page: 0,
+            courses_list: [],
+        })
+        this.getCourseList();
+    },
+
     onReachBottom: function () {
         if(this.data.current_page >= this.data.total_pages) {
             console.log("已无下一页数据");
@@ -174,6 +182,11 @@ Page({
           }, fail: (error) => {
               console.log(error);
           }, complete: (res) => {},
+        })
+        wx.stopPullDownRefresh({
+          success: (res) => {
+              console.log("hit");
+          },
         })
     },
 
@@ -400,11 +413,6 @@ Page({
 
     // 生命周期函数--监听页面卸载
     onUnload: function () {
-
-    },
-
-    // 页面相关事件处理函数--监听用户下拉动作
-    onPullDownRefresh: function () {
 
     },
 
