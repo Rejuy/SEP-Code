@@ -27,7 +27,7 @@
 
         <view class="score">
             <view class="average_score">
-                7.3
+                {{ place_score }}
             </view>
             <van-rate 
             allow-half 

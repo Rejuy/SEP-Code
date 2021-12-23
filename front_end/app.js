@@ -5,6 +5,6 @@ App({
     global_user_token: "", // user login token
   },
   logout: function(){
-    this.global_user_token = ""
+    this.global_data.global_user_token = ""
   }
 });
