@@ -16,26 +16,14 @@ if __name__ == "__main__":
     mydb.close()
     '''
 
-    user_info_list = [{
-        "user_name": "user1",
-        "password": "user1",
-        "email": "user119"
-    }, {
-        "user_name": "user2",
-        "password": "user2",
-        "email": "user219"
-    }, {
-        "user_name": "user3",
-        "password": "user3",
-        "email": "user319"
-    }, {
-        "user_name": "user4",
-        "password": "user4",
-        "email": "user419"
+    info = {
+        "type": 1,
+        "name": "软件工程",
+        "teacher": "刘强",
+        "department": 1,
+        "credit": 2
     }
-    ]
-    for user in user_info_list:
-        db.addUser(user)
+    db.addItem("course_list", info)
     #sql = 'SELECT id, name, teacher, department, type, star, score FROM course_list order by star LIMIT 0,16 '
     #order by star
     #mycursor.execute(sql)
