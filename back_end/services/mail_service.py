@@ -67,8 +67,8 @@ def send_feedback_email(feedback, user_mail):
 
 # 发送验证邮件
 def send_register_email(recipient):
-    html_body = '<p>Welcome! Thanks for signing up. Please follow this link to activate your account:</p> \
-<p><a href="{confirm_url}" target="_blank">{confirm_url}</a></p> \
+    html_body = '<p>欢迎使用清声细语，请点击下面的链接来激活你的账户！</p> \
+<p><a href="{confirm_url}" target="_blank">注册链接</a></p> \
 <br> \
 <p>Cheers!</p>'
     # 将要发送的链接嵌进去

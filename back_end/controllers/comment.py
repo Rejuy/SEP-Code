@@ -25,6 +25,9 @@ def addComment():
             return jsonify({'state': 0}), 400
         id = coder.decode(comment['mask'])
         comment['user'] = getNameByID(id)
+        last_comment, is_commented = db.checkItemCommented(user=comment['user'], item_class=comment['class'], item_id = comment['id'])
+        if is_commented:
+            return jsonify({'state': 2})
         comment['text'] = comment['user_text']
         del comment['user_text']
         comment['item_id'] = comment['id']

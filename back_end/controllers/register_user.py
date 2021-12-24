@@ -28,3 +28,12 @@ def registerUserInfo():
         print("26======")
         return jsonify({'state': BAD_ARGUMENTS}), 400
 
+@bp.route('/api/v1.0/test_register', methods=['POST', 'GET'])
+def registerTest():
+    try:
+        register_user_service.TestSend("zengxl19")
+        return jsonify({'state': 1}), 200
+    except KeyError:
+        print("26======")
+        return jsonify({'state': BAD_ARGUMENTS}), 400
+
