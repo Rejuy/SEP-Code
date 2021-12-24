@@ -356,7 +356,7 @@ class MySQLDb:
             locate_sql = ""
             # 判断是否需要筛选，若是则加上筛选部分sql语句
             locate_sql += " WHERE activated = 1"
-            for i in range(1, len(info['filter'])):
+            for i in range(0, len(info['filter'])):
                 locate_sql += " and " + info['filter'][i]['key'] + " = %s "
                 val += (info['filter'][i]['value'], )
             # 判断是否要模糊匹配
