@@ -46,6 +46,8 @@
         thumb-mode="aspectFill"
         thumb-link="../course/course"
         desc="随机解锁的{{ item.class }}~"
+        data-index="{{ index }}"
+        bindtap="viewItem" 
         >
             <view slot="tags">
                 <van-tag type="primary">随机推荐</van-tag>
@@ -65,7 +67,7 @@
                 X.X
             </view>
             <view slot="footer">
-                <van-button size="mini" bindtap="viewItem" data-index="{{ index }}">详情</van-button>
+                <van-button size="mini">详情</van-button>
             </view>
         </van-card>
     </view>

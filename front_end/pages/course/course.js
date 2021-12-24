@@ -185,7 +185,7 @@ Page({
         })
         wx.stopPullDownRefresh({
           success: (res) => {
-              console.log("hit");
+              
           },
         })
     },

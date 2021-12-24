@@ -135,7 +135,7 @@ Page({
     handleSubmit: function() {
         Dialog.confirm({
             title: '确认提交？',
-            message: '或许还可以再检查检查~',
+            message: '注：新增内容会替代您的原有评论',
         }).then(() => {
             const app = getApp();
 
@@ -159,10 +159,18 @@ Page({
                 timeout: 0,
                 success: (result) => {
                     let rtn = JSON.parse(result.data);
-                    if(rtn.state === 1) {
-                        Notify({ type: 'success', message: '发布成功' });
-                    }else {
-                        Notify({ type: 'danger', message: '发布失败' });
+                    switch(rtn.state) {
+                        case 1:
+                            Notify({ type: 'success', message: '发布成功' });
+                            break;
+                        case 0:
+                            Notify({ type: 'danger', message: '发布失败' });
+                            break;
+                        case 2:
+                            Notify({ type: 'primary', message: '替换成功' });
+                            break;
+                        default:
+                            console.log("course_item.js error")
                     }
                     this.setData({
                         current_page: 0,

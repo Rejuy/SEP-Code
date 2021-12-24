@@ -84,6 +84,8 @@
         title="{{ item.name }}"
         thumb="{{ image_url }}"
         thumb-mode="aspectFill"
+        data-index="{{ index }}"
+        bindtap="viewCourseItem" 
         >
             <view slot="tags">
                 <van-tag plain type="primary">{{ item.department }}</van-tag>
@@ -96,7 +98,7 @@
                 {{ func.toFixed(item.score) }}
             </view>
             <view slot="footer">
-                <van-button size="mini" bindtap="viewCourseItem" data-index="{{ index }}">详情</van-button>
+                <van-button size="mini">详情</van-button>
             </view>
             <wxs module="func">
                 var toFixed = function(value) {
