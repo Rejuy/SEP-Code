@@ -364,11 +364,11 @@ class MySQLDb:
                 val += (info['filter'][i]['value'], )
             # 判断是否要模糊匹配
             if 'like' in info.keys() and info['like'] != "":
-                locate_sql += " AND (name LIKE '%" + info['like'] + "%' OR "
+                locate_sql += " AND (name LIKE concat ('%','" + info['like'] + "','%') OR "
                 if table == "course_list":
-                    locate_sql += "teacher LIKE '%" + info['like'] + "%') "
+                    locate_sql += "teacher LIKE concat ('%','" + info['like'] + "','%') "
                 else:
-                    locate_sql += "position LIKE '%" + info['like'] + "%') "
+                    locate_sql += "position LIKE concat ('%','" + info['like'] + "','%')) "
             # 先根据条件获得数量
             count_sql = "SELECT COUNT(*) FROM " + table + locate_sql
             self.cursor.execute(count_sql, val)
@@ -876,13 +876,13 @@ class MySQLDb:
             # 获得数据
             data_sql = "SELECT * "
             count_sql = "SELECT COUNT(*) "
-            locate_sql = "FROM (SELECT id, name, teacher as description, star, score, department as scope, type, 1 FROM course_list WHERE name LIKE '%"\
+            locate_sql = "FROM (SELECT id, name, teacher as description, star, score, department as scope, type, 1 FROM course_list WHERE name LIKE concat ('%','"\
                   + info['like']\
-                  + "%' UNION SELECT id, name, position as description, star, score, scope, type, 2  FROM food_list WHERE name LIKE '%"\
+                  + "','%') UNION SELECT id, name, position as description, star, score, scope, type, 2  FROM food_list WHERE name LIKE concat ('%','"\
                   + info['like']\
-                  + "%' UNION SELECT id, name, position as description, star, score, scope, type, 3  FROM place_list WHERE name LIKE '%"\
+                  + "','%') UNION SELECT id, name, position as description, star, score, scope, type, 3  FROM place_list WHERE name LIKE concat ('%','"\
                   + info['like']\
-                  + "%') AS c "
+                  + "','%')) AS c "
             count_sql += locate_sql
             self.cursor.execute(count_sql)
             count = self.cursor.fetchall()[0][0]
