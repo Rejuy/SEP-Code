@@ -355,28 +355,20 @@ class MySQLDb:
             val = ()
             locate_sql = ""
             # 判断是否需要筛选，若是则加上筛选部分sql语句
-            if len(info['filter']) != 0:
-                locate_sql += " WHERE " + info['filter'][0]['key'] + " = %s "
-                val += (info['filter'][0]['value'], )
-                if len(info['filter']) > 1:
-                    for i in range(1, len(info['filter'])):
-                        locate_sql += " and " + info['filter'][i]['key'] + " = %s "
-                        val += (info['filter'][i]['value'], )
-                # 判断是否要模糊匹配
-                if 'like' in info.keys() and info['like'] != "":
-                    locate_sql += " AND (name LIKE '%" + info['like'] + "%' OR "
-                    if table == "course_list":
-                        locate_sql += "teacher LIKE '%" + info['like'] + "%') "
-                    else:
-                        locate_sql += "position LIKE '%" + info['like'] + "%') "
+            if table == "comment":
+                locate_sql += " WHERE 1 = 1"
             else:
-                # 判断是否要模糊匹配
-                if 'like' in info.keys() and info['like'] != "":
-                    locate_sql += " WHERE (name LIKE '%" + info['like'] + "%' OR "
-                    if table == "course_list":
-                        locate_sql += "teacher LIKE '%" + info['like'] + "%') "
-                    else:
-                        locate_sql += "position LIKE '%" + info['like'] + "%') "
+                locate_sql += " WHERE activated = 1"
+            for i in range(0, len(info['filter'])):
+                locate_sql += " and " + info['filter'][i]['key'] + " = %s "
+                val += (info['filter'][i]['value'], )
+            # 判断是否要模糊匹配
+            if 'like' in info.keys() and info['like'] != "":
+                locate_sql += " AND (name LIKE '%" + info['like'] + "%' OR "
+                if table == "course_list":
+                    locate_sql += "teacher LIKE '%" + info['like'] + "%') "
+                else:
+                    locate_sql += "position LIKE '%" + info['like'] + "%') "
             # 先根据条件获得数量
             count_sql = "SELECT COUNT(*) FROM " + table + locate_sql
             self.cursor.execute(count_sql, val)
