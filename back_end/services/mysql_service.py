@@ -402,7 +402,25 @@ class MySQLDb:
             # 执行语句
             self.cursor.execute(sql)
             # 获得返回值
-            count = self.cursor.fetchall()[0][0]
+            count = self.cursor.fetchall()
+            print(count)
+            count = count[0][0]
+            return count
+        except Exception as e:
+            print("[Error] (getTableCount)：{}".format(e))
+            # 回滚所有更改
+            self.connection.rollback()
+            return -1
+
+    def getTableActivatedCount(self, table):
+        try:
+            sql = "SELECT COUNT(*) FROM " + table + " WHERE activated = 1 "
+            # 执行语句
+            self.cursor.execute(sql)
+            # 获得返回值
+            count = self.cursor.fetchall()
+            print(count)
+            count = count[0][0]
             return count
         except Exception as e:
             print("[Error] (getTableCount)：{}".format(e))
@@ -876,11 +894,11 @@ class MySQLDb:
             # 获得数据
             data_sql = "SELECT * "
             count_sql = "SELECT COUNT(*) "
-            locate_sql = "FROM (SELECT id, name, teacher as description, star, score, department as scope, type, 1 FROM course_list WHERE name LIKE concat ('%','"\
+            locate_sql = "FROM (SELECT id, name, teacher as description, star, score, department as scope, type, 1 FROM course_list WHERE activated = 1 and name LIKE concat ('%','"\
                   + info['like']\
-                  + "','%') UNION SELECT id, name, position as description, star, score, scope, type, 2  FROM food_list WHERE name LIKE concat ('%','"\
+                  + "','%') UNION SELECT id, name, position as description, star, score, scope, type, 2  FROM food_list WHERE activated = 1 and name LIKE concat ('%','"\
                   + info['like']\
-                  + "','%') UNION SELECT id, name, position as description, star, score, scope, type, 3  FROM place_list WHERE name LIKE concat ('%','"\
+                  + "','%') UNION SELECT id, name, position as description, star, score, scope, type, 3  FROM place_list WHERE activated = 1 and name LIKE concat ('%','"\
                   + info['like']\
                   + "','%')) AS c "
             count_sql += locate_sql
@@ -948,7 +966,7 @@ class MySQLDb:
     def randomItemId(self, table, offset, key_list):
         try:
             # 获得数据
-            sql = "SELECT * FROM " + table + " LIMIT 1 OFFSET " + str(offset)
+            sql = "SELECT * FROM " + table + " WHERE activated = 1 LIMIT 1 OFFSET " + str(offset)
             self.cursor.execute(sql)
             data = self.cursor.fetchone()
             data = self.tupleToDict(data, key_list)
