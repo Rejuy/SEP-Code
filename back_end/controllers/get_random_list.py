@@ -15,6 +15,7 @@ bp = Blueprint(
 def getRandomList():
     try:
         db.reconnectDatabase()
+        print('afsd')
         result = randomList()
         return jsonify({"content": result}), 200
     except KeyError:

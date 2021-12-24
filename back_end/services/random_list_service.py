@@ -4,9 +4,9 @@ from headers import *
 
 
 def randomList():
-    course_count = db.getTableCount("course_list")
-    food_count = db.getTableCount("food_list")
-    place_count = db.getTableCount("place_list")
+    course_count = db.getTableActivatedCount("course_list")
+    food_count = db.getTableActivatedCount("food_list")
+    place_count = db.getTableActivatedCount("place_list")
     course_index = random.randint(0, course_count - 1)
     food_index = random.randint(0, food_count - 1)
     place_index = random.randint(0, place_count - 1)
