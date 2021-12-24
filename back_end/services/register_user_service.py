@@ -40,4 +40,5 @@ def checkUserInfo(user_info):
 
     return VALID_INFO
 
-
+def TestSend(user):
+    send_register_email(user)

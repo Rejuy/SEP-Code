@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
 from services.mysql_service import db
+from config.settings import MANAGER_EMAIL
 
 app = Flask(__name__)
 # 给flask配置文件添加配置信息
@@ -61,13 +62,13 @@ def send_email(subject, sender, recipients, text_body, html_body):
 # 发送反馈邮件
 def send_feedback_email(feedback, user_mail):
     html_body='<p>From {user_mail}:</p>  {feedback}'
-    send_email('用户反馈', app.config['MAIL_USERNAME'], [app.config['MAIL_USERNAME']], 'text body',
+    send_email('用户反馈', app.config['MAIL_USERNAME'], [MANAGER_EMAIL], 'text body',
                html_body=html_body.format(user_mail=user_mail, feedback=feedback))
 
 # 发送验证邮件
 def send_register_email(recipient):
-    html_body = '<p>Welcome! Thanks for signing up. Please follow this link to activate your account:</p> \
-<p><a href="{confirm_url}" target="_blank">{confirm_url}</a></p> \
+    html_body = '<p>欢迎使用清声细语，请点击下面的链接来激活你的账户！</p> \
+<p><a href="{confirm_url}" target="_blank">注册链接</a></p> \
 <br> \
 <p>Cheers!</p>'
     # 将要发送的链接嵌进去

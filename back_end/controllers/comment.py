@@ -25,12 +25,16 @@ def addComment():
             return jsonify({'state': 0}), 400
         id = coder.decode(comment['mask'])
         comment['user'] = getNameByID(id)
+        last_comment, is_commented = db.checkItemCommented(user=comment['user'], item_class=comment['class'], item_id = comment['id'])
         comment['text'] = comment['user_text']
         del comment['user_text']
         comment['item_id'] = comment['id']
         del comment['id']
         comment['table'] = INT_TO_TABLE[comment['class']]
         db.addComment(comment)  # TODO
+        if is_commented:
+            db.delComment('id', last_comment['id'])
+            return jsonify({'state': 2})
         return jsonify({'state': 1})
 
     except KeyError:
