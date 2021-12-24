@@ -1,0 +1,6 @@
+version: "1.0"
+services:
+  admin:
+    build: .
+    ports:
+      - "80:80"
