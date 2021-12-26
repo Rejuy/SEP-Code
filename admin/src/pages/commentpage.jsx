@@ -79,9 +79,9 @@ function Commentpage() {
         if (params.row.class === 1) {
           return <Link to={"/course/" + id}>{id}</Link>;
         } else if (params.row.class === 2) {
-          return <Link to={"/course/" + id}>{id}</Link>;
+          return <Link to={"/food/" + id}>{id}</Link>;
         } else if (params.row.class === 3) {
-          return <Link to={"/course/" + id}>{id}</Link>;
+          return <Link to={"/place/" + id}>{id}</Link>;
         } else {
           return <Typography>{id}</Typography>;
         }
@@ -102,15 +102,7 @@ function Commentpage() {
       flex: 1,
       renderCell: (params) => {
         const id = params.value;
-        if (params.row.class === 1) {
-          return <Link to={"/user/" + id}>{id}</Link>;
-        } else if (params.row.class === 2) {
-          return <Link to={"/user/" + id}>{id}</Link>;
-        } else if (params.row.class === 3) {
-          return <Link to={"/user/" + id}>{id}</Link>;
-        } else {
-          return <Typography>{id}</Typography>;
-        }
+        return <Link to={"/user/" + id}>{id}</Link>;
       },
     },
     {
