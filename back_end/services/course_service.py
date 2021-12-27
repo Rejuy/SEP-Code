@@ -44,7 +44,7 @@ def getCoursesList(raw_info):
 
     if raw_info['like'] != "":
         new_info['like'] = raw_info['like']
-
+    print('47', new_info)
     # 获取列表
     raw_list, course_count, result = db.getItemList("course_list", new_info)
     new_list = []

@@ -17,6 +17,7 @@ def globalSearch (info):
     return lst, count
 
 def limitedSearch(class_id, like):
+    print(';gg')
     if class_id == 1:
         key_list = BASIC_COURSES_KEY
     elif class_id == 2:

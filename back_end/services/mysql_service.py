@@ -359,6 +359,8 @@ class MySQLDb:
                 locate_sql += " WHERE 1 = 1"
             else:
                 locate_sql += " WHERE activated = 1"
+                
+            print(locate_sql)
             for i in range(0, len(info['filter'])):
                 locate_sql += " and " + info['filter'][i]['key'] + " = %s "
                 val += (info['filter'][i]['value'], )
@@ -366,11 +368,13 @@ class MySQLDb:
             if 'like' in info.keys() and info['like'] != "":
                 locate_sql += " AND (name LIKE concat ('%','" + info['like'] + "','%') OR "
                 if table == "course_list":
-                    locate_sql += "teacher LIKE concat ('%','" + info['like'] + "','%') "
+                    locate_sql += "teacher LIKE concat ('%','" + info['like'] + "','%')) "
                 else:
                     locate_sql += "position LIKE concat ('%','" + info['like'] + "','%')) "
             # 先根据条件获得数量
             count_sql = "SELECT COUNT(*) FROM " + table + locate_sql
+            print('--375=6')
+            print(count_sql)
             self.cursor.execute(count_sql, val)
             # 获得返回值
             count = self.cursor.fetchall()[0][0]
@@ -386,7 +390,7 @@ class MySQLDb:
             # 进行分页操作
             num_sql += " LIMIT " + str(info['item_count']) + " OFFSET " + str(info['index_begin'])
             sql += locate_sql + num_sql
-            print(sql)
+            print('392', sql)
             self.cursor.execute(sql, val)
             content_list = self.cursor.fetchall()
             return content_list, count, True
