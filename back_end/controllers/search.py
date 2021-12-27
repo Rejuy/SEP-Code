@@ -29,6 +29,8 @@ def limited_search():
     try:
         db.reconnectDatabase()
         info = request.get_json()
+        print(info)
+        print(info)
         item_list = search_service.limitedSearch(info['class'], info['like'])
         return jsonify({'state': 0, 'items': item_list})
     except KeyError:
